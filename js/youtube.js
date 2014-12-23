@@ -61,17 +61,31 @@ function onPlayerReady(event){
 		//cue the playlist
 		var playlistArrayJoin = playlistArray.join(",");
 		player.cuePlaylist(playlistArrayJoin);
+		
+		//assign a click callback to each img element in the table
+		//I don't know why this has to be declared twice
+		$("#videos_datatable tbody tr td img").each(function(){
+			$(this).click(function(){
+				var playlistindex = $(this).closest("tr").attr("data-index");
+				player.playVideoAt(playlistindex);
+				$("html, body").animate({
+					scrollTop: $("#video-player-container").offset().top 
+				},500);
+				console.log("I was clicked!" + playlistindex);
+			});
+		}); 
 	});
 	
  	//assign a click callback to each img element in the table
+	//I don't know why this has to be declared twice
 	$("#videos_datatable tbody tr td img").each(function(){
 		$(this).click(function(){
-			/* var playlistindex = $(this).closest("tr").attr("data-videoid");
+			var playlistindex = $(this).closest("tr").attr("data-index");
 			player.playVideoAt(playlistindex);
 			$("html, body").animate({
 				scrollTop: $("#video-player-container").offset().top 
-			},500); */
-			console.log("I was clicked!");
+			},500);
+			console.log("I was clicked!" + playlistindex);
 		});
 	}); 
 
