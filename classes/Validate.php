@@ -26,38 +26,38 @@ class Validate{
 					switch($rule){
 						case 'min':
 							if(strlen($value) < $rule_value){
-								$this->addError("{$item} must be a minimum of {$rule_value} characters.");
+								$this->addError($this->clean_item_output($item) . " must be a minimum of {$rule_value} characters.");
 							}
 						break;
 						case 'max':
 							if(strlen($value) > $rule_value){
-								$this->addError("{$item} must be a maximum of {$rule_value} characters.");
+								$this->addError($this->clean_item_output($item) . " must be a maximum of {$rule_value} characters.");
 							}
 						break;
 						case 'matches':
 							if($value != $source[$rule_value]){
-								$this->addError("{$rule_value} must match {$item}");
+								$this->addError("{$rule_value} must match " . $this->clean_item_output($item));
 							}
 						break;
 						case 'unique':
 							$check = $this->_db->get($rule_value, [$item, '=', $value]);
 							if($check->count()) {
-								$this->addError("{$item} already exists.");
+								$this->addError($this->clean_item_output($item) . " already exists.");
 							}
 						break;
 						case 'numeric':
 							if(!is_numeric($value)){
-								$this->addError("{$item} must be a number.");
+								$this->addError($this->clean_item_output($item) . " must be a number.");
 							}
 						break;
 						case 'yrstrlen':
 							if(strlen($value) != $rule_value){
-								$this->addError("{$item} must have four(4) digits.");
+								$this->addError($this->clean_item_output($item) . " must have four(4) digits.");
 							}
 						break;
 						case 'tmstrlen':
 							if(strlen($value) != $rule_value){
-								$this->addError("{$item} must have two(2) digits.  Needs a leading '0' if less than '10'.");
+								$this->addError($this->clean_item_output($item) . " must have two(2) digits.  Needs a leading '0' if less than '10'.");
 							}
 						break;
 					}
