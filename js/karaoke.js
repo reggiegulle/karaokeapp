@@ -21,6 +21,21 @@ $(document).ready(function(){
 			//datatables API instance
 			var videos_datatable = $("#videos_datatable").DataTable();
 			
+			var videoiddata = videos_datatable.cell(this, 4).data();
+			$(this).attr({
+				"data-videoid" : videoiddata
+			});
+			
+			//get the index of the rows
+			//based on their table ordering,
+			//not the html rendering
+			var trindex = $(this).index();
+			
+			//adopt the trindex into the tr html
+			$(this).attr({
+				"data-index":trindex
+			});
+			
 			var videoidnode = videos_datatable.cell(this, 4).node();
 			var videoid = $(videoidnode).html();
 
