@@ -27,7 +27,7 @@ $columns = [
 	[ 'db'	=>	'song_title',	'dt'	=>	1 ],
 	[ 'db'	=>	'composer',		'dt'	=>	2 ],
 	[ 'db'	=>	'performed_by',	'dt' 	=>	3 ],
-	[ 'db'	=>	'poster',		'dt'	=>	4 ],
+	[ 'db'	=>	'video_id',		'dt'	=>	4 ],
 	[ 'db'	=>	'source_album', 'dt'	=>	5 ],
 	[ 'db'	=>	'year_of_release',	'dt'	=>	6 ],
 	[ 'db'	=>	'genre',		'dt'	=>	7 ],
