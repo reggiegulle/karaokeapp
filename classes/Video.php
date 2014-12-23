@@ -2,7 +2,7 @@
 
 class Video{
 	private $_db,
-			$_data
+			$_data;
 	
 	public function __construct(){
 		$this->_db = DB::getInstance();
@@ -20,8 +20,8 @@ class Video{
 	} */
 	
 	public function create($fields = []){
-		if(!$this->_db->insert('users', $fields)){
-			throw new Exception('There was a problem creating an account.');
+		if(!$this->_db->insert('videos', $fields)){
+			throw new Exception('There was a problem creating a video entry.');
 		}
 	}
 	

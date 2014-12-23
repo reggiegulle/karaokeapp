@@ -53,26 +53,42 @@
 			//register user
 			/* Session::flash('success', 'You registered successfully!');
 			header('Location: index.php'); */
-			$user = new User();
+			$video = new Video();
+			
+			$running_time = '00:';
+			$running_time .= (Input::get('running_time_min'));
+			$running_time .= ':';
+			$running_time .= (Input::get('running_time_sec'));
 			
 			try{
-			
-				$user->create([
-					'username'	=> Input::get('username'),
+				
+				$video->create([
+					/* 'username'	=> Input::get('username'),
 					'password'	=> Hash::make(Input::get('password'), $salt),
 					'salt'		=> $salt,
 					'name'		=> Input::get('name'),
 					'joined'	=> date('Y-m-d H:i:s'),
-					'group'		=> 1
+					'group'		=> 1 */
+					'song_title'		=> (Input::get('song_title')),
+					'composer'			=> (Input::get('composer')),
+					'performed_by'		=> (Input::get('performed_by')),
+					'video_id'			=> (Input::get('video_id')),
+					'source_album'		=> (Input::get('source_album')),
+					'year_of_release'	=> (Input::get('year_of_release')),
+					'genre'				=> (Input::get('genre')),
+					'country_of_origin'	=> (Input::get('country_of_origin')),
+					'running_time'		=> $running_time,
+					'lyrics'			=> (Input::get('lyrics'))
+					
 				]);
 				
-				/* Session::flash('home', 'You have been registered and can now log in!'); */
+				Session::flash('add_video', 'You have added a new video entry!');
 			} catch (Exception $e){
 				die($e->getMessage());
 			}
 		} else {
 			//output errors
-			//print_r($validation->errors());
+			print_r($validation->errors());
 			foreach($validation->errors() as $error){
 				echo $error, '<br />';
 			}
@@ -80,6 +96,13 @@
 	}
 ?>
 
+<article>
+<?php
+if(Session::exists('add_video')){
+	echo '<p>' . Session::flash('add_video') . '</p>';
+}
+?>
+</article>
 
 <h1>Add New Video</h1>
 <form id="addnewvideo" action="" method="POST">

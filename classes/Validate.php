@@ -57,7 +57,7 @@ class Validate{
 						break;
 						case 'tmstrlen':
 							if(strlen($value) != $rule_value){
-								$this->addError("{$item} must have two(2) digits.");
+								$this->addError("{$item} must have two(2) digits.  Needs a leading '0' if less than '10'.");
 							}
 						break;
 					}
