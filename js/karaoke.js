@@ -40,8 +40,8 @@ $(document).ready(function(){
 			var indexnode = videos_datatable.cell(this, 0).node();
 			var indexnum = $(indexnode)
 				.html("<p>" + indexdata + "</p>")
-				.append("<a href='public/edit_entry.php'><p>Edit Video Details</p></a>")
-				.append("<a href='public/delete_entry.php'><p>Delete Video</p></a>");
+				.append('<a href="public/update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a>')
+				.append('<a href="public/delete_video.php?video_id=' + videoiddata + '"><p>Delete Video</p></a>');
 			
 			
 			var videoidnode = videos_datatable.cell(this, 4).node();

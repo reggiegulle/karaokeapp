@@ -50,9 +50,6 @@
 		]);
 		
 		if($validation->passed()){
-			//register user
-			/* Session::flash('success', 'You registered successfully!');
-			header('Location: index.php'); */
 			$video = new Video();
 			
 			$running_time = '00:';
@@ -63,12 +60,6 @@
 			try{
 				
 				$video->create([
-					/* 'username'	=> Input::get('username'),
-					'password'	=> Hash::make(Input::get('password'), $salt),
-					'salt'		=> $salt,
-					'name'		=> Input::get('name'),
-					'joined'	=> date('Y-m-d H:i:s'),
-					'group'		=> 1 */
 					'song_title'		=> (Input::get('song_title')),
 					'composer'			=> (Input::get('composer')),
 					'performed_by'		=> (Input::get('performed_by')),
@@ -88,7 +79,7 @@
 			}
 		} else {
 			//output errors
-			print_r($validation->errors());
+			//print_r($validation->errors());
 			foreach($validation->errors() as $error){
 				echo $error, '<br />';
 			}
@@ -113,7 +104,7 @@ if(Session::exists('add_video')){
 	<label for="performed_by"><p>Song Performer:</p></label>
 	<input type="text" id="performed_by" name="performed_by" form="addnewvideo" value="" />
 	<label for="video_id"><p>YouTube Video ID:</p></label>
-	<input type="text" id="video_id" name="video_id" form="addnewvideo" value="" />
+	<input type="text" id="video_id" name="video_id" form="addnewvideo" value="" />	
 	<label for="source_album"><p>Source Album:</p></label>
 	<input type="text" id="source_album" name="source_album" form="addnewvideo" value="" />
 	<label for="year_of_release"><p>Year of Release:</p></label>

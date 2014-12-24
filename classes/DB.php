@@ -35,6 +35,11 @@ class DB{
 		return self::$_instance;
 	}
 	
+	//custom function in place of PDO::quote()
+	public function quote($string) {
+		$this->_pdo->quote($string);
+	}
+	
 	public function query($sql, $params = array()) {
 		$this->_error = false; //error is from the DB class above
 		//basically all the words prefixed by a simple underscore here are taken from the DB class variables
