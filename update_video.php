@@ -2,103 +2,110 @@
 
 	require_once 'includes/init.php';
 	
-	if (!Input::exists('get') || $_GET['video_id'] === '') {
-		Redirect::to('../index.php');
-	}
-		
-	if (Input::exists('get')){
-		
-		$video = new Video();
-		$video_id = $video->safe_string(Input::get('video_id'));
-		$video->find($video_id);
-	}
+	$user = new User();
 	
-	if (!$video->exists()){
-		Redirect::to('../index.php');
+	if (!$user->isLoggedIn()){
+		Redirect::to('index.php');
 	} else {
-		//echo "The video is in the database.";
-		//var_dump($video->data());
-		//print_r($video->data());
 	
-		if(Input::exists('post')){
-	
-			$validate = new Validate();
-			$validation = $validate->check($_POST, [
-				'song_title'	=> [
-					'required'	=> true
-				],
-				'composer'	=> [
-					'required'	=> true
-				],
-				'performed_by' => [
-					'required'	=> true
-				],
-				'video_id' => [
-					'required'	=> true,
-					'min'		=> 11
-				],
-				'source_album' => [
-					'required'	=> true
-				],
-				'year_of_release' => [
-					'required'	=> true,
-					'numeric'	=> true,
-					'yrstrlen' => 4
-				],
-				'genre'	=> [
-					'required'	=> true
-				],
-				'country_of_origin'	=> [
-					'required'	=> true,
-					'min'	=> 3
-				],
-				'running_time_min'	=> [
-					'required'	=> true,
-					'numeric'	=> true,
-					'tmstrlen'	=> 2
-				],
-				'running_time_sec'	=> [
-					'required'	=> true,
-					'numeric'	=> true,
-					'tmstrlen'	=> 2
-				],
-				'lyrics'	=> [
-					'required'	=> true
-				]
-			]);
-		
-			if($validation->passed()){
-				//update
-				
-				$running_time = '00:';
-				$running_time .= (Input::get('running_time_min'));
-				$running_time .= ':';
-				$running_time .= (Input::get('running_time_sec'));
-				
-				try{
-					$video->update([
-						'song_title'		=> (Input::get('song_title')),
-						'composer'			=> (Input::get('composer')),
-						'performed_by'		=> (Input::get('performed_by')),
-						'video_id'			=> (Input::get('video_id')),
-						'source_album'		=> (Input::get('source_album')),
-						'year_of_release'	=> (Input::get('year_of_release')),
-						'genre'				=> (Input::get('genre')),
-						'country_of_origin'	=> (Input::get('country_of_origin')),
-						'running_time'		=> $running_time,
-						'lyrics'			=> (Input::get('lyrics'))
-					], $video->data()->id);
-					
-					Session::flash('update_video', 'Video details for song "' . $video->data()->song_title . '" updated.');
-				} catch(Exception $e){
-					die($e->getMessage());
-				}
+		if (!Input::exists('get') || $_GET['video_id'] === '') {
+			Redirect::to('../index.php');
+		}
 			
-			} else {
-				//echo errors
-				foreach($validation->errors() as $error){
-						echo $error . '<br />';
+		if (Input::exists('get')){
+			
+			$video = new Video();
+			$video_id = $video->safe_string(Input::get('video_id'));
+			$video->find($video_id);
+		}
+		
+		if (!$video->exists()){
+			Redirect::to('../index.php');
+		} else {
+			//echo "The video is in the database.";
+			//var_dump($video->data());
+			//print_r($video->data());
+		
+			if(Input::exists('post')){
+		
+				$validate = new Validate();
+				$validation = $validate->check($_POST, [
+					'song_title'	=> [
+						'required'	=> true
+					],
+					'composer'	=> [
+						'required'	=> true
+					],
+					'performed_by' => [
+						'required'	=> true
+					],
+					'video_id' => [
+						'required'	=> true,
+						'min'		=> 11
+					],
+					'source_album' => [
+						'required'	=> true
+					],
+					'year_of_release' => [
+						'required'	=> true,
+						'numeric'	=> true,
+						'yrstrlen' => 4
+					],
+					'genre'	=> [
+						'required'	=> true
+					],
+					'country_of_origin'	=> [
+						'required'	=> true,
+						'min'	=> 3
+					],
+					'running_time_min'	=> [
+						'required'	=> true,
+						'numeric'	=> true,
+						'tmstrlen'	=> 2
+					],
+					'running_time_sec'	=> [
+						'required'	=> true,
+						'numeric'	=> true,
+						'tmstrlen'	=> 2
+					],
+					'lyrics'	=> [
+						'required'	=> true
+					]
+				]);
+			
+				if($validation->passed()){
+					//update
+					
+					$running_time = '00:';
+					$running_time .= (Input::get('running_time_min'));
+					$running_time .= ':';
+					$running_time .= (Input::get('running_time_sec'));
+					
+					try{
+						$video->update([
+							'song_title'		=> (Input::get('song_title')),
+							'composer'			=> (Input::get('composer')),
+							'performed_by'		=> (Input::get('performed_by')),
+							'video_id'			=> (Input::get('video_id')),
+							'source_album'		=> (Input::get('source_album')),
+							'year_of_release'	=> (Input::get('year_of_release')),
+							'genre'				=> (Input::get('genre')),
+							'country_of_origin'	=> (Input::get('country_of_origin')),
+							'running_time'		=> $running_time,
+							'lyrics'			=> (Input::get('lyrics'))
+						], $video->data()->id);
+						
+						Session::flash('update_video', 'Video details for song "' . $video->data()->song_title . '" updated.');
+					} catch(Exception $e){
+						die($e->getMessage());
 					}
+				
+				} else {
+					//echo errors
+					foreach($validation->errors() as $error){
+							echo $error . '<br />';
+						}
+				}
 			}
 		}
 	}

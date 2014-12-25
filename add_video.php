@@ -1,87 +1,94 @@
 <?php
 	require_once 'includes/init.php';
 	
-	if(Input::exists()){
+	$user = new User();
 	
-		$validate = new Validate();
-		$validation = $validate->check($_POST, [
-			'song_title'	=> [
-				'required'	=> true
-			],
-			'composer'	=> [
-				'required'	=> true
-			],
-			'performed_by' => [
-				'required'	=> true
-			],
-			'video_id' => [
-				'required'	=> true,
-				'min'		=> 11,
-				'unique'	=> 'videos'
-			],
-			'source_album' => [
-				'required'	=> true
-			],
-			'year_of_release' => [
-				'required'	=> true,
-				'numeric'	=> true,
-				'yrstrlen' => 4
-			],
-			'genre'	=> [
-				'required'	=> true
-			],
-			'country_of_origin'	=> [
-				'required'	=> true,
-				'min'	=> 3
-			],
-			'running_time_min'	=> [
-				'required'	=> true,
-				'numeric'	=> true,
-				'tmstrlen'	=> 2
-			],
-			'running_time_sec'	=> [
-				'required'	=> true,
-				'numeric'	=> true,
-				'tmstrlen'	=> 2
-			],
-			'lyrics'	=> [
-				'required'	=> true
-			]
-		]);
+	if (!$user->isLoggedIn()){
+		Redirect::to('index.php');
+	} else {
+	
+		if(Input::exists()){
 		
-		if($validation->passed()){
-			$video = new Video();
+			$validate = new Validate();
+			$validation = $validate->check($_POST, [
+				'song_title'	=> [
+					'required'	=> true
+				],
+				'composer'	=> [
+					'required'	=> true
+				],
+				'performed_by' => [
+					'required'	=> true
+				],
+				'video_id' => [
+					'required'	=> true,
+					'min'		=> 11,
+					'unique'	=> 'videos'
+				],
+				'source_album' => [
+					'required'	=> true
+				],
+				'year_of_release' => [
+					'required'	=> true,
+					'numeric'	=> true,
+					'yrstrlen' => 4
+				],
+				'genre'	=> [
+					'required'	=> true
+				],
+				'country_of_origin'	=> [
+					'required'	=> true,
+					'min'	=> 3
+				],
+				'running_time_min'	=> [
+					'required'	=> true,
+					'numeric'	=> true,
+					'tmstrlen'	=> 2
+				],
+				'running_time_sec'	=> [
+					'required'	=> true,
+					'numeric'	=> true,
+					'tmstrlen'	=> 2
+				],
+				'lyrics'	=> [
+					'required'	=> true
+				]
+			]);
 			
-			$running_time = '00:';
-			$running_time .= (Input::get('running_time_min'));
-			$running_time .= ':';
-			$running_time .= (Input::get('running_time_sec'));
-			
-			try{
+			if($validation->passed()){
+				$video = new Video();
 				
-				$video->create([
-					'song_title'		=> (Input::get('song_title')),
-					'composer'			=> (Input::get('composer')),
-					'performed_by'		=> (Input::get('performed_by')),
-					'video_id'			=> (Input::get('video_id')),
-					'source_album'		=> (Input::get('source_album')),
-					'year_of_release'	=> (Input::get('year_of_release')),
-					'genre'				=> (Input::get('genre')),
-					'country_of_origin'	=> (Input::get('country_of_origin')),
-					'running_time'		=> $running_time,
-					'lyrics'			=> (Input::get('lyrics'))
+				$running_time = '00:';
+				$running_time .= (Input::get('running_time_min'));
+				$running_time .= ':';
+				$running_time .= (Input::get('running_time_sec'));
+				
+				try{
 					
-				]);
-				
-				Session::flash('add_video', 'You have added a new video entry!');
-			} catch (Exception $e){
-				die($e->getMessage());
-			}
-		} else {
-			//output errors
-			//print_r($validation->errors());
-			foreach($validation->errors() as $error){
-				echo $error, '<br />';
+					$video->create([
+						'song_title'		=> (Input::get('song_title')),
+						'composer'			=> (Input::get('composer')),
+						'performed_by'		=> (Input::get('performed_by')),
+						'video_id'			=> (Input::get('video_id')),
+						'source_album'		=> (Input::get('source_album')),
+						'year_of_release'	=> (Input::get('year_of_release')),
+						'genre'				=> (Input::get('genre')),
+						'country_of_origin'	=> (Input::get('country_of_origin')),
+						'running_time'		=> $running_time,
+						'lyrics'			=> (Input::get('lyrics'))
+						
+					]);
+					
+					Session::flash('add_video', 'You have added a new video entry!');
+				} catch (Exception $e){
+					die($e->getMessage());
+				}
+			} else {
+				//output errors
+				//print_r($validation->errors());
+				foreach($validation->errors() as $error){
+					echo $error, '<br />';
+				}
 			}
 		}
 	}

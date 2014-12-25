@@ -37,12 +37,15 @@ $(document).ready(function(){
 			});
 			
 			var songtitlenode = videos_datatable.cell(this, 1).node();
+			var songtitledata = videos_datatable.cell(this, 1).data();
+			var songtitle_array = songtitledata.split(" ");
+			var songtitle_join = songtitle_array.join("+");
 			var songtitle = $(songtitlenode).html();
 			
 			var indexdata = videos_datatable.cell(this, 0).data();
 			var indexnode = videos_datatable.cell(this, 0).node();
 			var indexnum = $(indexnode)
-				.html('<p>' + indexdata + '</p>');
+				.html('<p>' + indexdata + '</p><a href="update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a><a href="delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>');
 			
 			
 			var videoidnode = videos_datatable.cell(this, 4).node();

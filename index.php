@@ -28,7 +28,18 @@
 <script src="js/dataTables.responsive.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
 <!--custom JS-->
-<script src="js/karaoke.js" type="text/javascript"></script>
+<?php 
+	$user = new User();
+	if($user->isLoggedIn()){
+?>
+		<script src="js/karaoke.admin.js" type="text/javascript"></script>
+<?php
+	} else {
+?>
+		<script src="js/karaoke.js" type="text/javascript"></script>
+<?php
+	}
+?>
 <!--YouTube JS and Bootstrap JS at the bottom -->
 
 </head>
@@ -42,13 +53,51 @@
 	});
 	</script>
 	
-	<article id="logout"><a href="public/logout.php"><p>Logout</p></a></article>
+	
+	
+	<article>
+		<?php
+			if(Session::exists('register')){
+				echo '<p>' . Session::flash('register') . '</p>';
+			}
+		?>
+	</article>
+	
+	<article>
+		<?php
+			//$user = new User();
+			if($user->isLoggedIn()){
+		?>
+				<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
+				
+				<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
+				
+		<?php
+				if($user->hasPermission('admin')){
+					echo '<p>You are an administrator!</p>';
+				}
+				if($user->hasPermission('moderator')){
+					echo '<p>You are a moderator!</p>';
+				}
+				/* if(!$user->hasPermission('admin')){
+					Redirect::to('404.php');
+				} */
+			}
+		?>
+		
+	</article>
 	
 	<section id="video-player-container">
 		<article id="player"></article>
 	</section>
 	
-	<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
+	<?php
+		if($user->isLoggedIn()){
+	?>
+			<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
+	<?php
+		}
+	?>
 	
 	<article>
 	
@@ -70,7 +119,13 @@
 		</thead>
 	</table>
 	
-	<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
+	<?php
+		if($user->isLoggedIn()){
+	?>
+			<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
+	<?php
+		}
+	?>
 	
 	<section>
 		<article id="footer">
@@ -79,8 +134,26 @@
 				<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
 				<li><p>All Rights Reserved 2014</li>
 			</ul>
-			<h5><a href="login.php">Administrator Login</a></h5>
-			<h5><a href="register.php">Register New Admin</a></h5>
+			<?php
+				if(!$user->isLoggedIn()){
+			?>
+					<h5><a href="login.php">Administrator Login</a></h5>
+			<?php
+				}
+
+				if($user->isLoggedIn() && $user->hasPermission('admin')){
+			?>
+					<h5><a href="register.php">Register New Admin</a></h5>
+			
+			<?php
+				}
+				
+				if($user->isLoggedIn()){
+			?>	
+					<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
+			<?php
+				}
+			?>
 		</article>
 	</section>
 	
