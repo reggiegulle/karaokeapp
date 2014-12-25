@@ -80,6 +80,7 @@
 					$running_time .= (Input::get('running_time_min'));
 					$running_time .= ':';
 					$running_time .= (Input::get('running_time_sec'));
+					$lyrics_text = nl2br(Input::get('lyrics'));
 					
 					try{
 						$video->update([
@@ -92,7 +93,7 @@
 							'genre'				=> (Input::get('genre')),
 							'country_of_origin'	=> (Input::get('country_of_origin')),
 							'running_time'		=> $running_time,
-							'lyrics'			=> (Input::get('lyrics'))
+							'lyrics'			=> $lyrics_text
 						], $video->data()->id);
 						
 						Session::flash('update_video', 'Video details for song "' . $video->data()->song_title . '" updated.');
