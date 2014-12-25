@@ -50,6 +50,8 @@
 	
 	<article id="addnew"><a href="public/add_video.php"><p>Add New Video</p></a></article>
 	
+	<article>
+	
 	<table id="videos_datatable" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%">
 		<thead>
 			<tr>

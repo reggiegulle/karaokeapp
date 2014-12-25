@@ -13,17 +13,21 @@ class Video{
 		return $string;
 	}
 	
+	public function create($fields = []){
+		if(!$this->_db->insert('videos', $fields)){
+			throw new Exception('There was a problem creating a video entry.');
+		}
+	}
+	
  	public function update($fields = [], $id = null){
 		if(!$this->_db->update('videos', $id, $fields)){
 			throw new Exception('There was a problem updating.');
 		}
 	}
 	
-	
-	
-	public function create($fields = []){
-		if(!$this->_db->insert('videos', $fields)){
-			throw new Exception('There was a problem creating a video entry.');
+	public function delete($fields = []){
+		if(!$this->_db->delete('videos', $fields)){
+			throw new Exception('There was a problem deleting a video entry.');
 		}
 	}
 	

@@ -36,21 +36,23 @@ $(document).ready(function(){
 				"data-index":trindex
 			});
 			
+			var songtitlenode = videos_datatable.cell(this, 1).node();
+			var songtitledata = videos_datatable.cell(this, 1).data();
+			var songtitle_array = songtitledata.split(" ");
+			var songtitle_join = songtitle_array.join("+");
+			var songtitle = $(songtitlenode).html();
+	
+			$(videoidnode)
+				.html('<img src="https://i3.ytimg.com/vi/' + videoid + '/default.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
+			
 			var indexdata = videos_datatable.cell(this, 0).data();
 			var indexnode = videos_datatable.cell(this, 0).node();
 			var indexnum = $(indexnode)
-				.html("<p>" + indexdata + "</p>")
-				.append('<a href="public/update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a>')
-				.append('<a href="public/delete_video.php?video_id=' + videoiddata + '"><p>Delete Video</p></a>');
+				.html('<p>' + indexdata + '</p><a href="public/update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a><a href="public/delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '"><p>Delete Video</p></a>');
 			
 			
 			var videoidnode = videos_datatable.cell(this, 4).node();
 			var videoid = $(videoidnode).html();
-
-			var songtitlenode = videos_datatable.cell(this, 1).node();
-			var songtitle = $(songtitlenode).html();
-	
-			$(videoidnode).html('<img src="https://i3.ytimg.com/vi/' + videoid + '/default.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
 
 		});
 	}
