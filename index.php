@@ -48,7 +48,7 @@
 		<article id="player"></article>
 	</section>
 	
-	<article id="addnew"><a href="public/add_video.php"><p>Add New Video</p></a></article>
+	<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
 	
 	<article>
 	
@@ -70,7 +70,7 @@
 		</thead>
 	</table>
 	
-	<article id="addnew"><a href="public/add_video.php"><p>Add New Video</p></a></article>
+	<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
 	
 	<section>
 		<article id="footer">
@@ -79,6 +79,8 @@
 				<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
 				<li><p>All Rights Reserved 2014</li>
 			</ul>
+			<h5><a href="login.php">Administrator Login</a></h5>
+			<h5><a href="register.php">Register New Admin</a></h5>
 		</article>
 	</section>
 	

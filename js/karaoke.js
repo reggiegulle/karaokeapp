@@ -48,7 +48,7 @@ $(document).ready(function(){
 			var indexdata = videos_datatable.cell(this, 0).data();
 			var indexnode = videos_datatable.cell(this, 0).node();
 			var indexnum = $(indexnode)
-				.html('<p>' + indexdata + '</p><a href="public/update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a><a href="public/delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '"><p>Delete Video</p></a>');
+				.html('<p>' + indexdata + '</p><a href="update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a><a href="delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '"><p>Delete Video</p></a>');
 			
 			
 			var videoidnode = videos_datatable.cell(this, 4).node();
