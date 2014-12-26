@@ -1,11 +1,29 @@
 <?php
 
-require_once 'core/init.php';
+require_once 'includes/init.php';
 
 $user = new User();
 
-if(!$user->isLoggedIn()){
+//if $user not logged in,
+//back to index.php	
+if (!$user->isLoggedIn()){
 	Redirect::to('index.php');
+} else {
+	
+	if(!$username = Input::get('user')){
+		Redirect::to('index.php');
+	} else {
+		//assign variable $user to the User Object
+		$user = new User($username);
+		//check if $user exists in database
+		if(!$user->exists()){
+			//if $user is not in database,
+			//back to index.php
+			Redirect::to('index.php');
+		} else {
+			$data = $user->data();	
+		}
+	}
 }
 
 if(Input::exists()){
@@ -31,17 +49,17 @@ if(Input::exists()){
 		//if the validation passes
 		if($validation->passed()){
 			//change of password
-			if(Hash::make(Input::get('password_current'), $user->data()->salt) !== $user->data()->password){
-				echo 'Your current password is wrong.';
+			if(Hash::make(Input::get('password_current'), $data->salt) !== $data->password){
+				Session::flash('edit_user_current_pwd_error', 'The current password you provided is incorrect.');
 			} else{
 				//echo 'OK!';
 				$salt = Hash::salt(32);
 				$user->update([
 					'password' => Hash::make(Input::get('password_new'), $salt),
 					'salt' => $salt
-				]);
+				], $data->id);
 				
-				Session::flash('home', 'Your password has been changed.');
+				Session::flash('edit_user_pwd_success', 'Your password has been changed.');
 				Redirect::to('index.php');
 			}
 		
@@ -55,22 +73,28 @@ if(Input::exists()){
 
 ?>
 
+<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
+
+<p>To change your password, fill-in your current password in the field provided below.  Type your new password in both of the fields provided and click "Submit".</p>
 
 <form action="" method="POST">
-	<div class="field">
-		<label for="password_current">Current password</label>
-		<input type="password" name="password_current" id="password_current" />
-	</div>
-	
-	<div class="field">
-		<label for="password_new">New password</label>
-		<input type="password" name="password_new" id="password_new" />
-	</div>
-	
-	<div class="field">
-		<label for="password_new_again">New password again</label>
-		<input type="password" name="password_new_again" id="password_new_again" />
-	</div>
+
+	<article>
+		<?php
+			if(Session::exists('edit_user_current_pwd_error')){
+				echo '<p>' . Session::flash('edit_user_current_pwd_error') . '</p>';
+			}
+		?>
+	</article>
+
+	<label for="password_current">Current password</label>
+	<input type="password" name="password_current" id="password_current" />
+
+	<label for="password_new">New password</label>
+	<input type="password" name="password_new" id="password_new" />
+
+	<label for="password_new_again">Re-type your new password</label>
+	<input type="password" name="password_new_again" id="password_new_again" />
 		
 	<input type="submit" value="Change" />
 	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />

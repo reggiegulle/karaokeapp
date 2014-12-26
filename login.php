@@ -1,33 +1,39 @@
 <?php
 	require_once 'includes/init.php';
 	
-	if(Input::exists()){
-		if(Token::check(Input::get('token'))){
-		
-			$validate = new Validate();
-			$validation = $validate->check($_POST, [
-				'username'	=>	['required'	=> true],
-				'password'	=>	['required'	=> true]
-			]);
+	$user = new User();
+	
+	if ($user->isLoggedIn()){
+		Redirect::to('index.php');
+	} else {
+		if(Input::exists()){
+			if(Token::check(Input::get('token'))){
 			
-			if($validation->passed()){
-				//log user in
-				$user = new User();
+				$validate = new Validate();
+				$validation = $validate->check($_POST, [
+					'username'	=>	['required'	=> true],
+					'password'	=>	['required'	=> true]
+				]);
 				
-				$remember = (Input::get('remember') === 'on') ? true : false;
-				$login = $user->login(Input::get('username'), Input::get('password'), $remember);
-				
-				if($login){
-					Redirect::to('index.php');
+				if($validation->passed()){
+					//log user in
+					$user = new User();
+					
+					$remember = (Input::get('remember') === 'on') ? true : false;
+					$login = $user->login(Input::get('username'), Input::get('password'), $remember);
+					
+					if($login){
+						Redirect::to('index.php');
+					} else {
+						echo '<p>Sorry, logging in failed.</p>';
+					}
 				} else {
-					echo '<p>Sorry, logging in failed.</p>';
+					foreach($validation->errors() as $error){
+						echo $error . '<br />';
+					}
 				}
-			} else {
-				foreach($validation->errors() as $error){
-					echo $error . '<br />';
-				}
+			
 			}
-		
 		}
 	}
 ?>

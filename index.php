@@ -61,6 +61,18 @@
 		?>
 				<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
 				
+				<article>
+					<?php
+						if(Session::exists('edit_user_success')){
+							echo '<p>' . Session::flash('edit_user_success') . '</p>';
+						}
+						
+						if(Session::exists('edit_user_pwd_success')){
+							echo '<p>' . Session::flash('edit_user_pwd_success') . '</p>';
+						}
+					?>
+				</article>
+				
 				<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
 				
 		<?php
