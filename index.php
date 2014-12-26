@@ -54,15 +54,6 @@
 	</script>
 	
 	
-	
-	<article>
-		<?php
-			if(Session::exists('register')){
-				echo '<p>' . Session::flash('register') . '</p>';
-			}
-		?>
-	</article>
-	
 	<article>
 		<?php
 			//$user = new User();
@@ -144,13 +135,13 @@
 			<?php
 				if(!$user->isLoggedIn()){
 			?>
-					<h5><a href="login.php">Administrator Login</a></h5>
+					<h5><a href="login.php">Registered Users Login</a></h5>
 			<?php
 				}
 
 				if($user->isLoggedIn() && $user->hasPermission('admin')){
 			?>
-					<h5><a href="register.php">Register New Admin</a></h5>
+					<h5><a href="manage_users.php">Administer Users</a></h5>
 			
 			<?php
 				}
