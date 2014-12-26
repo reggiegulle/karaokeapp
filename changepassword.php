@@ -75,7 +75,7 @@ if(Input::exists()){
 
 <p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
 
-<p>To change your password, fill-in your current password in the field provided below.  Type your new password in both of the fields provided and click "Submit".</p>
+<p>To change your password, fill-in your current password in the field provided below.  Type and re-type your new password in each of the fields provided and click "Submit".</p>
 
 <form action="" method="POST">
 
