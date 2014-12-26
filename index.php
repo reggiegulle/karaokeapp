@@ -94,6 +94,13 @@
 	<?php
 		if($user->isLoggedIn()){
 	?>
+			<article>
+				<?php
+					if(Session::exists('delete')){
+						echo '<p>' . Session::flash('delete') . '</p>';
+					}
+				?>
+			</article>
 			<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
 	<?php
 		}

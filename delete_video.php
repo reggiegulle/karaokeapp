@@ -35,8 +35,8 @@
 					'video_id', '=' , Input::get('video_id')
 				]);
 				
-				Session::flash('delete', 'Video for song "{$song_title}" has been deleted from the database.');
-				//Redirect::to('../index.php');
+				Session::flash('delete', 'Video for song "' . $song_title . '" has been deleted from the database.');
+				Redirect::to('index.php');
 			} catch (Exception $e){
 				die($e->getMessage());
 			}

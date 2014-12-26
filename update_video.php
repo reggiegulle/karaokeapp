@@ -56,7 +56,7 @@
 					],
 					'country_of_origin'	=> [
 						'required'	=> true,
-						'min'	=> 3
+						'min'	=> 2
 					],
 					'running_time_min'	=> [
 						'required'	=> true,
