@@ -4,92 +4,98 @@ require_once 'includes/init.php';
 
 $user = new User();
 
-//if $user not logged in,
-//back to index.php	
-if (!$user->isLoggedIn()){
-	Redirect::to('index.php');
-} else {
-	
-	if(!$username = Input::get('user')){
+	//if $user not logged in,
+	//back to index.php	
+	if (!$user->isLoggedIn()){
 		Redirect::to('index.php');
 	} else {
-		//assign variable $user to the User Object
-		$user = new User($username);
-		//check if $user exists in database
-		if(!$user->exists()){
-			//if $user is not in database,
-			//back to index.php
+		if(!$user->hasPermission('admin') || !$user->exists()){
 			Redirect::to('index.php');
 		} else {
-			$data = $user->data();	
+			if(!$username = Input::get('user')){
+				Redirect::to('index.php');
+			} else {
+				//assign variable $user to the User Object
+				$karaoke_user = new User($username);
+				//check if $user exists in database
+				if(!$karaoke_user->exists()){
+					//if $user is not in database,
+					//back to index.php
+					Redirect::to('index.php');
+				} else {
+					$data = $karaoke_user->data();	
+				}
+			}
 		}
 	}
-}
 
-if(Input::exists()){
-	if(Token::check(Input::get('token'))){
-		//echo 'OK!';
-		$validate = new Validate();
-		$validation = $validate->check($_POST, [
-			'username' =>[
-				'required' => true,
-				'min' => 2,
-				'max' => 50
+	if(Input::exists()){
+		if(Token::check(Input::get('token'))){
+			//echo 'OK!';
+			$validate = new Validate();
+			$validation = $validate->check($_POST, [
+				'username'	=> [
+					'required'	=> true,
+					'min'		=> 2,
+					'max' 		=> 20
 				],
-			'name' =>[
-				'required' => true,
-				'min' => 2,
-				'max' => 50
+				'password'	=> [
+					'required'	=> true,
+					'min'		=> 6
+				],
+				'name' => [
+					'required'	=> true,
+					'min'		=> 2,
+					'max'		=> 50
 				]
-		]);
-		
-		if($validation->passed()){
-			if(Hash::make(Input::get('password'), $data->salt) !== $data->password){
-				Session::flash('edit_user_pwd_error', 'Password is incorrect.');
-			} else{
+			]);
+			
+			if($validation->passed()){
+				$salt = Hash::salt(32);
 				//update
 				try{
-					$user->update([
+					$karaoke_user->update([
 						'username'	=>	Input::get('username'),
-						'name' => Input::get('name')
+						'name' => Input::get('name'),
+						'password' => Hash::make(Input::get('password'), $salt),
+						'salt' => $salt	
 					], $data->id);
 					
-					Session::flash('edit_user_success', 'Your details have been updated.');
+					Session::flash('edit_karaokeuser_success', 'User details have been updated.');
 					
 				} catch(Exception $e){
 					die($e->getMessage());
 				}
+			}else{
+				//echo errors
+				foreach($validation->errors() as $error){
+						echo $error . '<br />';
+					}
 			}
-		
-		}else{
-			//echo errors
-			foreach($validation->errors() as $error){
-					echo $error . '<br />';
-				}
+			
 		}
-		
 	}
-}
 ?>
 
-<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
+<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
 
-<p>To modify your existing details, fill-in your new details in the fields below.  Then type your password in the field provided and click "Submit".</p>
+<p>To modify the user's existing details, fill-in the user's new details in the fields below.  Then type the user's reset password in the field provided and click "Submit".</p>
 
 <article>
 	<?php
-		if(Session::exists('edit_user_pwd_error')){
-			echo '<p>' . Session::flash('edit_user_pwd_error') . '</p>';
+		if(Session::exists('edit_karaokeuser_success')){
+			echo '<p>' . Session::flash('edit_karaokeuser_success') . '</p>';
 		}
 	?>
 </article>
+
 
 <form action="" method="POST">
 		<label for="name">Username</label>
 		<input type="text" name="username" value="<?php echo escape($data->username); ?>" />
 
-		<label for="name">Full Name</label>
-		<input type="text" name="name" value="<?php echo escape($data->name); ?>" />
+		<label for="name">User's Real Name</label>
+		<input type="text" name="name" id="name" value="<?php echo escape($data->name); ?>" />
 		
 		<label for="password">Password</label>
 		<input type="password" name="password" id="password" autocomplete="off" value="" />
@@ -98,5 +104,3 @@ if(Input::exists()){
 		<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
 
 </form>
-
-<p><a href="changepassword.php?user=<?php echo escape($user->data()->username); ?>">Click here</a> if you want to change your password.</p>

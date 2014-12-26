@@ -133,6 +133,12 @@ class User{
 	public function isLoggedIn(){
 		return $this->_isLoggedIn;
 	}
+	
+	public function delete($fields = []){
+		if(!$this->_db->delete('users', $fields)){
+			throw new Exception('There was a problem deleting the user.');
+		}
+	}
 
 }
 

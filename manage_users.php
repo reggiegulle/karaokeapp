@@ -125,13 +125,7 @@
 <form action="" method="POST">
 	<label for="username">Username</label>
 	<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off" />
-
-	<label for="password">Choose a password</label>
-	<input type="password" name="password" id="password" value="" />
-
-	<label for="password_again">Enter password again</label>
-	<input type="password" name="password_again" id="password_again" value="" />
-
+	
 	<label for="name">User's Real Name</label>
 	<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>" />
 	
@@ -139,6 +133,12 @@
 	<input type="radio" name="group" value="1" />Standard User
 	&nbsp;
 	<input type="radio" name="group" value="2" />Site Admin
+
+	<label for="password">Choose a password</label>
+	<input type="password" name="password" id="password" value="" />
+
+	<label for="password_again">Enter password again</label>
+	<input type="password" name="password_again" id="password_again" value="" />
 	
 	<input type="hidden" name="token" value="<?php echo Token::generate() ?>" >
 	
@@ -149,6 +149,14 @@
 <article>
 	<h5><a href="index.php">Cancel</a></h5>
 </article>
+
+	<article>
+		<?php
+			if(Session::exists('delete_user')){
+				echo '<p>' . Session::flash('delete_user') . '</p>';
+			}
+		?>
+	</article>
 
 <table id="users_datatable" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%">
 	<thead>
