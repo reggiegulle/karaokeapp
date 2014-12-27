@@ -151,7 +151,7 @@ $(document).ready(function(){
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
 		
 		//reinitialize owlCarousel
-		$("#owlkaraoke").owlCarousel({/*
+		owlkaraoke.owlCarousel({/*
 			items: 4,
 			itemsDesktop: [1199,4],
 			itemsDesktopSmall: [979,3],

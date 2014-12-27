@@ -9,12 +9,12 @@ $(document).ready(function(){
 				{"orderable": false, "targets":[4, 10]}
 			],
 		"drawCallback": function (settings) {
-				populatelists();
+				tableInteraction();
 			}
     });
 	
 	//function populatelists start
-	function populatelists() {
+	function tableInteraction() {
 	
 		//declare videos_datatable var
 		//to correspond to
@@ -150,7 +150,7 @@ $(document).ready(function(){
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
 		
 		//reinitialize owlCarousel
-		$("#owlkaraoke").owlCarousel({/*
+		owlkaraoke.owlCarousel({/*
 			items: 4,
 			itemsDesktop: [1199,4],
 			itemsDesktopSmall: [979,3],
@@ -158,7 +158,8 @@ $(document).ready(function(){
 			itemsMobile: [479,2],
 			pagination: true,*/
 			navigation: true,
-			afterInit: owllivideoindex
+			afterInit: owllivideoindex,
+			afterAction: logvisible
 		});
 		
 		
@@ -194,9 +195,17 @@ $(document).ready(function(){
 					"height":($("#owlhotel li img").width() * 0.5625) + "px"
 				});
 			});*/
-		} 
+		} 	
 		
-		
+		function logvisible(){
+			if(this.currentItem === this.maximumItem){
+				console.log("Last Item!");
+			} else if(this.currentItem === 0) {
+				console.log("First Item!");
+			} else {
+				console.log("Middle Item!");
+			}
+		}
 		
 	//function populatelists end
 	}
