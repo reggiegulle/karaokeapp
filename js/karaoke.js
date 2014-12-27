@@ -17,7 +17,6 @@ $(document).ready(function(){
 	
 	//initialize the owl-carousel plug-in
 	//on the #owlkaraoke ul element.
-	$("#owlkaraoke").addClass("owl-carousel owl-theme");
 	$("#owlkaraoke").owlCarousel();
 	var owl = $("#owlkaraoke").data("owlCarousel");
 	
@@ -70,11 +69,11 @@ $(document).ready(function(){
 			$(videoidnode)
 				.html('<img src="https://i3.ytimg.com/vi/' + videoid + '/default.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
 				
-			
+			var titledata = videos_datatable.cell(this, 1).data();
+			var performdata = videos_datatable.cell(this, 3).data();
 
 			//create li items for the
 			//#owlkaraoke table
-			//var owlkaraokeliitem = $("<li>A</li>");
 			var owlkaraokeliitem = $("<li>");
 			
 			//insert tr attributes into the owlkaraoke li item
@@ -82,28 +81,39 @@ $(document).ready(function(){
 				"data-videoid": videoiddata,
 				"data-htmlindex":trhtmlindex
 			});
-			//console.log(owlkaraokeliitem.attr("data-htmlindex"));
+			
+			//add content into
+			//each owlkaraoke list item
+			var videoposter = $(videoidnode).html();
+			owlkaraokeliitem.append(videoposter);
+			
+			function addowllinodes(){
+				owllitext = '';
+				owllitext += '<h6>' + titledata + '</h6>';
+				owllitext += '<p>' + performdata + '</p>';
+				return owllitext;
+			}
+			
+			var owlkaraokelinodes = addowllinodes();
+			owlkaraokeliitem.append(owlkaraokelinodes);
 			
 			$("#owlkaraoke").append(owlkaraokeliitem);
 
 		});
 		
-		/* //add the owlCarouel classes again
-		var owlhotel = $("#owlhotel").addClass("owl-carousel");
-		var owlhotel = $("#owlhotel").addClass("owl-theme");
-		
 		//reinitialize owlCarousel
-		owlhotel.owlCarousel({
+		$("#owlkaraoke").owlCarousel({/*
 			items: 4,
 			itemsDesktop: [1199,4],
 			itemsDesktopSmall: [979,3],
 			itemsTablet: [768,2],
 			itemsMobile: [479,2],
-			pagination: true,
-			navigation: true,
+			pagination: true,*/
+			navigation: true/*,
 			afterInit: owllivideoindex
-		});
+		*/});
 		
+		/*
 		function owllivideoindex(){
 			//behaviour of owlhotel li items on click
 			$("#owlhotel li").each(function(){

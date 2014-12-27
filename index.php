@@ -104,8 +104,7 @@
 
 
 	<section id="owl-container">
-		<ul id="owlkaraoke">
-			
+		<ul id="owlkaraoke" class="owl-carousel owl-theme">	
 		</ul>
 	</section>
 	
