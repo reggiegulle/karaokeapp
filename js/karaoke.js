@@ -13,8 +13,6 @@ $(document).ready(function(){
 			}
     });
 	
-	$("#owlkaraoke").html("<li>A</li><li>A</li><li>A</li><li>A</li><li>A</li>");
-	
 	//initialize the owl-carousel plug-in
 	//on the #owlkaraoke ul element.
 	$("#owlkaraoke").owlCarousel();
@@ -37,7 +35,7 @@ $(document).ready(function(){
 			.remove();
 		
 		
-	
+		//start ".each" table tr function
 		$("#videos_datatable tbody tr").each( function () {
 			
 			var videoiddata = videos_datatable.cell(this, 4).data();
@@ -98,7 +96,49 @@ $(document).ready(function(){
 			owlkaraokeliitem.append(owlkaraokelinodes);
 			
 			$("#owlkaraoke").append(owlkaraokeliitem);
-
+			
+			//create li items for karaokedesclist
+			var karaokedesclistitem = $("<li>");
+			
+			var composerdata = videos_datatable.cell(this, 2).data();
+			var albumdata = videos_datatable.cell(this, 5).data();
+			var releasedata = videos_datatable.cell(this, 6).data();
+			var genredata = videos_datatable.cell(this, 7).data();
+			var countrydata = videos_datatable.cell(this, 8).data();
+			var rntmdata = videos_datatable.cell(this, 9).data();
+			var lyricsdata = videos_datatable.cell(this, 10).data();
+			
+			//associate trhtmlindex
+			//to each li item
+			karaokedesclistitem.attr({
+				"data-htmlindex":trhtmlindex
+			});
+			
+			//function for adding content
+			//to the karaokedesclist li item
+			function adddesclinodes(){
+				var desclitext = "";
+				desclitext += videoposter;
+				desclitext += '<h6>' + titledata + '</h6>';
+				desclitext += '<p>Composed By: ' + composerdata + '</p>';
+				desclitext += '<p>Performed By: ' + performdata + '</p>';
+				desclitext += '<p>From the Album: ' + albumdata + '</p>';
+				desclitext += '<p>Year of Release: ' + releasedata + '</p>';
+				desclitext += '<p>Genre: ' + genredata + '</p>';
+				desclitext += '<p>Country of Origin: ' + countrydata + '</p>';
+				desclitext += '<p>Running Time: ' + rntmdata + '</p>';
+				desclitext += '<p>Lyrics: </p><br /><pre>' + lyricsdata + '</pre>';
+				
+				return desclitext;
+			}
+			
+			karaokedesclistitem.append(adddesclinodes);
+			
+			//add the owlhotel li item to the list
+			$("#karaokedesclist").append(karaokedesclistitem);
+		
+		
+		//end ".each" table tr function
 		});
 		
 		//reinitialize owlCarousel
