@@ -109,32 +109,32 @@ $(document).ready(function(){
 			itemsTablet: [768,2],
 			itemsMobile: [479,2],
 			pagination: true,*/
-			navigation: true/*,
+			navigation: true,
 			afterInit: owllivideoindex
-		*/});
+		});
 		
-		/*
+		
 		function owllivideoindex(){
 			//behaviour of owlhotel li items on click
-			$("#owlhotel li").each(function(){
+			$("#owlkaraoke li").each(function(){
 				$(this).click(function(){
 				
 					//associate each owlhotel li with its own data-index
-					var liplaylistindex = $(this).attr("data-index");
+					var liplaylistindex = $(this).attr("data-htmlindex");
 					
 					//play the video at the liplaylistindex
 					player.playVideoAt(liplaylistindex);
 					
 					//animate the page to scroll to the video
 					$("html, body").animate({
-						scrollTop: $("#banner").offset().top 
+						scrollTop: $("#video-player-container").offset().top 
 					},500);
 					
 				});
 			});
 			
 			
-			
+		/*	
 			//set the style of the
 			//owlhotel li img
 			$("#owlhotel li img").css({
@@ -145,8 +145,8 @@ $(document).ready(function(){
 				$("#owlhotel li img").css({
 					"height":($("#owlhotel li img").width() * 0.5625) + "px"
 				});
-			});
-		} */
+			});*/
+		} 
 		
 		
 		

@@ -66,7 +66,7 @@ function onPlayerReady(event){
 		//I don't know why this has to be declared twice
 		$("#videos_datatable tbody tr td img").each(function(){
 			$(this).click(function(){
-				var playlistindex = $(this).closest("tr").attr("data-index");
+				var playlistindex = $(this).closest("tr").attr("data-htmlindex");
 				player.playVideoAt(playlistindex);
 				$("html, body").animate({
 					scrollTop: $("#video-player-container").offset().top 
@@ -80,7 +80,7 @@ function onPlayerReady(event){
 	//I don't know why this has to be declared twice
 	$("#videos_datatable tbody tr td img").each(function(){
 		$(this).click(function(){
-			var playlistindex = $(this).closest("tr").attr("data-index");
+			var playlistindex = $(this).closest("tr").attr("data-htmlindex");
 			player.playVideoAt(playlistindex);
 			$("html, body").animate({
 				scrollTop: $("#video-player-container").offset().top 
