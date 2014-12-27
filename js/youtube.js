@@ -16,8 +16,8 @@ function onYouTubeIframeAPIReady() {
 			"showinfo": 0
 			},
 		events:{
-			"onReady":onPlayerReady /*,
-			"onStateChange":onPlayerStateChange*/
+			"onReady":onPlayerReady,
+			"onStateChange":onPlayerStateChange
 			}
 	});
 }
@@ -71,7 +71,6 @@ function onPlayerReady(event){
 				$("html, body").animate({
 					scrollTop: $("#video-player-container").offset().top 
 				},500);
-				console.log("I was clicked!" + playlistindex);
 			});
 		}); 
 	});
@@ -87,6 +86,83 @@ function onPlayerReady(event){
 			},500);
 			console.log("I was clicked!" + playlistindex);
 		});
-	}); 
+	});
+
+		//hide or show the
+		//info buttons on player Ready
+		$("#showinfo").show();
+		$("#hideinfo").hide();
+		$("#karaokedesclist").hide();
+		
+		//hide or show the
+		//info buttons on resize
+		$(window).resize(function(){
+			$("#showinfo").show();
+			$("#hideinfo").hide();
+			$("#karaokedesclist").hide();
+		});
+		
+		//onclick, show descrip list
+		$("#showinfo").click(function(){
+			$(this).hide();
+			$("#hideinfo").show();
+			$("#karaokedesclist").show();
+		});
+		
+		//onclick, hide descrip list
+		$("#hideinfo").click(function(){
+			$(this).hide();
+			$("#showinfo").show();
+			$("#karaokedesclist").hide();
+		});
+}
+
+function onPlayerStateChange(event){
+	if (YT.PlayerState.PLAYING) {
+	
+		//get the value of the video index
+		var playervideoindex = player.getPlaylistIndex();
+		
+		//show or hide the hoteldesc li item
+		//depending on the index of the video
+		//in the player
+		$("#karaokedesclist li").each(function(){
+			if ($(this).data("htmlindex") == playervideoindex){
+				$(this).show();
+			}
+			else{
+				$(this).hide();
+			}
+		});
+		
+		//hide or show the
+		//info buttons on player Ready
+		$("#showinfo").show();
+		$("#hideinfo").hide();
+		$("#karaokedesclist").hide();
+		
+		//hide or show the
+		//info buttons on resize
+		$(window).resize(function(){
+			$("#showinfo").show();
+			$("#hideinfo").hide();
+			$("#karaokedesclist").hide();
+		});
+		
+		//onclick, show descrip list
+		$("#showinfo").click(function(){
+			$(this).hide();
+			$("#hideinfo").show();
+			$("#karaokedesclist").show();
+		});
+		
+		//onclick, hide descrip list
+		$("#hideinfo").click(function(){
+			$(this).hide();
+			$("#showinfo").show();
+			$("#karaokedesclist").hide();
+		});
+	
+	}
 
 }

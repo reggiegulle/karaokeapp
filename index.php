@@ -97,14 +97,21 @@
 		<article id="player"></article>
 	</section>
 	
+	<article id="info-buttons">
+		<ul>
+			<li id="showinfo">SHOW INFO</li>
+			<li id="hideinfo">HIDE INFO</li>
+		</ul>
+	</article>
+	
 	<section id="desclist-container">
-		<ul id="videodesclist">
+		<ul id="karaokedesclist">
 		</ul>
 	</section>
 
 
 	<section id="owl-container">
-		<ul id="owlkaraoke" class="owl-carousel owl-theme">	
+		<ul id="owlkaraoke">	
 		</ul>
 	</section>
 	

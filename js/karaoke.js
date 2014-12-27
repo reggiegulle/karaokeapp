@@ -13,13 +13,6 @@ $(document).ready(function(){
 			}
     });
 	
-	//initialize the owl-carousel plug-in
-	//on the #owlkaraoke ul element.
-	$("#owlkaraoke").owlCarousel();
-	var owl = $("#owlkaraoke").data("owlCarousel");
-	
-	
-	
 	//function populatelists start
 	function populatelists() {
 	
@@ -29,11 +22,20 @@ $(document).ready(function(){
 		var videos_datatable = $("#videos_datatable").DataTable();
 		
 		
-		owl.destroy();
-		$("#owlkaraoke")
-			.contents()
-			.remove();
+		//add the necessary classes to owlkaraoke
+		var owlkaraoke = $("#owlkaraoke").addClass("owl-carousel");
+		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
 		
+		//create the owlkaraoke owlCarousel instance
+		owlkaraoke.owlCarousel();
+		
+		//destroy the owlkaraoke owlCarousel instance
+		owlkaraoke.data("owlCarousel").destroy();
+		$("#owlkaraoke").removeClass("owl-carousel");
+		$("#owlkaraoke").removeClass("owl-theme");
+		$("#owlkaraoke").empty();
+		
+		$("#karaokedesclist").empty();
 		
 		//start ".each" table tr function
 		$("#videos_datatable tbody tr").each( function () {
@@ -114,6 +116,8 @@ $(document).ready(function(){
 				"data-htmlindex":trhtmlindex
 			});
 			
+			
+			
 			//function for adding content
 			//to the karaokedesclist li item
 			function adddesclinodes(){
@@ -140,6 +144,10 @@ $(document).ready(function(){
 		
 		//end ".each" table tr function
 		});
+		
+		//add the owlCarouel classes again
+		var owlkaraoke = $("#owlkaraoke").addClass("owl-carousel");
+		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
 		
 		//reinitialize owlCarousel
 		$("#owlkaraoke").owlCarousel({/*
@@ -174,7 +182,7 @@ $(document).ready(function(){
 			});
 			
 			
-		/*	
+		    /*	
 			//set the style of the
 			//owlhotel li img
 			$("#owlhotel li img").css({
