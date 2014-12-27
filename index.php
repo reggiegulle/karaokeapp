@@ -20,6 +20,10 @@
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
 <link href="css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="screen">
+<!--Important owl-carousel stylesheet-->
+<link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="screen">
+<!-- Default owl-carousel Theme -->
+<link href="css/owl.theme.css" rel="stylesheet" type="text/css" media="screen">
 
 
 <!--JS files to be minified in deployment-->
@@ -40,6 +44,8 @@
 <?php
 	}
 ?>
+<!--owl-carousel jQuery plugin-->
+<script src="js/owl.carousel.min.js" type="text/javascript"></script>
 <!--YouTube JS and Bootstrap JS at the bottom -->
 
 </head>
@@ -82,9 +88,6 @@
 				if($user->hasPermission('moderator')){
 					echo '<p>You are a moderator!</p>';
 				}
-				/* if(!$user->hasPermission('admin')){
-					Redirect::to('404.php');
-				} */
 			}
 		?>
 		
@@ -93,6 +96,22 @@
 	<section id="video-player-container">
 		<article id="player"></article>
 	</section>
+	
+	<section id="desclist-container">
+		<ul id="videodesclist">
+		</ul>
+	</section>
+
+
+	<section id="owl-container">
+		<ul id="owlkaraoke">
+			
+		</ul>
+	</section>
+	
+	
+	
+	
 	
 	<?php
 		if($user->isLoggedIn()){

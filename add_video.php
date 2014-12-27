@@ -95,6 +95,8 @@
 	}
 ?>
 
+
+
 <article>
 <?php
 if(Session::exists('add_video')){
@@ -128,5 +130,12 @@ if(Session::exists('add_video')){
 	<textarea id="lyrics" name="lyrics"></textarea>
 	<br />
 	<input type="submit" value="Create Entry" />
-	<a href="index.php">Cancel</a>
+	<input id="button" onclick="resetform()" type="button" value="Cancel">
+	<!--<a href="index.php">Cancel</a>-->
 </form>
+
+<script type="text/javascript">
+function resetform() {
+	document.getElementById("addnewvideo").reset();
+}
+</script>
