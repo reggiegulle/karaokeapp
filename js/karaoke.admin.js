@@ -4,24 +4,24 @@ $(document).ready(function(){
         "processing": true,
         "serverSide": true,
         "ajax": "ajax/table_processing.php",
-		"dom": "<\"col-xs-8\"l><\"col-xs-4\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
+		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-xs-8\"l><\"col-xs-4\"f><\"col-xs-12\"t><\"col-xs-8\"l><\"col-xs-4\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]}
 			],
 		"drawCallback": function (settings) {
-				populatelists();
+				tableInteraction();
 			}
     });
 	
+	
 	//function populatelists start
-	function populatelists() {
+	function tableInteraction() {
 	
 		//declare videos_datatable var
 		//to correspond to
 		//datatables API instance
 		var videos_datatable = $("#videos_datatable").DataTable();
-		
-		
+
 		//add the necessary classes to owlkaraoke
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-carousel");
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
@@ -60,13 +60,13 @@ $(document).ready(function(){
 			var songtitle_array = songtitledata.split(" ");
 			var songtitle_join = songtitle_array.join("+");
 			var songtitle = $(songtitlenode).html();
-			
+
 			var indexdata = videos_datatable.cell(this, 0).data();
 			var indexnode = videos_datatable.cell(this, 0).node();
 			var indexnum = $(indexnode)
 				.html('<p>' + indexdata + '</p><a href="update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a><a href="delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>');
-			
-			
+
+
 			var videoidnode = videos_datatable.cell(this, 4).node();
 			var videoid = $(videoidnode).html();
 			$(videoidnode)
@@ -74,7 +74,7 @@ $(document).ready(function(){
 				
 			var titledata = videos_datatable.cell(this, 1).data();
 			var performdata = videos_datatable.cell(this, 3).data();
-
+			
 			//create li items for the
 			//#owlkaraoke table
 			var owlkaraokeliitem = $("<li>");
@@ -119,6 +119,8 @@ $(document).ready(function(){
 				"data-htmlindex":trhtmlindex
 			});
 			
+			
+			
 			//function for adding content
 			//to the karaokedesclist li item
 			function adddesclinodes(){
@@ -159,11 +161,17 @@ $(document).ready(function(){
 			itemsMobile: [479,2],
 			pagination: true,*/
 			navigation: true,
-			afterInit: owllivideoindex
+			afterInit: owllivideoindex,
+			beforeMove: getOrSetOwlNav,
+			afterAction: getOrSetOwlNav
 		});
 		
 		
 		function owllivideoindex(){
+		
+
+		
+		
 			//behaviour of owlhotel li items on click
 			$("#owlkaraoke li").each(function(){
 				$(this).click(function(){
@@ -183,6 +191,7 @@ $(document).ready(function(){
 			});
 			
 			
+			
 		    /*	
 			//set the style of the
 			//owlhotel li img
@@ -197,6 +206,61 @@ $(document).ready(function(){
 			});*/
 		} 
 		
+		function getOrSetOwlNav(){
+			//get number data on table pagination
+			var pageinfo = videos_datatable.page.info();
+			//get 1-indexed page of table
+			var currentpage = pageinfo.page + 1;
+			//get 1-indexed last page index of table
+			var lastpage = pageinfo.pages;
+			
+			var currentowlitem = this.currentItem;
+			var lastowlitem = this.maximumItem;
+			//multiple conditions on
+			//current page of table
+			if (currentpage == 1) {
+				//multiple conditions on
+				//current owl items shown
+				if (currentowlitem === 0) {
+					$(".owl-buttons").html('<div class="owl-next">next</div>');
+				} else if (currentowlitem < lastowlitem) {
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
+				} else if (currentowlitem === lastowlitem) {
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage">next page</div>');
+					$("#owl-nextpage").click(function(){
+						videos_datatable.page( 'next' ).draw( false );
+					});
+				}
+			} else if (currentpage < lastpage) {
+				if (currentowlitem === 0) {
+					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div><div class="owl-next">next</div>');
+					$("#owl-prevpage").click(function(){
+						videos_datatable.page( 'previous' ).draw( false );
+					});
+				} else if (currentowlitem < lastowlitem) {
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
+				} else if (currentowlitem === lastowlitem) {
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage">next page</div>');
+					$("#owl-nextpage").click(function(){
+						videos_datatable.page( 'next' ).draw( false );
+					});
+				}
+			} else if(currentpage == lastpage) {
+				if (currentowlitem < lastowlitem) {
+					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div><div class="owl-next">next</div>');
+					$("#owl-prevpage").click(function(){
+						videos_datatable.page( 'previous' ).draw( false );
+					});
+				} else if (currentowlitem === lastowlitem) {
+					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div>');
+					$("#owl-prevpage").click(function(){
+						videos_datatable.page( 'previous' ).draw( false );
+					});
+				}
+			}
+			
+			
+		}
 		
 		
 	//function populatelists end
