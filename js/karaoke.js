@@ -159,8 +159,8 @@ $(document).ready(function(){
 			pagination: true,*/
 			navigation: true,
 			afterInit: owllivideoindex,
-			beforeMove: logvisibleBeforeMove,
-			afterAction: logvisibleAfterAction
+			beforeMove: getOrSetOwlNav,
+			afterAction: getOrSetOwlNav
 		});
 		
 		
@@ -211,11 +211,8 @@ $(document).ready(function(){
 				});
 			});*/
 		} 
-
-
 		
-		
-		function logvisibleBeforeMove(){
+		function getOrSetOwlNav(){
 			//get number data on table pagination
 			var pageinfo = videos_datatable.page.info();
 			//get 1-indexed page of table
@@ -223,90 +220,35 @@ $(document).ready(function(){
 			//get 1-indexed last page index of table
 			var lastpage = pageinfo.pages;
 			
-			//console.log("Current page is: " + currentpage + " of " + lastpage + " pages.");
-			
 			var currentowlitem = this.currentItem;
 			var lastowlitem = this.maximumItem;
-			//console.log("Current OwlItem is: " + typeof currentowlitem + currentowlitem + " and last OwlItem is: " + typeof lastowlitem + lastowlitem );
 			//multiple conditions on
 			//current page of table
 			if (currentpage == 1) {
 				//multiple conditions on
 				//current owl items shown
 				if (currentowlitem === 0) {
-					console.log("First Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div class="owl-next">next</div>');
 				} else if (currentowlitem < lastowlitem) {
-					console.log("Middle Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
 				} else if (currentowlitem === lastowlitem) {
-					console.log("Last Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage" class="owl-nextpage">next page</div>');
 				}
 			} else if (currentpage < lastpage) {
 				if (currentowlitem === 0) {
-					console.log("First Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div><div class="owl-next">next</div>');
 				} else if (currentowlitem < lastowlitem) {
-					console.log("Middle Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
 				} else if (currentowlitem === lastowlitem) {
-					console.log("Last Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage" class="owl-nextpage">next page</div>');
 				}
 			} else if(currentpage == lastpage) {
 				if (currentowlitem === 0) {
-					console.log("First Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div><div class="owl-next">next</div>');
 				} else if (currentowlitem < lastowlitem) {
-					console.log("Middle Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
 				} else if (currentowlitem === lastowlitem) {
-					console.log("Last Item on page " + currentpage + "!");
-				}
-			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		function logvisibleAfterAction(){
-			//get number data on table pagination
-			var pageinfo = videos_datatable.page.info();
-			//get 1-indexed page of table
-			var currentpage = pageinfo.page + 1;
-			//get 1-indexed last page index of table
-			var lastpage = pageinfo.pages;
-			
-			//console.log("Current page is: " + currentpage + " of " + lastpage + " pages.");
-			
-			var currentowlitem = this.currentItem;
-			var lastowlitem = this.maximumItem;
-			//console.log("Current OwlItem is: " + typeof currentowlitem + currentowlitem + " and last OwlItem is: " + typeof lastowlitem + lastowlitem );
-			//multiple conditions on
-			//current page of table
-			if (currentpage == 1) {
-				//multiple conditions on
-				//current owl items shown
-				if (currentowlitem === 0) {
-					console.log("First Item on page " + currentpage + "!");
-				} else if (currentowlitem < lastowlitem) {
-					console.log("Middle Item on page " + currentpage + "!");
-				} else if (currentowlitem === lastowlitem) {
-					console.log("Last Item on page " + currentpage + "!");
-				}
-			} else if (currentpage < lastpage) {
-				if (currentowlitem === 0) {
-					console.log("First Item on page " + currentpage + "!");
-				} else if (currentowlitem < lastowlitem) {
-					console.log("Middle Item on page " + currentpage + "!");
-				} else if (currentowlitem === lastowlitem) {
-					console.log("Last Item on page " + currentpage + "!");
-				}
-			} else if(currentpage == lastpage) {
-				if (currentowlitem === 0) {
-					console.log("First Item on page " + currentpage + "!");
-				} else if (currentowlitem < lastowlitem) {
-					console.log("Middle Item on page " + currentpage + "!");
-				} else if (currentowlitem === lastowlitem) {
-					console.log("Last Item on page " + currentpage + "!");
+					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div>');
 				}
 			}
 		}
