@@ -4,7 +4,7 @@ $(document).ready(function(){
         "processing": true,
         "serverSide": true,
         "ajax": "ajax/table_processing.php",
-		"dom": "<\"col-xs-8\"l><\"col-xs-4\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
+		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-xs-8\"l><\"col-xs-4\"f><\"col-xs-12\"t><\"col-xs-8\"l><\"col-xs-4\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]}
 			],
@@ -165,6 +165,10 @@ $(document).ready(function(){
 		
 		
 		function owllivideoindex(){
+		
+
+		
+		
 			//behaviour of owlhotel li items on click
 			$("#owlkaraoke li").each(function(){
 				$(this).click(function(){
@@ -183,21 +187,6 @@ $(document).ready(function(){
 				});
 			});
 			
-			
-			//get number data on table pagination
-			var pageinfo = videos_datatable.page.info();
-			//get 1-indexed page of table
-			var currentpage = pageinfo.page + 1;
-			//get 1-indexed last page index of table
-			var lastpage = pageinfo.pages;
-			
-			//console.log("Current page is: " + currentpage + " of " + lastpage + " pages.");
-			
-			var currentowlitem = this.currentItem;
-			var lastowlitem = this.maximumItem;
-			//console.log("Current OwlItem is: " + typeof currentowlitem + currentowlitem + " and last OwlItem is: " + typeof lastowlitem + lastowlitem );
-			//multiple conditions on
-			//current page of table		
 		    /*	
 			//set the style of the
 			//owlhotel li img
@@ -243,10 +232,9 @@ $(document).ready(function(){
 					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage" class="owl-nextpage">next page</div>');
 				}
 			} else if(currentpage == lastpage) {
-				if (currentowlitem === 0) {
+				if (currentowlitem < lastowlitem) {
+					$(".owl-controls clickable").attr("style","display:block;");
 					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div><div class="owl-next">next</div>');
-				} else if (currentowlitem < lastowlitem) {
-					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
 				} else if (currentowlitem === lastowlitem) {
 					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div>');
 				}
