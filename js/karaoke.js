@@ -159,7 +159,8 @@ $(document).ready(function(){
 			pagination: true,*/
 			navigation: true,
 			afterInit: owllivideoindex,
-			afterAction: logvisible
+			beforeMove: logvisibleBeforeMove,
+			afterAction: logvisibleAfterAction
 		});
 		
 		
@@ -183,6 +184,20 @@ $(document).ready(function(){
 			});
 			
 			
+			//get number data on table pagination
+			var pageinfo = videos_datatable.page.info();
+			//get 1-indexed page of table
+			var currentpage = pageinfo.page + 1;
+			//get 1-indexed last page index of table
+			var lastpage = pageinfo.pages;
+			
+			//console.log("Current page is: " + currentpage + " of " + lastpage + " pages.");
+			
+			var currentowlitem = this.currentItem;
+			var lastowlitem = this.maximumItem;
+			//console.log("Current OwlItem is: " + typeof currentowlitem + currentowlitem + " and last OwlItem is: " + typeof lastowlitem + lastowlitem );
+			//multiple conditions on
+			//current page of table		
 		    /*	
 			//set the style of the
 			//owlhotel li img
@@ -195,15 +210,104 @@ $(document).ready(function(){
 					"height":($("#owlhotel li img").width() * 0.5625) + "px"
 				});
 			});*/
-		} 	
+		} 
+
+
 		
-		function logvisible(){
-			if(this.currentItem === this.maximumItem){
-				console.log("Last Item!");
-			} else if(this.currentItem === 0) {
-				console.log("First Item!");
-			} else {
-				console.log("Middle Item!");
+		
+		function logvisibleBeforeMove(){
+			//get number data on table pagination
+			var pageinfo = videos_datatable.page.info();
+			//get 1-indexed page of table
+			var currentpage = pageinfo.page + 1;
+			//get 1-indexed last page index of table
+			var lastpage = pageinfo.pages;
+			
+			//console.log("Current page is: " + currentpage + " of " + lastpage + " pages.");
+			
+			var currentowlitem = this.currentItem;
+			var lastowlitem = this.maximumItem;
+			//console.log("Current OwlItem is: " + typeof currentowlitem + currentowlitem + " and last OwlItem is: " + typeof lastowlitem + lastowlitem );
+			//multiple conditions on
+			//current page of table
+			if (currentpage == 1) {
+				//multiple conditions on
+				//current owl items shown
+				if (currentowlitem === 0) {
+					console.log("First Item on page " + currentpage + "!");
+				} else if (currentowlitem < lastowlitem) {
+					console.log("Middle Item on page " + currentpage + "!");
+				} else if (currentowlitem === lastowlitem) {
+					console.log("Last Item on page " + currentpage + "!");
+				}
+			} else if (currentpage < lastpage) {
+				if (currentowlitem === 0) {
+					console.log("First Item on page " + currentpage + "!");
+				} else if (currentowlitem < lastowlitem) {
+					console.log("Middle Item on page " + currentpage + "!");
+				} else if (currentowlitem === lastowlitem) {
+					console.log("Last Item on page " + currentpage + "!");
+				}
+			} else if(currentpage == lastpage) {
+				if (currentowlitem === 0) {
+					console.log("First Item on page " + currentpage + "!");
+				} else if (currentowlitem < lastowlitem) {
+					console.log("Middle Item on page " + currentpage + "!");
+				} else if (currentowlitem === lastowlitem) {
+					console.log("Last Item on page " + currentpage + "!");
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		function logvisibleAfterAction(){
+			//get number data on table pagination
+			var pageinfo = videos_datatable.page.info();
+			//get 1-indexed page of table
+			var currentpage = pageinfo.page + 1;
+			//get 1-indexed last page index of table
+			var lastpage = pageinfo.pages;
+			
+			//console.log("Current page is: " + currentpage + " of " + lastpage + " pages.");
+			
+			var currentowlitem = this.currentItem;
+			var lastowlitem = this.maximumItem;
+			//console.log("Current OwlItem is: " + typeof currentowlitem + currentowlitem + " and last OwlItem is: " + typeof lastowlitem + lastowlitem );
+			//multiple conditions on
+			//current page of table
+			if (currentpage == 1) {
+				//multiple conditions on
+				//current owl items shown
+				if (currentowlitem === 0) {
+					console.log("First Item on page " + currentpage + "!");
+				} else if (currentowlitem < lastowlitem) {
+					console.log("Middle Item on page " + currentpage + "!");
+				} else if (currentowlitem === lastowlitem) {
+					console.log("Last Item on page " + currentpage + "!");
+				}
+			} else if (currentpage < lastpage) {
+				if (currentowlitem === 0) {
+					console.log("First Item on page " + currentpage + "!");
+				} else if (currentowlitem < lastowlitem) {
+					console.log("Middle Item on page " + currentpage + "!");
+				} else if (currentowlitem === lastowlitem) {
+					console.log("Last Item on page " + currentpage + "!");
+				}
+			} else if(currentpage == lastpage) {
+				if (currentowlitem === 0) {
+					console.log("First Item on page " + currentpage + "!");
+				} else if (currentowlitem < lastowlitem) {
+					console.log("Middle Item on page " + currentpage + "!");
+				} else if (currentowlitem === lastowlitem) {
+					console.log("Last Item on page " + currentpage + "!");
+				}
 			}
 		}
 		
