@@ -13,6 +13,7 @@ $(document).ready(function(){
 			}
     });
 	
+	
 	//function populatelists start
 	function tableInteraction() {
 	
@@ -20,8 +21,7 @@ $(document).ready(function(){
 		//to correspond to
 		//datatables API instance
 		var videos_datatable = $("#videos_datatable").DataTable();
-		
-		
+
 		//add the necessary classes to owlkaraoke
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-carousel");
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
