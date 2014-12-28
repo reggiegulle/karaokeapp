@@ -187,6 +187,8 @@ $(document).ready(function(){
 				});
 			});
 			
+			
+			
 		    /*	
 			//set the style of the
 			//owlhotel li img
@@ -221,25 +223,42 @@ $(document).ready(function(){
 				} else if (currentowlitem < lastowlitem) {
 					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
 				} else if (currentowlitem === lastowlitem) {
-					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage" class="owl-nextpage">next page</div>');
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage">next page</div>');
+					$("#owl-nextpage").click(function(){
+						videos_datatable.page( 'next' ).draw( false );
+					});
 				}
 			} else if (currentpage < lastpage) {
 				if (currentowlitem === 0) {
-					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div><div class="owl-next">next</div>');
+					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div><div class="owl-next">next</div>');
+					$("#owl-prevpage").click(function(){
+						videos_datatable.page( 'previous' ).draw( false );
+					});
 				} else if (currentowlitem < lastowlitem) {
 					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
 				} else if (currentowlitem === lastowlitem) {
-					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage" class="owl-nextpage">next page</div>');
+					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage">next page</div>');
+					$("#owl-nextpage").click(function(){
+						videos_datatable.page( 'next' ).draw( false );
+					});
 				}
 			} else if(currentpage == lastpage) {
 				if (currentowlitem < lastowlitem) {
-					$(".owl-controls clickable").attr("style","display:block;");
-					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div><div class="owl-next">next</div>');
+					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div><div class="owl-next">next</div>');
+					$("#owl-prevpage").click(function(){
+						videos_datatable.page( 'previous' ).draw( false );
+					});
 				} else if (currentowlitem === lastowlitem) {
-					$(".owl-buttons").html('<div id="owl-prevpage" class="owl-prevpage">prev page</div>');
+					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div>');
+					$("#owl-prevpage").click(function(){
+						videos_datatable.page( 'previous' ).draw( false );
+					});
 				}
 			}
+			
+			
 		}
+		
 		
 	//function populatelists end
 	}
