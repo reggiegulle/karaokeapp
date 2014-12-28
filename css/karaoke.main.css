@@ -1,0 +1,74 @@
+html{
+	font-size: 62.5%;
+}
+
+body {
+	background: url("../images/14567-brick-wall-and-wood-floor.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-clip: content-box;
+}
+
+@media screen and (max-width: 600px){
+	#header{
+		display: block;
+		position: relative;
+		width: 100%;
+		height: auto;
+		margin-top: 3rem;
+		margin-right: auto;
+		margin-bottom: 2rem;
+		margin-left: auto;
+	}
+}
+
+@media screen and (min-width: 601px){
+	#header{
+		display: block;
+		position: relative;
+		width: 80%;
+		height: auto;
+		margin-top: 3rem;
+		margin-right: auto;
+		margin-bottom: 2rem;
+		margin-left: auto;
+	}
+}
+
+#header h1 {
+    font-family: "Anton",sans-serif;
+    text-align: center;
+    color: #FFF;
+    font-size: 5rem;
+}
+
+@media only screen
+and (max-width: 700px){
+	#video-player-container{
+		background: #000;
+		width: 100%;
+		min-width: 320px;
+		height: auto; 
+		margin: 0 auto 0.1rem;
+			-webkit-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
+			-moz-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
+		box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
+	}
+}
+
+@media only screen
+and (min-width: 701px){
+	#video-player-container{
+		background: #000;
+		width: 51.73807599029911%;
+		height: auto;
+		margin: 0 auto 0.1rem;
+			-webkit-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
+			-moz-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
+		box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
+	}
+}
+
+#videos_datatable {
+    background: rgba(255,255,255,0.5);
+}
