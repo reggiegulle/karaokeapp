@@ -29,6 +29,14 @@
 <!--Custom css-->
 <link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
 
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
 
 <!--JS files to be minified in deployment-->
 <script src="https://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script>
@@ -146,6 +154,8 @@
 		}
 	?>
 	
+	<section id="videos_datatable_container">
+	
 		<article>
 		
 			<table id="videos_datatable" class="table table-bordered dataTable no-footer" cellspacing="0" width="100%">
@@ -167,6 +177,8 @@
 			</table>
 		
 		</article>
+		
+	</section>
 	
 	<?php
 		if($user->isLoggedIn()){
@@ -179,30 +191,32 @@
 		<section>
 			<article id="footer">
 				<ul id="footer-ul">
-					<li>Powered by Youtube</li>
+					<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
 					<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
-					<li><p>All Rights Reserved 2014</li>
-				</ul>
-				<?php
-					if(!$user->isLoggedIn()){
-				?>
-						<h5><a href="login.php">Registered Users Login</a></h5>
-				<?php
-					}
+					<li><p>All Rights Reserved 2014</p></li>
+					<li>
+						<?php
+							if(!$user->isLoggedIn()){
+						?>
+								<h5><a href="login.php">Registered Users Login</a></h5>
+						<?php
+							}
 
-					if($user->isLoggedIn() && $user->hasPermission('admin')){
-				?>
-						<h5><a href="manage_users.php">Administer Users</a></h5>
-				
-				<?php
-					}
-					
-					if($user->isLoggedIn()){
-				?>	
-						<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
-				<?php
-					}
-				?>
+							if($user->isLoggedIn() && $user->hasPermission('admin')){
+						?>
+								<h5><a href="manage_users.php">Administer Users</a></h5>
+						
+						<?php
+							}
+							
+							if($user->isLoggedIn()){
+						?>	
+								<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
+						<?php
+							}
+						?>
+					</li>
+				</ul>
 			</article>
 		</section>
 	

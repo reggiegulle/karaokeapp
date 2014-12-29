@@ -5,8 +5,14 @@ $(document).ready(function(){
         "serverSide": true,
         "ajax": "ajax/table_processing.php",
 		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-xs-8\"l><\"col-xs-4\"f><\"col-xs-12\"t><\"col-xs-8\"l><\"col-xs-4\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
+		"responsive" : true,
 		"columnDefs":[
-				{"orderable": false, "targets":[4, 10]}
+				{"orderable": false, "targets":[4, 10]},
+				{className: "none", "targets":[0, 2, 9, 10]},
+				{className: "all strong", "targets":[1]},
+				{className: "all", "targets":[3, 4]},
+				{className: "min-tablet", "targets":[5, 7]},
+				{className: "min-desktop", "targets":[0, 6, 8]}
 			],
 		"drawCallback": function (settings) {
 				tableInteraction();
@@ -153,13 +159,12 @@ $(document).ready(function(){
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
 		
 		//reinitialize owlCarousel
-		owlkaraoke.owlCarousel({/*
-			items: 4,
-			itemsDesktop: [1199,4],
-			itemsDesktopSmall: [979,3],
-			itemsTablet: [768,2],
+		owlkaraoke.owlCarousel({
+			itemsDesktop: [1199,5],
+			itemsDesktopSmall: [979,4],
+			itemsTablet: [768,3],
 			itemsMobile: [479,2],
-			pagination: true,*/
+			pagination: false,
 			navigation: true,
 			afterInit: owllivideoindex,
 			beforeMove: getOrSetOwlNav,
@@ -174,6 +179,7 @@ $(document).ready(function(){
 		
 			//behaviour of owlhotel li items on click
 			$("#owlkaraoke li").each(function(){
+				$(this).addClass("gradient");
 				$(this).click(function(){
 				
 					//associate each owlhotel li with its own data-index
@@ -189,21 +195,6 @@ $(document).ready(function(){
 					
 				});
 			});
-			
-			
-			
-		    /*	
-			//set the style of the
-			//owlhotel li img
-			$("#owlhotel li img").css({
-				"height":($("#owlhotel li img").width() * 0.5625) + "px"
-			});
-			
-			$(window).resize(function(){
-				$("#owlhotel li img").css({
-					"height":($("#owlhotel li img").width() * 0.5625) + "px"
-				});
-			});*/
 		} 
 		
 		function getOrSetOwlNav(){
