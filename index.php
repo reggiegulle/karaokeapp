@@ -9,6 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="Description" CONTENT=""/>
 
+<meta property="og:url" content="http://www.renegadekaraoke.byethost7.com/"/>
+<meta property="og:title" content="Renegade Karaoke"/>
+<meta property="og:image" content="http://www.renegadekaraoke.byethost7.com/images/fb_og.png"/>
+<meta property="og:description" content="A New Karaoke App For Everybody"/>
+
 <title>Renegade Karaoke</title>
 
 <!--Set the window's initial width -->
