@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="Description" CONTENT=""/>
 
+<meta property="fb:app_id" content="412347942245523"/>
+<meta property="fb:admins" content="824395649"/>
 <meta property="og:url" content="http://www.renegadekaraoke.byethost7.com/"/>
 <meta property="og:title" content="Renegade Karaoke"/>
 <meta property="og:image" content="http://www.renegadekaraoke.byethost7.com/images/fb_og.png"/>
@@ -69,6 +71,25 @@
 
 </head>
 <body>
+	<script>
+	  window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '412347942245523',
+		  xfbml      : true,
+		  version    : 'v2.2'
+		});
+	  };
+
+	  (function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement(s); js.id = id;
+		 js.src = "//connect.facebook.net/en_US/sdk.js";
+		 fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
+
+
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var tag = document.createElement('script');
@@ -81,6 +102,11 @@
 		<section id="header">
 		
 			<h1>Renegade Karaoke</h1>
+			<div
+			  class="fb-like"
+			  data-share="true"
+			  data-width="450">
+			</div>
 		
 			<article>
 				<?php

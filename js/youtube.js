@@ -162,7 +162,35 @@ function onPlayerStateChange(event){
 			$("#showinfo").show();
 			$("#karaokedesclist").hide();
 		});
+		
+		//add or remove highlight class to owlhotel li elements
+		//depending on video id
+		$("#owlkaraoke li").each(function(){
+			if ($(this).data("htmlindex") == playervideoindex){
+				$(this).addClass("highlightowlli");
+			}
+			else{
+				$(this).removeClass("highlightowlli");
+			}
+		});
+	}
 	
+	
+	if (YT.PlayerState.PAUSED){
+	//if video is paused function start
+		
+		//make the owlCarousel "goto"
+		//the highlighted owlhotel li item
+		var owlkaraoke = $("#owlkaraoke");
+		$("#owlkaraoke li").each(function(){
+			if($(this).hasClass("highlightowlli")){
+				owlkaraoke.trigger("owl.goTo",$("#owlkaraoke li").index(this));
+			}
+		});
+		
+
+	
+	//if video is paused function end
 	}
 
 }
