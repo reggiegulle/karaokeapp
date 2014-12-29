@@ -7,12 +7,7 @@ $(document).ready(function(){
 		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-xs-8\"l><\"col-xs-4\"f><\"col-xs-12\"t><\"col-xs-8\"l><\"col-xs-4\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
 		"responsive" : true,
 		"columnDefs":[
-				{"orderable": false, "targets":[4, 10]},
-				{className: "none", "targets":[0, 2, 9, 10]},
-				{className: "all strong", "targets":[1]},
-				{className: "all", "targets":[3, 4]},
-				{className: "min-tablet", "targets":[5, 7]},
-				{className: "min-desktop", "targets":[0, 6, 8]}
+				{"orderable": false, "targets":[4, 10]}
 			],
 		"drawCallback": function (settings) {
 				tableInteraction();
