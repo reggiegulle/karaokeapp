@@ -88,54 +88,118 @@
 				//output errors
 				//print_r($validation->errors());
 				foreach($validation->errors() as $error){
-					echo $error, '<br />';
+					echo '<p class="error">' . $error . '</p><br />';
 				}
 			}
 		}
 	}
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="Description" CONTENT=""/>
 
-<article>
-<?php
-if(Session::exists('add_video')){
-	echo '<p>' . Session::flash('add_video') . '</p>';
-}
-?>
-</article>
+<title>Renegade Karaoke Add Video</title>
 
-<h1>Add New Video</h1>
-<form id="addnewvideo" action="" method="POST">
-	<label for="song_title"><p>Song Title:</p></label>
-	<input type="text" id="song_title" name="song_title" form="addnewvideo" value="" />
-	<label for="composer"><p>Song Composer:</p></label>
-	<input type="text" id="composer" name="composer" form="addnewvideo" value="" />
-	<label for="performed_by"><p>Song Performer:</p></label>
-	<input type="text" id="performed_by" name="performed_by" form="addnewvideo" value="" />
-	<label for="video_id"><p>YouTube Video ID:</p></label>
-	<input type="text" id="video_id" name="video_id" form="addnewvideo" value="" />	
-	<label for="source_album"><p>Source Album:</p></label>
-	<input type="text" id="source_album" name="source_album" form="addnewvideo" value="" />
-	<label for="year_of_release"><p>Year of Release:</p></label>
-	<input type="text" id="year_of_release" name="year_of_release" form="addnewvideo" value="" />
-	<label for="genre"><p>Genre:</p></label>
-	<input type="text" id="genre" name="genre" form="addnewvideo" value="" />
-	<label for="country_of_origin"><p>Country of Origin:</p></label>
-	<input type="text" id="country_of_origin" name="country_of_origin" form="addnewvideo" value="" />
-	<label for="running_time"><p>Running Time:</p></label>
-	<input type="text" id="running_time_min" name="running_time_min" form="addnewvideo" value="" /> min :
-	<input type="text" id="running_time_sec" name="running_time_sec" form="addnewvideo" value="" /> sec
-	<label for="lyrics"><p>Song Lyrics:</p></label>
-	<textarea id="lyrics" name="lyrics"></textarea>
-	<br />
-	<input type="submit" value="Create Entry" />
-	<input id="button" onclick="resetform()" type="button" value="Cancel">
-	<!--<a href="index.php">Cancel</a>-->
-</form>
+<!--Set the window's initial width -->
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!--Google Fonts-->
+<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<!--Separate css files to be minified in deployment-->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
+<!--Custom css-->
+<link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
+</head>
+<body>
+
+<section id="header">		
+	<h1><a href="index.php">Renegade Karaoke</a></h1>
+</section>
+
+	<div id="wrapper">
+		
+		<article id="user_panel_normal">
+
+			<article>
+				<?php
+				if(Session::exists('add_video')){
+					echo '<p>' . Session::flash('add_video') . '</p>';
+				}
+				?>
+			</article>
+
+			<h1>Add New Video</h1>
+			<form id="addnewvideo" action="" method="POST">
+				<div class="field">
+					<label for="song_title"><p>Song Title:</p></label>
+					<input type="text" id="song_title" name="song_title" form="addnewvideo" value="" />
+				</div>
+				<div class="field">
+					<label for="composer"><p>Song Composer:</p></label>
+					<input type="text" id="composer" name="composer" form="addnewvideo" value="" />
+				</div>
+				<div class="field">
+					<label for="performed_by"><p>Song Performer:</p></label>
+					<input type="text" id="performed_by" name="performed_by" form="addnewvideo" value="" />
+				</div>
+				<div class="field">
+					<label for="video_id"><p>YouTube Video ID:</p></label>
+					<input type="text" id="video_id" name="video_id" form="addnewvideo" value="" />	
+				</div>
+				<div class="field">
+					<label for="source_album"><p>Source Album:</p></label>
+					<input type="text" id="source_album" name="source_album" form="addnewvideo" value="" />
+				</div>
+				<div class="field">
+					<label for="year_of_release"><p>Year of Release:</p></label>
+					<input type="text" id="year_of_release" name="year_of_release" form="addnewvideo" value="" />
+				</div>
+				<div class="field">
+					<label for="genre"><p>Genre:</p></label>
+					<input type="text" id="genre" name="genre" form="addnewvideo" value="" />
+				</div>
+				<div class="field">
+					<label for="country_of_origin"><p>Country of Origin:</p></label>
+					<input type="text" id="country_of_origin" name="country_of_origin" form="addnewvideo" value="" />
+				</div>
+				<div class="field">
+					<label for="running_time"><p>Running Time:</p></label>
+					<input type="text" id="running_time_min" name="running_time_min" form="addnewvideo" value="" /> min :
+					<input type="text" id="running_time_sec" name="running_time_sec" form="addnewvideo" value="" /> sec
+				</div>
+				<div class="field">
+					<label for="lyrics"><p>Song Lyrics:</p></label>
+					<textarea id="lyrics" name="lyrics"></textarea>
+				</div>
+				<br />
+				<input type="submit" value="Create Entry" />
+				<input id="button" onclick="resetform()" type="button" value="Cancel">
+				<!--<a href="index.php">Cancel</a>-->
+			</form>
+			
+		</article>
+	</div>
+	
+	<section>
+		<article id="footer">
+			<ul id="footer-ul">
+				<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
+				<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
+				<li><p>All Rights Reserved 2014</p></li>
+			</ul>
+		</article>
+	</section>
 
 <script type="text/javascript">
 function resetform() {
 	document.getElementById("addnewvideo").reset();
 }
 </script>
+
+</body>
+</html>

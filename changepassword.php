@@ -72,31 +72,77 @@ if(Input::exists()){
 }
 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
 
-<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="Description" CONTENT=""/>
 
-<p>To change your password, fill-in your current password in the field provided below.  Type and re-type your new password in each of the fields provided and click "Submit".</p>
+<title>Renegade Karaoke User</title>
 
-<form action="" method="POST">
+<!--Set the window's initial width -->
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-	<article>
-		<?php
-			if(Session::exists('edit_user_current_pwd_error')){
-				echo '<p>' . Session::flash('edit_user_current_pwd_error') . '</p>';
-			}
-		?>
-	</article>
+<!--Google Fonts-->
+<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<!--Separate css files to be minified in deployment-->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
+<!--Custom css-->
+<link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
+</head>
+<body>
 
-	<label for="password_current">Current password</label>
-	<input type="password" name="password_current" id="password_current" />
-
-	<label for="password_new">New password</label>
-	<input type="password" name="password_new" id="password_new" />
-
-	<label for="password_new_again">Re-type your new password</label>
-	<input type="password" name="password_new_again" id="password_new_again" />
+	<section id="header">		
+		<h1><a href="index.php">Renegade Karaoke</a></h1>
+	</section>
 		
-	<input type="submit" value="Change" />
-	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+	<div id="wrapper">
+		<article id="user_panel_normal">
 
-</form>
+			<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
+
+			<p>To change your password, fill-in your current password in the field provided below.  Type and re-type your new password in each of the fields provided and click "Submit".</p>
+
+			<form action="" method="POST">
+
+				<article>
+					<?php
+						if(Session::exists('edit_user_current_pwd_error')){
+							echo '<p>' . Session::flash('edit_user_current_pwd_error') . '</p>';
+						}
+					?>
+				</article>
+				
+				<div class="field">
+					<label for="password_current">Current password</label>
+					<input type="password" name="password_current" id="password_current" />
+				</div>
+				<div class="field">
+					<label for="password_new">New password</label>
+					<input type="password" name="password_new" id="password_new" />
+				</div>
+				<div class="field">
+					<label for="password_new_again">Re-type your new password</label>
+					<input type="password" name="password_new_again" id="password_new_again" />
+				</div>
+				<div class="field">	
+					<input type="submit" value="Change" />
+					<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+				</div>
+
+			</form>
+		</article>
+	</div>
+	<section>
+		<article id="footer">
+			<ul id="footer-ul">
+				<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
+				<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
+				<li><p>All Rights Reserved 2014</p></li>
+			</ul>
+		</article>
+	</section>
+</body>
+</html>

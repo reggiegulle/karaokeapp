@@ -64,7 +64,7 @@ if(Input::exists()){
 		}else{
 			//echo errors
 			foreach($validation->errors() as $error){
-					echo $error . '<br />';
+					echo '<p class="error">' . $error . '</p><br />';
 				}
 		}
 		
@@ -72,31 +72,76 @@ if(Input::exists()){
 }
 ?>
 
-<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
+<!DOCTYPE html>
+<html>
+<head>
 
-<p>To modify your existing details, fill-in your new details in the fields below.  Then type your password in the field provided and click "Submit".</p>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="Description" CONTENT=""/>
 
-<article>
-	<?php
-		if(Session::exists('edit_user_pwd_error')){
-			echo '<p>' . Session::flash('edit_user_pwd_error') . '</p>';
-		}
-	?>
-</article>
+<title>Renegade Karaoke User</title>
 
-<form action="" method="POST">
-		<label for="name">Username</label>
-		<input type="text" name="username" value="<?php echo escape($data->username); ?>" />
+<!--Set the window's initial width -->
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-		<label for="name">Full Name</label>
-		<input type="text" name="name" value="<?php echo escape($data->name); ?>" />
+<!--Google Fonts-->
+<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<!--Separate css files to be minified in deployment-->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
+<!--Custom css-->
+<link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
+</head>
+<body>
+
+	<section id="header">		
+		<h1><a href="index.php">Renegade Karaoke User</a></h1>
+	</section>
 		
-		<label for="password">Password</label>
-		<input type="password" name="password" id="password" autocomplete="off" value="" />
-		
-		<input type="submit" value="Submit" />
-		<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+	<div id="wrapper">
+		<article id="user_panel_normal">
+			<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
 
-</form>
+			<p>To modify your existing details, fill-in your new details in the fields below.  Then type your password in the field provided and click "Submit".</p>
 
-<p><a href="changepassword.php?user=<?php echo escape($user->data()->username); ?>">Click here</a> if you want to change your password.</p>
+			<article>
+				<?php
+					if(Session::exists('edit_user_pwd_error')){
+						echo '<p>' . Session::flash('edit_user_pwd_error') . '</p>';
+					}
+				?>
+			</article>
+
+			<form action="" method="POST">
+				<div class="field">
+					<label for="name">Username</label>
+					<input type="text" name="username" value="<?php echo escape($data->username); ?>" />
+				</div>
+				<div class="field">
+					<label for="name">Full Name</label>
+					<input type="text" name="name" value="<?php echo escape($data->name); ?>" />
+				</div>
+				<div class="field">	
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" autocomplete="off" value="" />
+				</div>
+				<div class="field">	
+					<input type="submit" value="Submit" />
+					<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+				</div>
+			</form>
+
+			<p><a href="changepassword.php?user=<?php echo escape($user->data()->username); ?>">Click here</a> if you want to change your password.</p>
+		</article>
+	</div>
+	<section>
+		<article id="footer">
+			<ul id="footer-ul">
+				<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
+				<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
+				<li><p>All Rights Reserved 2014</p></li>
+			</ul>
+		</article>
+	</section>
+</body>
+</html>

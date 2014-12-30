@@ -98,22 +98,22 @@
 		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	});
 	</script>
-	<div id="wrapper">
-		<section id="header">
-		
-			<h1>Renegade Karaoke</h1>
-			<div
-			  class="fb-like"
-			  data-share="true"
-			  data-width="450">
-			</div>
-		
-			<article>
-				<?php
-					//$user = new User();
-					if($user->isLoggedIn()){
-				?>
-						<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
+	<section id="header">
+	
+		<h1><a href="index.php">Renegade Karaoke</a></h1>
+		<div
+		  class="fb-like"
+		  data-share="true"
+		  data-width="450">
+		</div>
+	
+			<?php
+				//$user = new User();
+				if($user->isLoggedIn()){
+			?>		
+					<article id="user_panel_index">
+				
+						<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><span class="strong underline"><?php echo escape($user->data()->username); ?></a>!</span></p>
 						
 						<article>
 							<?php
@@ -126,135 +126,138 @@
 								}
 							?>
 						</article>
-						
-						<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
-						
-				<?php
-						if($user->hasPermission('admin')){
-							echo '<p>You are an administrator!</p>';
-						}
-						if($user->hasPermission('moderator')){
-							echo '<p>You are a moderator!</p>';
-						}
+					
+			<?php
+					if($user->hasPermission('admin')){
+						echo '<p>You are an administrator!</p>';
 					}
-				?>
-				
-			</article>
-		</section>
-	
-	
-	
-		<section id="video-player-container">
-			<article id="player"></article>
-		</section>
-		
-		<article id="info-buttons">
-			<ul>
-				<li id="showinfo">SHOW INFO</li>
-				<li id="hideinfo">HIDE INFO</li>
-			</ul>
-		</article>
-		
-		<section id="desclist-container">
-			<ul id="karaokedesclist">
-			</ul>
-		</section>
+					if($user->hasPermission('moderator')){
+						echo '<p>You are a moderator!</p>';
+					}
+			?>
+					<article id="logout"><a href="logout.php"><p class="strong">Logout</p></a></article>
+			
+					</article>
+			<?php
+				}
+			?>
+			
+	</section>
 
 
-		<section id="owl-container">
-			<ul id="owlkaraoke">	
-			</ul>
-		</section>
-		
-	
-	
-	
-	
-	<?php
-		if($user->isLoggedIn()){
-	?>
-			<article>
-				<?php
-					if(Session::exists('delete')){
-						echo '<p>' . Session::flash('delete') . '</p>';
-					}
-				?>
-			</article>
-			<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
-	<?php
-		}
-	?>
-	
-	<section id="videos_datatable_container">
-	
-		<article>
-		
-			<table id="videos_datatable" class="table table-bordered dataTable no-footer" cellspacing="0" width="100%">
-				<thead>
-					<tr>
-						<th>Index</th>
-						<th>Song Title</th>
-						<th>Composer</th>
-						<th>Performed By</th>
-						<th>Poster</th>
-						<th>Source Album</th>
-						<th>Year of Release</th>
-						<th>Genre</th>
-						<th>Country Of Origin</th>
-						<th>Running Time</th>
-						<th>Lyrics</th>
-					</tr>
-				</thead>
-			</table>
-		
-		</article>
-		
+
+	<section id="video-player-container">
+		<article id="player"></article>
 	</section>
 	
-	<?php
-		if($user->isLoggedIn()){
-	?>
-			<article id="addnew"><a href="add_video.php"><p>Add New Video</p></a></article>
-	<?php
-		}
-	?>
+	<article id="info-buttons">
+		<ul>
+			<li id="showinfo">SHOW INFO</li>
+			<li id="hideinfo">HIDE INFO</li>
+		</ul>
+	</article>
 	
-		<section>
-			<article id="footer">
-				<ul id="footer-ul">
-					<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
-					<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
-					<li><p>All Rights Reserved 2014</p></li>
-					<li>
-						<?php
-							if(!$user->isLoggedIn()){
-						?>
-								<h5><a href="login.php">Registered Users Login</a></h5>
-						<?php
-							}
+	<section id="desclist-container">
+		<ul id="karaokedesclist">
+		</ul>
+	</section>
 
-							if($user->isLoggedIn() && $user->hasPermission('admin')){
-						?>
-								<h5><a href="manage_users.php">Administer Users</a></h5>
-						
-						<?php
-							}
-							
-							if($user->isLoggedIn()){
-						?>	
-								<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
-						<?php
-							}
-						?>
-					</li>
-				</ul>
-			</article>
-		</section>
+
+	<section id="owl-container">
+		<ul id="owlkaraoke">	
+		</ul>
+	</section>
 	
-		<!--YouTube JS -->
-		<script src="js/youtube.js"></script>
-		<!--Bootstrap JS -->
-		<script src="js/bootstrap.min.js"></script>
-	</div>
+
+
+
+
+<?php
+	if($user->isLoggedIn()){
+?>
+		<article id="addnew">
+			<?php
+				if(Session::exists('delete')){
+					echo '<p>' . Session::flash('delete') . '</p>';
+				}
+			?>
+			<a href="add_video.php"><p class="strong underline">Add New Video</p></a>
+		</article>
+<?php
+	}
+?>
+
+<section id="videos_datatable_container">
+
+	<article>
+	
+		<table id="videos_datatable" class="table table-bordered dataTable no-footer" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Song Title</th>
+					<th>Composer</th>
+					<th>Performed By</th>
+					<th>Poster</th>
+					<th>Source Album</th>
+					<th>Year of Release</th>
+					<th>Genre</th>
+					<th>Country Of Origin</th>
+					<th>Running Time</th>
+					<th>Lyrics</th>
+				</tr>
+			</thead>
+		</table>
+	
+	</article>
+	
+</section>
+
+<?php
+	if($user->isLoggedIn()){
+?>		
+		<article id="addnew">
+			<a href="add_video.php"><p class="strong underline">Add New Video</p></a>
+		</article>
+<?php
+	}
+?>
+
+	<section>
+		<article id="footer">
+			<ul id="footer-ul">
+				<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
+				<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
+				<li><p>All Rights Reserved 2014</p></li>
+				<li>
+					<?php
+						if(!$user->isLoggedIn()){
+					?>
+							<h5><a href="login.php">Registered Users Login</a></h5>
+					<?php
+						}
+
+						if($user->isLoggedIn() && $user->hasPermission('admin')){
+					?>
+							<h5><a href="manage_users.php">Administer Users</a></h5>
+					
+					<?php
+						}
+						
+						if($user->isLoggedIn()){
+					?>	
+							<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
+					<?php
+						}
+					?>
+				</li>
+			</ul>
+		</article>
+	</section>
+
+	<!--YouTube JS -->
+	<script src="js/youtube.js"></script>
+	<!--Bootstrap JS -->
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
