@@ -14,6 +14,7 @@ $(document).ready(function(){
 				{className: "min-tablet", "targets":[5, 7]},
 				{className: "min-desktop", "targets":[6, 8]}
 			],
+		"order" : [0, 'des'],
 		"drawCallback": function (settings) {
 				tableInteraction();
 			}
