@@ -42,7 +42,8 @@ $columns = [
 			return $output;
 		}
 	],
-	[ 'db'	=>	'lyrics',		'dt'	=>	10 ]
+	[ 'db'	=>	'lyrics',		'dt'	=>	10 ],
+	[ 'db'	=>	'added_by',		'dt'	=>	11 ]
 	/* array(
 		'db'        => 'start_date',
 		'dt'        => 4,

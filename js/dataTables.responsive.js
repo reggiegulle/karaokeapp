@@ -815,4 +815,3 @@ else if ( jQuery && !jQuery.fn.dataTable.Responsive ) {
 
 
 })(window, document);
-

@@ -8,7 +8,8 @@ $(document).ready(function(){
 		"responsive" : true,
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},
-				{className: "none", "targets":[0, 2, 9, 10]},
+				{className: "never", "targets":[0, 11]},
+				{className: "none", "targets":[2, 9, 10]},
 				{className: "all strong", "targets":[1]},
 				{className: "all", "targets":[3, 4]},
 				{className: "min-tablet", "targets":[5, 7]},

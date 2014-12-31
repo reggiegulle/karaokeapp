@@ -210,6 +210,7 @@
 					<th>Country Of Origin</th>
 					<th>Running Time</th>
 					<th>Lyrics</th>
+					<th>Added By</th>
 				</tr>
 			</thead>
 		</table>

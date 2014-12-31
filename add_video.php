@@ -7,6 +7,8 @@
 		Redirect::to('index.php');
 	} else {
 	
+		$data = $user->data();
+	
 		if(Input::exists()){
 		
 			$validate = new Validate();
@@ -76,7 +78,8 @@
 						'genre'				=> (Input::get('genre')),
 						'country_of_origin'	=> (Input::get('country_of_origin')),
 						'running_time'		=> $running_time,
-						'lyrics'			=> $lyrics_text
+						'lyrics'			=> $lyrics_text,
+						'added_by'			=> (Input::get('username'))
 						
 					]);
 					
@@ -177,6 +180,7 @@
 					<textarea id="lyrics" name="lyrics"></textarea>
 				</div>
 				<br />
+				<input type="hidden" name="username" value="<?php echo escape($data->username); ?>" />
 				<input type="submit" value="Create Entry" />
 				<input id="button" onclick="resetform()" type="button" value="Cancel">
 				<!--<a href="index.php">Cancel</a>-->
