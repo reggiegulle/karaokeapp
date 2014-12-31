@@ -25,11 +25,11 @@
 					if($login){
 						Redirect::to('index.php');
 					} else {
-						echo '<p>Sorry, logging in failed.</p>';
+						echo '<p class="error">Sorry, logging in failed.</p>';
 					}
 				} else {
 					foreach($validation->errors() as $error){
-						echo $error . '<br />';
+						echo '<p class="error">' . $error . '</p><br />';
 					}
 				}
 			

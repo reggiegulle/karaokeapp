@@ -17,14 +17,6 @@
 			$video = new Video();
 			$video_id = $video->safe_string(Input::get('video_id'));
 			$video->find($video_id);
-		}
-		
-		if (!$video->exists()){
-			Redirect::to('../index.php');
-		} else {
-			//echo "The video is in the database.";
-			//var_dump($video->data());
-			//print_r($video->data());
 		
 			if(Input::exists('post')){
 		
@@ -104,7 +96,7 @@
 				} else {
 					//echo errors
 					foreach($validation->errors() as $error){
-							echo $error . '<br />';
+							echo '<p class="error">' . $error . '</p><br />';
 						}
 				}
 			}
