@@ -123,7 +123,19 @@ function onPlayerStateChange(event){
 		//get the value of the video index
 		var playervideoindex = player.getPlaylistIndex();
 		
-		//show or hide the hoteldesc li item
+		//show or hide the karaoketitlelist li item
+		//depending on the index of the video
+		//in the player
+		$("#karaoketitlelist li").each(function(){
+			if ($(this).data("htmlindex") == playervideoindex){
+				$(this).show();
+			}
+			else{
+				$(this).hide();
+			}
+		});
+		
+		//show or hide the karaokedesclist li item
 		//depending on the index of the video
 		//in the player
 		$("#karaokedesclist li").each(function(){

@@ -104,6 +104,30 @@ $(document).ready(function(){
 			
 			$("#owlkaraoke").append(owlkaraokeliitem);
 			
+			//create li items for karaoketitlelist
+			var karaoketitlelistitem = $("<li>");
+			
+			//associate trhtmlindex
+			//to each li item
+			karaoketitlelistitem.attr({
+				"data-htmlindex":trhtmlindex
+			});
+			
+			//function for adding content
+			//to the karaokedesclist li item
+			function addtitlelinodes(){
+				var titlelitext = "";
+				titlelitext += '<h6>' + titledata + '</h6>';
+				titlelitext += '<p>Performed By: ' + performdata + '</p>';
+				
+				return titlelitext;
+			}
+			
+			karaoketitlelistitem.append(addtitlelinodes);
+			
+			//add the karaoketitlelist li item to the list
+			$("#karaoketitlelist").append(karaoketitlelistitem);
+			
 			//create li items for karaokedesclist
 			var karaokedesclistitem = $("<li>");
 			

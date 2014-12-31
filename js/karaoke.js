@@ -41,6 +41,8 @@ $(document).ready(function(){
 		$("#owlkaraoke").removeClass("owl-theme");
 		$("#owlkaraoke").empty();
 		
+		$("#karaoketitlelist").empty();
+		
 		$("#karaokedesclist").empty();
 		
 		//start ".each" table tr function
@@ -105,8 +107,38 @@ $(document).ready(function(){
 			
 			$("#owlkaraoke").append(owlkaraokeliitem);
 			
+			//create li items for karaoketitlelist
+			var karaoketitlelistitem = $("<li>");
+			
+			//associate trhtmlindex
+			//to each li item
+			karaoketitlelistitem.attr({
+				"data-htmlindex":trhtmlindex
+			});
+			
+			//function for adding content
+			//to the karaokedesclist li item
+			function addtitlelinodes(){
+				var titlelitext = "";
+				titlelitext += '<h6>' + titledata + '</h6>';
+				titlelitext += '<p>Performed By: ' + performdata + '</p>';
+				
+				return titlelitext;
+			}
+			
+			karaoketitlelistitem.append(addtitlelinodes);
+			
+			//add the karaoketitlelist li item to the list
+			$("#karaoketitlelist").append(karaoketitlelistitem);
+			
 			//create li items for karaokedesclist
 			var karaokedesclistitem = $("<li>");
+			
+			//associate trhtmlindex
+			//to each li item
+			karaokedesclistitem.attr({
+				"data-htmlindex":trhtmlindex
+			});
 			
 			var composerdata = videos_datatable.cell(this, 2).data();
 			var albumdata = videos_datatable.cell(this, 5).data();

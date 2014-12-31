@@ -150,6 +150,11 @@
 		<article id="player"></article>
 	</section>
 	
+	<section id="titlelist-container">
+		<ul id="karaoketitlelist">
+		</ul>
+	</section>
+	
 	<article id="info-buttons">
 		<ul>
 			<li id="showinfo">SHOW INFO</li>
