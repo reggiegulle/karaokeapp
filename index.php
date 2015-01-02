@@ -7,14 +7,14 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="Description" CONTENT=""/>
+<meta name="Description" CONTENT="Now you can get your karaoke fix anywhere, anytime, on any device — absolutely free!  Bust your pipes and show them You've Got Talent and be your own Singing Idol.  See you soon!"/>
 
+<meta property="og:title" content="Renegade Karaoke!"/>
+<meta property="og:site_name" content="Renegade Karaoke"/>
+<meta property="og:url" content="http://www.renegadekaraoke.byethost7.com/index.php"/>
+<meta property="og:description" content="Now you can get your karaoke fix anywhere, anytime, on any device — absolutely free!  Bust your pipes and show them You've Got Talent and be your own Singing Idol.  See you soon!"/>
+<meta property="og:image" content="http://www.renegadekaraoke.byethost7.com/images/rk-fb-og.png"/>
 <meta property="fb:app_id" content="412347942245523"/>
-<meta property="fb:admins" content="824395649"/>
-<meta property="og:url" content="http://www.renegadekaraoke.byethost7.com/"/>
-<meta property="og:title" content="Renegade Karaoke"/>
-<meta property="og:image" content="http://www.renegadekaraoke.byethost7.com/images/fb_og.png"/>
-<meta property="og:description" content="A New Karaoke App For Everybody"/>
 
 <title>Renegade Karaoke</title>
 
@@ -71,22 +71,15 @@
 
 </head>
 <body>
+	<div id="fb-root"></div>
 	<script>
-	  window.fbAsyncInit = function() {
-		FB.init({
-		  appId      : '412347942245523',
-		  xfbml      : true,
-		  version    : 'v2.2'
-		});
-	  };
-
-	  (function(d, s, id){
-		 var js, fjs = d.getElementsByTagName(s)[0];
-		 if (d.getElementById(id)) {return;}
-		 js = d.createElement(s); js.id = id;
-		 js.src = "//connect.facebook.net/en_US/sdk.js";
-		 fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=412347942245523&version=v2.0";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
 
@@ -101,11 +94,7 @@
 	<section id="header">
 	
 		<h1><a href="index.php">Renegade Karaoke</a></h1>
-		<div
-		  class="fb-like"
-		  data-share="true"
-		  data-width="450">
-		</div>
+		<div class="fb-like" data-href="http://www.renegadekaraoke.byethost7.com" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
 	
 			<?php
 				//$user = new User();
