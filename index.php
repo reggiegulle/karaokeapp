@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="Description" CONTENT="Now you can get your karaoke fix anywhere, anytime, on any device — absolutely free!  Bust your pipes and show them You've Got Talent and be your own Singing Idol.  See you soon!"/>
 
+<meta property="og:type" content="website"/>
 <meta property="og:title" content="Renegade Karaoke!"/>
 <meta property="og:site_name" content="Renegade Karaoke"/>
 <meta property="og:url" content="http://www.renegadekaraoke.byethost7.com/index.php"/>
@@ -23,6 +24,7 @@
 
 
 <!--Separate css files to be minified in deployment-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
