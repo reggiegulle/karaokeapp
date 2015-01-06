@@ -42,6 +42,8 @@ $(document).ready(function(){
 		$("#owlkaraoke").removeClass("owl-theme");
 		$("#owlkaraoke").empty();
 		
+		$("#karaoketitlelist").empty();
+		
 		$("#karaokedesclist").empty();
 		
 		//start ".each" table tr function
