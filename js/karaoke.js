@@ -284,7 +284,6 @@ $(document).ready(function(){
 			
 		}
 		
-		
 	//function populatelists end
 	}
 

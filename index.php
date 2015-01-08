@@ -49,9 +49,14 @@
 
 <!--JS files to be minified in deployment-->
 <script src="https://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script>
+<!--datatables-->
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="js/dataTables.responsive.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
+<!--GSAP library-->
+<script src="js/CSSPlugin.js" type="text/javascript"></script>
+<script src="js/TweenLite.js" type="text/javascript"></script>
+<script src="js/TimelineLite.js" type="text/javascript"></script>
 <!--custom JS-->
 <?php 
 	$user = new User();
@@ -95,7 +100,7 @@
 	</script>
 	<section id="header">
 	
-		<h1><a href="index.php">Renegade Karaoke</a></h1>
+		<h1><a id="masthead" href="index.php">Renegade Karaoke</a></h1>
 		<div class="fb-like" data-href="http://www.renegadekaraoke.byethost7.com" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
 	
 			<?php
