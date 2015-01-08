@@ -4,7 +4,11 @@ $(document).ready(function(){
         "processing": true,
         "serverSide": true,
         "ajax": "ajax/users_processing.php",
-		"dom": "<\"col-xs-8\"l><\"col-xs-4\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
+		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"f><\"col-xs-12\"t><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
+		"responsive" : true,
+		"columnDefs":[
+				{className: "none", "targets":[0, 3]}
+			],
 		"drawCallback": function (settings) {
 				placeEditors();
 			}

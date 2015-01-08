@@ -77,30 +77,62 @@ $user = new User();
 	}
 ?>
 
-<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
+<?php
+	
+	$pageTitle = "Edit User";
 
-<p>To modify the user's existing details, fill-in the user's new details in the fields below.  Then type the user's reset password in the field provided and click "Submit".</p>
+	include_once "includes/user_htmlHead.php";
+?>
+<body>
+<?php
+	include_once "includes/user_section_header.php";
+?>
 
-<article>
-	<?php
-		if(Session::exists('edit_karaokeuser_success')){
-			echo '<p>' . Session::flash('edit_karaokeuser_success') . '</p>';
-		}
-	?>
-</article>
+<div id="wrapper">
+
+	<article id="user_panel_normal">
+
+		<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
+
+		<p>To modify the user's existing details, fill-in the user's new details in the fields below.  Then type the user's reset password in the field provided and click "Submit".</p>
+
+		<article>
+			<?php
+				if(Session::exists('edit_karaokeuser_success')){
+					echo '<p>' . Session::flash('edit_karaokeuser_success') . '</p>';
+				}
+			?>
+		</article>
 
 
-<form action="" method="POST">
-		<label for="name">Username</label>
-		<input type="text" name="username" value="<?php echo escape($data->username); ?>" />
+		<form action="" method="POST">
+			<div class="field">
+				<label for="name">Username</label>
+				<input type="text" name="username" value="<?php echo escape($data->username); ?>" />
+			</div>
+			
+			<div class="field">
+				<label for="name">User's Real Name</label>
+				<input type="text" name="name" id="name" value="<?php echo escape($data->name); ?>" />
+			</div>
 
-		<label for="name">User's Real Name</label>
-		<input type="text" name="name" id="name" value="<?php echo escape($data->name); ?>" />
+			<div class="field">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" autocomplete="off" value="" />
+			</div>	
+				
+			<div class="field">
+				<input type="submit" value="Submit" />
+				<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+			</div>
+		</form>
 		
-		<label for="password">Password</label>
-		<input type="password" name="password" id="password" autocomplete="off" value="" />
-		
-		<input type="submit" value="Submit" />
-		<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+		<p>Back To: <a href="manage_users.php">Users Table</a></p>
+	
+	</article>
 
-</form>
+</div>
+
+<?php
+	include_once "includes/user_footer.php";
+?>

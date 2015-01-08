@@ -385,3 +385,7 @@ thead {
 #footer-ul li h3{
 	margin-top: 1rem;
 }
+
+#users_datatable {
+    background: #FFF;
+}

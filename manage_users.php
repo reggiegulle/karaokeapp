@@ -91,86 +91,120 @@
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
 <link href="css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="screen">
+<!--Custom css-->
+<link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
 
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
 
 <!--JS files to be minified in deployment-->
 <script src="https://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script>
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="js/dataTables.responsive.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
+<!--GSAP library-->
+<script src="js/CSSPlugin.js" type="text/javascript"></script>
+<script src="js/TweenLite.js" type="text/javascript"></script>
+<script src="js/TimelineLite.js" type="text/javascript"></script>
 <!--Custom JS for this Page-->
 <script src="js/manage_users.js" type="text/javascript"></script>
+<!--stylejs-->
+<script src="js/karaoke.style.js" type="text/javascript"></script>
 </head>
 
 <body>
 
+<?php
+	include_once "includes/user_section_header.php";
+?>
 
-<article>
-	<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
-	
-	<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
-</article>
+	<div id="wrapper">
 
-	<article>
-		<?php
-			if(Session::exists('register')){
-				echo '<p>' . Session::flash('register') . '</p>';
-			}
-		?>
-	</article>
+		<article id="user_panel_normal">
+			<article>
+				<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
+				
+				<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
+			</article>
+
+			<article>
+				<?php
+					if(Session::exists('register')){
+						echo '<p>' . Session::flash('register') . '</p>';
+					}
+				?>
+			</article>
 
 
-<h4>Register New User</h4>
+			<h4>Register New User</h4>
 
-<form action="" method="POST">
-	<label for="username">Username</label>
-	<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off" />
-	
-	<label for="name">User's Real Name</label>
-	<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>" />
-	
-	<label for="group">User Group</label>
-	<input type="radio" name="group" value="1" />Standard User
-	&nbsp;
-	<input type="radio" name="group" value="2" />Site Admin
+			<form action="" method="POST">
+				<div class="field">
+					<label for="username">Username</label>
+					<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off" />
+				</div>
+				
+				<div class="field">
+					<label for="name">User's Real Name</label>
+					<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>" />
+				</div>
+				
+				<div class="field">
+					<label for="group">User Group</label>
+					<input type="radio" name="group" value="1" />Standard User
+					&nbsp;
+					<input type="radio" name="group" value="2" />Site Admin
+				</div>
+				
+				<div class="field">
+					<label for="password">Choose a password</label>
+					<input type="password" name="password" id="password" value="" />
+				</div>
+				
+				<div class="field">
+					<label for="password_again">Enter password again</label>
+					<input type="password" name="password_again" id="password_again" value="" />
+				</div>
+				
+				<div class="field">
+					<input type="hidden" name="token" value="<?php echo Token::generate() ?>" >
+				</div>
+				
+				<input type="submit" value="Register" >
 
-	<label for="password">Choose a password</label>
-	<input type="password" name="password" id="password" value="" />
+				
+			</form>
+			<article>
+				<h5><a href="index.php">Cancel</a></h5>
+			</article>
 
-	<label for="password_again">Enter password again</label>
-	<input type="password" name="password_again" id="password_again" value="" />
-	
-	<input type="hidden" name="token" value="<?php echo Token::generate() ?>" >
-	
-	<input type="submit" value="Register" >
+			<article>
+				<?php
+					if(Session::exists('delete_user')){
+						echo '<p>' . Session::flash('delete_user') . '</p>';
+					}
+				?>
+			</article>
+		</article>
+	</div>
 
-	
-</form>
-<article>
-	<h5><a href="index.php">Cancel</a></h5>
-</article>
+	<table id="users_datatable" class="table table-bordered dataTable no-footer" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>Index</th>
+				<th>Username</th>
+				<th>Name</th>
+				<th>Joined</th>
+				<th>Group</th>
+			</tr>
+		</thead>
+	</table>
 
-	<article>
-		<?php
-			if(Session::exists('delete_user')){
-				echo '<p>' . Session::flash('delete_user') . '</p>';
-			}
-		?>
-	</article>
-
-<table id="users_datatable" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%">
-	<thead>
-		<tr>
-			<th>Index</th>
-			<th>Username</th>
-			<th>Name</th>
-			<th>Joined</th>
-			<th>Group</th>
-		</tr>
-	</thead>
-</table>
-
-<!--Bootstrap JS -->
-	<script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php
+	include_once "includes/user_footer.php";
+?>

@@ -38,29 +38,15 @@
 	}
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
+<?php
+	
+	$pageTitle = "Renegade Karaoke Login";
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="Description" CONTENT=""/>
-
-<title>Renegade Karaoke Login</title>
-
-<!--Set the window's initial width -->
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-<!--Google Fonts-->
-<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
-<!--Separate css files to be minified in deployment-->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
-<!--Custom css-->
-<link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
-</head>
+	include_once "includes/user_htmlHead.php";
+?>
 <body>
 		<section id="header">		
-			<h1><a href="index.php">Renegade Karaoke</a></h1>
+			<h1><a id="masthead" href="index.php">Renegade Karaoke</a></h1>
 		</section>
 		
 		<div id="wrapper">
@@ -85,13 +71,7 @@
 					<input type="submit" value="Log In" />
 				</form>
 			</article>
-			<article id="footer">
-				<ul id="footer-ul">
-					<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
-					<li><p>Design and UI by</p><h3>Reggie Gulle</h3></li>
-					<li><p>All Rights Reserved 2014</p></li>					
-				</ul>
-			</article>
 		</div>
-	</body>
-</html>
+<?php
+	include_once "includes/user_footer.php";
+?>
