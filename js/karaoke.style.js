@@ -26,6 +26,11 @@ $(document).ready(function(){
 		.to( "#masthead", 0.10, {opacity: 0}, "+=0.1" )
 		.to( "#masthead", 0.10, {opacity: 0.65} )
 		.to( "#masthead", 0.10, {opacity: 0}, "+=0.1" )
-		.to( "#masthead", 0.10, {opacity: 1} );
-		
+		.to( "#masthead", 0.10, {opacity: 1} )
+		.set( "#masthead", {opacity: 1}, "+=10" )
+		.call(animRestart);
+	
+	function animRestart(){
+		mastheadAnim.restart(true);
+	}
 });
