@@ -167,7 +167,7 @@
 				</div>
 				<div class="field">
 					<label for="lyrics"><p>Song Lyrics:</p></label>
-					<textarea id="lyrics" rows="10" cols="70" name="lyrics"><?php echo escape($video->data()->lyrics); ?></textarea>
+					<textarea id="lyrics" rows="10" cols="70" name="lyrics"><?php echo escape(strip_tags($video->data()->lyrics)); ?></textarea>
 					<br />
 				</div>
 				<input type="submit" value="Edit Entry" />
