@@ -48,7 +48,7 @@
 
 
 <!--JS files to be minified in deployment-->
-<script src="https://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
 <!--datatables-->
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="js/dataTables.responsive.js" type="text/javascript"></script>
