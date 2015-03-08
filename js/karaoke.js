@@ -4,7 +4,7 @@ $(document).ready(function(){
         "processing": true,
         "serverSide": true,
         "ajax": "ajax/table_processing.php",
-		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"f><\"col-xs-12\"t><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"f><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
+		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-sm-8 col-xs-12\"l><\"col-xs-12\"t><\"col-sm-8 col-xs-12\"l><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
 		"responsive" : true,
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},
@@ -283,6 +283,14 @@ $(document).ready(function(){
 			
 			
 		}
+		
+		//get the "custom-search-box" input
+		//and make it function
+		//as an external search box
+		$('#custom-search-box').on('keyup', function(){
+			videos_datatable.search(this.value).draw();
+		});
+		
 		
 	//function populatelists end
 	}

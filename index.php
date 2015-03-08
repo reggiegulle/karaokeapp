@@ -168,10 +168,18 @@
 		<ul id="owlkaraoke">	
 		</ul>
 	</section>
-	
 
-
-
+	<section id="custom-filter-search-container" class="col-xs-12">
+		<ul id="custom-filter-search">
+			<li>Filter by Year</li>
+			<li>Filter by Genre</li>
+			<li>Filter by Country</li>
+			<li>
+				Search
+				<input type="text" id="custom-search-box" />
+			</li>
+		</ul>
+	</section>
 
 <?php
 	if($user->isLoggedIn()){
