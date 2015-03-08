@@ -184,7 +184,7 @@
 <?php
 	if($user->isLoggedIn()){
 ?>
-		<article id="addnew">
+		<article id="addnew" class="col-xs-12">
 			<?php
 				if(Session::exists('delete')){
 					echo '<p>' . Session::flash('delete') . '</p>';
@@ -226,7 +226,7 @@
 <?php
 	if($user->isLoggedIn()){
 ?>		
-		<article id="addnew">
+		<article id="addnew" class="col-xs-12">
 			<a href="add_video.php"><p class="strong underline">Add New Video</p></a>
 		</article>
 <?php
