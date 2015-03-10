@@ -280,10 +280,10 @@ $(document).ready(function(){
 			
 		}
 		
-		//get the "custom-search-box" input
+		//get the "custom-search-input"
 		//and make it function
-		//as an external search box
-		$('#custom-search-box').on('keyup', function(){
+		//as an external search input area
+		$('#custom-search-input').on('keyup', function(){
 			videos_datatable.search(this.value).draw();
 		});
 		

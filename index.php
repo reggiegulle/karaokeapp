@@ -25,9 +25,14 @@
 
 <!--Separate css files to be minified in deployment-->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
+<!--bootstrap css files-->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
+<!--datatables-bootstrap integration css files-->
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+<!--yadcf css files-->
+<link href="css/jquery.dataTables.yadcf.css" rel="stylesheet" type="text/css" media="screen">
+<!--datatables responsive plug-in css-->
 <link href="css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="screen">
 <!--Important owl-carousel stylesheet-->
 <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="screen">
@@ -49,8 +54,11 @@
 
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
-<!--datatables-->
+<!--datatables core-->
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+<!--yadcf-->
+<script src="js/jquery.dataTables.yadcf.js" type="text/javascript"></script>
+<!--datatables extensions-->
 <script src="js/dataTables.responsive.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
 <!--GSAP library-->
@@ -70,6 +78,11 @@
 <?php
 	}
 ?>
+
+
+<!--custom JS for yadcf-->
+<script src="js/karaoke.yadcf.js" type="text/javascript"></script>
+
 <!--owl-carousel jQuery plugin-->
 <script src="js/owl.carousel.min.js" type="text/javascript"></script>
 <!--stylejs-->
@@ -168,16 +181,16 @@
 		<ul id="owlkaraoke">	
 		</ul>
 	</section>
+	
+	<section id="search-container">
+		<article>Search <input type="text" id="custom-search-input" /></article>
+	</section>
 
 	<section id="custom-filter-search-container" class="col-xs-12">
-		<ul id="custom-filter-search">
-			<li>Filter by Year</li>
-			<li>Filter by Genre</li>
-			<li>Filter by Country</li>
-			<li>
-				Search
-				<input type="text" id="custom-search-box" />
-			</li>
+		<ul id="custom-filter">
+			<li id="year-filter"></li>
+			<li id="genre-filter"></li>
+			<li id="country-filter"></li>
 		</ul>
 	</section>
 
