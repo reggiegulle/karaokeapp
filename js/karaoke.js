@@ -4,7 +4,7 @@ $(document).ready(function(){
         "processing": true,
         "serverSide": true,
         "ajax": "ajax/table_processing.php",
-		"dom": "<\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p><\"col-sm-8 col-xs-12\"l><\"col-xs-12\"t><\"col-sm-8 col-xs-12\"l><\"col-sm-8 col-xs-12\"i><\"col-sm-4 col-xs-12\"p>r",
+		"dom": "<\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},
@@ -16,6 +16,7 @@ $(document).ready(function(){
 				{className: "min-desktop", "targets":[0, 6, 8]}
 			],
 		"order" : [0, 'des'],
+		"sPaginationType": "listbox",
 		"drawCallback": function (settings) {
 				tableInteraction();
 			}

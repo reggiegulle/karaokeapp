@@ -38,6 +38,8 @@
 <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="screen">
 <!-- Default owl-carousel Theme -->
 <link href="css/owl.theme.css" rel="stylesheet" type="text/css" media="screen">
+<!-- SlickNav css-->
+<link href="css/slicknav.css" rel="stylesheet" type="text/css" media="screen">
 <!--Google Fonts-->
 <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
 <!--Custom css-->
@@ -56,6 +58,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
 <!--datatables core-->
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="js/select.js" type="text/javascript"></script>
 <!--yadcf-->
 <script src="js/jquery.dataTables.yadcf.js" type="text/javascript"></script>
 <!--datatables extensions-->
@@ -87,7 +90,9 @@
 <script src="js/owl.carousel.min.js" type="text/javascript"></script>
 <!--stylejs-->
 <script src="js/karaoke.style.js" type="text/javascript"></script>
-<!--YouTube JS and Bootstrap JS at the bottom -->
+<!--SlickNav JS-->
+<script src="js/jquery.slicknav.js" type="text/javascript"></script>
+<!--YouTube JS, SlickNav custom JS init, and Bootstrap JS at the bottom -->
 
 </head>
 <body>
@@ -183,10 +188,16 @@
 	</section>
 	
 	<section id="search-container">
-		<article>Search <input type="text" id="custom-search-input" /></article>
+		<form>
+			<div class="form-group">
+				<label for="custom-search-input">Search for artist, song title, album, lyrics, etc.</label>
+				<img src="images/search_icon.png" width="32px" height="32px" alt="search icon" id="search-icon" />
+				<input type="text" id="custom-search-input" class="form-control input-sm" />
+			</div>
+		</form>
 	</section>
 
-	<section id="custom-filter-search-container" class="col-xs-12">
+	<section id="custom-filter-search-container">
 		<ul id="custom-filter">
 			<li id="year-filter"></li>
 			<li id="genre-filter"></li>
@@ -209,7 +220,7 @@
 	}
 ?>
 
-<section id="videos_datatable_container">
+<section id="videos_datatable_container" class="row">
 
 	<article>
 	
@@ -276,9 +287,10 @@
 			</ul>
 		</article>
 	</section>
-
 	<!--YouTube JS -->
 	<script src="js/youtube.js"></script>
+	<!--custom SlickNav JS init-->
+	<script src="js/karaoke.slicknav.js"></script>
 	<!--Bootstrap JS -->
 	<script src="js/bootstrap.min.js"></script>
 </body>

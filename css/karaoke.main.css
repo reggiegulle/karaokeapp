@@ -287,13 +287,30 @@ div.dataTables_info{
 	margin-left: 4rem;
 }
 
-div.dataTables_filter,
-div.dataTables_paginate{
+div.dataTables_filter{
 	margin-right: 4rem;
 }
 
+@media only screen
+and (max-width: 700px){
+	div.dataTables_paginate{
+		margin-right: 0;
+	}
+}
+
+@media only screen
+and (min-width: 701px){
+	div.dataTables_paginate{
+		margin-right: 4rem;
+	}
+}
+
+div.dataTables_paginate{
+	padding-top: 8px;
+}
+
 .owl-carousel {
-    margin-bottom: 6rem;
+    margin-bottom: 4.5rem;
 }
 
 #owlkaraoke {
@@ -314,7 +331,6 @@ div.dataTables_paginate{
 	background: -ms-linear-gradient(left,  rgba(234,220,168,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 74%,rgba(234,220,168,1) 100%); /* IE10+ */
 	background: linear-gradient(to right,  rgba(234,220,168,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,1) 74%,rgba(234,220,168,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eadca8', endColorstr='#eadca8',GradientType=1 ); /* IE6-8 */
-    margin: 1rem;
     border-radius: 6px;
     box-shadow: 1px 1px 2px #CCC, -1px -1px 2px #CCC;
 }
@@ -352,6 +368,79 @@ div.dataTables_paginate{
     position: absolute;
     right: 10px;
     text-shadow: -1px 1px 2px #000;
+}
+
+#search-container, #custom-filter-search-container{
+    text-align: center;
+}
+
+#search-container{
+	color: #FFF;
+	text-shadow: 1px 2px 1px #000, -1px -2px 1px #000;
+}
+
+#search-container form label{
+	display: block;
+    font-size: 1.8rem;
+}
+
+#search-icon {
+    margin: -1px -3px 0 0;
+    vertical-align: top;
+}
+
+@media only screen
+and (max-width: 700px){
+	.slicknav_menu{
+		display: block;
+	}
+	
+	#custom-filter{
+		display: none;
+	}
+}
+
+@media only screen
+and (min-width: 701px){
+	.slicknav_menu{
+		display: none;
+	}
+	
+	#custom-filter{
+		display: block;
+	}
+}
+
+#custom-search-input.form-control.input-sm {
+    border-radius: 3px;
+    color: #000;
+    display: inline-block;
+    font-size: inherit;
+    height: 3rem;
+    width: auto;
+}
+
+#custom-filter-search-container > ul {
+    list-style-type: none;
+}
+
+#custom-filter > li {
+    display: inline-block;
+}
+
+@media only screen
+and (max-width: 700px){
+	#videos_datatable_container.row {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+}
+
+@media only screen
+and (min-width: 701px){
+	#videos_datatable_container.row {
+		margin: 0 2rem;
+	}
 }
 
 thead {
