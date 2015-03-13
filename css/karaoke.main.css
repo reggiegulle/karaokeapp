@@ -277,6 +277,7 @@ and (min-width: 701px){
 div.dataTables_length,
 div.dataTables_filter label,
 div.dataTables_info,
+div.dataTables_paginate,
 #footer-ul{
 	color: #FFF;
 	text-shadow: 1px 2px 1px #000, -1px -2px 1px #000;
@@ -293,20 +294,41 @@ div.dataTables_filter{
 
 @media only screen
 and (max-width: 700px){
-	div.dataTables_paginate{
-		margin-right: 0;
+	.dataTables_info {
+	  margin-bottom: 0;
 	}
 }
 
 @media only screen
 and (min-width: 701px){
+	.dataTables_info {
+	  margin-bottom: 1rem;
+	}
+}
+
+@media only screen
+and (max-width: 700px){
 	div.dataTables_paginate{
-		margin-right: 4rem;
+		margin-right: 0;
+		margin-bottom: 1rem;
+	}
+}
+
+@media only screen
+and (min-width: 701px){
+	div.dataTables_paginate {
+	  margin-bottom: 1rem;
+	  margin-right: 4rem;
 	}
 }
 
 div.dataTables_paginate{
 	padding-top: 8px;
+}
+
+#videos_datatable_paginate > select {
+  color: #000;
+  padding: 6px 0;
 }
 
 .owl-carousel {
@@ -393,6 +415,7 @@ div.dataTables_paginate{
 and (max-width: 700px){
 	.slicknav_menu{
 		display: block;
+		margin-bottom: 1.5rem;
 	}
 	
 	#custom-filter{
@@ -404,6 +427,7 @@ and (max-width: 700px){
 and (min-width: 701px){
 	.slicknav_menu{
 		display: none;
+		margin-bottom: 1.5rem;
 	}
 	
 	#custom-filter{
@@ -420,12 +444,58 @@ and (min-width: 701px){
     width: auto;
 }
 
-#custom-filter-search-container > ul {
-    list-style-type: none;
+@media only screen
+and (max-width: 700px){
+	#custom-filter-search-container.container-fluid {
+	  padding: 0;
+	}
+}
+
+@media only screen
+and (min-width: 701px){
+	#custom-filter-search-container.container-fluid {
+	  padding: 0 15px;
+	}
+}
+
+@media only screen
+and (max-width: 700px){
+	#custom-filter-search-container > ul {
+		background: rgba(76,76,76,0.8);
+		border-radius: 4px;
+		list-style-type: none;
+		margin: 0 0 1.5rem;
+		padding: 1rem 0;
+	}
+}
+
+@media only screen
+and (min-width: 701px){
+	#custom-filter-search-container > ul {
+	  background: none repeat scroll 0 0 rgba(76, 76, 76, 0.8);
+	  border-radius: 4px;
+	  list-style-type: none;
+	  margin: 0 1.8rem 1.5rem;
+	  padding: 1rem 0;
+	}
 }
 
 #custom-filter > li {
     display: inline-block;
+}
+
+.yadcf-filter {
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
+  color: #000;
+  padding: 3px 4px;
+}
+
+.yadcf-filter-reset-button {
+  background: none repeat scroll 0 0 #000;
+  border-color: #4c4c4c;
+  border-radius: 4px;
+  color: #fff;
+  padding: 2px 8px;
 }
 
 @media only screen
@@ -443,8 +513,20 @@ and (min-width: 701px){
 	}
 }
 
+#videos_datatable_info {
+  margin-bottom: 1rem;
+}
+
+table {
+  border-radius: 4px;
+}
+
 thead {
     background: rgba(255,255,255,0.9);
+}
+
+table.dataTable thead .sorting::after {
+  opacity: 0.5;
 }
 
 #videos_datatable tbody{
@@ -477,4 +559,8 @@ thead {
 
 #users_datatable {
     background: #FFF;
+}
+
+#footer {
+    padding-top: 3rem;
 }

@@ -4,7 +4,7 @@ $(document).ready(function(){
         "processing": true,
         "serverSide": true,
         "ajax": "ajax/table_processing.php",
-		"dom": "<\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
+		"dom": "<\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},

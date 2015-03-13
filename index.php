@@ -197,11 +197,11 @@
 		</form>
 	</section>
 
-	<section id="custom-filter-search-container">
-		<ul id="custom-filter">
-			<li id="year-filter"></li>
-			<li id="genre-filter"></li>
-			<li id="country-filter"></li>
+	<section id="custom-filter-search-container" class="container-fluid">
+		<ul id="custom-filter" class="row">
+			<li id="year-filter" class="col-md-4 col-xs-12"></li>
+			<li id="genre-filter" class="col-md-4 col-xs-12"></li>
+			<li id="country-filter" class="col-md-4 col-xs-12"></li>
 		</ul>
 	</section>
 
@@ -261,7 +261,7 @@
 		<article id="footer">
 			<ul id="footer-ul">
 				<li>Powered by <a href="http://www.youtube.com" title="YouTube"><img src="images/Youtube_icon45.png" width="45px" height="45px" alt="youtube_icon" /></a></li>
-				<li><p>All Rights Reserved 2014</p></li>
+				<li><p>All Rights Reserved <?php echo date("Y", time()); ?></p></li>
 				<li>
 					<?php
 						if(!$user->isLoggedIn()){
