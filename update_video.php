@@ -8,15 +8,15 @@
 		Redirect::to('index.php');
 	} else {
 	
-		if (!Input::exists('get') || $_GET['video_id'] === '') {
+		if (!Input::exists('get') || $_GET['video_index'] === '') {
 			Redirect::to('../index.php');
 		}
 			
 		if (Input::exists('get')){
 			
 			$video = new Video();
-			$video_id = $video->safe_string(Input::get('video_id'));
-			$video->find($video_id);
+			$video_index = $video->safe_string(Input::get('video_index'));
+			$video->find($video_index);
 		
 			if(Input::exists('post')){
 		

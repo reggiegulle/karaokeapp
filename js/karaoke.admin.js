@@ -50,6 +50,7 @@ $(document).ready(function(){
 		//start ".each" table tr function
 		$("#videos_datatable tbody tr").each( function () {
 			
+			var video_index = videos_datatable.cell(this,0).data();
 			var videoiddata = videos_datatable.cell(this, 4).data();
 			//get the index of the rows
 			//based on their table ordering,
@@ -74,7 +75,7 @@ $(document).ready(function(){
 			var indexdata = videos_datatable.cell(this, 0).data();
 			var indexnode = videos_datatable.cell(this, 0).node();
 			var indexnum = $(indexnode)
-				.html('<p>' + indexdata + '</p><a href="update_video.php?video_id=' + videoiddata + '"><p>Edit Video Details</p></a><a href="delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>');
+				.html('<p>' + indexdata + '</p><a href="update_video.php?video_index=' + video_index + '"><p>Edit Video Details</p></a><a href="delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>');
 
 
 			var videoidnode = videos_datatable.cell(this, 4).node();
