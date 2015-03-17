@@ -444,6 +444,15 @@ and (min-width: 701px){
     width: auto;
 }
 
+#search_reset {
+	cursor: pointer;
+	display: inline-block;
+	margin-left: -2px;
+		-webkit-box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
+		-moz-box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
+	box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
+}
+
 @media only screen
 and (max-width: 700px){
 	#custom-filter-search-container.container-fluid {
@@ -490,6 +499,7 @@ and (min-width: 701px){
   padding: 3px 4px;
 }
 
+#search_reset,
 .yadcf-filter-reset-button {
   background: none repeat scroll 0 0 #000;
   border-color: #4c4c4c;

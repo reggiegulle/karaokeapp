@@ -292,6 +292,13 @@ $(document).ready(function(){
 			videos_datatable.search(this.value).draw();
 		});
 		
+		//make the search reset button
+		//functional
+		$('#search_reset').on('click', function(){
+			$('#custom-search-input').val('');
+			videos_datatable.search($('#custom-search-input').val()).draw();
+		});
+		
 		
 	//function populatelists end
 	}
