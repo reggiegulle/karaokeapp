@@ -53,7 +53,7 @@ if (!$user->isLoggedIn()){
 				<p>Username: <strong>"<?php echo escape($data->username); ?>"</strong></p>
 				<p>Full Name: <strong>"<?php echo escape($data->name); ?>"</strong></p>
 
-				<p><a href="edit_user_details.php?user=<?php echo escape($data->username); ?>">Click here</a> if you want to change your profile details.</p>
+				<p><a href="edit_user_details.php?id=<?php echo escape($data->id); ?>">Click here</a> if you want to change your profile details.</p>
 			</article>
 		</div>
 		

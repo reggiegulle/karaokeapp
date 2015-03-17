@@ -10,11 +10,11 @@ if (!$user->isLoggedIn()){
 	Redirect::to('index.php');
 } else {
 	
-	if(!$username = Input::get('user')){
+	if(!$user_id = Input::get('id')){
 		Redirect::to('index.php');
 	} else {
 		//assign variable $user to the User Object
-		$user = new User($username);
+		$user = new User($user_id);
 		//check if $user exists in database
 		if(!$user->exists()){
 			//if $user is not in database,
@@ -34,13 +34,14 @@ if(Input::exists()){
 			'username' =>[
 				'required' => true,
 				'min' => 2,
-				'max' => 50
-				],
+				'max' => 50,
+				'editnotduplicate'	=> 'users'
+			],
 			'name' =>[
 				'required' => true,
 				'min' => 2,
 				'max' => 50
-				]
+			]
 		]);
 		
 		if($validation->passed()){
