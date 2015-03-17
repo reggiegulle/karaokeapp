@@ -44,7 +44,13 @@ class Validate{
 							if($check->count()) {
 								$this->addError($this->clean_item_output($item) . " already exists.");
 							}
-						break;
+						break;						
+						case 'editnotduplicate':
+							$check = $this->_db->check_update_not_duplicate($rule_value,[$item, $value, "id", $_GET['id']]);
+							if($check->count()){
+								$this->addError($this->clean_item_output($item) . " is already in use. Please put a different value.");
+							}
+						break;					
 						case 'numeric':
 							if(!is_numeric($value)){
 								$this->addError($this->clean_item_output($item) . " must be a number.");

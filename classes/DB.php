@@ -88,6 +88,31 @@ class DB{
 		return false;
 	}
 	
+	//Template: $sql = 	"SELECT * >> $action
+				//		FROM videos >> $table
+				//		WHERE video_id >> $field1
+				//		= ? >> $value1
+				//		AND id >> field2
+				//		<> ?" >> $value2 
+				
+	public function check_update_not_duplicate($table, $where=[]){
+		if(count($where) === 4){
+			
+			$field1 = $where[0];
+			$value1 = $where[1];
+			$field2 = $where[2];
+			$value2 = $where[3];
+
+			$sql = "SELECT * FROM {$table} WHERE {$field1} = ? AND {$field2} <> ?";
+			
+			if(!$this->query($sql, [$value1, $value2])->error()){
+				return $this;
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	public function get($table,$where){
 		return $this->action('SELECT *', $table, $where);
 	}
@@ -140,6 +165,8 @@ class DB{
 		
 		return false;
 	}
+	
+	
 	
 	public function results(){
 		return $this->_results;

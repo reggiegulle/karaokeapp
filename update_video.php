@@ -8,14 +8,14 @@
 		Redirect::to('index.php');
 	} else {
 	
-		if (!Input::exists('get') || $_GET['video_index'] === '') {
+		if (!Input::exists('get') || $_GET['id'] === '') {
 			Redirect::to('../index.php');
 		}
 			
 		if (Input::exists('get')){
 			
 			$video = new Video();
-			$video_index = $video->safe_string(Input::get('video_index'));
+			$video_index = $video->safe_string(Input::get('id'));
 			$video->find($video_index);
 		
 			if(Input::exists('post')){
@@ -33,7 +33,8 @@
 					],
 					'video_id' => [
 						'required'	=> true,
-						'min'		=> 11
+						'min'		=> 11,
+						'editnotduplicate'	=> 'videos'
 					],
 					'source_album' => [
 						'required'	=> true
@@ -92,6 +93,8 @@
 					} catch(Exception $e){
 						die($e->getMessage());
 					}
+					
+					
 				
 				} else {
 					//echo errors
