@@ -145,12 +145,12 @@
 			<form action="" method="POST">
 				<div class="field">
 					<label for="username">Username</label>
-					<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off" />
+					<input type="text" name="username" id="username" value="" autocomplete="off" />
 				</div>
 				
 				<div class="field">
 					<label for="name">User's Real Name</label>
-					<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>" />
+					<input type="text" name="name" id="name" value="" />
 				</div>
 				
 				<div class="field">
