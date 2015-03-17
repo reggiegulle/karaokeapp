@@ -99,8 +99,8 @@
 				} else {
 					//echo errors
 					foreach($validation->errors() as $error){
-							echo '<p class="error">' . $error . '</p><br />';
-						}
+						echo '<p class="error">' . $error . '</p><br />';
+					}
 				}
 			}
 		}

@@ -8,71 +8,57 @@ $user = new User();
 	//back to index.php	
 	if (!$user->isLoggedIn()){
 		Redirect::to('index.php');
-	} else {
-		if(!$user->hasPermission('admin') || !$user->exists()){
-			Redirect::to('index.php');
-		} else {
-			if(!$username = Input::get('user')){
-				Redirect::to('index.php');
-			} else {
-				//assign variable $user to the User Object
-				$karaoke_user = new User($username);
-				//check if $user exists in database
-				if(!$karaoke_user->exists()){
-					//if $user is not in database,
-					//back to index.php
-					Redirect::to('index.php');
-				} else {
-					$data = $karaoke_user->data();	
-				}
-			}
-		}
+	} 
+	
+	if(!$user->hasPermission('admin') || !$user->exists()){
+		Redirect::to('index.php');
 	}
+	
+	$karaoke_user_to_be_edited = new User($_GET['id']);
+	$karaoke_user_data = $karaoke_user_to_be_edited->data();	
 
 	if(Input::exists()){
-		if(Token::check(Input::get('token'))){
-			//echo 'OK!';
-			$validate = new Validate();
-			$validation = $validate->check($_POST, [
-				'username'	=> [
-					'required'	=> true,
-					'min'		=> 2,
-					'max' 		=> 20
-				],
-				'password'	=> [
-					'required'	=> true,
-					'min'		=> 6
-				],
-				'name' => [
-					'required'	=> true,
-					'min'		=> 2,
-					'max'		=> 50
-				]
-			]);
-			
-			if($validation->passed()){
-				$salt = Hash::salt(32);
-				//update
-				try{
-					$karaoke_user->update([
-						'username'	=>	Input::get('username'),
-						'name' => Input::get('name'),
-						'password' => Hash::make(Input::get('password'), $salt),
-						'salt' => $salt	
-					], $data->id);
-					
-					Session::flash('edit_karaokeuser_success', 'User details have been updated.');
-					
-				} catch(Exception $e){
-					die($e->getMessage());
-				}
-			}else{
-				//echo errors
-				foreach($validation->errors() as $error){
-						echo $error . '<br />';
-					}
+		//echo 'OK!';
+		$validate = new Validate();
+		$validation = $validate->check($_POST, [
+			'username'	=> [
+				'required'	=> true,
+				'min'		=> 2,
+				'max' 		=> 20,
+				'editnotduplicate'	=> 'users'
+			],
+			'password'	=> [
+				'required'	=> true,
+				'min'		=> 6
+			],
+			'name' => [
+				'required'	=> true,
+				'min'		=> 2,
+				'max'		=> 50
+			]
+		]);
+		
+		if($validation->passed()){
+			$salt = Hash::salt(32);
+			//update
+			try{
+				$karaoke_user_to_be_edited->update([
+					'username'	=>	Input::get('username'),
+					'name' => Input::get('name'),
+					'password' => Hash::make(Input::get('password'), $salt),
+					'salt' => $salt	
+				], $karaoke_user_data->id);
+				
+				Session::flash('edit_karaokeuser_success', 'User details have been updated.');
+				
+			} catch(Exception $e){
+				die($e->getMessage());
 			}
-			
+		}else{
+			//echo errors
+			foreach($validation->errors() as $error){
+				echo '<p class="error">' . $error . '</p><br />';
+			}
 		}
 	}
 ?>
@@ -108,12 +94,12 @@ $user = new User();
 		<form action="" method="POST">
 			<div class="field">
 				<label for="name">Username</label>
-				<input type="text" name="username" value="<?php echo escape($data->username); ?>" />
+				<input type="text" name="username" value="<?php echo escape($karaoke_user_data->username); ?>" />
 			</div>
 			
 			<div class="field">
 				<label for="name">User's Real Name</label>
-				<input type="text" name="name" id="name" value="<?php echo escape($data->name); ?>" />
+				<input type="text" name="name" id="name" value="<?php echo escape($karaoke_user_data->name); ?>" />
 			</div>
 
 			<div class="field">

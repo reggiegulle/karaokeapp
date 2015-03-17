@@ -61,10 +61,9 @@
 							die($e->getMessage());
 						}
 					} else {
-						//output errors
-						//print_r($validation->errors());
+						//echo errors
 						foreach($validation->errors() as $error){
-							echo $error, '<br />';
+							echo '<p class="error">' . $error . '</p><br />';
 						}
 					}
 				}
