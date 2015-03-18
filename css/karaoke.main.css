@@ -148,7 +148,6 @@ body {
 
 #karaoketitlelist{
 	list-style-type: none;
-	padding: 1rem;
 }
 
 #karaoketitlelist li{
@@ -394,6 +393,7 @@ div.dataTables_paginate{
 #search-container form label{
 	display: block;
     font-size: 1.8rem;
+	margin-bottom: 12px;
 }
 
 #search-icon {
@@ -435,10 +435,15 @@ div.dataTables_paginate{
 #search_reset {
 	cursor: pointer;
 	display: inline-block;
-	margin-left: -2px;
+	margin-left: 0px;
 		-webkit-box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
 		-moz-box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
 	box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
+	background: none repeat scroll 0 0 #000;
+	border-color: #4c4c4c;
+	border-radius: 4px;
+	color: #fff;
+	padding: 2px 8px;
 }
 
 @media only screen and (max-width: 700px){
@@ -483,7 +488,6 @@ div.dataTables_paginate{
   padding: 3px 4px;
 }
 
-#search_reset,
 .yadcf-filter-reset-button {
   background: none repeat scroll 0 0 #000;
   border-color: #4c4c4c;

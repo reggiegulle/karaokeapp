@@ -68,6 +68,7 @@
 <script src="js/CSSPlugin.js" type="text/javascript"></script>
 <script src="js/TweenLite.js" type="text/javascript"></script>
 <script src="js/TimelineLite.js" type="text/javascript"></script>
+<script src="js/EasePack.js" type="text/javascript"></script>
 <!--custom JS-->
 <?php 
 	$user = new User();
@@ -193,7 +194,7 @@
 				<label for="custom-search-input">Search for artist, song title, album, lyrics, etc.</label>
 				<img src="images/search_icon.png" width="32px" height="32px" alt="search icon" id="search-icon" />
 				<input type="text" id="custom-search-input" class="form-control input-sm" />
-				<div id="search_reset">X</div>
+				<div id="search_reset" title="Reset Search">X</div>
 			</div>
 		</form>
 	</section>
