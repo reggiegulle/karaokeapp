@@ -26,7 +26,7 @@ class Session{
 			self::delete($name);
 			return $session;
 		} else {
-			session::put($name, $string);
+			self::put($name, $string);
 		}
 	}
 

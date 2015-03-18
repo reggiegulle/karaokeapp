@@ -35,7 +35,10 @@
 							'required'	=> true,
 							'min'		=> 2,
 							'max'		=> 50
-						]
+						]/*,
+						'group' => [
+							'required'	=> true
+						]*/
 					]);
 					
 					if($validation->passed()){
@@ -60,12 +63,12 @@
 						} catch (Exception $e){
 							die($e->getMessage());
 						}
-					} else {
+					} /*else {
 						//echo errors
 						foreach($validation->errors() as $error){
 							echo '<p class="error">' . $error . '</p><br />';
 						}
-					}
+					}*/
 				}
 			}
 		}
@@ -144,16 +147,37 @@
 
 			<form action="" method="POST">
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('username')){
+								echo '<p class="error">' . Session::flash('username') . '</p>';
+							}
+						?>
+					</article>
 					<label for="username">Username</label>
 					<input type="text" name="username" id="username" value="" autocomplete="off" />
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('name')){
+								echo '<p class="error">' . Session::flash('name') . '</p>';
+							}
+						?>
+					</article>
 					<label for="name">User's Real Name</label>
 					<input type="text" name="name" id="name" value="" />
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('group')){
+								echo '<p class="error">' . Session::flash('group') . '</p>';
+							}
+						?>
+					</article>
 					<label for="group">User Group</label>
 					<input type="radio" name="group" value="1" />Standard User
 					&nbsp;
@@ -161,11 +185,25 @@
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password')){
+								echo '<p class="error">' . Session::flash('password') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password">Choose a password</label>
 					<input type="password" name="password" id="password" value="" />
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password_again')){
+								echo '<p class="error">' . Session::flash('password_again') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password_again">Enter password again</label>
 					<input type="password" name="password_again" id="password_again" value="" />
 				</div>
