@@ -7,13 +7,13 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="Description" CONTENT="Now you can get your karaoke fix anywhere, anytime, on any device — absolutely free!  Bust your pipes and show them You've Got Talent and be your own Singing Idol.  See you soon!"/>
+<meta name="Description" CONTENT="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
 
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Renegade Karaoke!"/>
 <meta property="og:site_name" content="Renegade Karaoke"/>
 <meta property="og:url" content="http://www.renegadekaraoke.byethost7.com/index.php"/>
-<meta property="og:description" content="Now you can get your karaoke fix anywhere, anytime, on any device — absolutely free!  Bust your pipes and show them You've Got Talent and be your own Singing Idol.  See you soon!"/>
+<meta property="og:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
 <meta property="og:image" content="http://www.renegadekaraoke.byethost7.com/images/rk-fb-og.png"/>
 <meta property="fb:app_id" content="412347942245523"/>
 
