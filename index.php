@@ -16,7 +16,7 @@
 <meta name="twitter:creator" content="@reggiegulle">
 <meta name="twitter:creator:id" content="Reggie Gulle">
 <meta name="twitter:title" content="Renegade Karaoke!">
-<meta name="twitter:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!">
+<meta name="twitter:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs!">
 <meta name="twitter:image:src" content="http://www.renegade-karaoke.com/images/rk-fb-og.png">
 
 <!--FB OG-->
