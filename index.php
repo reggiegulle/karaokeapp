@@ -8,13 +8,24 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="Description" CONTENT="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
+<link rel="canonical" href="http://www.renegade-karaoke.com" />
 
+<!--Twitter-->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@reggiegulle">
+<meta name="twitter:creator" content="@reggiegulle">
+<meta name="twitter:creator:id" content="Reggie Gulle">
+<meta name="twitter:title" content="Renegade Karaoke!">
+<meta name="twitter:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!">
+<meta name="twitter:image:src" content="http://www.renegade-karaoke.com/images/rk-fb-og.png">
+
+<!--FB OG-->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Renegade Karaoke!"/>
 <meta property="og:site_name" content="Renegade Karaoke"/>
-<meta property="og:url" content="http://www.renegadekaraoke.byethost7.com/index.php"/>
+<meta property="og:url" content="http://www.renegade-karaoke.com/"/>
 <meta property="og:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
-<meta property="og:image" content="http://www.renegadekaraoke.byethost7.com/images/rk-fb-og.png"/>
+<meta property="og:image" content="http://www.renegade-karaoke.com/images/rk-fb-og.png"/>
 <meta property="fb:app_id" content="412347942245523"/>
 
 <title>Renegade Karaoke</title>
@@ -120,7 +131,11 @@
 	<section id="header">
 	
 		<h1><a id="masthead" href="index.php">Renegade Karaoke</a></h1>
-		<div class="fb-like" data-href="http://www.renegadekaraoke.byethost7.com" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+		<article id="social-media-buttons">
+			<div class="fb-like" data-href="http://www.renegade-karaoke.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-width="250px"></div>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</article>
 	
 			<?php
 				//$user = new User();
