@@ -60,6 +60,23 @@ body {
 	text-decoration: none;
 }
 
+#header #social-media-buttons {
+	text-align: center;
+}
+
+.fb-like.fb_iframe_widget {
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  margin: 5px auto;
+  padding: 5px 10px;
+  vertical-align: middle;
+}
+
+.twitter-share-button.twitter-tweet-button.twitter-share-button.twitter-count-horizontal {
+	margin-left: 40px;
+	vertical-align: middle;
+}
+
 #user_panel_login{
 	background: rgba(255,255,255, 0.8);
 	padding: 2rem;
