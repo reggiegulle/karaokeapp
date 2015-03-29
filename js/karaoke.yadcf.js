@@ -39,6 +39,7 @@ $(document).ready(function(){
 					"Glam Rock",
 					"Gospel",
 					"Hard Rock",
+					"Heavy Metal",
 					"Hip Hop",
 					"House",
 					"Indie Pop",
