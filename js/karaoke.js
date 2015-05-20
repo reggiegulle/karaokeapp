@@ -9,10 +9,10 @@ $(document).ready(function(){
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},
 				{className: "never", "targets":[0, 11]},
-				{className: "none", "targets":[2, 9, 10]},
-				{className: "all strong", "targets":[1]},
+				{className: "none", "targets":[2, 5, 9, 10]},
+				{className: "all strong", "targets":[3]},
 				{className: "all", "targets":[3, 4]},
-				{className: "min-tablet", "targets":[5, 7]},
+				{className: "min-tablet", "targets":[7]},
 				{className: "min-desktop", "targets":[0, 6, 8]}
 			],
 		"order" : [0, 'des'],

@@ -76,10 +76,10 @@ html{
 }
 
 .fb-like.fb_iframe_widget {
-  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.7) none repeat scroll 0 0;
   border-radius: 4px;
   margin: 5px auto;
-  padding: 5px 10px;
+  padding: 10px;
   vertical-align: middle;
 }
 
@@ -429,26 +429,8 @@ div.dataTables_paginate{
     vertical-align: top;
 }
 
-@media only screen and (max-width: 700px){
-	.slicknav_menu{
-		display: block;
-		margin-bottom: 1.5rem;
-	}
-	
-	#custom-filter{
-		display: none;
-	}
-}
-
-@media only screen and (min-width: 701px){
-	.slicknav_menu{
-		display: none;
-		margin-bottom: 1.5rem;
-	}
-	
-	#custom-filter{
-		display: block;
-	}
+#custom-filter{
+	display: block;
 }
 
 #custom-search-input.form-control.input-sm {
@@ -506,8 +488,19 @@ div.dataTables_paginate{
 	}
 }
 
-#custom-filter > li {
-    display: inline-block;
+@media only screen and (max-width: 600px){
+	#custom-filter > li {
+		display: inline-block;
+		padding: 5px 0;
+	}
+
+}
+
+@media only screen and (min-width: 601px){
+	#custom-filter > li {
+		display: inline-block;
+		padding: 5px 0;
+	}
 }
 
 .yadcf-filter {
