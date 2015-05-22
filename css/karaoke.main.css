@@ -429,8 +429,26 @@ div.dataTables_paginate{
     vertical-align: top;
 }
 
-#custom-filter{
-	display: block;
+@media only screen and (max-width: 700px){
+	.slicknav_menu{
+		display: block;
+		margin-bottom: 1.5rem;
+	}
+	
+	#custom-filter{
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 701px){
+	.slicknav_menu{
+		display: none;
+		margin-bottom: 1.5rem;
+	}
+	
+	#custom-filter{
+		display: block;
+	}
 }
 
 #custom-search-input.form-control.input-sm {
@@ -488,19 +506,13 @@ div.dataTables_paginate{
 	}
 }
 
-@media only screen and (max-width: 600px){
-	#custom-filter > li {
-		display: inline-block;
-		padding: 5px 0;
-	}
-
+#custom-filter > li {
+	display: inline-block;
+	padding: 0;
 }
 
-@media only screen and (min-width: 601px){
-	#custom-filter > li {
-		display: inline-block;
-		padding: 5px 0;
-	}
+.slicknav_nav li {
+  padding: 5px 0;
 }
 
 .yadcf-filter {

@@ -307,7 +307,7 @@
 	<!--YouTube JS -->
 	<script src="js/youtube.js"></script>
 	<!--custom SlickNav JS init-->
-	<!--<script src="js/karaoke.slicknav.js"></script>-->
+	<script src="js/karaoke.slicknav.js"></script>
 	<!--Bootstrap JS -->
 	<script src="js/bootstrap.min.js"></script>
 </body>
