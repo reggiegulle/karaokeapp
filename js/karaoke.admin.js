@@ -8,7 +8,7 @@ $(document).ready(function(){
 		"responsive" : true,
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},
-				{className: "never", "targets":[0, 11]},
+				{className: "all", "targets":[0, 11]},
 				{className: "none", "targets":[2, 5, 9, 10]},
 				{className: "all strong", "targets":[3]},
 				{className: "all", "targets":[3, 4]},
