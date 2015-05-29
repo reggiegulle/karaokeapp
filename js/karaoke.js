@@ -66,7 +66,7 @@ $(document).ready(function(){
 			//not the html rendering
 			var trposindex = videos_datatable.row(this).index();
 			
-			var songtitlenode = videos_datatable.cell(this, 1).node();
+			var songtitlenode = videos_datatable.cell(this, 3).node();
 			var songtitle = $(songtitlenode).html();
 			
 			var indexdata = videos_datatable.cell(this, 0).data();
@@ -80,8 +80,8 @@ $(document).ready(function(){
 			$(videoidnode)
 				.html('<img src="https://i3.ytimg.com/vi/' + videoid + '/default.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
 				
-			var titledata = videos_datatable.cell(this, 1).data();
-			var performdata = videos_datatable.cell(this, 3).data();
+			var titledata = videos_datatable.cell(this, 3).data();
+			var performdata = videos_datatable.cell(this, 1).data();
 
 			//create li items for the
 			//#owlkaraoke table
