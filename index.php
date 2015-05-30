@@ -66,7 +66,7 @@
 
 
 <!--JS files to be minified in deployment-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 <!--datatables core-->
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="js/select.js" type="text/javascript"></script>
