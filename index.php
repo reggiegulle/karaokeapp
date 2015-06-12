@@ -305,7 +305,18 @@
 		</article>
 	</section>
 	<!--YouTube JS -->
-	<script src="js/youtube.js"></script>
+<?php 
+	$user = new User();
+	if($user->isLoggedIn()){
+?>
+		<script src="js/youtube_reg_user.js" type="text/javascript"></script>
+<?php
+	} else {
+?>
+		<script src="js/youtube.js" type="text/javascript"></script>
+<?php
+	}
+?>
 	<!--custom SlickNav JS init-->
 	<script src="js/karaoke.slicknav.js"></script>
 	<!--Bootstrap JS -->
