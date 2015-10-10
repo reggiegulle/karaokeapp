@@ -179,10 +179,10 @@ function onPlayerStateChange(event){
 		//depending on video id
 		$("#owlkaraoke li").each(function(){
 			if ($(this).data("htmlindex") == playervideoindex){
-				$(this).addClass("highlightowlli");
+				$(this).addClass("playing");
 			}
 			else{
-				$(this).removeClass("highlightowlli");
+				$(this).removeClass("playing");
 			}
 		});
 	}
@@ -195,7 +195,7 @@ function onPlayerStateChange(event){
 		//the highlighted owlhotel li item
 		var owlkaraoke = $("#owlkaraoke");
 		$("#owlkaraoke li").each(function(){
-			if($(this).hasClass("highlightowlli")){
+			if($(this).hasClass("playing")){
 				owlkaraoke.trigger("owl.goTo",$("#owlkaraoke li").index(this));
 			}
 		});

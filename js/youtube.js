@@ -22,10 +22,33 @@ function onYouTubeIframeAPIReady() {
 	});
 }
 
+function trClickAction(elem){
+	var trindexplaying = elem.data('trindex');
+
+	var owlkaraoke = $("#owlkaraoke");
+	
+	$("#videos_datatable tbody tr.playing, #karaoketitlelist li.playing, #owlkaraoke li.playing, #karaokedesclist li.playing").removeClass('playing');
+	
+	$("#videos_datatable tbody").find('tr[data-trindex="' + trindexplaying + '"]').addClass('playing');
+	
+	$("#karaoketitlelist").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
+	
+	$("#owlkaraoke").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
+	
+	$("#karaokedesclist").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
+	
+	$("#owlkaraoke li").each(function(){
+		if($(this).hasClass("playing")){
+			owlkaraoke.trigger("owl.goTo", $("#owlkaraoke li").index(this));
+		}
+	});
+}
+
 function onPlayerReady(event){
 
 	//load the first video to be cued
-	var firstCuedVid = $("#videos_datatable tbody tr").eq(0).data("videoid");
+	//var firstCuedVid = $("#videos_datatable tbody tr").eq(0).data("videoid");
+	var firstCuedVid = $("#videos_datatable tbody tr").has('img').first().data("videoid");
 	event.target.cueVideoById(firstCuedVid);
 	
 	$("#videos_datatable tbody tr").each(function(){
@@ -33,6 +56,16 @@ function onPlayerReady(event){
 		var trvideoid = $(this).data("videoid");
 		
 		$(this).on("click", "td img", function(){
+			trClickAction($(this).closest('tr'));
+			//play the video on the player
+			event.target.loadVideoById(trvideoid);
+			//animate the webpage
+			$("html, body").animate({
+				scrollTop: $("#video-player-container").offset().top 
+			},500);
+		});
+		$(this).on("click", "td.strong", function(){
+			trClickAction($(this).closest('tr'));
 			//play the video on the player
 			event.target.loadVideoById(trvideoid);
 			//animate the webpage
@@ -42,12 +75,19 @@ function onPlayerReady(event){
 		});
 	});
 	
+	$("#karaoketitlelist li").each(function(){
+		if ($(this).data("videoid") == firstCuedVid){
+			$("#karaoketitlelist li.playing").removeClass('playing');
+			$(this).addClass('playing');
+		}
+	});
+	
 	//declare dataTable variable
 	var videos_datatable = $("#videos_datatable").DataTable();
 	
 	videos_datatable.on("draw.dt", function(){
 		//cue the first video on DataTable draw
-		var firstCuedVid = $("#videos_datatable tbody tr").eq(0).data("videoid");
+		var firstCuedVid = $("#videos_datatable tbody tr").has('img').first().data("videoid");
 		event.target.cueVideoById(firstCuedVid);
 		
 		$("#videos_datatable tbody tr").each(function(){
@@ -55,6 +95,16 @@ function onPlayerReady(event){
 			var trvideoid = $(this).data("videoid");
 			
 			$(this).on("click", "td img", function(){
+				trClickAction($(this).closest('tr'));
+				//play the video on the player
+				event.target.loadVideoById(trvideoid);
+				//animate the webpage
+				$("html, body").animate({
+					scrollTop: $("#video-player-container").offset().top 
+				},500);
+			});
+			$(this).on("click", "td.strong", function(){
+				trClickAction($(this).closest('tr'));
 				//play the video on the player
 				event.target.loadVideoById(trvideoid);
 				//animate the webpage
@@ -63,45 +113,30 @@ function onPlayerReady(event){
 				},500);
 			});
 		});
-		
-		$("#karaoketitlelist li").hide();
 	
 		$("#karaoketitlelist li").each(function(){
 			if ($(this).data("videoid") == firstCuedVid){
-				$(this).show();
-			}
-			else{
-				$(this).hide();
+				$("#karaoketitlelist li.playing").removeClass('playing');
+				$(this).addClass('playing');
 			}
 		});
 		
 		$("#karaokedesclist li").each(function(){
 			if ($(this).data("videoid") == firstCuedVid){
-				$(this).show();
+				$(this).addClass('playing');
 			}
 			else{
-				$(this).hide();
+				$(this).removeClass('playing');
 			}
 		});
 	});
 	
-	$("#karaoketitlelist li").hide();
-	
-	$("#karaoketitlelist li").each(function(){
-		if ($(this).data("videoid") == firstCuedVid){
-			$(this).show();
-		}
-		else{
-			$(this).hide();
-		}
-	});
-	
 	$("#karaokedesclist li").each(function(){
 		if ($(this).data("videoid") == firstCuedVid){
-			$(this).show();
+			$(this).addClass('playing');
 		}
 		else{
-			$(this).hide();
+			$(this).removeClass('playing');
 		}
 	});
 	
@@ -140,22 +175,20 @@ function onPlayerStateChange(event){
 		//get the YouTube URL of the video playing
 		var vidurl = event.target.getVideoUrl();
 		//extract the video_id
-		regex = /https\:\/\/www\.youtube\.com\/watch\?v=([\w-]{11})/;
+		regex = /v=([\w-]{11})/;
 		var vidIdFrURI = vidurl.match(regex)[1];
 		
 		$("#videos_datatable tbody tr").each(function(){
-			$(this).css("background", "transparent");
 			if(vidIdFrURI === $(this).data("videoid")){
-				$(this).css("background-color", "#FFF");
+				$("#videos_datatable tbody tr.playing").removeClass('playing');
+				$(this).addClass("playing");
 			}
 		});
 		
 		$("#karaoketitlelist li").each(function(){
 			if ($(this).data("videoid") == vidIdFrURI){
-				$(this).show();
-			}
-			else{
-				$(this).hide();
+				$("#karaoketitlelist li.playing").removeClass('playing');
+				$(this).addClass('playing');
 			}
 		});
 		
@@ -164,10 +197,10 @@ function onPlayerStateChange(event){
 		//in the player
 		$("#karaokedesclist li").each(function(){
 			if ($(this).data("videoid") == vidIdFrURI){
-				$(this).show();
+				$(this).addClass('playing');
 			}
 			else{
-				$(this).hide();
+				$(this).removeClass('playing');
 			}
 		});
 		
@@ -203,10 +236,10 @@ function onPlayerStateChange(event){
 		//depending on video id
 		$("#owlkaraoke li").each(function(){
 			if ($(this).data("videoid") == vidIdFrURI){
-				$(this).addClass("highlightowlli");
+				$(this).addClass("playing");
 			}
 			else{
-				$(this).removeClass("highlightowlli");
+				$(this).removeClass("playing");
 			}
 		});
 		
@@ -217,12 +250,13 @@ function onPlayerStateChange(event){
 		//get the YouTube URL of the video playing
 		var vidurl = event.target.getVideoUrl();
 		//extract the video_id
-		regex = /https\:\/\/www\.youtube\.com\/watch\?v=([\w-]{11})/;
+		regex = /v=([\w-]{11})/;
 		var vidIdFrURI = vidurl.match(regex)[1];
 		
 		$("#videos_datatable tbody tr").each(function(){
 			if(vidIdFrURI === $(this).data("videoid")){
-				$(this).css("background-color", "#FFF");
+				$("#videos_datatable tbody tr.playing").removeClass('playing');
+				$(this).addClass('playing');
 			}
 		});
 		
@@ -230,8 +264,8 @@ function onPlayerStateChange(event){
 		//the highlighted owlhotel li item
 		var owlkaraoke = $("#owlkaraoke");
 		$("#owlkaraoke li").each(function(){
-			if($(this).hasClass("highlightowlli")){
-				owlkaraoke.trigger("owl.goTo",$("#owlkaraoke li").index(this));
+			if($(this).hasClass("playing")){
+				owlkaraoke.trigger("owl.goTo", $("#owlkaraoke li").index(this));
 			}
 		});
 	}
@@ -241,7 +275,7 @@ function onPlayerStateChange(event){
 		//get the YouTube URL of the video playing
 		var vidurl = event.target.getVideoUrl();
 		//extract the video_id
-		regex = /https\:\/\/www\.youtube\.com\/watch\?v=([\w-]{11})/;
+		regex = /v=([\w-]{11})/;
 		var vidIdFrURI = vidurl.match(regex)[1];
 		//get the last table row
 		var endOfTR = ($("#videos_datatable tbody tr").length) - 1;
@@ -249,8 +283,7 @@ function onPlayerStateChange(event){
 		$("#videos_datatable tbody tr").each(function(){
 			if(vidIdFrURI === $(this).data("videoid")){
 				var thisIndex = $(this).index();
-				console.info("This TR's index is " + thisIndex);
-				$(this).css("background", "transparent");
+				$(this).removeClass('playing');
 				if($(this).index() === endOfTR){
 					var firstTr = $(this).first().attr("data-videoid");
 					event.target.cueVideoById(firstTr);
