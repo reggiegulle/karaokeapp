@@ -131,11 +131,11 @@
 	<section id="header">
 	
 		<h1><a id="masthead" href="index.php">Renegade Karaoke</a></h1>
-			<article id="social-media-buttons">
-				<div class="fb-like" data-href="http://www.renegade-karaoke.com/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true" data-width="250px"></div>
-				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a>
+			<ul id="social-media-buttons" class="gradient">
+				<li class="fb-like" data-href="http://www.renegade-karaoke.com/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true" data-width="225px"></li>
+				<li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a></li>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-			</article>
+			</ul>
 		
 			<?php
 				//$user = new User();
@@ -215,10 +215,10 @@
 	</section>
 
 	<section id="custom-filter-search-container" class="container-fluid">
-		<ul id="custom-filter" class="row">
-			<li id="year-filter" class="col-md-4 col-xs-12"></li>
-			<li id="genre-filter" class="col-md-4 col-xs-12"></li>
-			<li id="country-filter" class="col-md-4 col-xs-12"></li>
+		<ul id="custom-filter" class="gradient row">
+			<li id="year-filter" class="col-xs-12 col-sm-4 col-md-4"></li>
+			<li id="genre-filter" class="col-xs-12 col-sm-4 col-md-4"></li>
+			<li id="country-filter" class="col-xs-12 col-sm-4 col-md-4"></li>
 		</ul>
 	</section>
 

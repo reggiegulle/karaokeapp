@@ -123,7 +123,8 @@ $(document).ready(function(){
 			//associate trhtmlindex
 			//to each li item
 			karaoketitlelistitem.attr({
-				"data-videoid": videoiddata
+				"data-videoid": videoiddata,
+				"data-trindex": trposindex
 			});
 			
 			//function for adding content
@@ -141,16 +142,14 @@ $(document).ready(function(){
 			//add the karaoketitlelist li item to the list
 			$("#karaoketitlelist").append(karaoketitlelistitem);
 			
-			//add the karaoketitlelist li item to the list
-			$("#karaoketitlelist").append(karaoketitlelistitem);
-			
 			//create li items for karaokedesclist
 			var karaokedesclistitem = $("<li>");
 			
 			//associate data-videoid
 			//to each li item
 			karaokedesclistitem.attr({
-				"data-videoid":videoiddata
+				"data-videoid":videoiddata,
+				"data-trindex": trposindex
 			});
 			
 			var composerdata = videos_datatable.cell(this, 2).data();
@@ -205,12 +204,37 @@ $(document).ready(function(){
 		
 		
 		function owllivideoindex(){
-		
+			
+			function owlLiClickAction(elem){
+				var trindexplaying = elem.data('trindex');
 
-		
+				var owlkaraoke = $("#owlkaraoke");
+				
+				$("#videos_datatable tbody tr.playing, #karaoketitlelist li.playing, #owlkaraoke li.playing, #karaokedesclist li.playing").removeClass('playing');
+				
+				$("#videos_datatable tbody").find('tr[data-trindex="' + trindexplaying + '"]').addClass('playing');
+				
+				$("#karaoketitlelist").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
+				
+				$("#owlkaraoke").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
+				
+				$("#karaokedesclist").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
+				
+				$("#owlkaraoke li").each(function(){
+					if($(this).hasClass("playing")){
+						owlkaraoke.trigger("owl.goTo", $("#owlkaraoke li").index(this));
+					}
+				});
+			}
 		
 			//behaviour of owlhotel li items on click
 			$("#owlkaraoke li").each(function(){
+				
+				//I have to set the styling of the owl-carousel here
+				$(this).css({
+					'height':$('#owlkaraoke').height() + 'px'
+				});
+		
 				
 				var owlPoster = $(this).children("img");
 				var owlPosterSrc = owlPoster.attr("src");
@@ -219,6 +243,8 @@ $(document).ready(function(){
 				
 				$(this).addClass("gradient");
 				$(this).click(function(){
+					
+					owlLiClickAction($(this).closest('li'));
 				
 					//associate each owlhotel li with its own data-index
 					var owlLiVidId = $(this).attr("data-videoid");
@@ -233,6 +259,7 @@ $(document).ready(function(){
 					
 				});
 			});
+			
 		} 
 		
 		function getOrSetOwlNav(){
