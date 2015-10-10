@@ -1,5 +1,20 @@
 $(document).ready(function(){
-
+	
+	function getMeta(url, imgObj){
+		$("<img/>").attr("src", url).load(function(){
+			
+			s = {w: this.width, h: this.height};
+			
+			if(s.w === 120){
+				imgObj.parent().attr("data-visible", "false").remove();
+			} else {
+				imgObj.parent().attr("data-visible", "true")
+			}
+			
+		});	
+	}
+	
+	
 	$("#videos_datatable").dataTable({
         "processing": true,
         "serverSide": true,
@@ -17,20 +32,16 @@ $(document).ready(function(){
 			],
 		"order" : [0, 'des'],
 		"sPaginationType": "listbox",
-		"drawCallback": function (settings) {
-				tableInteraction();
+		"drawCallback": function(settings){
+				populate_table();
 			}
     });
-	
-	
-	//function populatelists start
-	function tableInteraction() {
-	
+		
+	//DataTable drawCallback START
+	function populate_table(){
 		//declare videos_datatable var
-		//to correspond to
-		//datatables API instance
-		var videos_datatable = $("#videos_datatable").DataTable();
-
+		var videos_datatable = $("#videos_datatable").DataTable();	
+		
 		//add the necessary classes to owlkaraoke
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-carousel");
 		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
@@ -48,38 +59,33 @@ $(document).ready(function(){
 		
 		$("#karaokedesclist").empty();
 		
+		
 		//start ".each" table tr function
 		$("#videos_datatable tbody tr").each( function () {
-			
 			var videoiddata = videos_datatable.cell(this, 4).data();
-			//get the index of the rows
-			//based on their table ordering,
-			//not the html rendering
 			var trhtmlindex = $(this).index();
-			$(this).attr({
-				"data-videoid": videoiddata,
-				"data-htmlindex":trhtmlindex
-			});
 			
 			//get the index of the rows
 			//based on their datatable ordering,
 			//not the html rendering
 			var trposindex = videos_datatable.row(this).index();
 			
+			$(this).attr({
+				"data-videoid": videoiddata,
+				"data-trindex": trposindex
+			});
+			
 			var songtitlenode = videos_datatable.cell(this, 3).node();
 			var songtitle = $(songtitlenode).html();
-			
-			var indexdata = videos_datatable.cell(this, 0).data();
-			var indexnode = videos_datatable.cell(this, 0).node();
-			var indexnum = $(indexnode)
-				.html('<p>' + indexdata + '</p>');
-			
 			
 			var videoidnode = videos_datatable.cell(this, 4).node();
 			var videoid = $(videoidnode).html();
 			$(videoidnode)
-				.html('<img src="https://i3.ytimg.com/vi/' + videoid + '/default.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
-				
+				.html('<img src="https://i3.ytimg.com/vi/' + videoid + '/mqdefault.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
+			var posterObj = $(videoidnode);
+			var posterImgSrc = $(posterObj).children('img').attr('src');
+			getMeta(posterImgSrc, posterObj);
+			
 			var titledata = videos_datatable.cell(this, 3).data();
 			var performdata = videos_datatable.cell(this, 1).data();
 
@@ -90,7 +96,7 @@ $(document).ready(function(){
 			//insert tr attributes into the owlkaraoke li item
 			owlkaraokeliitem.attr({
 				"data-videoid": videoiddata,
-				"data-htmlindex":trhtmlindex
+				"data-trindex": trposindex
 			});
 			
 			//add content into
@@ -110,13 +116,14 @@ $(document).ready(function(){
 			
 			$("#owlkaraoke").append(owlkaraokeliitem);
 			
+			
 			//create li items for karaoketitlelist
 			var karaoketitlelistitem = $("<li>");
 			
 			//associate trhtmlindex
 			//to each li item
 			karaoketitlelistitem.attr({
-				"data-htmlindex":trhtmlindex
+				"data-videoid": videoiddata
 			});
 			
 			//function for adding content
@@ -134,13 +141,16 @@ $(document).ready(function(){
 			//add the karaoketitlelist li item to the list
 			$("#karaoketitlelist").append(karaoketitlelistitem);
 			
+			//add the karaoketitlelist li item to the list
+			$("#karaoketitlelist").append(karaoketitlelistitem);
+			
 			//create li items for karaokedesclist
 			var karaokedesclistitem = $("<li>");
 			
-			//associate trhtmlindex
+			//associate data-videoid
 			//to each li item
 			karaokedesclistitem.attr({
-				"data-htmlindex":trhtmlindex
+				"data-videoid":videoiddata
 			});
 			
 			var composerdata = videos_datatable.cell(this, 2).data();
@@ -149,16 +159,8 @@ $(document).ready(function(){
 			var genredata = videos_datatable.cell(this, 7).data();
 			var countrydata = videos_datatable.cell(this, 8).data();
 			var rntmdata = videos_datatable.cell(this, 9).data();
-			var lyricsdata = videos_datatable.cell(this, 10).data();
-			
-			//associate trhtmlindex
-			//to each li item
-			karaokedesclistitem.attr({
-				"data-htmlindex":trhtmlindex
-			});
-			
-			
-			
+			var lyricsdata = videos_datatable.cell(this, 10).data();	
+				
 			//function for adding content
 			//to the karaokedesclist li item
 			function adddesclinodes(){
@@ -181,9 +183,7 @@ $(document).ready(function(){
 			
 			//add the owlhotel li item to the list
 			$("#karaokedesclist").append(karaokedesclistitem);
-		
-		
-		//end ".each" table tr function
+			
 		});
 		
 		//add the owlCarouel classes again
@@ -211,14 +211,20 @@ $(document).ready(function(){
 		
 			//behaviour of owlhotel li items on click
 			$("#owlkaraoke li").each(function(){
+				
+				var owlPoster = $(this).children("img");
+				var owlPosterSrc = owlPoster.attr("src");
+				
+				getMeta(owlPosterSrc, owlPoster);
+				
 				$(this).addClass("gradient");
 				$(this).click(function(){
 				
 					//associate each owlhotel li with its own data-index
-					var liplaylistindex = $(this).attr("data-htmlindex");
+					var owlLiVidId = $(this).attr("data-videoid");
 					
 					//play the video at the liplaylistindex
-					player.playVideoAt(liplaylistindex);
+					player.loadVideoById(owlLiVidId);
 					
 					//animate the page to scroll to the video
 					$("html, body").animate({
@@ -298,9 +304,7 @@ $(document).ready(function(){
 			$('#custom-search-input').val('');
 			videos_datatable.search($('#custom-search-input').val()).draw();
 		});
-		
-		
-	//function populatelists end
 	}
-
+	//DataTable drawCallback END
+	
 });
