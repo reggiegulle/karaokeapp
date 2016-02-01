@@ -1,9 +1,20 @@
 $(document).ready(function(){
-
+	
+	var filter_yr_of_rlse = 'reset';
+	var filter_genre = 'reset';
+	var filter_country_origin = 'reset';
+	
 	$("#videos_datatable").dataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "ajax/table_processing.php",
+         "ajax": {
+			'url': 'ajax/table_processing.php',
+			'data': function(data){
+				data.year_of_release = filter_yr_of_rlse;
+				data.genre = filter_genre;
+				data.country_of_origin = filter_country_origin;
+			}
+		},
 		"dom": "<\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs":[
@@ -17,11 +28,14 @@ $(document).ready(function(){
 			],
 		"order" : [0, 'des'],
 		"sPaginationType": "listbox",
+		"stateSave": true,
+		"stateDuration": 60 * 60 * 24,
 		"drawCallback": function (settings) {
 				tableInteraction();
 			}
     });
 	
+	var videos_datatable = $("#videos_datatable").DataTable();
 	
 	//function populatelists start
 	function tableInteraction() {
@@ -300,5 +314,23 @@ $(document).ready(function(){
 		
 	//function populatelists end
 	}
+	//DataTable drawCallback END
+	
+	//Custom-filters
+	
+	$('#decade-filter').change(function(){
+		filter_yr_of_rlse = $(this).val();
+		videos_datatable.draw();
+	});
+
+	$('#genre-filter').change(function(){
+		filter_genre = $(this).val();
+		videos_datatable.draw();
+	});
+
+	$('#country-filter').change(function(){
+		filter_country_origin = $(this).val();
+		videos_datatable.draw();
+	});
 
 });

@@ -14,11 +14,25 @@ $(document).ready(function(){
 		});	
 	}
 	
+	var filter_yr_of_rlse = 'reset';
+	var filter_genre = 'reset';
+	var filter_country_origin = 'reset';
+	
 	
 	$("#videos_datatable").dataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "ajax/table_processing.php",
+        "ajax": {
+			'url': 'ajax/table_processing.php',
+			'data': function(data){
+				/* data.year_of_release = $('#decade-filter').val();
+				data.genre = $('#genre-filter').val();
+				data.country_of_origin = $('#country-filter').val(); */
+				data.year_of_release = filter_yr_of_rlse;
+				data.genre = filter_genre;
+				data.country_of_origin = filter_country_origin;
+			}
+		},
 		"dom": "<\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs":[
@@ -32,10 +46,14 @@ $(document).ready(function(){
 			],
 		"order" : [0, 'des'],
 		"sPaginationType": "listbox",
+		"stateSave": false,
+		"sPaginationType": "listbox",
 		"drawCallback": function(settings){
 				populate_table();
 			}
     });
+	
+	var videos_datatable = $("#videos_datatable").DataTable();
 		
 	//DataTable drawCallback START
 	function populate_table(){
@@ -333,5 +351,28 @@ $(document).ready(function(){
 		});
 	}
 	//DataTable drawCallback END
+	
+	$('#search-reset').click(function(){
+		videos_datatable.search('').draw();
+	});
+	
+	//Custom-filters
+
+	$('#decade-filter').change(function(){
+		filter_yr_of_rlse = $(this).val();
+		videos_datatable.draw();
+	});
+
+	$('#genre-filter').change(function(){
+		filter_genre = $(this).val();
+		videos_datatable.draw();
+	});
+
+	$('#country-filter').change(function(){
+		filter_country_origin = $(this).val();
+		videos_datatable.draw();
+	});
+
+	
 	
 });

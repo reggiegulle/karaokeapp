@@ -33,6 +33,7 @@
 <script src="js/CSSPlugin.js" type="text/javascript"></script>
 <script src="js/TweenLite.js" type="text/javascript"></script>
 <script src="js/TimelineLite.js" type="text/javascript"></script>
+<script src="js/EasePack.js" type="text/javascript"></script>
 <!--stylejs-->
 <script src="js/karaoke.style.js" type="text/javascript"></script>
 <!--Bootstrap JS at the bottom -->

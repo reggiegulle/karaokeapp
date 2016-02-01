@@ -89,10 +89,11 @@
 
 
 <!--Separate css files to be minified in deployment-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
-<link href="css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="screen">
+<link href="css/responsive.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
 <!--Custom css-->
 <link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
 
@@ -106,13 +107,14 @@
 
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
-<script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="js/jquery.dataTables.js" type="text/javascript"></script>
 <script src="js/dataTables.responsive.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
 <!--GSAP library-->
 <script src="js/CSSPlugin.js" type="text/javascript"></script>
 <script src="js/TweenLite.js" type="text/javascript"></script>
 <script src="js/TimelineLite.js" type="text/javascript"></script>
+<script src="js/EasePack.js" type="text/javascript"></script>
 <!--Custom JS for this Page-->
 <script src="js/manage_users.js" type="text/javascript"></script>
 <!--stylejs-->
