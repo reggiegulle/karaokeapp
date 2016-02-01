@@ -63,11 +63,11 @@ if(Input::exists()){
 				Redirect::to('index.php');
 			}
 		
-		} else {
+		} /*else {
 			foreach($validation->errors() as $error){
 				echo '<p class="error">' . $error . '</p><br />';
 			}
-		}
+		}*/
 	}
 }
 
@@ -91,24 +91,44 @@ if(Input::exists()){
 			<p>To change your password, fill-in your current password in the field provided below.  Type and re-type your new password in each of the fields provided and click "Submit".</p>
 
 			<form action="" method="POST">
-
-				<article>
-					<?php
-						if(Session::exists('edit_user_current_pwd_error')){
-							echo '<p>' . Session::flash('edit_user_current_pwd_error') . '</p>';
-						}
-					?>
-				</article>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password_current')){
+								echo '<p class="error">' . Session::flash('password_current') . '</p>';
+							}
+						?>
+					</article>
+					<article>
+						<?php
+							if(Session::exists('edit_user_current_pwd_error')){
+								echo '<p class="error">' . Session::flash('edit_user_current_pwd_error') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password_current">Current password</label>
 					<input type="password" name="password_current" id="password_current" />
 				</div>
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password_new')){
+								echo '<p class="error">' . Session::flash('password_new') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password_new">New password</label>
 					<input type="password" name="password_new" id="password_new" />
 				</div>
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password_new_again')){
+								echo '<p class="error">' . Session::flash('password_new_again') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password_new_again">Re-type your new password</label>
 					<input type="password" name="password_new_again" id="password_new_again" />
 				</div>

@@ -25,13 +25,14 @@
 					if($login){
 						Redirect::to('index.php');
 					} else {
-						echo '<p class="error">Sorry, logging in failed.</p>';
+						//echo '<p class="error">Sorry, logging in failed.</p>';
+						Session::put("login_fail", "Invalid username/password.  Please try again.");
 					}
-				} else {
+				}/* else {
 					foreach($validation->errors() as $error){
 						echo '<p class="error">' . $error . '</p><br />';
 					}
-				}
+				}*/
 			
 			}
 		}
@@ -51,12 +52,35 @@
 		
 		<div id="wrapper">
 			<article id="user_panel_login">
+			
+				<article>
+					<?php
+						if(Session::exists('login_fail')){
+							echo '<p class="error">' . Session::flash('login_fail') . '</p>';
+						}
+					?>
+				</article>
+			
 				<form action="" method="POST">
 					<div class="field">
+						<article>
+							<?php
+								if(Session::exists('username')){
+									echo '<p class="error">' . Session::flash('username') . '</p>';
+								}
+							?>
+						</article>
 						<label for="username">Username</label>
 						<input type="text" name="username" id="username" autocomplete="off" value="" />
 					</div>
 					<div class="field">
+						<article>
+							<?php
+								if(Session::exists('password')){
+									echo '<p class="error">' . Session::flash('password') . '</p>';
+								}
+							?>
+						</article>
 						<label for="password">Password</label>
 						<input type="password" name="password" id="password" autocomplete="off" value="" />
 					</div>

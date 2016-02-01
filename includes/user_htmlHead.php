@@ -28,11 +28,12 @@
 <![endif]-->
 
 <!--JS files to be minified in deployment-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 <!--GSAP library-->
 <script src="js/CSSPlugin.js" type="text/javascript"></script>
 <script src="js/TweenLite.js" type="text/javascript"></script>
 <script src="js/TimelineLite.js" type="text/javascript"></script>
+<script src="js/EasePack.js" type="text/javascript"></script>
 <!--stylejs-->
 <script src="js/karaoke.style.js" type="text/javascript"></script>
 <!--Bootstrap JS at the bottom -->

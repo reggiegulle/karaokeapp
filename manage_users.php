@@ -35,7 +35,10 @@
 							'required'	=> true,
 							'min'		=> 2,
 							'max'		=> 50
-						]
+						]/*,
+						'group' => [
+							'required'	=> true
+						]*/
 					]);
 					
 					if($validation->passed()){
@@ -60,12 +63,12 @@
 						} catch (Exception $e){
 							die($e->getMessage());
 						}
-					} else {
+					} /*else {
 						//echo errors
 						foreach($validation->errors() as $error){
 							echo '<p class="error">' . $error . '</p><br />';
 						}
-					}
+					}*/
 				}
 			}
 		}
@@ -86,10 +89,11 @@
 
 
 <!--Separate css files to be minified in deployment-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
-<link href="css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="screen">
+<link href="css/responsive.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
 <!--Custom css-->
 <link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
 
@@ -102,14 +106,15 @@
 <![endif]-->
 
 <!--JS files to be minified in deployment-->
-<script src="https://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script>
-<script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.dataTables.js" type="text/javascript"></script>
 <script src="js/dataTables.responsive.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
 <!--GSAP library-->
 <script src="js/CSSPlugin.js" type="text/javascript"></script>
 <script src="js/TweenLite.js" type="text/javascript"></script>
 <script src="js/TimelineLite.js" type="text/javascript"></script>
+<script src="js/EasePack.js" type="text/javascript"></script>
 <!--Custom JS for this Page-->
 <script src="js/manage_users.js" type="text/javascript"></script>
 <!--stylejs-->
@@ -144,16 +149,37 @@
 
 			<form action="" method="POST">
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('username')){
+								echo '<p class="error">' . Session::flash('username') . '</p>';
+							}
+						?>
+					</article>
 					<label for="username">Username</label>
 					<input type="text" name="username" id="username" value="" autocomplete="off" />
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('name')){
+								echo '<p class="error">' . Session::flash('name') . '</p>';
+							}
+						?>
+					</article>
 					<label for="name">User's Real Name</label>
 					<input type="text" name="name" id="name" value="" />
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('group')){
+								echo '<p class="error">' . Session::flash('group') . '</p>';
+							}
+						?>
+					</article>
 					<label for="group">User Group</label>
 					<input type="radio" name="group" value="1" />Standard User
 					&nbsp;
@@ -161,11 +187,25 @@
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password')){
+								echo '<p class="error">' . Session::flash('password') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password">Choose a password</label>
 					<input type="password" name="password" id="password" value="" />
 				</div>
 				
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password_again')){
+								echo '<p class="error">' . Session::flash('password_again') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password_again">Enter password again</label>
 					<input type="password" name="password_again" id="password_again" value="" />
 				</div>

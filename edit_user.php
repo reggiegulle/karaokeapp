@@ -54,12 +54,12 @@ $user = new User();
 			} catch(Exception $e){
 				die($e->getMessage());
 			}
-		}else{
+		}/*else{
 			//echo errors
 			foreach($validation->errors() as $error){
 				echo '<p class="error">' . $error . '</p><br />';
 			}
-		}
+		}*/
 	}
 ?>
 
@@ -93,16 +93,37 @@ $user = new User();
 
 		<form action="" method="POST">
 			<div class="field">
+				<article>
+					<?php
+						if(Session::exists('username')){
+							echo '<p class="error">' . Session::flash('username') . '</p>';
+						}
+					?>
+				</article>
 				<label for="name">Username</label>
 				<input type="text" name="username" value="<?php echo escape($karaoke_user_data->username); ?>" />
 			</div>
 			
 			<div class="field">
+				<article>
+					<?php
+						if(Session::exists('name')){
+							echo '<p class="error">' . Session::flash('name') . '</p>';
+						}
+					?>
+				</article>
 				<label for="name">User's Real Name</label>
 				<input type="text" name="name" id="name" value="<?php echo escape($karaoke_user_data->name); ?>" />
 			</div>
 
 			<div class="field">
+				<article>
+					<?php
+						if(Session::exists('password')){
+							echo '<p class="error">' . Session::flash('password') . '</p>';
+						}
+					?>
+				</article>
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" autocomplete="off" value="" />
 			</div>	

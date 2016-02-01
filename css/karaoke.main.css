@@ -1,29 +1,40 @@
-html{
+	html{
 	font-size: 62.5%;
 }
 
-body {
-	background: url("../images/karaokeapp.02.ver.png");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-clip: content-box;
+@media only screen and (max-width: 600px){
+	body {
+		background: #421E11;
+		background-position: top;
+		background-repeat: no-repeat;
+		background-attachment: scroll;
+	}
 }
 
-@media screen and (max-width: 600px){
+@media only screen and (min-width: 601px){
+	body {
+		background: url("../images/karaokeapp.07.ver.jpg");
+		background-position: top;
+		background-repeat: repeat-y;
+		background-attachment: scroll;
+	}
+}
+
+@media only screen and (max-width: 600px){
 	#wrapper{
 		width: 100%;
 		margin: 2rem auto;
 	}
 }
 
-@media screen and (min-width: 601px){
+@media only screen and (min-width: 601px){
 	#wrapper{
 		width: 80%;
 		margin: 2rem auto;
 	}
 }
 
-@media screen and (max-width: 600px){
+@media only screen and (max-width: 600px){
 	#header{
 		display: block;
 		position: relative;
@@ -36,7 +47,7 @@ body {
 	}
 }
 
-@media screen and (min-width: 601px){
+@media only screen and (min-width: 601px){
 	#header{
 		display: block;
 		position: relative;
@@ -60,6 +71,33 @@ body {
 	text-decoration: none;
 }
 
+#header #social-media-buttons {
+	background-color: rgba(247, 166, 86, 0.5);
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+100&0+0,0.8+15,0.8+85,0+100 */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y3YTY1NiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE1JSIgc3RvcC1jb2xvcj0iI2Y3YTY1NiIgc3RvcC1vcGFjaXR5PSIwLjgiLz4KICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjZjdhNjU2IiBzdG9wLW9wYWNpdHk9IjAuOCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZjdhNjU2IiBzdG9wLW9wYWNpdHk9IjAiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-linear-gradient(left, rgba(247,166,86,0) 0%, rgba(247,166,86,0.8) 15%, rgba(247,166,86,0.8) 85%, rgba(247,166,86,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(247,166,86,0)), color-stop(15%,rgba(247,166,86,0.8)), color-stop(85%,rgba(247,166,86,0.8)), color-stop(100%,rgba(247,166,86,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, rgba(247,166,86,0) 0%,rgba(247,166,86,0.8) 15%,rgba(247,166,86,0.8) 85%,rgba(247,166,86,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, rgba(247,166,86,0) 0%,rgba(247,166,86,0.8) 15%,rgba(247,166,86,0.8) 85%,rgba(247,166,86,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, rgba(247,166,86,0) 0%,rgba(247,166,86,0.8) 15%,rgba(247,166,86,0.8) 85%,rgba(247,166,86,0) 100%); /* IE10+ */
+	background: linear-gradient(to right, rgba(247,166,86,0) 0%,rgba(247,166,86,0.8) 15%,rgba(247,166,86,0.8) 85%,rgba(247,166,86,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00f7a656', endColorstr='#00f7a656',GradientType=1 ); /* IE6-8 */
+	border-radius: 6px;
+	margin: 0 auto;
+	max-width: 500px;
+	min-width: 300px;
+	padding: 8px 0 3px;
+	text-align: center;
+}
+
+#header #social-media-buttons  li{
+	display: inline-block;
+	list-style-type: none;
+	text-align: center;
+	vertical-align: middle;
+}
+
 #user_panel_login{
 	background: rgba(255,255,255, 0.8);
 	padding: 2rem;
@@ -75,7 +113,7 @@ body {
 	border-radius: 6px;
 }
 
-@media screen and (max-width: 600px){
+@media only screen and (max-width: 600px){
 	#user_panel_index{
 		background: rgba(255,255,255, 0.8);
 		padding: 2rem;
@@ -84,7 +122,7 @@ body {
 	}
 }
 
-@media screen and (min-width: 601px){
+@media only screen and (min-width: 601px){
 	#user_panel_index{
 		background: rgba(255,255,255, 0.8);
 		padding: 2rem;
@@ -103,8 +141,7 @@ body {
     padding: 1rem;
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	#video-player-container{
 		background: #000;
 		width: 100%;
@@ -117,8 +154,7 @@ and (max-width: 700px){
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	#video-player-container{
 		background: #000;
 		width: 51.73807599029911%;
@@ -130,8 +166,7 @@ and (min-width: 701px){
 	}
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	#titlelist-container {
 		margin: 0 auto;
 		display: block;
@@ -140,8 +175,7 @@ and (max-width: 700px){
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	#titlelist-container {
 		margin: 0 auto;
 		display: block;
@@ -152,12 +186,15 @@ and (min-width: 701px){
 
 #karaoketitlelist{
 	list-style-type: none;
-	padding: 1rem;
 }
 
 #karaoketitlelist li{
-	display: block;
+	display: none;
 	text-align: center;
+}
+
+#karaoketitlelist li.playing{
+	display: block;
 }
 
 #karaoketitlelist li h6 {
@@ -230,8 +267,7 @@ and (min-width: 701px){
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#383838', endColorstr='#606060',GradientType=0 ); /* IE6-8 */
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	#desclist-container {
 		background: rgba(255,255,255,0.8);
 		margin: 0 auto;
@@ -241,8 +277,7 @@ and (max-width: 700px){
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	#desclist-container {
 		background: rgba(255,255,255,0.8);
 		margin: 0 auto;
@@ -263,6 +298,10 @@ and (min-width: 701px){
 }
 
 #karaokedesclist li{
+	display: none;
+}
+
+#karaokedesclist li.playing{
 	display: block;
 }
 
@@ -292,30 +331,26 @@ div.dataTables_filter{
 	margin-right: 4rem;
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	.dataTables_info {
 	  margin-bottom: 0;
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	.dataTables_info {
 	  margin-bottom: 1rem;
 	}
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	div.dataTables_paginate{
 		margin-right: 0;
 		margin-bottom: 1rem;
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	div.dataTables_paginate {
 	  margin-bottom: 1rem;
 	  margin-right: 4rem;
@@ -357,7 +392,7 @@ div.dataTables_paginate{
     box-shadow: 1px 1px 2px #CCC, -1px -1px 2px #CCC;
 }
 
-#owlkaraoke li.highlightowlli {
+#owlkaraoke li.playing {
     background: none repeat scroll 0 0 #20adc9;
     color: #ffffff;
 }
@@ -404,6 +439,7 @@ div.dataTables_paginate{
 #search-container form label{
 	display: block;
     font-size: 1.8rem;
+	margin-bottom: 12px;
 }
 
 #search-icon {
@@ -411,28 +447,25 @@ div.dataTables_paginate{
     vertical-align: top;
 }
 
-@media only screen
-and (max-width: 700px){
-	.slicknav_menu{
-		display: block;
-		margin-bottom: 1.5rem;
-	}
-	
-	#custom-filter{
-		display: none;
+.container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+@media only screen and (max-width: 767px){
+	.navbar-brand{
+		display: inline;
 	}
 }
 
-@media only screen
-and (min-width: 701px){
-	.slicknav_menu{
+@media only screen and (min-width: 768px){
+	.navbar-brand{
 		display: none;
-		margin-bottom: 1.5rem;
 	}
+}
 	
-	#custom-filter{
-		display: block;
-	}
+#custom-filter{
+	display: block;
 }
 
 #custom-search-input.form-control.input-sm {
@@ -447,30 +480,42 @@ and (min-width: 701px){
 #search_reset {
 	cursor: pointer;
 	display: inline-block;
-	margin-left: -2px;
+	margin-left: 0px;
 		-webkit-box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
 		-moz-box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
 	box-shadow: 1px -1px 3px 1px rgba(255, 255, 255, 0.7);
+	background: none repeat scroll 0 0 #000;
+	border-color: #4c4c4c;
+	border-radius: 4px;
+	color: #fff;
+	padding: 2px 8px;
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	#custom-filter-search-container.container-fluid {
 	  padding: 0;
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	#custom-filter-search-container.container-fluid {
 	  padding: 0 15px;
 	}
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	#custom-filter-search-container > ul {
 		background: rgba(76,76,76,0.8);
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4c4c4c+0,4c4c4c+100&0+0,0.8+15,0.8+85,0+100 */
+		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRjNGM0YyIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE1JSIgc3RvcC1jb2xvcj0iIzRjNGM0YyIgc3RvcC1vcGFjaXR5PSIwLjgiLz4KICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjNGM0YzRjIiBzdG9wLW9wYWNpdHk9IjAuOCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNGM0YzRjIiBzdG9wLW9wYWNpdHk9IjAiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+		background: -moz-linear-gradient(left, rgba(76,76,76,0) 0%, rgba(76,76,76,0.8) 15%, rgba(76,76,76,0.8) 85%, rgba(76,76,76,0) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(76,76,76,0)), color-stop(15%,rgba(76,76,76,0.8)), color-stop(85%,rgba(76,76,76,0.8)), color-stop(100%,rgba(76,76,76,0))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* IE10+ */
+		background: linear-gradient(to right, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004c4c4c', endColorstr='#004c4c4c',GradientType=1 ); /* IE6-8 */
 		border-radius: 4px;
 		list-style-type: none;
 		margin: 0 0 1.5rem;
@@ -478,19 +523,33 @@ and (max-width: 700px){
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	#custom-filter-search-container > ul {
-	  background: none repeat scroll 0 0 rgba(76, 76, 76, 0.8);
-	  border-radius: 4px;
-	  list-style-type: none;
-	  margin: 0 1.8rem 1.5rem;
-	  padding: 1rem 0;
+		background: none repeat scroll 0 0 rgba(76, 76, 76, 0.8);
+			  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4c4c4c+0,4c4c4c+100&0+0,0.8+15,0.8+85,0+100 */
+		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRjNGM0YyIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE1JSIgc3RvcC1jb2xvcj0iIzRjNGM0YyIgc3RvcC1vcGFjaXR5PSIwLjgiLz4KICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjNGM0YzRjIiBzdG9wLW9wYWNpdHk9IjAuOCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNGM0YzRjIiBzdG9wLW9wYWNpdHk9IjAiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+		background: -moz-linear-gradient(left, rgba(76,76,76,0) 0%, rgba(76,76,76,0.8) 15%, rgba(76,76,76,0.8) 85%, rgba(76,76,76,0) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(76,76,76,0)), color-stop(15%,rgba(76,76,76,0.8)), color-stop(85%,rgba(76,76,76,0.8)), color-stop(100%,rgba(76,76,76,0))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* IE10+ */
+		background: linear-gradient(to right, rgba(76,76,76,0) 0%,rgba(76,76,76,0.8) 15%,rgba(76,76,76,0.8) 85%,rgba(76,76,76,0) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004c4c4c', endColorstr='#004c4c4c',GradientType=1 ); /* IE6-8 */
+		border-radius: 4px;
+		list-style-type: none;
+		margin: 0 1.8rem 1.5rem;
+		padding: 1rem 0;
 	}
 }
 
 #custom-filter > li {
-    display: inline-block;
+	display: inline-block;
+	padding: 0;
+}
+
+.slicknav_nav li {
+  padding: 5px 0;
 }
 
 .yadcf-filter {
@@ -499,7 +558,6 @@ and (min-width: 701px){
   padding: 3px 4px;
 }
 
-#search_reset,
 .yadcf-filter-reset-button {
   background: none repeat scroll 0 0 #000;
   border-color: #4c4c4c;
@@ -508,16 +566,14 @@ and (min-width: 701px){
   padding: 2px 8px;
 }
 
-@media only screen
-and (max-width: 700px){
+@media only screen and (max-width: 700px){
 	#videos_datatable_container.row {
-		margin-left: -15px;
-		margin-right: -15px;
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
 
-@media only screen
-and (min-width: 701px){
+@media only screen and (min-width: 701px){
 	#videos_datatable_container.row {
 		margin: 0 2rem;
 	}
@@ -531,7 +587,8 @@ table {
   border-radius: 4px;
 }
 
-thead {
+thead,
+tfoot {
     background: rgba(255,255,255,0.9);
 }
 
@@ -543,13 +600,26 @@ table.dataTable thead .sorting::after {
     background: rgba(255,255,255,0.7);
 }
 
+#videos_datatable tbody tr{
+	background-color: transparent;
+}
+
+#videos_datatable tbody tr.playing{
+	background-color: #FFF;
+}
+
 #videos_datatable tbody tr td img,
 #owlkaraoke li img{
 	border-radius: 4px;
 	box-shadow: 1px 1px 2px #000, -1px -1px 2px #000;
 }
 
-#videos_datatable tbody tr td img {
+#owlkaraoke li img{
+	cursor: pointer;
+}
+
+#videos_datatable tbody tr td img ,
+#videos_datatable tbody tr td.strong{
     cursor: pointer;
 }
 

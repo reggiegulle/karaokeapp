@@ -1,26 +1,41 @@
 $(document).ready(function(){
-
+	
+	var filter_yr_of_rlse = 'reset';
+	var filter_genre = 'reset';
+	var filter_country_origin = 'reset';
+	
 	$("#videos_datatable").dataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "ajax/table_processing.php",
+         "ajax": {
+			'url': 'ajax/table_processing.php',
+			'data': function(data){
+				data.year_of_release = filter_yr_of_rlse;
+				data.genre = filter_genre;
+				data.country_of_origin = filter_country_origin;
+			}
+		},
 		"dom": "<\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},
-				{className: "none", "targets":[2, 9, 10]},
-				{className: "all strong", "targets":[1]},
+				{className: "all", "targets":[0, 11]},
+				{className: "none", "targets":[2, 5, 9, 10]},
+				{className: "all strong", "targets":[3]},
 				{className: "all", "targets":[3, 4]},
-				{className: "min-tablet", "targets":[5, 7]},
-				{className: "min-desktop", "targets":[6, 8]}
+				{className: "min-tablet", "targets":[7]},
+				{className: "min-desktop", "targets":[0, 6, 8]}
 			],
 		"order" : [0, 'des'],
 		"sPaginationType": "listbox",
+		"stateSave": true,
+		"stateDuration": 60 * 60 * 24,
 		"drawCallback": function (settings) {
 				tableInteraction();
 			}
     });
 	
+	var videos_datatable = $("#videos_datatable").DataTable();
 	
 	//function populatelists start
 	function tableInteraction() {
@@ -66,8 +81,8 @@ $(document).ready(function(){
 			//not the html rendering
 			var trposindex = videos_datatable.row(this).index();
 			
-			var songtitlenode = videos_datatable.cell(this, 1).node();
-			var songtitledata = videos_datatable.cell(this, 1).data();
+			var songtitlenode = videos_datatable.cell(this, 3).node();
+			var songtitledata = videos_datatable.cell(this, 3).data();
 			var songtitle_array = songtitledata.split(" ");
 			var songtitle_join = songtitle_array.join("+");
 			var songtitle = $(songtitlenode).html();
@@ -83,8 +98,8 @@ $(document).ready(function(){
 			$(videoidnode)
 				.html('<img src="https://i3.ytimg.com/vi/' + videoid + '/default.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
 				
-			var titledata = videos_datatable.cell(this, 1).data();
-			var performdata = videos_datatable.cell(this, 3).data();
+			var titledata = videos_datatable.cell(this, 3).data();
+			var performdata = videos_datatable.cell(this, 1).data();
 			
 			//create li items for the
 			//#owlkaraoke table
@@ -299,5 +314,23 @@ $(document).ready(function(){
 		
 	//function populatelists end
 	}
+	//DataTable drawCallback END
+	
+	//Custom-filters
+	
+	$('#decade-filter').change(function(){
+		filter_yr_of_rlse = $(this).val();
+		videos_datatable.draw();
+	});
+
+	$('#genre-filter').change(function(){
+		filter_genre = $(this).val();
+		videos_datatable.draw();
+	});
+
+	$('#country-filter').change(function(){
+		filter_country_origin = $(this).val();
+		videos_datatable.draw();
+	});
 
 });

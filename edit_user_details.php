@@ -46,7 +46,7 @@ if(Input::exists()){
 		
 		if($validation->passed()){
 			if(Hash::make(Input::get('password'), $data->salt) !== $data->password){
-				Session::flash('edit_user_pwd_error', 'Password is incorrect.');
+				Session::flash('edit_user_pwd_error', 'Password is blank/incorrect.');
 			} else{
 				//update
 				try{
@@ -62,13 +62,12 @@ if(Input::exists()){
 				}
 			}
 		
-		}else{
+		}/*else{
 			//echo errors
 			foreach($validation->errors() as $error){
 					echo '<p class="error">' . $error . '</p><br />';
 				}
-		}
-		
+		}*/
 	}
 }
 ?>
@@ -89,24 +88,44 @@ if(Input::exists()){
 
 			<p>To modify your existing details, fill-in your new details in the fields below.  Then type your password in the field provided and click "Submit".</p>
 
-			<article>
-				<?php
-					if(Session::exists('edit_user_pwd_error')){
-						echo '<p>' . Session::flash('edit_user_pwd_error') . '</p>';
-					}
-				?>
-			</article>
-
 			<form action="" method="POST">
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('username')){
+								echo '<p class="error">' . Session::flash('username') . '</p>';
+							}
+						?>
+					</article>
 					<label for="name">Username</label>
 					<input type="text" name="username" value="<?php echo escape($data->username); ?>" />
 				</div>
 				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('name')){
+								echo '<p class="error">' . Session::flash('name') . '</p>';
+							}
+						?>
+					</article>
 					<label for="name">Full Name</label>
 					<input type="text" name="name" value="<?php echo escape($data->name); ?>" />
 				</div>
-				<div class="field">	
+				<div class="field">
+					<article>
+						<?php
+							if(Session::exists('password')){
+								echo '<p class="error">' . Session::flash('password') . '</p>';
+							}
+						?>
+					</article>
+					<article>
+						<?php
+							if(Session::exists('edit_user_pwd_error')){
+								echo '<p class="error">' . Session::flash('edit_user_pwd_error') . '</p>';
+							}
+						?>
+					</article>
 					<label for="password">Password</label>
 					<input type="password" name="password" id="password" autocomplete="off" value="" />
 				</div>
