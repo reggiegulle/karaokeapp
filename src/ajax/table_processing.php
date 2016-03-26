@@ -48,10 +48,10 @@ $columns = [
 
 // SQL server connection information
 $sql_details = [
-	'user' => 'xxxxxxx',
-	'pass' => 'xxxxxxx',
-	'db'   => 'xxxxxxx',
-	'host' => 'xxxxxxx'
+	'user' => 'reggiegulle',
+	'pass' => 'Kwisatz01@kartadakA',
+	'db'   => 'karaokeapp',
+	'host' => 'localhost'
 ];
 
 //utility null variable
@@ -147,8 +147,12 @@ if(isset($_GET['year_of_release']) && $_GET['year_of_release'] != 'reset'){
 
 require( '../ajax/ssp.class.php' );
 
-echo json_encode(
-	SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns, $nullValue, $string_filter)
-);
+$results = SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns, $nullValue, $string_filter);
+
+if ($_GET['order'][0]['column'] === '0') {
+    shuffle( $results['data'] );
+}
+
+echo json_encode( $results );
 
 ?>
