@@ -548,17 +548,7 @@ div.dataTables_paginate{
 	padding: 0;
 }
 
-.slicknav_nav li {
-  padding: 5px 0;
-}
-
-.yadcf-filter {
-  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8);
-  color: #000;
-  padding: 3px 4px;
-}
-
-.yadcf-filter-reset-button {
+.filter-reset-button {
   background: none repeat scroll 0 0 #000;
   border-color: #4c4c4c;
   border-radius: 4px;

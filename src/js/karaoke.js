@@ -13,10 +13,96 @@ $(document).ready(function(){
 			
 		});	
 	}
+    
+    /**
+    * This plug-in removes the default behaviour of DataTables to filter on each
+    * keypress, and replaces with it the requirement to press the enter key to
+    * perform the filter.
+    *
+    *  @name fnFilterOnReturn
+    *  @summary Require the return key to be pressed to filter a table
+    *  @author [Jon Ranes](http://www.mvccms.com/)
+    *
+    *  @returns {jQuery} jQuery instance
+    *
+    *  @example
+    *    $(document).ready(function() {
+    *        $('.dataTable').dataTable().fnFilterOnReturn();
+    *    } );
+    */
+
+    jQuery.fn.dataTableExt.oApi.fnFilterOnReturn = function (oSettings) {
+        var _that = this;
+
+        this.each(function (i) {
+            $.fn.dataTableExt.iApiIndex = i;
+            var $this = this;
+            var anControl = $('input', _that.fnSettings().aanFeatures.f);
+            anControl
+                .unbind('keyup search input')
+                .bind('keypress', function (e) {
+                    if (e.which == 13) {
+                        $.fn.dataTableExt.iApiIndex = i;
+                        _that.fnFilter(anControl.val());
+                    }
+                });
+            return this;
+        });
+        return this;
+    };
 	
+    /*
+    * START
+    * content of the 'custom_filter_section'
+    */
+	var custom_filter_section = '<section id="custom-filter-container" class="container-fluid">';
+    custom_filter_section += '<div class="navbar-header">';
+    custom_filter_section += '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">';
+    custom_filter_section += '<span class="icon-bar"></span>';
+    custom_filter_section += '<span class="icon-bar"></span>';
+    custom_filter_section += '<span class="icon-bar"></span>';
+    custom_filter_section += '</button>';
+    custom_filter_section += '<a class="navbar-brand" href="#">Filters</a>';
+    custom_filter_section += '</div>';
+    custom_filter_section += '<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">';
+    custom_filter_section += '<ul id="custom-filter" class="nav navbar-nav col-xs-12">';
+    custom_filter_section += '<li class="filter col-xs-12 col-sm-4 col-md-4">';
+    custom_filter_section += '<select id="decade-filter">';
+    custom_filter_section += '<option value="reset" selected>--Filter By Decade--</option>';
+    custom_filter_section += '<option value="2010">2010s</option>';
+    custom_filter_section += '<option value="2000">2000s</option>';
+    custom_filter_section += '<option value="1990">1990s</option>';
+    custom_filter_section += '<option value="1980">1980s</option>';
+    custom_filter_section += '<option value="1970">1970s</option>';
+    custom_filter_section += '<option value="1960">1960s</option>';
+    custom_filter_section += '<option value="1950">1950s</option>';
+    custom_filter_section += '<option value="1940">1940s</option>';
+    custom_filter_section += '</select>';
+    custom_filter_section += '<button id="reset-decade-filter" class="filter-reset-button">X</button>'
+    custom_filter_section += '</li>';
+    custom_filter_section += '<li class="filter col-xs-12 col-sm-4 col-md-4">';
+    custom_filter_section += '<select id="genre-filter">';
+    custom_filter_section += '</select>';
+    custom_filter_section += '<button id="reset-genre-filter" class="filter-reset-button">X</button>';
+    custom_filter_section += '</li>';
+    custom_filter_section += '<li class="filter col-xs-12 col-sm-4 col-md-4">';
+    custom_filter_section += '<select id="country-filter">';
+    custom_filter_section += '</select>';
+    custom_filter_section += '<button id="reset-country-filter" class="filter-reset-button">X</button>';
+    custom_filter_section += '</li>';  
+    custom_filter_section += '</ul>';
+    custom_filter_section += '</div>';
+    custom_filter_section += '</section>';
+    /*
+    * END
+    * content of the 'custom_filter_section'
+    */
+    
 	var filter_yr_of_rlse = 'reset';
 	var filter_genre = 'reset';
 	var filter_country_origin = 'reset';
+    var genre_filter_value = 'reset';
+    var country_filter_value = 'reset';
 	
 	
 	$("#videos_datatable").dataTable({
@@ -33,7 +119,7 @@ $(document).ready(function(){
 				data.country_of_origin = filter_country_origin;
 			}
 		},
-		"dom": "<\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
+		"dom": "<\"col-xs-12\"f<\"#search_reset\">><\"col-xs-12 navbar navbar-default\" <\"custom-filter-container container-fluid\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs":[
 				{"orderable": false, "targets":[4, 10]},
@@ -47,317 +133,53 @@ $(document).ready(function(){
         "order": [ 0, 'desc' ],
 		"sPaginationType": "listbox",
 		"stateSave": false,
-		"sPaginationType": "listbox",
-		"drawCallback": function(settings){
-				populate_table();
-			}
-    });
+		"sPaginationType": "listbox"
+    }).fnFilterOnReturn();
+    
+    $('#search_reset').attr('title', 'Reset Search').html('X');
+    
+    $('div.custom-filter-container').html(custom_filter_section);
 	
 	var videos_datatable = $("#videos_datatable").DataTable();
-		
-	//DataTable drawCallback START
-	function populate_table(){
-		//declare videos_datatable var
-		var videos_datatable = $("#videos_datatable").DataTable();	
-		
-		//add the necessary classes to owlkaraoke
-		var owlkaraoke = $("#owlkaraoke").addClass("owl-carousel");
-		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
-		
-		//create the owlkaraoke owlCarousel instance
-		owlkaraoke.owlCarousel();
-		
-		//destroy the owlkaraoke owlCarousel instance
-		owlkaraoke.data("owlCarousel").destroy();
-		$("#owlkaraoke").removeClass("owl-carousel");
-		$("#owlkaraoke").removeClass("owl-theme");
-		$("#owlkaraoke").empty();
-		
-		$("#karaoketitlelist").empty();
-		
-		$("#karaokedesclist").empty();
-		
-		
-		//start ".each" table tr function
-		$("#videos_datatable tbody tr").each( function () {
-			var videoiddata = videos_datatable.cell(this, 4).data();
-			var trhtmlindex = $(this).index();
-			
-			//get the index of the rows
-			//based on their datatable ordering,
-			//not the html rendering
-			var trposindex = videos_datatable.row(this).index();
-			
-			$(this).attr({
-				"data-videoid": videoiddata,
-				"data-trindex": trposindex
-			});
-			
-			var songtitlenode = videos_datatable.cell(this, 3).node();
-			var songtitle = $(songtitlenode).html();
-			
-			var videoidnode = videos_datatable.cell(this, 4).node();
-			var videoid = $(videoidnode).html();
-			$(videoidnode)
-				.html('<img src="https://i3.ytimg.com/vi/' + videoid + '/mqdefault.jpg" alt="' + songtitle + ' thumbnail" width="120px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of ' + songtitle + '" />');
-			var posterObj = $(videoidnode);
-			var posterImgSrc = $(posterObj).children('img').attr('src');
-			getMeta(posterImgSrc, posterObj);
-			
-			var titledata = videos_datatable.cell(this, 3).data();
-			var performdata = videos_datatable.cell(this, 1).data();
-
-			//create li items for the
-			//#owlkaraoke table
-			var owlkaraokeliitem = $("<li>");
-			
-			//insert tr attributes into the owlkaraoke li item
-			owlkaraokeliitem.attr({
-				"data-videoid": videoiddata,
-				"data-trindex": trposindex
-			});
-			
-			//add content into
-			//each owlkaraoke list item
-			var videoposter = $(videoidnode).html();
-			owlkaraokeliitem.append(videoposter);
-			
-			function addowllinodes(){
-				owllitext = '';
-				owllitext += '<h6>' + titledata + '</h6>';
-				owllitext += '<p>' + performdata + '</p>';
-				return owllitext;
-			}
-			
-			var owlkaraokelinodes = addowllinodes();
-			owlkaraokeliitem.append(owlkaraokelinodes);
-			
-			$("#owlkaraoke").append(owlkaraokeliitem);
-			
-			
-			//create li items for karaoketitlelist
-			var karaoketitlelistitem = $("<li>");
-			
-			//associate trhtmlindex
-			//to each li item
-			karaoketitlelistitem.attr({
-				"data-videoid": videoiddata,
-				"data-trindex": trposindex
-			});
-			
-			//function for adding content
-			//to the karaokedesclist li item
-			function addtitlelinodes(){
-				var titlelitext = "";
-				titlelitext += '<h6>' + titledata + '</h6>';
-				titlelitext += '<p>Performed By: ' + performdata + '</p>';
-				
-				return titlelitext;
-			}
-			
-			karaoketitlelistitem.append(addtitlelinodes);
-			
-			//add the karaoketitlelist li item to the list
-			$("#karaoketitlelist").append(karaoketitlelistitem);
-			
-			//create li items for karaokedesclist
-			var karaokedesclistitem = $("<li>");
-			
-			//associate data-videoid
-			//to each li item
-			karaokedesclistitem.attr({
-				"data-videoid":videoiddata,
-				"data-trindex": trposindex
-			});
-			
-			var composerdata = videos_datatable.cell(this, 2).data();
-			var albumdata = videos_datatable.cell(this, 5).data();
-			var releasedata = videos_datatable.cell(this, 6).data();
-			var genredata = videos_datatable.cell(this, 7).data();
-			var countrydata = videos_datatable.cell(this, 8).data();
-			var rntmdata = videos_datatable.cell(this, 9).data();
-			var lyricsdata = videos_datatable.cell(this, 10).data();	
-				
-			//function for adding content
-			//to the karaokedesclist li item
-			function adddesclinodes(){
-				var desclitext = "";
-				desclitext += videoposter;
-				desclitext += '<h6>' + titledata + '</h6>';
-				desclitext += '<p>Composed By: ' + composerdata + '</p>';
-				desclitext += '<p>Performed By: ' + performdata + '</p>';
-				desclitext += '<p>From the Album: ' + albumdata + '</p>';
-				desclitext += '<p>Year of Release: ' + releasedata + '</p>';
-				desclitext += '<p>Genre: ' + genredata + '</p>';
-				desclitext += '<p>Country of Origin: ' + countrydata + '</p>';
-				desclitext += '<p>Running Time: ' + rntmdata + '</p>';
-				desclitext += '<p>Lyrics: </p><br /><pre>' + lyricsdata + '</pre>';
-				
-				return desclitext;
-			}
-			
-			karaokedesclistitem.append(adddesclinodes);
-			
-			//add the owlhotel li item to the list
-			$("#karaokedesclist").append(karaokedesclistitem);
-			
-		});
-		
-		//add the owlCarouel classes again
-		var owlkaraoke = $("#owlkaraoke").addClass("owl-carousel");
-		var owlkaraoke = $("#owlkaraoke").addClass("owl-theme");
-		
-		//reinitialize owlCarousel
-		owlkaraoke.owlCarousel({
-			itemsDesktop: [1199,5],
-			itemsDesktopSmall: [979,4],
-			itemsTablet: [768,3],
-			itemsMobile: [479,2],
-			pagination: false,
-			navigation: true,
-			afterInit: owllivideoindex,
-			beforeMove: getOrSetOwlNav,
-			afterAction: getOrSetOwlNav
-		});
-		
-		
-		function owllivideoindex(){
-			
-			function owlLiClickAction(elem){
-				var trindexplaying = elem.data('trindex');
-
-				var owlkaraoke = $("#owlkaraoke");
-				
-				$("#videos_datatable tbody tr.playing, #karaoketitlelist li.playing, #owlkaraoke li.playing, #karaokedesclist li.playing").removeClass('playing');
-				
-				$("#videos_datatable tbody").find('tr[data-trindex="' + trindexplaying + '"]').addClass('playing');
-				
-				$("#karaoketitlelist").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
-				
-				$("#owlkaraoke").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
-				
-				$("#karaokedesclist").find('li[data-trindex="' + trindexplaying + '"]').addClass('playing');
-				
-				$("#owlkaraoke li").each(function(){
-					if($(this).hasClass("playing")){
-						owlkaraoke.trigger("owl.goTo", $("#owlkaraoke li").index(this));
-					}
-				});
-			}
-		
-			//behaviour of owlhotel li items on click
-			$("#owlkaraoke li").each(function(){
-				
-				//I have to set the styling of the owl-carousel here
-				$(this).css({
-					'height':$('#owlkaraoke').height() + 'px'
-				});
-		
-				
-				var owlPoster = $(this).children("img");
-				var owlPosterSrc = owlPoster.attr("src");
-				
-				getMeta(owlPosterSrc, owlPoster);
-				
-				$(this).addClass("gradient");
-				$(this).click(function(){
-					
-					owlLiClickAction($(this).closest('li'));
-				
-					//associate each owlhotel li with its own data-index
-					var owlLiVidId = $(this).attr("data-videoid");
-					
-					//play the video at the liplaylistindex
-					player.loadVideoById(owlLiVidId);
-					
-					//animate the page to scroll to the video
-					$("html, body").animate({
-						scrollTop: $("#video-player-container").offset().top 
-					},500);
-					
-				});
-			});
-			
-		} 
-		
-		function getOrSetOwlNav(){
-			//get number data on table pagination
-			var pageinfo = videos_datatable.page.info();
-			//get 1-indexed page of table
-			var currentpage = pageinfo.page + 1;
-			//get 1-indexed last page index of table
-			var lastpage = pageinfo.pages;
-			
-			var currentowlitem = this.currentItem;
-			var lastowlitem = this.maximumItem;
-			//multiple conditions on
-			//current page of table
-			if (currentpage == 1) {
-				//multiple conditions on
-				//current owl items shown
-				if (currentowlitem === 0) {
-					$(".owl-buttons").html('<div class="owl-next">next</div>');
-				} else if (currentowlitem < lastowlitem) {
-					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
-				} else if (currentowlitem === lastowlitem) {
-					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage">next page</div>');
-					$("#owl-nextpage").click(function(){
-						videos_datatable.page( 'next' ).draw( false );
-					});
-				}
-			} else if (currentpage < lastpage) {
-				if (currentowlitem === 0) {
-					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div><div class="owl-next">next</div>');
-					$("#owl-prevpage").click(function(){
-						videos_datatable.page( 'previous' ).draw( false );
-					});
-				} else if (currentowlitem < lastowlitem) {
-					$(".owl-buttons").html('<div class="owl-prev">prev</div><div class="owl-next">next</div>');
-				} else if (currentowlitem === lastowlitem) {
-					$(".owl-buttons").html('<div class="owl-prev">prev</div><div id="owl-nextpage">next page</div>');
-					$("#owl-nextpage").click(function(){
-						videos_datatable.page( 'next' ).draw( false );
-					});
-				}
-			} else if(currentpage == lastpage) {
-				if (currentowlitem < lastowlitem) {
-					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div><div class="owl-next">next</div>');
-					$("#owl-prevpage").click(function(){
-						videos_datatable.page( 'previous' ).draw( false );
-					});
-				} else if (currentowlitem === lastowlitem) {
-					$(".owl-buttons").html('<div id="owl-prevpage">prev page</div>');
-					$("#owl-prevpage").click(function(){
-						videos_datatable.page( 'previous' ).draw( false );
-					});
-				}
-			}
-			
-			
-		}
-		
-		//get the "custom-search-input"
-		//and make it function
-		//as an external search input area
-		$('#custom-search-input').on('keyup', function(){
-			videos_datatable.search(this.value).draw();
-		});
-		
-		//make the search reset button
-		//functional
-		$('#search_reset').on('click', function(){
-			$('#custom-search-input').val('');
-			videos_datatable.search($('#custom-search-input').val()).draw();
-		});
-	}
-	//DataTable drawCallback END
+	
+    videos_datatable.on('draw.dt', function (){
+        var get_filters = $.ajax({
+            url: 'video_filter_values.php',
+            dataType: 'json'
+        });
+        
+        $('#genre-filter').empty();
+        
+        $('#country-filter').empty();
+        
+        get_filters.done( function ( data ) {
+            $.each(data.genre, function( index, value ) {
+                $('#genre-filter').append('<option value="' + value + '">' + value + '</option>');    
+            } );
+            $('#genre-filter').prepend('<option value="reset">--Filter By Genre--</option>');
+            $('#genre-filter').val(genre_filter_value);
+        } )
+        .done( function ( data ) {
+            $.each(data.country_of_origin, function( index, value ) {
+                $('#country-filter').append('<option value="' + value + '">' + value + '</option>');    
+            } );
+            $('#country-filter').prepend('<option value="reset">--Filter By Country--</option>');
+            $('#country-filter').val(country_filter_value);
+        } );
+    });
+    
+    //make the search reset button
+    //functional
+    $('#search_reset').on('click', function(){
+        $('.form-control.input-sm').val('');
+        videos_datatable.search('').draw();
+    });
 	
 	$('#search-reset').click(function(){
 		videos_datatable.search('').draw();
 	});
 	
-	//Custom-filters
-
+	//Custom filters
 	$('#decade-filter').change(function(){
 		filter_yr_of_rlse = $(this).val();
 		videos_datatable.draw();
@@ -365,14 +187,35 @@ $(document).ready(function(){
 
 	$('#genre-filter').change(function(){
 		filter_genre = $(this).val();
+        genre_filter_value = filter_genre;
 		videos_datatable.draw();
 	});
 
 	$('#country-filter').change(function(){
 		filter_country_origin = $(this).val();
+        country_filter_value = filter_country_origin;
 		videos_datatable.draw();
 	});
-
-	
+    
+    //Reset buttons for custom filters
+	$( '#reset-decade-filter' ).click( function () {
+        $( '#decade-filter' ).val( 'reset' );
+        filter_yr_of_rlse = 'reset';
+        videos_datatable.draw();
+    } );
+    
+    $( '#reset-genre-filter' ).click( function () {
+        $( '#genre-filter' ).val( 'reset' );
+        filter_genre = 'reset';
+        genre_filter_value = filter_genre;
+        videos_datatable.draw();
+    } );
+    
+    $( '#reset-country-filter' ).click( function () {
+        $( '#country-filter' ).val( 'reset' );
+        filter_country_origin = 'reset';
+        country_filter_value = filter_country_origin;
+        videos_datatable.draw();
+    } );
 	
 });
