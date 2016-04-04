@@ -1,15 +1,12 @@
 <?php
 	require_once 'includes/init.php';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="Description" CONTENT="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
 <link rel="canonical" href="http://www.renegade-karaoke.com" />
-
 <!--Twitter-->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@reggiegulle">
@@ -18,7 +15,6 @@
 <meta name="twitter:title" content="Renegade Karaoke!">
 <meta name="twitter:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs!">
 <meta name="twitter:image:src" content="http://www.renegade-karaoke.com/images/rk-fb-og.png">
-
 <!--FB OG-->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Renegade Karaoke!"/>
@@ -27,13 +23,9 @@
 <meta property="og:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
 <meta property="og:image" content="http://www.renegade-karaoke.com/images/rk-fb-og.png"/>
 <meta property="fb:app_id" content="412347942245523"/>
-
 <title>Renegade Karaoke</title>
-
 <!--Set the window's initial width -->
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-
 <!--Separate css files to be minified in deployment-->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <!--bootstrap css files-->
@@ -43,15 +35,14 @@
 <link href="css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
 <!--datatables responsive plug-in css-->
 <link href="css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
-<!--Important owl-carousel stylesheet-->
-<link href="css/owl.carousel.min.css" rel="stylesheet" type="text/css" media="screen">
-<!-- Default owl-carousel Theme -->
-<link href="css/owl.theme.min.css" rel="stylesheet" type="text/css" media="screen">
+<!--Important slick carousel stylesheet-->
+<link href="css/slick.min.css" rel="stylesheet" type="text/css" media="screen">
+<!-- Default slick-carousel Theme -->
+<link href="css/slick-theme.min.css" rel="stylesheet" type="text/css" media="screen">
 <!--Google Fonts-->
 <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
 <!--Custom css-->
 <link href="css/karaoke.main.min.css" rel="stylesheet" type="text/css" media="screen">
-
 <!--[if gte IE 9]>
   <style type="text/css">
     .gradient {
@@ -59,40 +50,39 @@
     }
   </style>
 <![endif]-->
-
-
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+<!--Bootstrap JS--> 
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
 <!--datatables core-->
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.min.js" type="text/javascript"></script>
 <script src="js/select.min.js" type="text/javascript"></script>
-
 <!--datatables extensions-->
 <script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
-<script src="js/responsive.bootstrap.js" type="text/javascript"></script>
-
+<script src="js/responsive.bootstrap.min.js" type="text/javascript"></script>
 <!--GSAP library-->
 <script src="js/CSSPlugin.min.js" type="text/javascript"></script>
 <script src="js/TweenLite.min.js" type="text/javascript"></script>
 <script src="js/TimelineLite.min.js" type="text/javascript"></script>
 <script src="js/EasePack.min.js" type="text/javascript"></script>
+<!--slick carousel-->
+<script src="js/slick.min.js" type="text/javascript"></script> 
 <!--custom JS-->
 <?php 
 	$user = new User();
 	if($user->isLoggedIn()){
 ?>
-		<script src="js/karaoke.admin.min.js" type="text/javascript"></script>
+		<script src="js/karaoke_table.admin.min.js" type="text/javascript"></script>
 <?php
 	} else {
 ?>
-		<script src="js/karaoke.min.js" type="text/javascript"></script>
+		<script src="js/karaoke_table.min.js" type="text/javascript"></script>
 <?php
 	}
 ?>
-
-<!--owl-carousel jQuery plugin-->
-<script src="js/owl.carousel.min.js" type="text/javascript"></script>
+<!--custom slick slider JS-->
+<script src="js/karaoke_slider.min.js" type="text/javascript"></script>
 <!--stylejs-->
 <script src="js/karaoke.style.min.js" type="text/javascript"></script>
 <!--YouTube JS, SlickNav custom JS init, and Bootstrap JS at the bottom -->
@@ -218,14 +208,14 @@
 			<table id="videos_datatable" class="table table-bordered dataTable no-footer" cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>Index</th>
-						<th>Performed By</th>
-						<th>Composer</th>
 						<th>Song Title</th>
+						<th>ID</th>
+						<th>Performed By</th>
 						<th>Poster</th>
-						<th>Source Album</th>
-						<th>Year of Release</th>
+						<th>Composer</th>
 						<th>Genre</th>
+						<th>Source Album</th>
+						<th>Year Of Release</th>
 						<th>Country Of Origin</th>
 						<th>Running Time</th>
 						<th>Lyrics</th>
@@ -234,14 +224,14 @@
 				</thead>
 				<tfoot>
 					<tr>
-						<th>Index</th>
-						<th>Performed By</th>
-						<th>Composer</th>
 						<th>Song Title</th>
+						<th>ID</th>
+						<th>Performed By</th>
 						<th>Poster</th>
-						<th>Source Album</th>
-						<th>Year of Release</th>
+						<th>Composer</th>
 						<th>Genre</th>
+						<th>Source Album</th>
+						<th>Year Of Release</th>
 						<th>Country Of Origin</th>
 						<th>Running Time</th>
 						<th>Lyrics</th>
@@ -294,21 +284,6 @@
 				</ul>
 			</article>
 		</section>
-		<!--YouTube JS -->
-	<?php 
-		$user = new User();
-		if($user->isLoggedIn()){
-	?>
-			<script src="js/youtube_reg_user.min.js" type="text/javascript"></script>
-	<?php
-		} else {
-	?>
-			<script src="js/youtube.min.js" type="text/javascript"></script>
-	<?php
-		}
-	?>
-		<!--Bootstrap JS -->
-		<script src="js/bootstrap.min.js"></script>
 	</div>
 </body>
 </html>

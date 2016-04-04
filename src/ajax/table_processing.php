@@ -23,14 +23,14 @@ $primaryKey = 'id';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = [
-	[ 'db'	=>	'id',			'dt'	=>	0 ],
-	[ 'db'	=>	'song_title',	'dt'	=>	3 ],
-	[ 'db'	=>	'composer',		'dt'	=>	2 ],
-	[ 'db'	=>	'performed_by',	'dt' 	=>	1 ],
-	[ 'db'	=>	'video_id',		'dt'	=>	4 ],
-	[ 'db'	=>	'source_album', 'dt'	=>	5 ],
-	[ 'db'	=>	'year_of_release',	'dt'	=>	6 ],
-	[ 'db'	=>	'genre',		'dt'	=>	7 ],
+	[ 'db'	=>	'id',			'dt'	=>	1 ],
+	[ 'db'	=>	'song_title',	'dt'	=>	0 ],
+	[ 'db'	=>	'composer',		'dt'	=>	4 ],
+	[ 'db'	=>	'performed_by',	'dt' 	=>	2 ],
+	[ 'db'	=>	'video_id',		'dt'	=>	3 ],
+	[ 'db'	=>	'source_album', 'dt'	=>	6 ],
+	[ 'db'	=>	'year_of_release',	'dt'	=>	7 ],
+	[ 'db'	=>	'genre',		'dt'	=>	5 ],
 	[ 'db'	=>	'country_of_origin',	'dt'	=>	8 ],
 	[ 
 		'db'	=>	'running_time',	
@@ -48,10 +48,10 @@ $columns = [
 
 // SQL server connection information
 $sql_details = [
-	'user' => 'reggiegulle',
-	'pass' => 'Kwisatz01@kartadakA',
-	'db'   => 'karaokeapp',
-	'host' => 'localhost'
+	'user' => '',
+	'pass' => '',
+	'db'   => '',
+	'host' => ''
 ];
 
 //utility null variable
@@ -149,7 +149,7 @@ require( '../ajax/ssp.class.php' );
 
 $results = SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns, $nullValue, $string_filter);
 
-if ($_GET['order'][0]['column'] === '0') {
+if ($_GET['order'][0]['column'] === '1') {
     shuffle( $results['data'] );
 }
 

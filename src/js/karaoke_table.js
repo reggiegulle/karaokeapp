@@ -1,5 +1,11 @@
 $(document).ready(function(){
-	
+	/* 
+    * START
+    * helper function for
+    * removing rows from the videos datatable
+    * where the image is not online
+    * at YouTube
+    */
 	function getMeta(url, imgObj){
 		$("<img/>").attr("src", url).load(function(){
 			
@@ -13,6 +19,13 @@ $(document).ready(function(){
 			
 		});	
 	}
+    /* 
+    * END
+    * helper function for
+    * removing rows from the videos datatable
+    * where the image is not online
+    * at YouTube
+    */
     
     /**
     * This plug-in removes the default behaviour of DataTables to filter on each
@@ -50,6 +63,16 @@ $(document).ready(function(){
         });
         return this;
     };
+    
+    /*
+    * START
+    * content of the 'custom_filter_section'
+    */
+    var search_icon = '<img src="images/search_icon.png" width="32px" height="32px" alt="search icon" id="search-icon" />';
+    /*
+    * END
+    * content of the 'custom_filter_section'
+    */
 	
     /*
     * START
@@ -98,22 +121,40 @@ $(document).ready(function(){
     * content of the 'custom_filter_section'
     */
     
+    /*
+    * START
+    * utility variables
+    * to be assigned as
+    * values of data
+    * to be sent over
+    * the video datatable
+    * AJAX request
+    */
 	var filter_yr_of_rlse = 'reset';
 	var filter_genre = 'reset';
 	var filter_country_origin = 'reset';
     var genre_filter_value = 'reset';
     var country_filter_value = 'reset';
+    /*
+    * END
+    * utility variables
+    * to be assigned as
+    * values of data
+    * to be sent over
+    * the video datatable
+    * AJAX request
+    */
 	
-	
+	/**
+    * initialize the dataTable
+    * for the karaoke videos
+    */
 	$("#videos_datatable").dataTable({
         "processing": true,
         "serverSide": true,
         "ajax": {
 			'url': 'ajax/table_processing.php',
 			'data': function(data){
-				/* data.year_of_release = $('#decade-filter').val();
-				data.genre = $('#genre-filter').val();
-				data.country_of_origin = $('#country-filter').val(); */
 				data.year_of_release = filter_yr_of_rlse;
 				data.genre = filter_genre;
 				data.country_of_origin = filter_country_origin;
@@ -122,27 +163,65 @@ $(document).ready(function(){
 		"dom": "<\"col-xs-12\"f<\"#search_reset\">><\"col-xs-12 navbar navbar-default\" <\"custom-filter-container container-fluid\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs":[
-				{"orderable": false, "targets":[4, 10]},
-				{"className": "never", "targets":[0, 11]},
-				{"className": "none", "targets":[2, 5, 9, 10]},
-				{"className": "all strong", "targets":[3]},
-				{"className": "all", "targets":[3, 4]},
-				{"className": "min-tablet", "targets":[7]},
-				{"className": "min-desktop", "targets":[0, 6, 8]}
+				{"orderable": false, "targets":[3, 10]},
+				{"className": "never", "targets":[1, 11]},
+				{"className": "none", "targets":[4, 9, 10]},
+				{"className": "all strong", "targets":[0]},
+				{"className": "all", "targets":[0]},
+                {"className": "all", "targets":[3], 
+                "createdCell": function (cell, cellData, rowData, row, col) {
+                        var songtitle = rowData[0];
+                        var altsongtitlesplit = rowData[0].split(' ');
+                        var altsongtitle = altsongtitlesplit.join('-');
+                        var newCellHTML = '<img src="https://i3.ytimg.com/vi/'; 
+                        newCellHTML += cellData;
+                        newCellHTML += '/default.jpg" alt="'; 
+                        newCellHTML += altsongtitle;
+                        newCellHTML += '-thumbnail" ';
+                        newCellHTML += 'width="120px" height="90px" ';
+                        newCellHTML += 'longdesc="Thumbnail for the Youtube karaoke video of \''; 
+                        newCellHTML += songtitle + '\'" />';
+                        $(cell).html(newCellHTML);
+                    }
+                },
+				{"className": "min-tablet", "targets":[5, 6]},
+				{"className": "min-desktop", "targets":[2, 7, 8]}
 			],
-        "order": [ 0, 'desc' ],
+        "order": [ 1, 'desc' ],
 		"sPaginationType": "listbox",
 		"stateSave": false,
-		"sPaginationType": "listbox"
+		"sPaginationType": "listbox",
+        "drawCallback": prepareVideosTable
     }).fnFilterOnReturn();
+    
     
     $('#search_reset').attr('title', 'Reset Search').html('X');
     
     $('div.custom-filter-container').html(custom_filter_section);
 	
-	var videos_datatable = $("#videos_datatable").DataTable();
+    //assign a variable to
+    //the videos dataTable API instance
+	var videos_datatable = $('#videos_datatable').DataTable();
 	
-    videos_datatable.on('draw.dt', function (){
+    
+    /*
+    * START
+    * functions to be invoked
+    * every time the videos dataTable
+    * is rendered
+    */
+    function prepareVideosTable () {
+        $('#videos_datatable_filter.dataTables_filter label')
+        .contents()
+        .filter( function () { 
+            return this.nodeType === 3; 
+        } )
+        .remove();
+        
+        if ( $( '#search-icon' ).length === 0 ) {
+            $( '#videos_datatable_filter.dataTables_filter label' ).prepend( search_icon );    
+        }
+        
         var get_filters = $.ajax({
             url: 'video_filter_values.php',
             dataType: 'json'
@@ -166,7 +245,13 @@ $(document).ready(function(){
             $('#country-filter').prepend('<option value="reset">--Filter By Country--</option>');
             $('#country-filter').val(country_filter_value);
         } );
-    });
+    }
+    /*
+    * END
+    * functions to be invoked
+    * every time the videos dataTable
+    * is rendered
+    */
     
     //make the search reset button
     //functional

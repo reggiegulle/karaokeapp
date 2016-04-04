@@ -3,19 +3,19 @@
 session_start();
 
 $GLOBALS['config'] = [
-	'mysql' => [
-		'host' => 'sql310.byethost14.com',
-		'username' => 'b14_15919127',
-		'password' => 'Kwisatz01@kartadabH',
-		'db' => 'b14_15919127_karaokeapp'
+    'mysql' => [
+		'host' => '',
+		'username' => '',
+		'password' => '',
+		'db' => ''
 	],
 	'remember' => [
-		'cookie_name' => 'hash',
-		'cookie_expiry' => '604800'
+		'cookie_name' => '',
+		'cookie_expiry' => ''
 	],
 	'session' => [
-		'session_name' => 'user',
-		'token_name' => 'token'
+		'session_name' => '',
+		'token_name' => ''
 	]
 ];
 
