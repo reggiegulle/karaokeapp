@@ -4,7 +4,7 @@ session_start();
 
 $GLOBALS['config'] = [
 	'mysql' => [
-		
+	
 	],
 	'remember' => [
 		

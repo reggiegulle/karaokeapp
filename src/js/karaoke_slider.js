@@ -17,40 +17,6 @@ $(document).ready(function () {
         };
     })();
     
-    /* 
-    * START
-    * helper function for
-    * adding notifications to
-    * the slick sliders
-    * where the image is not online
-    * at YouTube
-    */
-    
-    var vidOfflineNotif = '<div class="offline-notification">Sorry, video is unavailable</div>';
-    
-	function addSliderItemOfflineNotif(video_id, imgObj) {
-        var url = 'https://i3.ytimg.com/vi/' + video_id + '/mqdefault.jpg';
-
-        $("<img/>").attr("src", url).load(function () {
-
-            var s = {w: this.width, h: this.height};
-
-            if (s.w === 120) {
-                imgObj
-                .find('img')
-                .replaceWith(vidOfflineNotif);   
-            }
-        });
-	}
-    /* 
-    * END
-    * helper function for
-    * adding notifications to
-    * the slick sliders
-    * where the image is not online
-    * at YouTube
-    */
-    
     //assign a variable to the
     //karaoke-slider-1 element
     //and initialize it as
@@ -114,27 +80,122 @@ $(document).ready(function () {
     
     /*
     * START
+    * function for assembling
+    * a karaoke-slider-1 li item
+    * for appending to
+    * an error-free karaoke-slider-1
+    */
+    function assembleKaraokeSlider1Item(rowData, index_data) {
+        //form a value
+        //to be assigned to
+        //the 'alt' attribute of
+        //each item img
+        var songtitle = rowData[0];
+        var altsongtitlesplit = rowData[0].split(' ');
+        var altsongtitle = altsongtitlesplit.join('-');
+        
+        //add this data to each karaoke-slider-1 li
+        var karaoke_slider_1_li_item = '<li data-index_position="' + index_data + '" data-video_id="' + rowData[3] + '">';
+        karaoke_slider_1_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/hqdefault.jpg" width="80%" alt="' + altsongtitle + '-karaoke-video-thumbnail">';
+        karaoke_slider_1_li_item += '</li>';
+        return karaoke_slider_1_li_item;
+    }
+    /*
+    * function for assembling
+    * a karaoke-slider-1 li item
+    * for appending to
+    * an error-free karaoke-slider-1
+    * END
+    */
+    
+    /* 
+    * START
+    * helper function for
+    * adding notifications to
+    * the karaoke-slider-1 items
+    * where the image is not online
+    * at YouTube
+    */
+    function addOfflineNotifKarSlider1() {
+        //iterate through each of the newly-formed
+        //karaoke-slider-2 li items
+        $('#karaoke-slider-1 li img').each(function () {
+            //get the src of the img
+            var url = $(this).attr('src');
+            var thisImage = $(this);
+            //assign an empty variable
+            //to represent a yet to be determined size
+            var size;
+            //load an img into the browser memory
+            //and get its size
+            $('<img/>').attr('src', url).load(function () {
+                //assign a value
+                //to the size var above
+                size = {width: this.width, height: this.height};
+                if (size.width < 320) {
+                    //if the size is smaller
+                    //than the 'mqdefault' size
+                    //of the thumbnail,
+                    //replace with a notification
+                    thisImage.replaceWith('<div class="offline-notification">Sorry, video is unavailable</div>')
+                }
+
+            });
+        });    
+    }
+    /* 
+    * helper function for
+    * adding notifications to
+    * the karaoke-slider-1 items
+    * where the image is not online
+    * at YouTube
+    * END
+    */
+    
+    /*
+    * START
     * function for appending li items to 
     * the karaoke-slider-1 element
     * if the videos datatable
     * has valid items
     */
-    function populateKaraokeSlider1() {
+    function initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item) {
         //remove items from upper bxslider ("karaoke-slider-1")
         //right after each rendering of the videos datatable
         while($('#karaoke-slider-1 li').length > 0){
             $('#karaoke-slider-1').empty();
         }
         
+        $('#videos_datatable tbody tr').each(function () {
+            //increment video index variable by 1
+            //for each iteration
+            video_index++;
+            
+            thisRow = $(this);
+            //get the JSON data from each video table row
+            rowData = videos_datatable.row(thisRow).data();
+            
+            karaoke_slider_1_item = assembleKaraokeSlider1Item(rowData, video_index);
+            
+            $('#karaoke-slider-1').append(karaoke_slider_1_item);
+        });
+        
         //reload the karaoke_slider_1 bxslider
-        karaoke_slider_1.reloadSlider();
+        karaoke_slider_1.reloadSlider({
+            onSliderLoad: function () {
+                //invoke the function
+                //for replacing offline videos
+                //with a notification
+                addOfflineNotifKarSlider1();
+            }
+        });
     }
     /*
-    * END
     * function for appending li items to 
     * the karaoke-slider-1 element
     * if the videos datatable
     * has valid items
+    * END
     */
 /*
 * functions and vars
@@ -147,39 +208,6 @@ $(document).ready(function () {
 * functions and vars
 * for karaoke-slider-2
 */
-    
-    /* 
-    * START
-    * helper function for
-    * adding notifications to
-    * the karaoke-slider-2 items
-    * where the image is not online
-    * at YouTube
-    */
-    function addOfflineNotifKarSlider2() {
-         $('#karaoke-slider-2 li img').each(function () {
-            var url = $(this).attr('src');
-            var thisImage = $(this);
-            var size;
-            $('<img/>').attr('src', url).load(function () {
-                size = {width: this.width, height: this.height};
-                if (size.width < 320) {
-                    //console.log(thisImage);
-                    thisImage.replaceWith('<div class="offline-notification">Sorry, video is unavailable</div>')
-                }
-
-            });
-        });    
-    }
-    /* 
-    * helper function for
-    * adding notifications to
-    * the karaoke-slider-2 items
-    * where the image is not online
-    * at YouTube
-    * END
-    */
-    
     /*
     * START
     * 'clear out' function for
@@ -216,10 +244,17 @@ $(document).ready(function () {
     * an error-free karaoke-slider-2
     */
     function assembleKaraokeSlider2Item(rowData, index_data) {
-        //add this data to each hotel-2 li
+        //form a value
+        //to be assigned to
+        //the 'alt' attribute of
+        //each item img
+        var songtitle = rowData[0];
+        var altsongtitlesplit = rowData[0].split(' ');
+        var altsongtitle = altsongtitlesplit.join('-');
+        
+        //add this data to each karaoke-slider-2 li
         var karaoke_slider_2_li_item = '<li data-index_position="' + index_data + '" data-video_id="' + rowData[3] + '">';
-        karaoke_slider_2_li_item += '<div class="hotel-2-slide">';
-        karaoke_slider_2_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/mqdefault.jpg" width="80%" alt="' + rowData[0] + '"></div>';
+        karaoke_slider_2_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/mqdefault.jpg" width="80%" alt="' + altsongtitle + '-karaoke-video-thumbnail">';
         karaoke_slider_2_li_item += '<h6>';
         karaoke_slider_2_li_item += rowData[0];
         karaoke_slider_2_li_item += '</h6>';
@@ -237,6 +272,50 @@ $(document).ready(function () {
     * an error-free karaoke-slider-2
     */
     
+    /* 
+    * START
+    * helper function for
+    * adding notifications to
+    * the karaoke-slider-2 items
+    * where the image is not online
+    * at YouTube
+    */
+    function addOfflineNotifKarSlider2() {
+        //iterate through each of the newly-formed
+        //karaoke-slider-2 li items
+        $('#karaoke-slider-2 li img').each(function () {
+            //get the src of the img
+            var url = $(this).attr('src');
+            var thisImage = $(this);
+            //assign an empty variable
+            //to represent a yet to be determined size
+            var size;
+            //load an img into the browser memory
+            //and get its size
+            $('<img/>').attr('src', url).load(function () {
+                //assign a value
+                //to the size var above
+                size = {width: this.width, height: this.height};
+                if (size.width < 320) {
+                    //if the size is smaller
+                    //than the 'mqdefault' size
+                    //of the thumbnail,
+                    //replace with a notification
+                    thisImage.replaceWith('<div class="offline-notification">Sorry, video is unavailable</div>')
+                }
+
+            });
+        });    
+    }
+    /* 
+    * helper function for
+    * adding notifications to
+    * the karaoke-slider-2 items
+    * where the image is not online
+    * at YouTube
+    * END
+    */
+    
     /*
     * START
     * function for populating
@@ -251,7 +330,6 @@ $(document).ready(function () {
         
         //iterate through each table row
         $('#videos_datatable tbody tr').each(function () {
-
             //increment video index variable by 1
             //for each iteration
             video_index++;
@@ -260,8 +338,12 @@ $(document).ready(function () {
             //get the JSON data from each video table row
             rowData = videos_datatable.row(thisRow).data();
             
+            //per iteration,
+            //form a karaoke-slider-2 item
             karaoke_slider_2_item = assembleKaraokeSlider2Item(rowData, video_index);
             
+            //insert the karaoke-slider-2 item
+            //into the karaoke-slider-2 element
             $('#karaoke-slider-2').append(karaoke_slider_2_item);            
         });
         
@@ -271,6 +353,9 @@ $(document).ready(function () {
             maxSlides: 10,
             slideWidth: 200,
             onSliderLoad: function () {
+                //invoke the function
+                //for replacing offline videos
+                //with a notification
                 addOfflineNotifKarSlider2();
             }
         });
@@ -308,15 +393,26 @@ $(document).ready(function () {
         //which will increment per
         //iteration later
             video_index = 0,
+            karaoke_slider_1_item,
             karaoke_slider_2_item;
 
         //if a video table search DOES NOT return a
         //"No Results Found" message
         //(there were results)
         if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
+            //
+            initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item);
             initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item);
         }
+        //if a video table search returns a
+        //"No Results Found" message
+        //(there were no results)
         else if ($('#videos_datatable tbody tr td.dataTables_empty').length > 0) {
+            //invoke the karaoke-slider-1
+            //error action
+            renderKaraoke1SliderErrorState();
+            //invoke the karaoke-slider-2
+            //error action
             renderKaraoke2SliderErrorState();
         }
     });
