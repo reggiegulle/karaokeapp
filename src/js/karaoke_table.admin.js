@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
-	var filter_yr_of_rlse = 'reset';
-	var filter_genre = 'reset';
-	var filter_country_origin = 'reset';
+	var filter_yr_of_rlse = 'reset',
+	filter_genre = 'reset',
+	filter_country_origin = 'reset';
 	
 	$("#videos_datatable").dataTable({
         "processing": true,

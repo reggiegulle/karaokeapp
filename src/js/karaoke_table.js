@@ -8,12 +8,15 @@ $(document).ready(function () {
     
 	/* 
     * START
-    * helper function for
-    * removing rows from the videos datatable
+    * helper functions for
+    * adding notifications to the videos datatable
     * where the image is not online
     * at YouTube
     */
-	function retainOrRemoveRow(srcData, htmlObj) {
+    
+    var vidOfflineNotif = '<div class="offline-notification">Sorry, video is unavailable</div>';
+    
+	function addOfflineNotif(srcData, htmlObj) {
         
         var url = 'https://i3.ytimg.com/vi/' + srcData[3] + '/mqdefault.jpg';
 
@@ -22,14 +25,17 @@ $(document).ready(function () {
             var s = {w: this.width, h: this.height};
 
             if (s.w === 120) {
-                $(htmlObj).remove();
+                $(htmlObj)
+                .children('td')
+                .eq(3)
+                .html(vidOfflineNotif);
             }
         });	
 	}
     /*  
     * END
-    * helper function for
-    * removing rows from the videos datatable
+    * helper functions for
+    * adding notifications to the videos datatable
     * where the image is not online
     * at YouTube
     */
@@ -300,7 +306,7 @@ $(document).ready(function () {
                 //add video_index data
                 thisRow.attr('data-video_id', video_index - 1);
                 var rowData = videos_datatable.row(thisRow).data();
-                retainOrRemoveRow(rowData, thisRow);
+                addOfflineNotif(rowData, thisRow);
             });    
         } 
     }

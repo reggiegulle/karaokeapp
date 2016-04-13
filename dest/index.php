@@ -60,7 +60,7 @@
 <script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
 <script src="js/responsive.bootstrap.min.js" type="text/javascript"></script>
 <!-- bxslider JS -->
-<script src="js/jquery.bxslider.js" type="text/javascript"></script>
+<script src="js/jquery.bxslider.min.js" type="text/javascript"></script>
 <!--GSAP library-->
 <script src="js/CSSPlugin.min.js" type="text/javascript"></script>
 <script src="js/TweenLite.min.js" type="text/javascript"></script>
