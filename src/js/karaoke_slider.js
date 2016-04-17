@@ -90,13 +90,20 @@ $(document).ready(function () {
         //to be assigned to
         //the 'alt' attribute of
         //each item img
-        var songtitle = rowData[0];
-        var altsongtitlesplit = rowData[0].split(' ');
-        var altsongtitle = altsongtitlesplit.join('-');
+        var songtitle = rowData[0],
+            altsongtitlesplit = rowData[0].split(' '),
+            altsongtitle = altsongtitlesplit.join('-');
         
         //add this data to each karaoke-slider-1 li
         var karaoke_slider_1_li_item = '<li data-index_position="' + index_data + '" data-video_id="' + rowData[3] + '">';
-        karaoke_slider_1_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/hqdefault.jpg" width="80%" alt="' + altsongtitle + '-karaoke-video-thumbnail">';
+        karaoke_slider_1_li_item += '<div class="karaoke-slider-1-slide-shell">';
+        karaoke_slider_1_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/hqdefault.jpg" width="100%" alt="' + altsongtitle + '-karaoke-video-thumbnail">';
+        karaoke_slider_1_li_item += '<button class="play-button">Play</button>';
+        karaoke_slider_1_li_item += '<div class="karaoke-splash-details">';
+        karaoke_slider_1_li_item += '<h4>' + songtitle + '</h4>';
+        karaoke_slider_1_li_item += '<p>' + rowData[2] + '</p>';
+        karaoke_slider_1_li_item += '</div>';
+        karaoke_slider_1_li_item += '</div>';
         karaoke_slider_1_li_item += '</li>';
         return karaoke_slider_1_li_item;
     }
@@ -182,12 +189,17 @@ $(document).ready(function () {
         
         //reload the karaoke_slider_1 bxslider
         karaoke_slider_1.reloadSlider({
+            auto: true,
+            autoHover: true,
+            pager: false,
+            pause: 6000,
             onSliderLoad: function () {
                 //invoke the function
                 //for replacing offline videos
                 //with a notification
                 addOfflineNotifKarSlider1();
-            }
+            },
+            onSlideAfter: afterTransitionKarSlider2ItmBehaviour
         });
     }
     /*
@@ -248,9 +260,9 @@ $(document).ready(function () {
         //to be assigned to
         //the 'alt' attribute of
         //each item img
-        var songtitle = rowData[0];
-        var altsongtitlesplit = rowData[0].split(' ');
-        var altsongtitle = altsongtitlesplit.join('-');
+        var songtitle = rowData[0],
+        altsongtitlesplit = rowData[0].split(' '),
+        altsongtitle = altsongtitlesplit.join('-');
         
         //add this data to each karaoke-slider-2 li
         var karaoke_slider_2_li_item = '<li data-index_position="' + index_data + '" data-video_id="' + rowData[3] + '">';
@@ -318,6 +330,45 @@ $(document).ready(function () {
     
     /*
     * START
+    * function for syncing
+    * the karaoke-slider-1 element
+    * to the karaoke-slider-2 element
+    * when a karaoke-slider-2 item is clicked
+    */
+    function karaokeSlider2ClickAction() {
+        $('#karaoke-slider-2 li').click(function () {
+            var karSlidr1Pos = $(this).data('index_position') - 1;
+            karaoke_slider_1.goToSlide(karSlidr1Pos);
+        });   
+    }
+    /*
+    * function for syncing
+    * the karaoke-slider-1 element
+    * to the karaoke-slider-2 element
+    * when a karaoke-slider-2 item is clicked
+    * END
+    */
+    
+    /*
+    * START
+    * behaviour of
+    * each karaoke-slider-2 item element
+    * when karaoke-slider-1 undergoes
+    * transitions
+    */
+    function afterTransitionKarSlider2ItmBehaviour($slideElement, oldIndex, newIndex) {
+        karaoke_slider_2.goToSlide(newIndex);    
+    }
+    /*
+    * behaviour of
+    * each karaoke-slider-2 item element
+    * when karaoke-slider-1 undergoes
+    * transitions
+    * END
+    */
+    
+    /*
+    * START
     * function for populating
     * an error-free karaoke-slider-2
     */
@@ -352,11 +403,14 @@ $(document).ready(function () {
             minSlides: 2,
             maxSlides: 10,
             slideWidth: 200,
+            moveSlides: 1,
+            pager: false,
             onSliderLoad: function () {
                 //invoke the function
                 //for replacing offline videos
                 //with a notification
                 addOfflineNotifKarSlider2();
+                karaokeSlider2ClickAction();
             }
         });
     }
@@ -400,9 +454,8 @@ $(document).ready(function () {
         //"No Results Found" message
         //(there were results)
         if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
-            //
-            initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item);
             initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item);
+            initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item);
         }
         //if a video table search returns a
         //"No Results Found" message

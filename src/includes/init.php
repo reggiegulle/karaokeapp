@@ -3,15 +3,7 @@
 session_start();
 
 $GLOBALS['config'] = [
-	'mysql' => [
 	
-	],
-	'remember' => [
-		
-	],
-	'session' => [
-		
-	]
 ];
 
 spl_autoload_register(function($class){
