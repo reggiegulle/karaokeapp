@@ -64,7 +64,8 @@
 				$running_time .= (Input::get('running_time_min'));
 				$running_time .= ':';
 				$running_time .= (Input::get('running_time_sec'));
-				$lyrics_text = nl2br(Input::get('lyrics'));
+                $lyrics_text = '<br/ >';
+				$lyrics_text .= nl2br(Input::get('lyrics'));
 				
 				try{
 					

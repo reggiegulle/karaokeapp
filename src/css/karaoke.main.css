@@ -23,6 +23,18 @@
 * customise bootstrap
 */
 /* START
+* karaokedesclist styles
+*/
+#karaokedesclist {
+  list-style-type: none;
+  padding: 1rem;
+  display: none;
+}
+/*
+* karaokedesclist styles
+* END
+*/
+/* START
 * custom bxslider styles
 */
 .bx-wrapper .bx-prev {

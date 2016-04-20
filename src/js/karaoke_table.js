@@ -6,87 +6,40 @@ $(document).ready(function () {
 * with the DataTables jQuery plug-in
 */
     
-	/* 
-    * START
-    * helper functions for
-    * adding notifications to the videos datatable
-    * where the image is not online
-    * at YouTube
-    */
-    
-    var vidOfflineNotif = '<div class="offline-notification">Sorry, video is unavailable</div>';
-    
-	function addOfflineNotif(srcData, htmlObj) {
-        
-        var url = 'https://i3.ytimg.com/vi/' + srcData[3] + '/mqdefault.jpg';
-
-        $("<img/>").attr("src", url).load(function () {
-
-            var s = {w: this.width, h: this.height};
-
-            if (s.w === 120) {
-                $(htmlObj)
-                .children('td')
-                .eq(3)
-                .html(vidOfflineNotif);
-            }
-        });	
-	}
-    /*  
-    * END
-    * helper functions for
-    * adding notifications to the videos datatable
-    * where the image is not online
-    * at YouTube
-    */
-    
-    /**
-    * This plug-in removes the default behaviour of DataTables to filter on each
-    * keypress, and replaces with it the requirement to press the enter key to
-    * perform the filter.
-    *
-    *  @name fnFilterOnReturn
-    *  @summary Require the return key to be pressed to filter a table
-    *  @author [Jon Ranes](http://www.mvccms.com/)
-    *
-    *  @returns {jQuery} jQuery instance
-    *
-    *  @example
-    *    $(document).ready(function() {
-    *        $('.dataTable').dataTable().fnFilterOnReturn();
-    *    } );
-    */
-
-    jQuery.fn.dataTableExt.oApi.fnFilterOnReturn = function (oSettings) {
-        var _that = this;
-
-        this.each(function (i) {
-            $.fn.dataTableExt.iApiIndex = i;
-            var $this = this;
-            var anControl = $('input', _that.fnSettings().aanFeatures.f);
-            anControl
-                .unbind('keyup search input')
-                .bind('keypress', function (e) {
-                    if (e.which === 13) {
-                        $.fn.dataTableExt.iApiIndex = i;
-                        _that.fnFilter(anControl.val());
-                    }
-                });
-            return this;
-        });
-        return this;
-    };
-    
+    //helper vars
+    var vidOfflineNotif = '<div class="offline-notification">Sorry, video is unavailable</div>',
     /*
     * START
     * content of the 'custom_filter_section'
     */
-    var search_icon = '<img src="images/search_icon.png" width="32px" height="32px" alt="search icon" id="search-icon" />';
+        search_icon = '<img src="images/search_icon.png" width="32px" height="32px" alt="search icon" id="search-icon" />',
     /*
     * END
     * content of the 'custom_filter_section'
     */
-	
+    /*
+    * START
+    * utility variables
+    * to be assigned as
+    * values of data
+    * to be sent over
+    * the video datatable
+    * AJAX request
+    */
+        filter_yr_of_rlse = 'reset',
+        filter_genre = 'reset',
+        filter_country_origin = 'reset',
+        genre_filter_value = 'reset',
+        country_filter_value = 'reset';
+    /*
+    * END
+    * utility variables
+    * to be assigned as
+    * values of data
+    * to be sent over
+    * the video datatable
+    * AJAX request
+    */
     /*
     * START
     * content of the 'custom_filter_section'
@@ -134,29 +87,100 @@ $(document).ready(function () {
     * content of the 'custom_filter_section'
     */
     
-    /*
+    /* 
     * START
-    * utility variables
-    * to be assigned as
-    * values of data
-    * to be sent over
-    * the video datatable
-    * AJAX request
+    * helper functions for
+    * adding notifications to the videos datatable
+    * where the image is not online
+    * at YouTube
     */
-	var filter_yr_of_rlse = 'reset';
-	var filter_genre = 'reset';
-	var filter_country_origin = 'reset';
-    var genre_filter_value = 'reset';
-    var country_filter_value = 'reset';
-    /*
+	function addOfflineNotif(elemId, srcData, htmlObj) {
+        //if the function
+        //is called by a videos dataTable element
+        if (elemId === 'videos_datatable') {
+            //form a URL of the image
+            var url = 'https://i3.ytimg.com/vi/' + srcData[3] + '/mqdefault.jpg';
+            
+            //load the image through a jQuery img object
+            $("<img/>").attr("src", url).load(function () {
+                //get the dimensions
+                var s = {w: this.width, h: this.height};
+                //if the width of the src img
+                //is exactly equal to 120px
+                if (s.w === 120) {
+                    $(htmlObj)
+                        .children('td')
+                        .eq(3)
+                        .html(vidOfflineNotif);
+                }
+            });	    
+        }
+        //else if the function
+        //is called by a karaokedesclist child element
+        else if (elemId === 'karaokedesclist') {
+            //URL of the image supplied by the function argument 'srcData'
+            var url = srcData;
+            
+            //load the image through a jQuery img object
+            $("<img/>").attr("src", url).load(function () {
+                //get the dimensions
+                var s = {w: this.width, h: this.height};
+                //if the width of the src img
+                //is exactly equal to 120px
+                if (s.w === 120) {
+                    $(htmlObj)
+                        //replace the img tag with
+                        //a 'Video Not Available' notification
+                        .children('img')
+                        .replaceWith(vidOfflineNotif);
+                }
+            });	    
+        }
+	}
+    /*  
     * END
-    * utility variables
-    * to be assigned as
-    * values of data
-    * to be sent over
-    * the video datatable
-    * AJAX request
+    * helper functions for
+    * adding notifications to the videos datatable
+    * where the image is not online
+    * at YouTube
     */
+    
+    /**
+    * This plug-in removes the default behaviour of DataTables to filter on each
+    * keypress, and replaces with it the requirement to press the enter key to
+    * perform the filter.
+    *
+    *  @name fnFilterOnReturn
+    *  @summary Require the return key to be pressed to filter a table
+    *  @author [Jon Ranes](http://www.mvccms.com/)
+    *
+    *  @returns {jQuery} jQuery instance
+    *
+    *  @example
+    *    $(document).ready(function() {
+    *        $('.dataTable').dataTable().fnFilterOnReturn();
+    *    } );
+    */
+
+    jQuery.fn.dataTableExt.oApi.fnFilterOnReturn = function (oSettings) {
+        var _that = this;
+
+        this.each(function (i) {
+            $.fn.dataTableExt.iApiIndex = i;
+            var $this = this;
+            var anControl = $('input', _that.fnSettings().aanFeatures.f);
+            anControl
+                .unbind('keyup search input')
+                .bind('keypress', function (e) {
+                    if (e.which === 13) {
+                        $.fn.dataTableExt.iApiIndex = i;
+                        _that.fnFilter(anControl.val());
+                    }
+                });
+            return this;
+        });
+        return this;
+    };
 	
 	/**
     * initialize the dataTable
@@ -181,22 +205,7 @@ $(document).ready(function () {
             {"className": "none", "targets": [4, 9, 10]},
             {"className": "all strong", "targets": [0]},
             {"className": "all", "targets": [0]},
-            {"className": "all", "targets": [3], 
-                "createdCell": function (cell, cellData, rowData, row, col) {
-                    var songtitle = rowData[0];
-                    var altsongtitlesplit = rowData[0].split(' ');
-                    var altsongtitle = altsongtitlesplit.join('-');
-                    var newCellHTML = '<img src="https://i3.ytimg.com/vi/'; 
-                    newCellHTML += cellData;
-                    newCellHTML += '/mqdefault.jpg" alt="'; 
-                    newCellHTML += altsongtitle;
-                    newCellHTML += '-thumbnail" ';
-                    newCellHTML += 'width="80%" ';
-                    newCellHTML += 'longdesc="Thumbnail for the Youtube karaoke video of \''; 
-                    newCellHTML += songtitle + '\'" />';
-                    $(cell).html(newCellHTML);
-                }
-            },
+            {"className": "all", "targets": [3], "createdCell": addRowImages},
             {"className": "min-tablet", "targets": [5, 6]},
             {"className": "min-desktop", "targets": [2, 7, 8]}
         ],
@@ -216,6 +225,127 @@ $(document).ready(function () {
     //the videos dataTable API instance
 	var videos_datatable = $('#videos_datatable').DataTable();
 	
+    /*
+    * START
+    * function for adding images
+    * to the videos dataTable
+    */
+    function addRowImages(cell, cellData, rowData, row, col) {
+        //assign variables for
+        //populating certain attributes
+        //of the HTML tags to be formed below
+        var songtitle = rowData[0],
+            altsongtitlesplit = rowData[0].split(' '),
+            altsongtitle = altsongtitlesplit.join('-');
+        
+        //form a new img element
+        var newCellHTML = '<img src="https://i3.ytimg.com/vi/'; 
+        newCellHTML += cellData;
+        newCellHTML += '/mqdefault.jpg" alt="'; 
+        newCellHTML += altsongtitle;
+        newCellHTML += '-thumbnail" ';
+        newCellHTML += 'width="80%" ';
+        newCellHTML += 'longdesc="Thumbnail for the Youtube karaoke video of \''; 
+        newCellHTML += songtitle + '\'" />';
+        
+        //place the img element into
+        //the relevent videos table TD
+        $(cell).html(newCellHTML);
+    }
+    /*
+    * function for adding images
+    * to the videos dataTable
+    * END
+    */
+    
+    /*
+    * START
+    * function for populating
+    * the karaoke description list
+    */
+    function populateKaraokedesclist() {
+        videos_datatable.on('draw.dt', function () {
+            //empty the karaokedesclist ul element
+            //with each table render
+            while ($('#karaokedesclist li').length > 0) {
+                $('#karaokedesclist').empty();    
+            }
+            
+            //if a video table search DOES NOT return a
+            //"No Results Found" message
+            //(there were results)
+            if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
+                //assign an empty variable
+                //to be incremented later
+                var video_index = 0;
+
+                //remove those rows
+                //where the YouTube video is offline
+                $('#videos_datatable tbody tr').each(function () {
+                    //increment video_index
+                    video_index++;
+                    var thisRow = $(this);
+                    //add video_index data
+                    thisRow.attr('data-video_id', video_index - 1);
+                    var rowData = videos_datatable.row(thisRow).data(),
+                        //assign variables for
+                        //populating certain attributes
+                        //of the HTML tags to be formed below
+                        songtitle = rowData[0],
+                        altsongtitlesplit = rowData[0].split(' '),
+                        altsongtitle = altsongtitlesplit.join('-');
+                    
+                    //form a new li parent element
+                    //with children
+                    var karaokedesclistitem = '<li data-index_position="';
+                        karaokedesclistitem += video_index - 1;
+                        karaokedesclistitem += '">';
+                        karaokedesclistitem += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/mqdefault.jpg" alt="' + altsongtitle + '-thumbnail" width="160px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of \'' + songtitle + '\'" />';
+                        karaokedesclistitem += '<h4>Song Title:</h4>';
+                        karaokedesclistitem += '<p>';
+                        karaokedesclistitem += rowData[0];
+                        karaokedesclistitem += '</p>';
+                        karaokedesclistitem += '</li>';
+                    
+                    //append the newly formed li element
+                    //into the karaokedesclist ul
+                    $('#karaokedesclist').append(karaokedesclistitem);
+                });
+                
+                //go over each karaokedesclist ul li
+                //and replace 'offline' YouTube thumbnails
+                //with a notification
+                $('#karaokedesclist li').each(function () {
+                    var thisLiItem = $(this),
+                        imgURL = $(this).children('img').attr('src');
+                    
+                    //invoke the function
+                    //for adding a 'Video Not Available' notification
+                    addOfflineNotif('karaokedesclist', imgURL, thisLiItem);
+                }); 
+            }
+            //if a video table search RETURNS a
+            //"No Results Found" message
+            //(there were null results)
+            else if ($('#videos_datatable tbody tr td.dataTables_empty').length > 0) {
+                //form a new li element
+                //to appear as an error notification
+                var karaokedesclistitem = '<li>';
+                    karaokedesclistitem += 'Sorry, No Info To Show';
+                    karaokedesclistitem += '</li>';
+                
+                //add the li element into
+                //the karaokedesclist ul
+                //as the sole item
+                $('#karaokedesclist').append(karaokedesclistitem);
+            }
+        });    
+    }
+    /*
+    * function for populating
+    * the karaoke description list
+    * END
+    */
     
     /*
     * START
@@ -233,7 +363,9 @@ $(document).ready(function () {
         //input search field
         $('#videos_datatable_filter.dataTables_filter label')
         .contents()
-        .filter(function () { 
+        .filter(function () {
+            //find the only node item
+            //that is of type 'text'
             return this.nodeType === 3; 
         })
         .remove();
@@ -306,16 +438,45 @@ $(document).ready(function () {
                 //add video_index data
                 thisRow.attr('data-video_id', video_index - 1);
                 var rowData = videos_datatable.row(thisRow).data();
-                addOfflineNotif(rowData, thisRow);
+                addOfflineNotif('videos_datatable', rowData, thisRow);
             });    
         } 
     }
     /*
-    * END
     * functions to be invoked
     * every time the videos dataTable
     * is rendered
+    * END
     */
+    
+    /*
+    * START
+    * invoke the function
+    * for populating the karaokedesclist ul
+    */
+    populateKaraokedesclist();
+    /*
+    * invoke the function
+    * for populating the karaokedesclist ul
+    * END
+    */
+    
+    //by default, only the
+    //'SHOW INFO' button must be visible
+    $('#info-buttons ul li#hideinfo').hide();
+    
+    //toggle the visibility of the
+    //HIDE INFO and SHOW INFO buttons
+    $('#info-buttons ul li').click(function () {
+        if ($('#info-buttons ul li#showinfo').is(':visible')) {
+            $('#info-buttons ul li#showinfo').hide();
+            $('#info-buttons ul li#hideinfo').show();
+        }
+        else if ($('#info-buttons ul li#hideinfo').is(':visible')) {
+            $('#info-buttons ul li#hideinfo').hide();
+            $('#info-buttons ul li#showinfo').show();
+        }
+    });
     
     //make the search reset button
     //functional
@@ -324,6 +485,9 @@ $(document).ready(function () {
         videos_datatable.search('').draw();
     });
 	
+    //clicking the 'Reset' button
+    //beside the search input
+    //will reset the table
 	$('#search-reset').click(function () {
 		videos_datatable.search('').draw();
 	});

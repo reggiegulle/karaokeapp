@@ -298,10 +298,6 @@
     font-weight: bold;
 }
 
-#karaokedesclist li{
-	display: none;
-}
-
 #karaokedesclist li.playing{
 	display: block;
 }
