@@ -17,6 +17,30 @@ $(document).ready(function () {
         };
     })();
     
+    
+    /*
+    * START
+    * utility function
+    * for animating the document
+    * to the bxslider
+    * with the YouTube iframe Player
+    */
+    function scrollToVidFrame() {
+        //animate the document
+        //to scroll up
+        //to the hotel-1 slider
+        $('html, body').animate({
+            scrollTop: $('#karaoke-slider-1').offset().top 
+        },500);    
+    }
+    /*
+    * utility function
+    * for animating the document
+    * to the bxslider
+    * with the YouTube iframe Player
+    * END
+    */
+    
     //assign a variable to the
     //karaoke-slider-1 element
     //and initialize it as
@@ -28,7 +52,7 @@ $(document).ready(function () {
     //and initialize it as
     //a new bxslider instance
     karaoke_slider_2 = $('#karaoke-slider-2').bxSlider(),
-    
+
     //assign "hoteltable" dataTable API instance
     videos_datatable = $('#videos_datatable').DataTable();
     
@@ -214,7 +238,7 @@ $(document).ready(function () {
     * with a YouTube iframe
     * END
     */
-    
+
     /*
     * START
     * function for removing iframes in 
@@ -292,6 +316,8 @@ $(document).ready(function () {
         karaoke_slider_1.reloadSlider({
             auto: true,
             pager: false,
+            infiniteLoop: false,
+            hideControlOnEnd: true,
             pause: 6000,
             onSliderLoad: function (currentIndex) {
                 //by default, hide the
@@ -304,6 +330,26 @@ $(document).ready(function () {
                 //for replacing offline videos
                 //with a notification
                 addOfflineNotifKarSlider1();
+
+                //invoke functions on every
+                //click of an img in the
+                //videos table
+                $('#videos_datatable tbody tr td img').click(function () {
+                    //get the video_index of the tr
+                    var thisVideoIndex = $(this).parents('tr').data('index_position');
+                    
+                    //make the karaoke-slider-1 element
+                    //scroll to the video frame
+                    //corresponding to the videos_datatable img
+                    //clicked on
+                    karaoke_slider_1.goToSlide(thisVideoIndex);
+                    
+                    //animate the document
+                    //to scroll to the
+                    //karaoke-slider-1 element
+                    scrollToVidFrame();        
+                });
+                
                 
                 //invoke the function
                 //for replacing a slider content
@@ -435,12 +481,17 @@ $(document).ready(function () {
     * returns no items
     * (i.e., Null search results)
     */
-    function renderKaraoke2SliderErrorState() {
+    function renderKaraoke2SliderErrorState(karaoke_slider_2_vis_items) {
         //empty the karaoke-slider-2 element
         //on every draw of the videos dataTable
         while ($('#karaoke-slider-2 li').length > 0) {
             $('#karaoke-slider-2').empty();
         }
+        
+        //empty the
+        //utility variable
+        //'karaoke_slider_2_vis_items'
+        karaoke_slider_2_vis_items.length = 0;
         
         //reload the karaoke-slider-2 element
         //with empty options
@@ -558,6 +609,11 @@ $(document).ready(function () {
             //slide/transition to the item
             //with the index position above
             karaoke_slider_1.goToSlide(karSlidr1Pos);
+            
+            //invoke the function
+            //for scrolling to
+            //the karaoke-slider-1 element
+            scrollToVidFrame();
         });   
     }
     /*
@@ -591,10 +647,27 @@ $(document).ready(function () {
     
     /*
     * START
+    * function that controls
+    * the behaviour of the
+    * 'Prev Page' and 'Next Page'
+    * buttons
+    */
+    
+    
+    /*
+    * function that controls
+    * the behaviour of the
+    * 'Prev Page' and 'Next Page'
+    * buttons
+    * END
+    */
+    
+    /*
+    * START
     * function for populating
     * an error-free karaoke-slider-2
     */
-    function initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item) { 
+    function initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item, karaoke_slider_2_vis_items, videos_table_items_length) { 
         //empty the karaoke-slider-2 element
         //on every draw of the videos dataTable
         while ($('#karaoke-slider-2 li').length > 0) {
@@ -627,16 +700,93 @@ $(document).ready(function () {
             slideWidth: 200,
             moveSlides: 1,
             pager: false,
+            infiniteLoop: false,
+            hideControlOnEnd: true,
             onSliderLoad: function () {
                 //invoke the function
                 //for replacing offline videos
                 //with a notification
                 addOfflineNotifKarSlider2();
+                
                 //invoke function for
                 //syncing the karaoke-slider-1 element
                 //with the position of the karaoke-slider-2-element
                 //on clicking a karaoke-slider-2 item
                 karaokeSlider2ClickAction();
+                
+                //empty the array
+                //'karaoke_slider_2_vis_items'
+                karaoke_slider_2_vis_items.length = 0;
+                
+                //iterate through each karaoke-slider-2 item
+                //that has an attribute of
+                //'aria-hidden="false"'
+                $('#karaoke-slider-2 li[aria-hidden="false"]').each(function () {
+                    //assign a variable
+                    //corresponding to the 'index_position' data
+                    //of the li item
+                    var thisVisibleItemIndex = $(this).data('index_position');
+                    //add this data to
+                    //the 'karaoke_slider_2_vis_items' array
+                    karaoke_slider_2_vis_items.push(thisVisibleItemIndex);
+                });
+                
+                //iterate through all the items of
+                //the 'karaoke_slider_2_vis_items array
+                for (i = 0; i < karaoke_slider_2_vis_items.length; i++) {
+                    //if any one of the items is exactly equal to 1
+                    if (karaoke_slider_2_vis_items[i] === 1) {
+                        //hide the custom page turn buttons first
+                        $('.bxslider-custom-page-turn').hide();
+                        //then show the prev button
+                        $('#prev-slider-page').show();    
+                    }
+                } 
+            },
+            onSlideAfter: function () {
+                //empty the array
+                //'karaoke_slider_2_vis_items'
+                karaoke_slider_2_vis_items.length = 0;
+                
+                //hide the custom page turn buttons first
+                $('.bxslider-custom-page-turn').hide();
+                
+                //iterate through each karaoke-slider-2 item
+                //that has an attribute of
+                //'aria-hidden="false"'
+                $('#karaoke-slider-2 li[aria-hidden="false"]').each(function () {
+                    //assign a variable
+                    //corresponding to the 'index_position' data
+                    //of the li item
+                    var thisVisibleItemIndex = $(this).data('index_position');
+                    //add this data to
+                    //the 'karaoke_slider_2_vis_items' array
+                    karaoke_slider_2_vis_items.push(thisVisibleItemIndex);
+                });
+                
+                //iterate through all the items of
+                //the 'karaoke_slider_2_vis_items array
+                for (i = 0; i < karaoke_slider_2_vis_items.length; i++) {
+                    //if any one of the items is exactly equal to 1
+                    if (karaoke_slider_2_vis_items[0] === 1) {
+                        //show the prev button
+                        $('#prev-slider-page').show();
+                    }
+                    //if there are no items exactly equal to 1
+                    if (karaoke_slider_2_vis_items[0] !== 1) {
+                        //hide the custom page turn buttons
+                        $('.bxslider-custom-page-turn').hide();
+                    }
+                    //if any one of the items is exactly equal to
+                    //the number of displayed table rows
+                    if (karaoke_slider_2_vis_items[i] === videos_table_items_length) {
+                        //hide the custom page turn buttons first
+                        $('.bxslider-custom-page-turn').hide();
+                        //show the next button
+                        $('#next-slider-page').show();        
+                    }
+                }
+                
             }
         });
     }
@@ -673,11 +823,27 @@ $(document).ready(function () {
         //which will increment per
         //iteration later
             video_index = 0,
+        //empty variables
+        //to represent
+        //each individual slider item
+        //for both karaoke-slider-1
+        //and karaoke-slider-2
             karaoke_slider_1_item,
-            karaoke_slider_2_item;
+            karaoke_slider_2_item,
+        //helper vars representing
+        //integer data about
+        //the video table's paging
+            tablePageInfo = videos_datatable.page.info(),
+            tablePageTotal = tablePageInfo.pages,
+            currentTablePage = videos_datatable.page(),
+        //assign an empty array to represent
+        //the visible items in the
+        //karaoke-slider-2 element
+        //to be populated while
+        //the slider moves
+            karaoke_slider_2_vis_items = [],
+            videos_table_items_length = $('#videos_datatable tbody tr').length;
         
-        
-
         //if a video table search DOES NOT return a
         //"No Results Found" message
         //(there were results)
@@ -686,7 +852,40 @@ $(document).ready(function () {
             initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item);
             
             //assemble the karaoke-slider-2 element
-            initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item);
+            initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item, karaoke_slider_2_vis_items, videos_table_items_length);
+            
+            //based on the currentTablePage data above
+            //if the value is exactly equal to (int)0
+            if (currentTablePage === 0) {
+                //hide the prev button
+                $('#prev-slider-page').hide();    
+            }
+            //based on the currentTablePage data above
+            //if the value is greater than 0
+            if (currentTablePage > 0) {
+                //go to the prev page of the table
+                //when the prev page button is clicked
+                $('#prev-slider-page').click(function () {
+                    videos_datatable.page(currentTablePage - 1).draw('page');    
+                });    
+            }
+            //based on the tablePageTotal data above
+            //while the value is less than
+            //the tablePageTotal
+            if (currentTablePage < tablePageTotal) {
+                //go to the next page of the table
+                //when the next page button is clicked
+                $('#next-slider-page').click(function () {
+                    videos_datatable.page(currentTablePage + 1).draw('page');    
+                });    
+            }
+            //based on the tablePageTotal data above
+            //if the value is exactly equal to
+            //the tablePageTotal
+            if (currentTablePage === tablePageTotal) {
+                //hide the next button
+                $('#next-slider-page').hide();        
+            }
         }
         //if a video table search returns a
         //"No Results Found" message
@@ -695,10 +894,10 @@ $(document).ready(function () {
             //invoke the karaoke-slider-1
             //error action
             renderKaraoke1SliderErrorState();
-            
+ 
             //invoke the karaoke-slider-2
             //error action
-            renderKaraoke2SliderErrorState();
+            renderKaraoke2SliderErrorState(karaoke_slider_2_vis_items);
         }
     });
 /*

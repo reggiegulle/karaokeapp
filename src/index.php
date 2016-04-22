@@ -172,6 +172,9 @@
 		<ul id="karaoke-slider-2">	
 		</ul>
 	</section>
+    <button id="prev-slider-page" class="bxslider-custom-page-turn">Prev Page</button>
+    <button id="next-slider-page" class="bxslider-custom-page-turn">Next Page</button>
+    
 		
 	<?php
 		if($user->isLoggedIn()){

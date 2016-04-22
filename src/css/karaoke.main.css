@@ -45,6 +45,9 @@
   right: 10px;
   background: url('../images/controls.png') no-repeat -43px -32px;
 }
+.bxslider-custom-page-turn {
+  display: none;
+}
 /* END
 * custom bxslider styles
 */

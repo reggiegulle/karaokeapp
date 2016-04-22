@@ -286,7 +286,7 @@ $(document).ready(function () {
                     video_index++;
                     var thisRow = $(this);
                     //add video_index data
-                    thisRow.attr('data-video_id', video_index - 1);
+                    thisRow.attr('data-index_position', video_index - 1);
                     var rowData = videos_datatable.row(thisRow).data(),
                         //assign variables for
                         //populating certain attributes
@@ -300,11 +300,27 @@ $(document).ready(function () {
                     var karaokedesclistitem = '<li data-index_position="';
                         karaokedesclistitem += video_index - 1;
                         karaokedesclistitem += '">';
+                        //rowData[3] is the Video ID data
                         karaokedesclistitem += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/mqdefault.jpg" alt="' + altsongtitle + '-thumbnail" width="160px" height="90px" longdesc="Thumbnail for the Youtube karaoke video of \'' + songtitle + '\'" />';
-                        karaokedesclistitem += '<h4>Song Title:</h4>';
-                        karaokedesclistitem += '<p>';
-                        karaokedesclistitem += rowData[0];
-                        karaokedesclistitem += '</p>';
+                        //rowData[0] is the Song Title  
+                        karaokedesclistitem += '<h4>' + rowData[0] + '</h4>';
+                        //rowData[4] is the Composer data
+                        karaokedesclistitem += '<p>(' + rowData[4] + ')</p>';
+                        //rowData[2] is the Performer data
+                        karaokedesclistitem += '<h5>As Popularized By: <strong>' + rowData[2] + '</strong></h5>';
+                        //rowData[6] is the Source Album data
+                        //rowData[7] is the Year Of Release data
+                        //rowData[8] is the Country Of Origin data
+                        //rowData[10] is the Lyrics data
+                        karaokedesclistitem += '<p>From The Album: <em>' + rowData[6] + '</em> (' + rowData[7] + ', ' + rowData[8] + ')</p>';
+                        karaokedesclistitem += '<p>' + rowData[10] + '</p>';
+                        //rowData[9] is the Running Time data
+                        karaokedesclistitem += '<p><em>' + rowData[9] + '</em></p>';
+                        //rowData[5] is the Genre data
+                        karaokedesclistitem += '<p><em>' + rowData[5] + '</em></p>';
+                        //rowData[11] is the Added By data
+                        karaokedesclistitem += '<p>Added By: ' + rowData[11] + '</p>';
+                        
                         karaokedesclistitem += '</li>';
                     
                     //append the newly formed li element
@@ -436,7 +452,7 @@ $(document).ready(function () {
                 video_index++;
                 var thisRow = $(this);
                 //add video_index data
-                thisRow.attr('data-video_id', video_index - 1);
+                thisRow.attr('data-index_position', video_index - 1);
                 var rowData = videos_datatable.row(thisRow).data();
                 addOfflineNotif('videos_datatable', rowData, thisRow);
             });    
