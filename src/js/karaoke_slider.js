@@ -56,6 +56,60 @@ $(document).ready(function () {
     //assign "hoteltable" dataTable API instance
     videos_datatable = $('#videos_datatable').DataTable();
     
+    /*
+    * START
+    * utility function for
+    * adding an 'active' class
+    * to the karaoke-slider-2 element
+    * that is in sync with the
+    * current karaoke-slider-1 item displayed
+    */
+    function addActiveClass(sliderElement, index) {
+        switch (sliderElement) {
+            //if the sliderElement specified is 'karaoke-slider-1'
+            case 'karaoke-slider-1':
+                //first remove the class 'active'
+                //from all karaoke-slider-2 li items
+                $('#karaoke-slider-2 li').removeClass('active');
+                //then add an 'active' class to
+                //the eq position specified by the index argument
+                $('#karaoke-slider-2 li').eq(index).addClass('active');
+                //then remove the class 'active'
+                //from all videos table tr items
+                $('#videos_datatable tbody').find('tr.active').removeClass('active');
+                //then add an 'active' class to
+                //the table row with the 
+                //eq position specified by the index argument
+                $('#videos_datatable tbody tr').eq(index).addClass('active');
+            break;
+            //if the sliderElement specified is 'karaoke-slider-2'
+            case 'karaoke-slider-2':
+                //first remove the class 'active'
+                //from all karaoke-slider-2 li items
+                $('#karaoke-slider-2 li').removeClass('active');
+                //then add an 'active' class to
+                //the first li element of karaoke-slider-2
+                $('#karaoke-slider-2 li').eq(0).addClass('active');
+                //then remove the class 'active'
+                //from all videos table tr items
+                $('#videos_datatable tbody').find('tr.active').removeClass('active');
+                //then add an 'active' class to
+                //the first tr of the videos table
+                $('#videos_datatable tbody tr').eq(0).addClass('active');
+            break;
+            default:
+            break;
+        }
+    }
+    /*
+    * utility function for
+    * adding an 'active' class
+    * to the karaoke-slider-2 element
+    * that is in sync with the
+    * current karaoke-slider-1 item displayed
+    * END
+    */
+    
 /*
 * START
 * functions and vars
@@ -286,11 +340,17 @@ $(document).ready(function () {
     * if the videos datatable
     * has valid items
     */
-    function initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item) {
+    function initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage, tablePageTurn) {
         //remove items from upper bxslider ("karaoke-slider-1")
         //right after each rendering of the videos datatable
         while($('#karaoke-slider-1 li').length > 0){
             $('#karaoke-slider-1').empty();
+        }
+        
+        //function for making the video table
+        //go to its next page
+        function goToNextTablePage() {
+            videos_datatable.page(currentTablePage + 1).draw('page');    
         }
         
         $('#videos_datatable tbody tr').each(function () {
@@ -338,6 +398,17 @@ $(document).ready(function () {
                     //get the video_index of the tr
                     var thisVideoIndex = $(this).parents('tr').data('index_position');
                     
+                    //if the parent tr of this image
+                    //does not have an 'active' class
+                    if ($(this).parents('tr').not('.active')) {
+                        //remove the class 'active'
+                        //from all videos table tr items
+                        $('#videos_datatable tbody').find('tr.active').removeClass('active');
+                        //then add an 'active' class to
+                        //this image's parent tr
+                        $(this).parents('tr').addClass('active');
+                    }
+                    
                     //make the karaoke-slider-1 element
                     //scroll to the video frame
                     //corresponding to the videos_datatable img
@@ -349,7 +420,6 @@ $(document).ready(function () {
                     //karaoke-slider-1 element
                     scrollToVidFrame();        
                 });
-                
                 
                 //invoke the function
                 //for replacing a slider content
@@ -368,6 +438,13 @@ $(document).ready(function () {
                 showOrHideKarDescList();
             },
             onSlideAfter: function ($slideElement, oldIndex, newIndex) {
+                //invoke the function
+                //for adding an 'active' class
+                //to the karaoke-slider-2 item
+                //in sync with the karaoke-slider-1 item
+                //that is currently displayed
+                addActiveClass('karaoke-slider-1', newIndex);
+                
                 //invoke the function
                 //for moving the karaoke-slider-2 items
                 //to sync with karaoke-slider-1
@@ -396,6 +473,18 @@ $(document).ready(function () {
                 //invoke function called by
                 //'Show Info' and 'Hide Info' buttons
                 showOrHideKarDescList();
+                
+                //if the element is the last
+                if ($slideElement.data('index_position') === videos_table_items_length) {
+                    //first, clear the timeout with ID tablePageTurn
+                    window.clearTimeout(tablePageTurn);
+                    
+                    //set a the tablePageTurn var
+                    //into a setTimeout ID
+                    //that executes a table page turn
+                    //after 8 seconds
+                    tablePageTurn = window.setTimeout(goToNextTablePage, 8000);
+                }
             }
         });
     }
@@ -488,6 +577,8 @@ $(document).ready(function () {
             $('#karaoke-slider-2').empty();
         }
         
+        $('.bxslider-custom-page-turn').hide();
+        
         //empty the
         //utility variable
         //'karaoke_slider_2_vis_items'
@@ -495,7 +586,9 @@ $(document).ready(function () {
         
         //reload the karaoke-slider-2 element
         //with empty options
-        karaoke_slider_2.reloadSlider();
+        karaoke_slider_2.reloadSlider({
+            hideControlOnEnd: false    
+        });
     }
     /*
     * END
@@ -605,6 +698,17 @@ $(document).ready(function () {
             //of the element
             var karSlidr1Pos = $(this).data('index_position') - 1;
             
+            //if this element
+            //DOES NOT have a class of 'active'
+            if ($(this).not('.active')) {
+                //first find and remove the class 'active'
+                //from any karaoke-slider-2 li items
+                $('#karaoke-slider-2').find('li.active').removeClass('active');
+                //then add the active class
+                //to this li item
+                $(this).addClass('active');
+            }
+            
             //make the karaoke-slider-1 element
             //slide/transition to the item
             //with the index position above
@@ -644,24 +748,7 @@ $(document).ready(function () {
     * transitions
     * END
     */
-    
-    /*
-    * START
-    * function that controls
-    * the behaviour of the
-    * 'Prev Page' and 'Next Page'
-    * buttons
-    */
-    
-    
-    /*
-    * function that controls
-    * the behaviour of the
-    * 'Prev Page' and 'Next Page'
-    * buttons
-    * END
-    */
-    
+
     /*
     * START
     * function for populating
@@ -717,6 +804,12 @@ $(document).ready(function () {
                 //empty the array
                 //'karaoke_slider_2_vis_items'
                 karaoke_slider_2_vis_items.length = 0;
+                
+                //get slide count of karaoke-slider-1
+                var karaoke_slider_1_qty = karaoke_slider_1.getSlideCount();
+                //console.log('The karaoke-slider-1 slider has ' + karaoke_slider_1_qty + ' slides!');
+                
+                addActiveClass('karaoke-slider-2');
                 
                 //iterate through each karaoke-slider-2 item
                 //that has an attribute of
@@ -796,6 +889,51 @@ $(document).ready(function () {
     * an error-free karaoke-slider-2
     */
     
+    /*
+    * START
+    * function that controls
+    * the behaviour of the
+    * 'Prev Page' and 'Next Page' buttons
+    * after the karaoke-slider-2 element
+    * has been initialized
+    */
+    function showOrHideCustomPageBtns(currentTablePage, tablePageTotal) {
+        //based on the currentTablePage data above
+        //if the value is exactly equal to (int)0
+        if (currentTablePage === 0) {
+            //hide the prev button
+            $('#prev-slider-page').hide();    
+        }
+        //based on the currentTablePage data above
+        //if the value is greater than 0
+        if (currentTablePage > 0) {
+            //go to the prev page of the table
+            //when the prev page button is clicked
+            $('#prev-slider-page').click(function () {
+                videos_datatable.page(currentTablePage - 1).draw('page');    
+            });    
+        }
+        //based on the tablePageTotal data above
+        //while the value is less than
+        //the tablePageTotal
+        if (currentTablePage < tablePageTotal) {
+            //go to the next page of the table
+            //when the next page button is clicked
+            $('#next-slider-page').click(function () {
+                videos_datatable.page(currentTablePage + 1).draw('page');    
+            });    
+        }   
+    }
+    /*
+    * function that controls
+    * the behaviour of the
+    * 'Prev Page' and 'Next Page' buttons
+    * after the karaoke-slider-2 element
+    * has been initialized
+    * END
+    */
+        
+    
     
     
 /*
@@ -803,6 +941,8 @@ $(document).ready(function () {
 * for karaoke-slider-2
 * END
 */
+    
+
     
     
     
@@ -842,50 +982,31 @@ $(document).ready(function () {
         //to be populated while
         //the slider moves
             karaoke_slider_2_vis_items = [],
-            videos_table_items_length = $('#videos_datatable tbody tr').length;
+        //get the length of the videos table
+            videos_table_items_length = $('#videos_datatable tbody tr').length,
+        //create an empty var
+        //which will be assigned
+        //the value of a setTimeout ID
+        //later in the init karaoke-slider-1 func
+            tablePageTurn;
+        
+        
         
         //if a video table search DOES NOT return a
         //"No Results Found" message
         //(there were results)
         if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
             //assemble the karaoke-slider-1 element
-            initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item);
+            initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage, tablePageTurn);
             
             //assemble the karaoke-slider-2 element
             initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item, karaoke_slider_2_vis_items, videos_table_items_length);
             
-            //based on the currentTablePage data above
-            //if the value is exactly equal to (int)0
-            if (currentTablePage === 0) {
-                //hide the prev button
-                $('#prev-slider-page').hide();    
-            }
-            //based on the currentTablePage data above
-            //if the value is greater than 0
-            if (currentTablePage > 0) {
-                //go to the prev page of the table
-                //when the prev page button is clicked
-                $('#prev-slider-page').click(function () {
-                    videos_datatable.page(currentTablePage - 1).draw('page');    
-                });    
-            }
-            //based on the tablePageTotal data above
-            //while the value is less than
-            //the tablePageTotal
-            if (currentTablePage < tablePageTotal) {
-                //go to the next page of the table
-                //when the next page button is clicked
-                $('#next-slider-page').click(function () {
-                    videos_datatable.page(currentTablePage + 1).draw('page');    
-                });    
-            }
-            //based on the tablePageTotal data above
-            //if the value is exactly equal to
-            //the tablePageTotal
-            if (currentTablePage === tablePageTotal) {
-                //hide the next button
-                $('#next-slider-page').hide();        
-            }
+            //invoke function for
+            //showing or hiding the
+            //'Prev Page' and 'Next Page' buttons
+            //depending on the video table page
+            showOrHideCustomPageBtns(currentTablePage, tablePageTotal);
         }
         //if a video table search returns a
         //"No Results Found" message

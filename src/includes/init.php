@@ -3,7 +3,7 @@
 session_start();
 
 $GLOBALS['config'] = [
-
+	
 ];
 
 spl_autoload_register(function($class){

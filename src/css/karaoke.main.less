@@ -2,6 +2,16 @@
 
 @import (css) 'karaoke.old.css';
 
+/*
+* START
+* Variables
+*/
+@active-color: rgb(51, 255, 255); //light blue
+/*
+* Variables
+* END
+*/
+
 /* START
 * customise bootstrap
 */
@@ -66,8 +76,24 @@
 
 #karaoke-slider-2 {
     padding-left: 0;
+    
+    li.active {
+        background-color: @active-color; 
+    }
 }
 
 /* END
 * karaoke-slider-2 styles
+*/
+
+/* 
+* START
+* videos_datatable styles
+*/
+#videos_datatable tbody tr.active {
+    background-color: @active-color; 
+}
+/*
+* videos_datatable styles
+* END
 */

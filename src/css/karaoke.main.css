@@ -1,5 +1,13 @@
 /*LESS to be converted to CSS*/
 @import 'karaoke.old.css';
+/*
+* START
+* Variables
+*/
+/*
+* Variables
+* END
+*/
 /* START
 * customise bootstrap
 */
@@ -57,6 +65,20 @@
 #karaoke-slider-2 {
   padding-left: 0;
 }
+#karaoke-slider-2 li.active {
+  background-color: #33ffff;
+}
 /* END
 * karaoke-slider-2 styles
+*/
+/* 
+* START
+* videos_datatable styles
+*/
+#videos_datatable tbody tr.active {
+  background-color: #33ffff;
+}
+/*
+* videos_datatable styles
+* END
 */
