@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
 /**
 * START
 * functions and behaviours
@@ -195,6 +196,7 @@ $(document).ready(function () {
 				data.year_of_release = filter_yr_of_rlse;
 				data.genre = filter_genre;
 				data.country_of_origin = filter_country_origin;
+                data.registered = registered;
 			}
 		},
 		"dom": "<\"col-xs-12\"f<\"#search_reset\">><\"col-xs-12 navbar navbar-default\" <\"custom-filter-container container-fluid\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
@@ -244,9 +246,9 @@ $(document).ready(function () {
         newCellHTML += '/mqdefault.jpg" alt="'; 
         newCellHTML += altsongtitle;
         newCellHTML += '-thumbnail" ';
-        newCellHTML += 'width="80%" ';
+        newCellHTML += 'height="84px" width="154px" ';
         newCellHTML += 'longdesc="Thumbnail for the Youtube karaoke video of \''; 
-        newCellHTML += songtitle + '\'" />';
+        newCellHTML += songtitle + '\'" title="' + songtitle + '"/>';
         
         //place the img element into
         //the relevent videos table TD

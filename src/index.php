@@ -1,5 +1,6 @@
 <?php
 	require_once 'includes/init.php';
+    $user = new User();
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,6 +51,16 @@
 <![endif]-->
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<!--helper vars-->
+<script type="text/javascript">
+<?php
+    if ($user->isLoggedIn()) {
+        echo 'var registered = "green";';    
+    } else {
+        echo 'var registered = "black";';
+    }
+?>    
+</script>
 <!--Bootstrap JS--> 
 <script src="js/bootstrap.js" type="text/javascript"></script>
 <!--datatables core-->
@@ -67,18 +78,7 @@
 <script src="js/TimelineLite.js" type="text/javascript"></script>
 <script src="js/EasePack.js" type="text/javascript"></script>
 <!--custom JS-->
-<?php 
-	$user = new User();
-	if($user->isLoggedIn()){
-?>
-		<script src="js/karaoke_table.admin.js" type="text/javascript"></script>
-<?php
-	} else {
-?>
-		<script src="js/karaoke_table.js" type="text/javascript"></script>
-<?php
-	}
-?>
+<script src="js/karaoke_table.js" type="text/javascript"></script>
 <!--custom slick slider JS-->
 <script src="js/karaoke_slider.js" type="text/javascript"></script>
 <!--stylejs-->

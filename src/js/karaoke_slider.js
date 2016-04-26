@@ -1,4 +1,11 @@
 $(document).ready(function () {
+/*if (registered === 'black') {
+    console.log('Hellow Worled');
+} else if (registered === 'green') {
+    console.log('I am logged in!');
+}*/
+    
+    
     /* 
     * utility function for
     * window resize Event
@@ -179,7 +186,7 @@ $(document).ready(function () {
         //rowData[3] below
         //corresponds to the
         //YouTube video id
-        karaoke_slider_1_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/hqdefault.jpg" width="100%" alt="' + altsongtitle + '-karaoke-video-thumbnail">';
+        karaoke_slider_1_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/hqdefault.jpg" width="100%" alt="' + altsongtitle + '-karaoke-video-thumbnail" title="' + songtitle + '">';
         karaoke_slider_1_li_item += '<button class="karaoke-slider-1-play-button">Play</button>';
         karaoke_slider_1_li_item += '<div class="karaoke-splash-details">';
         karaoke_slider_1_li_item += '<h4>' + songtitle + '</h4>';
@@ -260,9 +267,12 @@ $(document).ready(function () {
     */
     function karSlider1PlayBtnAxn() {
         $('button.karaoke-slider-1-play-button').click(function () {
-            //pause the autoplay
-            //of the karaoke-slider-1 element
-            karaoke_slider_1.stopAuto();
+            //reference the helper variable
+            if (registered === 'black') {
+                //pause the autoplay
+                //of the karaoke-slider-1 element
+                karaoke_slider_1.stopAuto();    
+            }
             
             //get the video ID 
             var video_id = $(this).parents('li.karaoke-slider-1-slide').data('video_id'),
@@ -320,9 +330,13 @@ $(document).ready(function () {
             //make the 'slide-controls' div
             //visible again
             karSlider1Controls.show();
-            //restart the autoplaying slideshow
-            //process of bxslider
-            karaoke_slider_1.startAuto();
+            
+            //reference the helper var
+            if (registered === 'black') {
+                //restart the autoplaying slideshow
+                //process of bxslider
+                karaoke_slider_1.startAuto();    
+            } 
         }
     }
     /*
@@ -340,7 +354,7 @@ $(document).ready(function () {
     * if the videos datatable
     * has valid items
     */
-    function initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage, tablePageTurn) {
+    function initKaraokeSlider1(registered, thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage, tablePageTurn) {
         //remove items from upper bxslider ("karaoke-slider-1")
         //right after each rendering of the videos datatable
         while($('#karaoke-slider-1 li').length > 0){
@@ -372,121 +386,253 @@ $(document).ready(function () {
             $('#karaoke-slider-1').append(karaoke_slider_1_item);
         });
         
-        //reload the karaoke_slider_1 bxslider
-        karaoke_slider_1.reloadSlider({
-            auto: true,
-            pager: false,
-            infiniteLoop: false,
-            hideControlOnEnd: true,
-            pause: 6000,
-            onSliderLoad: function (currentIndex) {
-                //by default, hide the
-                //div which will contain
-                //the iframe YouTube embed 
-                //for each slide
-                $('.karaoke-slider-1-slide-player-container').hide();
-                
-                //invoke the function
-                //for replacing offline videos
-                //with a notification
-                addOfflineNotifKarSlider1();
+        /*
+        * START
+        * reload the bxslider
+        * with reference to the
+        * 'black' value of the
+        * registered helper var
+        */
+        if (registered === 'black') {
+            //reload the karaoke_slider_1 bxslider
+            karaoke_slider_1.reloadSlider({
+                auto: true,
+                pager: false,
+                infiniteLoop: false,
+                hideControlOnEnd: true,
+                pause: 6000,
+                onSliderLoad: function (currentIndex) {
+                    //by default, hide the
+                    //div which will contain
+                    //the iframe YouTube embed 
+                    //for each slide
+                    $('.karaoke-slider-1-slide-player-container').hide();
 
-                //invoke functions on every
-                //click of an img in the
-                //videos table
-                $('#videos_datatable tbody tr td img').click(function () {
-                    //get the video_index of the tr
-                    var thisVideoIndex = $(this).parents('tr').data('index_position');
-                    
-                    //if the parent tr of this image
-                    //does not have an 'active' class
-                    if ($(this).parents('tr').not('.active')) {
-                        //remove the class 'active'
-                        //from all videos table tr items
-                        $('#videos_datatable tbody').find('tr.active').removeClass('active');
-                        //then add an 'active' class to
-                        //this image's parent tr
-                        $(this).parents('tr').addClass('active');
+                    //invoke the function
+                    //for replacing offline videos
+                    //with a notification
+                    addOfflineNotifKarSlider1();
+
+                    //invoke functions on every
+                    //click of an img in the
+                    //videos table
+                    $('#videos_datatable tbody tr td img').click(function () {
+                        //get the video_index of the tr
+                        var thisVideoIndex = $(this).parents('tr').data('index_position');
+
+                        //if the parent tr of this image
+                        //does not have an 'active' class
+                        if ($(this).parents('tr').not('.active')) {
+                            //remove the class 'active'
+                            //from all videos table tr items
+                            $('#videos_datatable tbody').find('tr.active').removeClass('active');
+                            //then add an 'active' class to
+                            //this image's parent tr
+                            $(this).parents('tr').addClass('active');
+                        }
+
+                        //make the karaoke-slider-1 element
+                        //scroll to the video frame
+                        //corresponding to the videos_datatable img
+                        //clicked on
+                        karaoke_slider_1.goToSlide(thisVideoIndex);
+
+                        //animate the document
+                        //to scroll to the
+                        //karaoke-slider-1 element
+                        scrollToVidFrame();        
+                    });
+
+                    //invoke the function
+                    //for replacing a slider content
+                    //with an iframe player
+                    karSlider1PlayBtnAxn();
+
+                    //hide 'karaokedesclist' ul
+                    $('#karaokedesclist').hide();
+
+                    //invoke function for
+                    //behaviour of 'karaokedesclist' items
+                    showOrHideDescListItems(currentIndex);
+
+                    //invoke function called by
+                    //'Show Info' and 'Hide Info' buttons
+                    showOrHideKarDescList();
+                },
+                onSlideAfter: function ($slideElement, oldIndex, newIndex) {
+                    //invoke the function
+                    //for adding an 'active' class
+                    //to the karaoke-slider-2 item
+                    //in sync with the karaoke-slider-1 item
+                    //that is currently displayed
+                    addActiveClass('karaoke-slider-1', newIndex);
+
+                    //invoke the function
+                    //for moving the karaoke-slider-2 items
+                    //to sync with karaoke-slider-1
+                    afterTransitionKarSlider2ItmBehaviour($slideElement, oldIndex, newIndex);
+
+                    //hide 'karaokedesclist' ul
+                    $('#karaokedesclist').hide();
+                    if ($('#info-buttons ul li#hideinfo').is(':visible')) {
+                        $('#info-buttons ul li#hideinfo').hide();
+                        $('#info-buttons ul li#showinfo').show();    
                     }
-                    
-                    //make the karaoke-slider-1 element
-                    //scroll to the video frame
-                    //corresponding to the videos_datatable img
-                    //clicked on
-                    karaoke_slider_1.goToSlide(thisVideoIndex);
-                    
-                    //animate the document
-                    //to scroll to the
-                    //karaoke-slider-1 element
-                    scrollToVidFrame();        
-                });
-                
-                //invoke the function
-                //for replacing a slider content
-                //with an iframe player
-                karSlider1PlayBtnAxn();
-                
-                //hide 'karaokedesclist' ul
-                $('#karaokedesclist').hide();
-                
-                //invoke function for
-                //behaviour of 'karaokedesclist' items
-                showOrHideDescListItems(currentIndex);
-                
-                //invoke function called by
-                //'Show Info' and 'Hide Info' buttons
-                showOrHideKarDescList();
-            },
-            onSlideAfter: function ($slideElement, oldIndex, newIndex) {
-                //invoke the function
-                //for adding an 'active' class
-                //to the karaoke-slider-2 item
-                //in sync with the karaoke-slider-1 item
-                //that is currently displayed
-                addActiveClass('karaoke-slider-1', newIndex);
-                
-                //invoke the function
-                //for moving the karaoke-slider-2 items
-                //to sync with karaoke-slider-1
-                afterTransitionKarSlider2ItmBehaviour($slideElement, oldIndex, newIndex);
-                
-                //hide 'karaokedesclist' ul
-                $('#karaokedesclist').hide();
-                if ($('#info-buttons ul li#hideinfo').is(':visible')) {
-                    $('#info-buttons ul li#hideinfo').hide();
-                    $('#info-buttons ul li#showinfo').show();    
+
+                    //then restart slider autoplay
+                    karaoke_slider_1.startAuto();
+
+                    //invoke the function
+                    //for removing
+                    //the YouTube iframe
+                    //and returning the slide controls
+                    afterTransitionKarSlider1IframeBehaviour();
+
+                    //invoke function for
+                    //behaviour of 'karaokedesclist' items
+                    showOrHideDescListItems(newIndex);
+
+                    //invoke function called by
+                    //'Show Info' and 'Hide Info' buttons
+                    showOrHideKarDescList();
+
+                    //if the element is the last
+                    if ($slideElement.data('index_position') === videos_table_items_length) {
+                        //first, clear the timeout with ID tablePageTurn
+                        window.clearTimeout(tablePageTurn);
+
+                        //set a the tablePageTurn var
+                        //into a setTimeout ID
+                        //that executes a table page turn
+                        //after 8 seconds
+                        tablePageTurn = window.setTimeout(goToNextTablePage, 8000);
+                    }
                 }
-                
-                //then restart slider autoplay
-                karaoke_slider_1.startAuto();
-               
-                //invoke the function
-                //for removing
-                //the YouTube iframe
-                //and returning the slide controls
-                afterTransitionKarSlider1IframeBehaviour();
-                
-                //invoke function for
-                //behaviour of 'karaokedesclist' items
-                showOrHideDescListItems(newIndex);
-                
-                //invoke function called by
-                //'Show Info' and 'Hide Info' buttons
-                showOrHideKarDescList();
-                
-                //if the element is the last
-                if ($slideElement.data('index_position') === videos_table_items_length) {
-                    //first, clear the timeout with ID tablePageTurn
-                    window.clearTimeout(tablePageTurn);
-                    
-                    //set a the tablePageTurn var
-                    //into a setTimeout ID
-                    //that executes a table page turn
-                    //after 8 seconds
-                    tablePageTurn = window.setTimeout(goToNextTablePage, 8000);
+            });    
+        }
+        /*
+        * reload the bxslider
+        * with reference to the
+        * 'black' value of the
+        * registered helper var
+        * END
+        */
+        
+        /*
+        * START
+        * reload the bxslider
+        * with reference to the
+        * 'green' value of the
+        * registered helper var
+        */
+        else if (registered === 'green') {
+            //reload the karaoke_slider_1 bxslider
+            karaoke_slider_1.reloadSlider({
+                auto: false,
+                pager: false,
+                infiniteLoop: false,
+                hideControlOnEnd: true,
+                onSliderLoad: function (currentIndex) {
+                    //by default, hide the
+                    //div which will contain
+                    //the iframe YouTube embed 
+                    //for each slide
+                    $('.karaoke-slider-1-slide-player-container').hide();
+
+                    //invoke the function
+                    //for replacing offline videos
+                    //with a notification
+                    addOfflineNotifKarSlider1();
+
+                    //invoke functions on every
+                    //click of an img in the
+                    //videos table
+                    $('#videos_datatable tbody tr td img').click(function () {
+                        //get the video_index of the tr
+                        var thisVideoIndex = $(this).parents('tr').data('index_position');
+
+                        //if the parent tr of this image
+                        //does not have an 'active' class
+                        if ($(this).parents('tr').not('.active')) {
+                            //remove the class 'active'
+                            //from all videos table tr items
+                            $('#videos_datatable tbody').find('tr.active').removeClass('active');
+                            //then add an 'active' class to
+                            //this image's parent tr
+                            $(this).parents('tr').addClass('active');
+                        }
+
+                        //make the karaoke-slider-1 element
+                        //scroll to the video frame
+                        //corresponding to the videos_datatable img
+                        //clicked on
+                        karaoke_slider_1.goToSlide(thisVideoIndex);
+
+                        //animate the document
+                        //to scroll to the
+                        //karaoke-slider-1 element
+                        scrollToVidFrame();        
+                    });
+
+                    //invoke the function
+                    //for replacing a slider content
+                    //with an iframe player
+                    karSlider1PlayBtnAxn();
+
+                    //hide 'karaokedesclist' ul
+                    $('#karaokedesclist').hide();
+
+                    //invoke function for
+                    //behaviour of 'karaokedesclist' items
+                    showOrHideDescListItems(currentIndex);
+
+                    //invoke function called by
+                    //'Show Info' and 'Hide Info' buttons
+                    showOrHideKarDescList();
+                },
+                onSlideAfter: function ($slideElement, oldIndex, newIndex) {
+                    //invoke the function
+                    //for adding an 'active' class
+                    //to the karaoke-slider-2 item
+                    //in sync with the karaoke-slider-1 item
+                    //that is currently displayed
+                    addActiveClass('karaoke-slider-1', newIndex);
+
+                    //invoke the function
+                    //for moving the karaoke-slider-2 items
+                    //to sync with karaoke-slider-1
+                    afterTransitionKarSlider2ItmBehaviour($slideElement, oldIndex, newIndex);
+
+                    //hide 'karaokedesclist' ul
+                    $('#karaokedesclist').hide();
+                    if ($('#info-buttons ul li#hideinfo').is(':visible')) {
+                        $('#info-buttons ul li#hideinfo').hide();
+                        $('#info-buttons ul li#showinfo').show();    
+                    }
+
+                    //invoke the function
+                    //for removing
+                    //the YouTube iframe
+                    //and returning the slide controls
+                    afterTransitionKarSlider1IframeBehaviour();
+
+                    //invoke function for
+                    //behaviour of 'karaokedesclist' items
+                    showOrHideDescListItems(newIndex);
+
+                    //invoke function called by
+                    //'Show Info' and 'Hide Info' buttons
+                    showOrHideKarDescList();
                 }
-            }
-        });
+            }); 
+        }
+        /*
+        * reload the bxslider
+        * with reference to the
+        * 'green' value of the
+        * registered helper var
+        * END
+        */
     }
     /*
     * function for appending li items to 
@@ -532,8 +678,11 @@ $(document).ready(function () {
         $('#showinfo').click(function () {
             //reveal the karaokedesclist element
             $('#karaokedesclist').show();
-            //stop the karaoke-slider-1 autoplay
-            karaoke_slider_1.stopAuto();
+            
+            if (registered === 'black') {
+                //stop the karaoke-slider-1 autoplay
+                karaoke_slider_1.stopAuto();    
+            }
         }); 
         
         $('#hideinfo').click(function () {
@@ -618,7 +767,7 @@ $(document).ready(function () {
         //add this data to each karaoke-slider-2 li
         //rowData[3] contains the video ID from YouTube
         var karaoke_slider_2_li_item = '<li data-index_position="' + index_data + '" data-video_id="' + rowData[3] + '">';
-        karaoke_slider_2_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/mqdefault.jpg" width="80%" alt="' + altsongtitle + '-karaoke-video-thumbnail">';
+        karaoke_slider_2_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/mqdefault.jpg" width="80%" alt="' + altsongtitle + '-karaoke-video-thumbnail" title="' + songtitle + '">';
         karaoke_slider_2_li_item += '<h6>';
         //rowData[0] contains the song title
         karaoke_slider_2_li_item += rowData[0];
@@ -997,7 +1146,7 @@ $(document).ready(function () {
         //(there were results)
         if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
             //assemble the karaoke-slider-1 element
-            initKaraokeSlider1(thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage, tablePageTurn);
+            initKaraokeSlider1(registered, thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage, tablePageTurn);
             
             //assemble the karaoke-slider-2 element
             initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item, karaoke_slider_2_vis_items, videos_table_items_length);

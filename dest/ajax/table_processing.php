@@ -51,6 +51,9 @@ $sql_details = [
 
 ];
 
+//GET value of the 'logged in' user status
+$greenorblack = $_GET['registered'];
+
 //utility null variable
 $nullValue = null;
 
@@ -144,12 +147,21 @@ if(isset($_GET['year_of_release']) && $_GET['year_of_release'] != 'reset'){
 
 require( '../ajax/ssp.class.php' );
 
+//assign the resulting dataset
+//to a 'results' array
 $results = SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns, $nullValue, $string_filter);
 
-if ($_GET['order'][0]['column'] === '1') {
-    shuffle( $results['data'] );
+//if the $_GET['registered'] data
+//IS NOT equal to the string 'green'
+if ($greenorblack != 'green') {
+    //shuffle the ordering of the results
+    //if the ordering is based on
+    //the default dataTables plug-in
+    //0 column ordering
+    if ($_GET['order'][0]['column'] === '1') {
+        shuffle( $results['data'] );
+    }
 }
 
 echo json_encode( $results );
-
 ?>
