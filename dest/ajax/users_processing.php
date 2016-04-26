@@ -37,10 +37,7 @@ $columns = [
 
 // SQL server connection information
 $sql_details = [
-	'user' => 'b14_15919127',
-	'pass' => 'Kwisatz01@kartadabH',
-	'db'   => 'b14_15919127_karaokeapp',
-	'host' => 'sql310.byethost14.com'
+
 ];
 
 

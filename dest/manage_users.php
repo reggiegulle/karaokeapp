@@ -90,10 +90,15 @@
 
 <!--Separate css files to be minified in deployment-->
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
+<!--bootstrap css files-->
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" media="screen" />
+<!--datatables-bootstrap integration css files-->
 <link href="css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
+<!--datatables responsive plug-in css-->
 <link href="css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
+<!--Google Fonts-->
+<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
 <!--Custom css-->
 <link href="css/karaoke.main.min.css" rel="stylesheet" type="text/css" media="screen">
 
@@ -107,13 +112,17 @@
 
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+<!--Bootstrap JS--> 
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<!--datatables core-->
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+<script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
+<script src="js/responsive.bootstrap.min.js" type="text/javascript"></script>
 <!--GSAP library-->
 <script src="js/CSSPlugin.min.js" type="text/javascript"></script>
-<script src="js/TweenLite.min.js" type="text/javascript"></script>
 <script src="js/TimelineLite.min.js" type="text/javascript"></script>
+<script src="js/TweenLite.min.js" type="text/javascript"></script>
 <script src="js/EasePack.min.js" type="text/javascript"></script>
 <!--Custom JS for this Page-->
 <script src="js/manage_users.min.js" type="text/javascript"></script>

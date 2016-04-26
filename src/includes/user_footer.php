@@ -7,7 +7,5 @@
 				</ul>
 			</article>
 		</section>
-	<!--Bootstrap JS -->
-	<script src="js/bootstrap.js"></script>
 	</body>
 </html>

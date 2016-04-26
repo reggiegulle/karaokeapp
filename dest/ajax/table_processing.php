@@ -23,14 +23,14 @@ $primaryKey = 'id';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = [
-	[ 'db'	=>	'id',			'dt'	=>	0 ],
-	[ 'db'	=>	'song_title',	'dt'	=>	3 ],
-	[ 'db'	=>	'composer',		'dt'	=>	2 ],
-	[ 'db'	=>	'performed_by',	'dt' 	=>	1 ],
-	[ 'db'	=>	'video_id',		'dt'	=>	4 ],
-	[ 'db'	=>	'source_album', 'dt'	=>	5 ],
-	[ 'db'	=>	'year_of_release',	'dt'	=>	6 ],
-	[ 'db'	=>	'genre',		'dt'	=>	7 ],
+	[ 'db'	=>	'id',			'dt'	=>	1 ],
+	[ 'db'	=>	'song_title',	'dt'	=>	0 ],
+	[ 'db'	=>	'composer',		'dt'	=>	4 ],
+	[ 'db'	=>	'performed_by',	'dt' 	=>	2 ],
+	[ 'db'	=>	'video_id',		'dt'	=>	3 ],
+	[ 'db'	=>	'source_album', 'dt'	=>	6 ],
+	[ 'db'	=>	'year_of_release',	'dt'	=>	7 ],
+	[ 'db'	=>	'genre',		'dt'	=>	5 ],
 	[ 'db'	=>	'country_of_origin',	'dt'	=>	8 ],
 	[ 
 		'db'	=>	'running_time',	
@@ -48,11 +48,11 @@ $columns = [
 
 // SQL server connection information
 $sql_details = [
-	'user' => 'b14_15919127',
-	'pass' => 'Kwisatz01@kartadabH',
-	'db'   => 'b14_15919127_karaokeapp',
-	'host' => 'sql310.byethost14.com'
+
 ];
+
+//GET value of the 'logged in' user status
+$greenorblack = $_GET['registered'];
 
 //utility null variable
 $nullValue = null;
@@ -147,8 +147,21 @@ if(isset($_GET['year_of_release']) && $_GET['year_of_release'] != 'reset'){
 
 require( '../ajax/ssp.class.php' );
 
-echo json_encode(
-	SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns, $nullValue, $string_filter)
-);
+//assign the resulting dataset
+//to a 'results' array
+$results = SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns, $nullValue, $string_filter);
 
+//if the $_GET['registered'] data
+//IS NOT equal to the string 'green'
+if ($greenorblack != 'green') {
+    //shuffle the ordering of the results
+    //if the ordering is based on
+    //the default dataTables plug-in
+    //0 column ordering
+    if ($_GET['order'][0]['column'] === '1') {
+        shuffle( $results['data'] );
+    }
+}
+
+echo json_encode( $results );
 ?>
