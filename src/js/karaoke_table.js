@@ -457,6 +457,8 @@ $(document).ready(function () {
                 thisRow.attr('data-index_position', video_index - 1);
                 var rowData = videos_datatable.row(thisRow).data();
                 addOfflineNotif('videos_datatable', rowData, thisRow);
+                
+                /*('<p>' + indexdata + '</p><a href="update_video.php?id=' + video_index + '"><p>Edit Video Details</p></a><a href="delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>');*/
             });    
         } 
     }
@@ -464,6 +466,46 @@ $(document).ready(function () {
     * functions to be invoked
     * every time the videos dataTable
     * is rendered
+    * END
+    */
+    
+    /*
+    * START
+    * links to MySQL C-R-U-D pages
+    * to be added to the videos table
+    * if user has sufficient
+    * privileges
+    */
+    if (registered === 'green') {
+        //on every videos table render
+        videos_datatable.on('draw.dt', function () {
+            $('#videos_datatable tbody tr').each(function () {
+                //assign helper vars
+                var thisRow = $(this),
+                    rowData = videos_datatable.row(thisRow).data(),
+                    song_db_id = rowData[1],
+                    songtitle = rowData[0],
+                    songtitlesplit = rowData[0].split(' '),
+                    songtitlejoin = songtitlesplit.join('+'),
+                    //get the datatable row Node object
+                    firstNode = videos_datatable.cell(this, 0).node();
+                
+                //assemble the links
+                //to be added to each table row
+                var crudLinks = '<p>' + songtitle + '</p>';
+                    crudLinks += '<a href="update_video.php?id=' + song_db_id + '">Edit Video Details</a>';
+                    crudLinks += '<a href="delete_video.php?video_id=' + song_db_id + '&song_title=' + songtitlejoin + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>';
+                
+                //add the links
+                $(firstNode).html(crudLinks);
+            });
+        });
+    }
+    /*
+    * links to MySQL C-R-U-D pages
+    * to be added to the videos table
+    * if user has sufficient
+    * privileges
     * END
     */
     
