@@ -83,7 +83,7 @@ if(Input::exists()){
 	include_once "includes/user_section_header.php";
 ?>
 	<div id="wrapper">
-		<article id="user_panel_normal">
+		<article id="user_panel_normal" class="user_panel">
 			<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
 
 			<p>To modify your existing details, fill-in your new details in the fields below.  Then type your password in the field provided and click "Submit".</p>

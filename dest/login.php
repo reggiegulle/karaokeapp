@@ -51,7 +51,7 @@
 		</section>
 		
 		<div id="wrapper">
-			<article id="user_panel_login">
+			<article id="user_panel_login" class="user_panel">
 			
 				<article>
 					<?php

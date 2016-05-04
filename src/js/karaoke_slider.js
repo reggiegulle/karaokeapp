@@ -291,9 +291,10 @@ $(document).ready(function () {
             //insert iframe content
             //to the 'player container' div
             thisSlidePlayerContainer
-                .html('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>')
-            //make the div visible
-                .show();
+                //make the div visible
+                .show()
+                
+                .html('<iframe id="ytplayer" type="text/html" width="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>');
         });    
     } 
     /*

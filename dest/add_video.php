@@ -112,7 +112,7 @@
 
 	<div id="wrapper">
 		
-		<article id="user_panel_normal">
+		<article id="user_panel_normal" class="user_panel">
 
 			<article>
 				<?php

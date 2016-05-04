@@ -39,7 +39,7 @@
 <!--bxslider css-->
 <link href="css/jquery.bxslider.min.css" rel="stylesheet" type="text/css" media="screen">
 <!--Google Fonts-->
-<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Anton|Roboto' rel='stylesheet' type='text/css'>
 <!--Custom css-->
 <link href="css/karaoke.main.min.css" rel="stylesheet" type="text/css" media="screen">
 <!--[if gte IE 9]>
@@ -97,52 +97,58 @@
 	</script>
 
     <div class="container">
-	
-	<section id="header">
-	
-		<h1><a id="masthead" href="index.php">Renegade Karaoke</a></h1>
-			<ul id="social-media-buttons" class="gradient">
-				<li class="fb-like" data-href="http://www.renegade-karaoke.com/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true" data-width="225px"></li>
-				<li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a></li>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-			</ul>
-		
-			<?php
-				//$user = new User();
-				if($user->isLoggedIn()){
-			?>		
-					<article id="user_panel_index">
-				
-						<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><span class="strong underline"><?php echo escape($user->data()->username); ?></a>!</span></p>
-						
-						<article>
-							<?php
-								if(Session::exists('edit_user_success')){
-									echo '<p>' . Session::flash('edit_user_success') . '</p>';
-								}
-								
-								if(Session::exists('edit_user_pwd_success')){
-									echo '<p>' . Session::flash('edit_user_pwd_success') . '</p>';
-								}
-							?>
-						</article>
-					
-			<?php
-					if($user->hasPermission('admin')){
-						echo '<p>You are an administrator!</p>';
-					}
-					if($user->hasPermission('moderator')){
-						echo '<p>You are a moderator!</p>';
-					}
-			?>
-					<article id="logout"><a href="logout.php"><p class="strong">Logout</p></a></article>
-			
-					</article>
-			<?php
-				}
-			?>
-			
-	</section>
+        <section id="header">
+            <h1>
+                <a id="masthead" href="index.php">Renegade Karaoke</a>
+            </h1>
+            <ul id="social-media-buttons" class="row gradient">
+                <li class="fb-like col-xs-6" data-href="http://www.renegade-karaoke.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" data-width="225px">
+                </li>
+                <li class="col-xs-6">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a>
+                </li>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </ul>
+            <?php
+                //$user = new User();
+                if($user->isLoggedIn()){
+            ?>		
+            <article id="user_panel_index" class="row user_panel">
+                <ul id="user_panel_index_user_creds" class="col-xs-12 col-sm-8">
+                    <li id="username">
+                        Hello
+                            <span class="strong underline">
+                                <a href="profile.php?user=<?php echo escape($user->data()->username); ?>">
+                                    <?php echo escape($user->data()->username);?>
+                                </a>
+                            </span>!
+                    </li>
+            <?php
+                if($user->hasPermission('admin')){
+                    echo '<li class="credential">You are an administrator!</li>';
+                }
+                if($user->hasPermission('moderator')){
+                    echo '<li class="credential">You are a moderator!</li>';
+                }
+            ?>
+                </ul>
+                <div id="logout" class="col-xs-12 col-sm-4">
+                    <a href="logout.php">Logout</a>
+                </div>                
+            <?php
+                if(Session::exists('edit_user_success')){
+                    echo '<div class="col-xs-12">' . Session::flash('edit_user_success') . '</div>';
+                }
+
+                if(Session::exists('edit_user_pwd_success')){
+                    echo '<div class="col-xs-12">' . Session::flash('edit_user_pwd_success') . '</div>';
+                }
+            ?>
+            </article>
+            <?php
+                }
+            ?>	
+        </section>
 
 
 
