@@ -1,0 +1,84 @@
+/*LESS to be converted to CSS*/
+@import 'karaoke.old.css';
+/*
+* START
+* Variables
+*/
+/*
+* Variables
+* END
+*/
+/* START
+* customise bootstrap
+*/
+@media only screen and (max-width: 7001px) {
+  .container {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+@media only screen and (min-width: 701px) {
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+/* END
+* customise bootstrap
+*/
+/* START
+* karaokedesclist styles
+*/
+#karaokedesclist {
+  list-style-type: none;
+  padding: 1rem;
+  display: none;
+}
+/*
+* karaokedesclist styles
+* END
+*/
+/* START
+* custom bxslider styles
+*/
+.bx-wrapper .bx-prev {
+  left: 10px;
+  background: url('../images/controls.png') no-repeat 0 -32px;
+}
+.bx-wrapper .bx-next {
+  right: 10px;
+  background: url('../images/controls.png') no-repeat -43px -32px;
+}
+.bxslider-custom-page-turn {
+  display: none;
+}
+/* END
+* custom bxslider styles
+*/
+/* START
+* karaoke-slider-2 styles
+*/
+#karaoke-slider-2 {
+  padding-left: 0;
+}
+#karaoke-slider-2 li.active {
+  background-color: #33ffff;
+}
+/* END
+* karaoke-slider-2 styles
+*/
+/* 
+* START
+* videos_datatable styles
+*/
+#videos_datatable tbody tr.active {
+  background-color: #33ffff;
+}
+/*
+* videos_datatable styles
+* END
+*/
