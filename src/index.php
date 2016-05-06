@@ -185,13 +185,13 @@
 	<?php
 		if($user->isLoggedIn()){
 	?>
-			<article id="addnew" class="col-xs-12">
+			<article class="addnew">
 				<?php
 					if(Session::exists('delete')){
 						echo '<p>' . Session::flash('delete') . '</p>';
 					}
 				?>
-				<a href="add_video.php"><p class="strong underline">Add New Video</p></a>
+				<a href="add_video.php">Add New Video</a>
 			</article>
 	<?php
 		}
@@ -243,8 +243,8 @@
 	<?php
 		if($user->isLoggedIn()){
 	?>		
-			<article id="addnew" class="col-xs-12">
-				<a href="add_video.php"><p class="strong underline">Add New Video</p></a>
+			<article class="addnew">
+				<a href="add_video.php">Add New Video</a>
 			</article>
 	<?php
 		}

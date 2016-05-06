@@ -15,7 +15,7 @@
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
 <!--Google Fonts-->
-<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Anton|Roboto' rel='stylesheet' type='text/css'>
 <!--Custom css-->
 <link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
 

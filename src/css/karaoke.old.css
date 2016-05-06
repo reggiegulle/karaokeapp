@@ -145,7 +145,7 @@
 		width: 100%;
 		min-width: 320px;
 		height: auto; 
-		margin: 0 auto 0.1rem;
+		margin: 0 auto 60px;
 			-webkit-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
 			-moz-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
 		box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
@@ -157,7 +157,7 @@
 		max-width: 75%;
         min-width: 640px;
 		height: auto;
-		margin: 0 auto 0.1rem;
+		margin: 0 auto 60px;
 			-webkit-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
 			-moz-box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
 		box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.75);
@@ -316,15 +316,6 @@ div.dataTables_paginate,
 	text-shadow: 1px 2px 1px #000, -1px -2px 1px #000;
 }
 
-div.dataTables_length,
-div.dataTables_info{
-	margin-left: 4rem;
-}
-
-div.dataTables_filter{
-	margin-right: 4rem;
-}
-
 @media only screen and (max-width: 700px){
 	.dataTables_info {
 	  margin-bottom: 0;
@@ -399,6 +390,7 @@ div.dataTables_paginate{
 	
 #custom-filter{
 	display: block;
+    text-align: center;
 }
 
 #custom-search-input.form-control.input-sm {
@@ -479,6 +471,7 @@ div.dataTables_paginate{
 #custom-filter > li {
 	display: inline-block;
 	padding: 0;
+    white-space: nowrap;
 }
 
 .filter-reset-button {
@@ -489,17 +482,8 @@ div.dataTables_paginate{
   padding: 2px 8px;
 }
 
-@media only screen and (max-width: 700px){
-	#videos_datatable_container.row {
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
-
-@media only screen and (min-width: 701px){
-	#videos_datatable_container.row {
-		margin: 0 2rem;
-	}
+#videos_datatable_container.row {
+    margin: 0;
 }
 
 #videos_datatable_info {

@@ -96,6 +96,36 @@ body {
 * customise bootstrap
 */
 /* START
+* karaoke-slider-1 styles
+*/
+.karaoke-slider-1-slide .iframe-container {
+  display: none;
+}
+.karaoke-slider-1-slide .karaoke-slider-1-play-button {
+  position: absolute;
+  top: 33.33%;
+  left: 40%;
+  z-index: 50;
+}
+.karaoke-slider-1-slide .karaoke-slider-1-no-video-notif {
+  position: absolute;
+  top: 33.33%;
+  left: 10%;
+  z-index: 50;
+}
+.karaoke-slider-1-slide .karaoke-splash-details {
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  text-align: center;
+  z-index: 20;
+}
+/*
+* karaoke-slider-1 styles
+* END
+*/
+/* START
 * karaokedesclist styles
 */
 #karaokedesclist {
@@ -140,8 +170,24 @@ body {
 * START
 * videos_datatable styles
 */
-#videos_datatable tbody tr.active {
+.addnew a {
+  padding-left: 15px;
+}
+#videos_datatable_wrapper > div.col-sm-4 > #videos_datatable_paginate.dataTables_paginate.paging_listbox {
+  padding-top: 0px;
+  margin-bottom: 12px;
+}
+tbody tr.active,
+.table > tbody > tr.active > td {
   background-color: #33ffff;
+}
+#videos_datatable tbody tr td a {
+  font-weight: normal;
+  color: #0d5799;
+}
+#videos_datatable tbody tr td a:hover,
+#videos_datatable tbody tr td a:focus {
+  color: #042F59;
 }
 /*
 * videos_datatable styles
