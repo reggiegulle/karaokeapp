@@ -186,13 +186,15 @@ $(document).ready(function () {
         //YouTube video id
         karaoke_slider_1_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/hqdefault.jpg" width="100%" alt="' + altsongtitle + '-karaoke-video-thumbnail" title="' + songtitle + '">';
         karaoke_slider_1_li_item += '<div class="iframe-container"></div>';
-        karaoke_slider_1_li_item += '<button class="karaoke-slider-1-play-button">Play</button>';
+        karaoke_slider_1_li_item += '<button class="karaoke-slider-1-play-button"></button>';
+        karaoke_slider_1_li_item += '<div class="karaoke-splash-details-container">';
         karaoke_slider_1_li_item += '<div class="karaoke-splash-details">';
         karaoke_slider_1_li_item += '<h4>' + songtitle + '</h4>';
         //rowData[2] below
         //corresponds to
         //the song performer's name
         karaoke_slider_1_li_item += '<p>' + rowData[2] + '</p>';
+        karaoke_slider_1_li_item += '</div>';
         karaoke_slider_1_li_item += '</div>';
         karaoke_slider_1_li_item += '</li>';
         
@@ -205,6 +207,40 @@ $(document).ready(function () {
     * a karaoke-slider-1 li item
     * for appending to
     * an error-free karaoke-slider-1
+    * END
+    */
+    
+    /* 
+    * START
+    * helper function for
+    * adjusting the margins
+    * of each 'karaoke-splash-details' elem
+    */
+    function adjustSplashDetailsMargins() {
+        //get each karaoke-splash-details div elem
+        $('.karaoke-splash-details').each(function () {
+                //get the height
+            var this_height = $(this).height(),
+                //get the height of the parent div
+                this_parent_container_height = $(this).parent('div').height(),
+                //get the difference between
+                //the two height values
+                height_diff = this_parent_container_height - this_height,
+                //divide this diff by 2
+                //to get the margin-top value
+                splash_details_margin_top = height_diff/2;
+            
+            //assign the resolved margin-top value
+            //to the relevant style property
+            $(this).css({
+                'margin-top': splash_details_margin_top + 'px'    
+            });
+        });
+    }
+    /* 
+    * helper function for
+    * adjusting the margins
+    * of each 'karaoke-splash-details' elem
     * END
     */
     
@@ -238,13 +274,13 @@ $(document).ready(function () {
                     //of the thumbnail,
                     //first, remove the play button
                     //of the element
-                    thisImage.siblings('.karaoke-slider-1-play-button').replaceWith('<div class="karaoke-slider-1-no-video-notif">Sorry, video is unavailable</div>');
+                    thisImage.siblings('.karaoke-slider-1-play-button').remove();
                     
-                    //then this image to be
-                    //replaced with a notification
-                    thisImage.replaceWith('<img src="images/no-video-black.jpg" width="100%" alt="No-video-available" title="No video available">');
+                    //then replace the image
+                    //with other HTML tags
+                    //that show a "No Video" message
+                    thisImage.replaceWith('<img src="images/no-video-black-with-text.jpg" width="100%" alt="No-video-available" title="No video available">');
                 }
-
             });
         });    
     }
@@ -284,12 +320,12 @@ $(document).ready(function () {
                 //to be assigned to the
                 //iframe container's height later
                 slideImgHt = slideImg.height(),
-                //get the div.karaoke-splash-details elem
-                splashDetails = slidePlayBtn.siblings('.karaoke-splash-details'),
+                //get the div.karaoke-splash-details-container elem
+                splashDetails = slidePlayBtn.siblings('.karaoke-splash-details-container'),
                 //get the hidden iframe-container
                 slideIframeContainer = slidePlayBtn.siblings('div.iframe-container');
             
-            //hide the div.karaoke-splash-details elem
+            //hide the div.karaoke-splash-details-container elem
             splashDetails.hide();
             
             //hide the slide's play button
@@ -345,8 +381,8 @@ $(document).ready(function () {
                 //slide player button
                 hiddenPlayButton = iframeContainer.siblings('button'),
                 //get the presently hidden
-                //div.karaoke-splash-details elem
-                hiddenSplashDetails = iframeContainer.siblings('.karaoke-splash-details');
+                //div.karaoke-splash-details-container elem
+                hiddenSplashDetails = iframeContainer.siblings('.karaoke-splash-details-container');
             
             //now, clear the div.iframe-container
             //of any content
@@ -370,7 +406,7 @@ $(document).ready(function () {
             hiddenPlayButton.show();
             
             //show the previously hidden
-            //div.karaoke-splash-details elem
+            //div.karaoke-splash-details-container elem
             hiddenSplashDetails.show();
               
             
@@ -442,8 +478,13 @@ $(document).ready(function () {
                 auto: true,
                 pager: false,
                 infiniteLoop: false,
+                nextSelector: $('div.custom-bx-next'),
+                prevSelector: $('div.custom-bx-prev'),
+                nextText: '&rang;',
+                prevText: '&lang;',
                 hideControlOnEnd: true,
-                pause: 4000,
+                pause: 5500,
+                speed: 1000,
                 onSliderLoad: function (currentIndex) {
                     //by default, hide the
                     //div which will contain
@@ -455,6 +496,11 @@ $(document).ready(function () {
                     //for replacing offline videos
                     //with a notification
                     addOfflineNotifKarSlider1();
+                    
+                    //invoke function for
+                    //adjusting the margin-top
+                    //of each karaoke video splash details panel
+                    adjustSplashDetailsMargins();
 
                     //invoke functions on every
                     //click of an img in the
@@ -574,6 +620,10 @@ $(document).ready(function () {
                 auto: false,
                 pager: false,
                 infiniteLoop: false,
+                nextSelector: $('div.custom-bx-next'),
+                prevSelector: $('div.custom-bx-prev'),
+                nextText: '&rang;',
+                prevText: '&lang;',
                 hideControlOnEnd: true,
                 onSliderLoad: function (currentIndex) {
                     //by default, hide the
@@ -586,6 +636,11 @@ $(document).ready(function () {
                     //for replacing offline videos
                     //with a notification
                     addOfflineNotifKarSlider1();
+                    
+                    //invoke function for
+                    //adjusting the margin-top
+                    //of each karaoke video splash details panel
+                    adjustSplashDetailsMargins();
 
                     //invoke functions on every
                     //click of an img in the
@@ -693,21 +748,49 @@ $(document).ready(function () {
     * is resized
     */
     function karSlider1OnBrowserResize() {
+        //every time the browser window is resized...
         $(window).resize(function () {
+            //invoke the function
+            //for finishing a window.SetTimeOut call
+            //before executing other functions
             waitForFinalEvent(function () {
+                    //get any iframe containers that are visible
+                    //(by default, these containers are hidden)
                 var visibleIframeContainer = $('#karaoke-slider-1 div.iframe-container').filter(':visible'),
+                    //get the parent elem of the visible
+                    //iframe container
+                    //(which is a slide)
                     visibleIframeContainerLiParent = visibleIframeContainer.parents('li.karaoke-slider-1-slide'),
+                    //get the next slide
                     nextKar1LiSlide = visibleIframeContainerLiParent.next(),
+                    //get the image elem which is
+                    //the child of the next slide
                     nextKar1LiSlideImg = nextKar1LiSlide.children('img'),
+                    //get the height of this img
                     newIframeContainerHeight = nextKar1LiSlideImg.height();
-
+                
+                //if there is even one visible iframe
                 if (visibleIframeContainer.length > 0) {
+                    //get the height of the elem containing the iframe
                     visibleIframeContainer.height(newIframeContainerHeight);
+                    //make the height of the 'karaoke-slider-1-container' element
+                    //equal to: (height of the iframe container) + (10)
                     $('#karaoke-slider-1-container').height(newIframeContainerHeight + 10);
+                    //make the height of the 'bx-viewport' element
+                    //equal to: (height of the iframe container)
                     $('#karaoke-slider-1-container div.bx-viewport').height(newIframeContainerHeight);
                 } else {
+                //if there are no visible iframes
+                    //make the height of the 'karaoke-slider-1-container' element
+                    //equal to: (height of the 'bx-viewport' element) + (10)
                     $('#karaoke-slider-1-container').height($('#karaoke-slider-1-container div.bx-viewport').height() + 10);
                 }
+                
+                //invoke function for
+                //adjusting the margin-top
+                //of each karaoke video splash details panel
+                adjustSplashDetailsMargins();
+                
             }, 250, 'karaoke-slider-1-resize');    
         });    
     }
@@ -877,11 +960,12 @@ $(document).ready(function () {
         //karaoke-slider-2 li items
         $('#karaoke-slider-2 li img').each(function () {
             //get the src of the img
-            var url = $(this).attr('src');
-            var thisImage = $(this);
+            var url = $(this).attr('src'),
+                thisImage = $(this),
+                thisImageParent = $(this).parent('li'),
             //assign an empty variable
             //to represent a yet to be determined size
-            var size;
+                size;
             //load an img into the browser memory
             //and get its size
             $('<img/>').attr('src', url).load(function () {
@@ -893,7 +977,7 @@ $(document).ready(function () {
                     //than the 'mqdefault' size
                     //of the thumbnail,
                     //replace with a notification
-                    thisImage.replaceWith('<div class="offline-notification">Sorry, video is unavailable</div>')
+                    thisImage.replaceWith('<div class="karaoke-slider-2-no-video-notif"><img src="images/no-video-black-with-text-320x180.jpg" width="80%" alt="No-video-available" title="No video available"></div>');
                 }
 
             });
@@ -1030,9 +1114,11 @@ $(document).ready(function () {
                 //'karaoke_slider_2_vis_items'
                 karaoke_slider_2_vis_items.length = 0;
                 
-                //get slide count of karaoke-slider-1
-                var karaoke_slider_1_qty = karaoke_slider_1.getSlideCount();
-                //console.log('The karaoke-slider-1 slider has ' + karaoke_slider_1_qty + ' slides!');
+                var viewport_height = $('#karaoke-slider-2-container .bx-viewport').height();
+                
+                $('#karaoke-slider-2 li').css({
+                    'height': viewport_height + 'px' 
+                });
                 
                 addActiveClass('karaoke-slider-2');
                 
@@ -1251,7 +1337,12 @@ $(document).ready(function () {
             //error action
             renderKaraoke2SliderErrorState(karaoke_slider_2_vis_items);
         }
+        
+         
     });
+    
+    
+     
 /*
 * behaviour of
 * sliders per every

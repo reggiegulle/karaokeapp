@@ -8,7 +8,7 @@ $(document).ready(function () {
 */
     
     //helper vars
-    var vidOfflineNotif = '<div class="offline-notification">Sorry, video is unavailable</div>',
+    var vidOfflineNotif = '<div class="offline-notification"><img src="images/no-video-black-with-text-320x180.jpg" width="160px" height="90px" alt="No-video-available" title="Video is unavailable"></div>',
     /*
     * START
     * content of the 'custom_filter_section'

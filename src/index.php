@@ -154,6 +154,8 @@
 
 	<section id="karaoke-slider-1-container">
 		<article id="karaoke-slider-1"></article>
+        <div class="custom-bx-prev"></div>
+        <div class="custom-bx-next"></div>
 	</section>
 	
 	<section id="titlelist-container">
@@ -178,9 +180,11 @@
 		<ul id="karaoke-slider-2">	
 		</ul>
 	</section>
-    <button id="prev-slider-page" class="bxslider-custom-page-turn">Prev Page</button>
-    <button id="next-slider-page" class="bxslider-custom-page-turn">Next Page</button>
     
+    <div class="bxslider-custom-page-turn-container row">
+        <button id="prev-slider-page" class="col-xs-4 col-sm-2 bxslider-custom-page-turn">Prev Page</button>
+        <button id="next-slider-page" class="col-xs-4 col-xs-offset-8 col-sm-2 col-sm-offset-10 bxslider-custom-page-turn">Next Page</button>
+    </div>
 		
 	<?php
 		if($user->isLoggedIn()){
