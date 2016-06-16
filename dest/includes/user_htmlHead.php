@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="Description" CONTENT=""/>
 
@@ -15,7 +14,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" media="screen" />
 <!--Google Fonts-->
-<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Anton|Roboto' rel='stylesheet' type='text/css'>
 <!--Custom css-->
 <link href="css/karaoke.main.min.css" rel="stylesheet" type="text/css" media="screen">
 
@@ -26,7 +25,10 @@
     }
   </style>
 <![endif]-->
-
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+<![endif]-->
+    
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 <!--Bootstrap JS -->
@@ -38,5 +40,4 @@
 <script src="js/EasePack.min.js" type="text/javascript"></script>
 <!--stylejs-->
 <script src="js/karaoke.style.min.js" type="text/javascript"></script>
-<!--Bootstrap JS at the bottom -->
 </head>

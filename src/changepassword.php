@@ -8,22 +8,17 @@ $user = new User();
 //back to index.php	
 if (!$user->isLoggedIn()){
 	Redirect::to('index.php');
-} else {
+} else if ($user->isLoggedIn()) {
 	
-	if(!$username = Input::get('user')){
-		Redirect::to('index.php');
-	} else {
-		//assign variable $user to the User Object
-		$user = new User($username);
-		//check if $user exists in database
-		if(!$user->exists()){
-			//if $user is not in database,
-			//back to index.php
-			Redirect::to('index.php');
-		} else {
-			$data = $user->data();	
-		}
-	}
+    $data = $user->data();
+
+    if(!$username = Input::get('user')){
+        Redirect::to('index.php');
+    } else {
+        if ($username !== $data->username) {
+            Redirect::to('index.php');    
+        }
+    }
 }
 
 if(Input::exists()){
@@ -65,7 +60,7 @@ if(Input::exists()){
 		
 		} /*else {
 			foreach($validation->errors() as $error){
-				echo '<p class="error">' . $error . '</p><br />';
+				echo '<p>' . $error . '</p><br />';
 			}
 		}*/
 	}
@@ -78,68 +73,83 @@ if(Input::exists()){
 
 	include_once "includes/user_htmlHead.php";
 ?>
+
 <body>
+    
 <?php
 	include_once "includes/user_section_header.php";
 ?>
 		
-	<div id="wrapper">
-		<article id="user_panel_normal">
+	<section class="min-height-box">
+        
+        <div class="container">
+            
+            <div class="row">
+                
+                <section id="user_panel_normal" class="user_panel col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
 
-			<p>Hello <a href="profile.php?user=<?php echo escape($data->username); ?>"><?php echo escape($data->username); ?>!</a></p>
+                   <h2 class="col-xs-12 col-sm-11 col-sm-offset-1">Edit Password:</h2>
 
-			<p>To change your password, fill-in your current password in the field provided below.  Type and re-type your new password in each of the fields provided and click "Submit".</p>
+                    <p class="col-xs-12 col-sm-11 col-sm-offset-1">To change your password, fill-in your current password in the field provided below.  Type and re-type your new password in each of the fields provided and click "Submit".</p>
 
-			<form action="" method="POST">
-				
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('password_current')){
-								echo '<p class="error">' . Session::flash('password_current') . '</p>';
-							}
-						?>
-					</article>
-					<article>
-						<?php
-							if(Session::exists('edit_user_current_pwd_error')){
-								echo '<p class="error">' . Session::flash('edit_user_current_pwd_error') . '</p>';
-							}
-						?>
-					</article>
-					<label for="password_current">Current password</label>
-					<input type="password" name="password_current" id="password_current" />
-				</div>
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('password_new')){
-								echo '<p class="error">' . Session::flash('password_new') . '</p>';
-							}
-						?>
-					</article>
-					<label for="password_new">New password</label>
-					<input type="password" name="password_new" id="password_new" />
-				</div>
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('password_new_again')){
-								echo '<p class="error">' . Session::flash('password_new_again') . '</p>';
-							}
-						?>
-					</article>
-					<label for="password_new_again">Re-type your new password</label>
-					<input type="password" name="password_new_again" id="password_new_again" />
-				</div>
-				<div class="field">	
-					<input type="submit" value="Change" />
-					<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
-				</div>
+                    <form action="" method="POST" class="col-xs-12 col-sm-11 col-sm-offset-1">
 
-			</form>
-		</article>
-	</div>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('password_current')){
+                                        echo '<p>' . Session::flash('password_current') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('edit_user_current_pwd_error')){
+                                        echo '<p>' . Session::flash('edit_user_current_pwd_error') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="password_current" class="col-xs-12">Current password</label>
+                            <input type="password" name="password_current" id="password_current" class="col-xs-8 col-sm-8" />
+                        </div>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('password_new')){
+                                        echo '<p>' . Session::flash('password_new') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="password_new" class="col-xs-12">New password</label>
+                            <input type="password" name="password_new" id="password_new" class="col-xs-8 col-sm-8" />
+                        </div>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('password_new_again')){
+                                        echo '<p>' . Session::flash('password_new_again') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="password_new_again" class="col-xs-12">Re-type your new password</label>
+                            <input type="password" name="password_new_again" id="password_new_again" class="col-xs-8 col-sm-8" />
+                        </div>
+                        <div class="col-xs-12 field">	
+                            <input type="submit" value="Change" class="col-xs-4 col-sm-2"/>
+                            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+                            <a class="col-xs-3 col-sm-2 cancel-button" href="index.php">Cancel</a>
+                        </div>
+
+                    </form>
+                    
+                </section>
+                
+            </div>
+            
+        </div>
+        
+    </section>
+    
 <?php
 	include_once "includes/user_footer.php";
 ?>

@@ -87,7 +87,7 @@ $(document).ready(function () {
                 //then add an 'active' class to
                 //the table row with the 
                 //eq position specified by the index argument
-                $('#videos_datatable tbody tr').eq(index).addClass('active');
+                $('#videos_datatable tbody tr').not('.child').eq(index).addClass('active');
             break;
             //if the sliderElement specified is 'karaoke-slider-2'
             case 'karaoke-slider-2':
@@ -102,7 +102,7 @@ $(document).ready(function () {
                 $('#videos_datatable tbody').find('tr.active').removeClass('active');
                 //then add an 'active' class to
                 //the first tr of the videos table
-                $('#videos_datatable tbody tr').eq(0).addClass('active');
+                $('#videos_datatable tbody tr').not('.child').eq(0).addClass('active');
             break;
             default:
             break;
@@ -181,13 +181,13 @@ $(document).ready(function () {
         
         //add this content to each karaoke-slider-1 li
         var karaoke_slider_1_li_item = '<li class="karaoke-slider-1-slide" data-index_position="' + index_data + '" data-video_id="' + rowData[3] + '">';
-        karaoke_slider_1_li_item += '<div class="karaoke-slider-1-slide-player-container"></div>';
-        karaoke_slider_1_li_item += '<div class="karaoke-slider-1-slide-controls">';
         //rowData[3] below
         //corresponds to the
         //YouTube video id
         karaoke_slider_1_li_item += '<img src="https://i3.ytimg.com/vi/' + rowData[3] + '/hqdefault.jpg" width="100%" alt="' + altsongtitle + '-karaoke-video-thumbnail" title="' + songtitle + '">';
-        karaoke_slider_1_li_item += '<button class="karaoke-slider-1-play-button">Play</button>';
+        karaoke_slider_1_li_item += '<div class="iframe-container"></div>';
+        karaoke_slider_1_li_item += '<button class="karaoke-slider-1-play-button"></button>';
+        karaoke_slider_1_li_item += '<div class="karaoke-splash-details-container">';
         karaoke_slider_1_li_item += '<div class="karaoke-splash-details">';
         karaoke_slider_1_li_item += '<h4>' + songtitle + '</h4>';
         //rowData[2] below
@@ -242,11 +242,11 @@ $(document).ready(function () {
                     //of the element
                     thisImage.siblings('.karaoke-slider-1-play-button').remove();
                     
-                    //then this image to be
-                    //replaced with a notification
-                    thisImage.replaceWith('<div class="offline-notification">Sorry, video is unavailable</div>')
+                    //then replace the image
+                    //with other HTML tags
+                    //that show a "No Video" message
+                    thisImage.replaceWith('<img src="images/no-video-black-with-text.jpg" width="100%" alt="No-video-available" title="No video available">');
                 }
-
             });
         });    
     }
@@ -274,26 +274,47 @@ $(document).ready(function () {
                 karaoke_slider_1.stopAuto();    
             }
             
-            //get the video ID 
-            var video_id = $(this).parents('li.karaoke-slider-1-slide').data('video_id'),
-            //assign a var to
-            //the 'controls' div
-            //that will be hidden
-            thisParentControls = $(this).parent('div.karaoke-slider-1-slide-controls'),
-            //assign a var to
-            //the 'player container' div
-            //that will become visible
-            //(by default, it is hidden)
-            thisSlidePlayerContainer = thisParentControls.siblings('div.karaoke-slider-1-slide-player-container');
+            //helper variables
+            var slidePlayBtn = $(this),
+                //get the play button's parent li element
+                slidePlayBtnParent = slidePlayBtn.parents('li.karaoke-slider-1-slide'),
+                //get the relevant video_id string/data
+                video_id = slidePlayBtn.parents('li.karaoke-slider-1-slide').data('video_id'),
+                //get the slide's image
+                slideImg = slidePlayBtn.siblings('img'),
+                //get the height of the slide's image
+                //to be assigned to the
+                //iframe container's height later
+                slideImgHt = slideImg.height(),
+                //get the div.karaoke-splash-details-container elem
+                splashDetails = slidePlayBtn.siblings('.karaoke-splash-details-container'),
+                //get the hidden iframe-container
+                slideIframeContainer = slidePlayBtn.siblings('div.iframe-container');
             
-            //hide the 'controls' div
-            thisParentControls.hide();
-            //insert iframe content
-            //to the 'player container' div
-            thisSlidePlayerContainer
-                .html('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"/>')
-            //make the div visible
-                .show();
+            //hide the div.karaoke-splash-details-container elem
+            splashDetails.hide();
+            
+            //hide the slide's play button
+            slidePlayBtn.hide();
+        
+            slideIframeContainer
+                //show the previously hidden
+                //div.iframe-container
+                .show()
+                //assign width
+                .width('100%')
+                //make height of iframe-container
+                //equal to the slide img height
+                .height(slideImgHt);
+            
+            //now, hide the slide img
+            slideImg.hide();
+            
+            //populate the iframe-container
+            //with the appropriate
+            //YouTube iframe embedded player
+            //witht the proper video
+            slideIframeContainer.html('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"&iv_load_policy=3/>');
         });    
     } 
     /*
@@ -314,22 +335,46 @@ $(document).ready(function () {
         //first, detect if there is at least one iframe
         //present inside the karaoke-slider-1 element
         if ($('#karaoke-slider-1 iframe').length > 0) {
-            //assign a variable
-            //to the currently visible
-            //'player-container' div
-            var karIframeContainer = $('#karaoke-slider-1 iframe').parent('div.karaoke-slider-1-slide-player-container'),
-            //assign a variable
-            //to the currently hidden
-            //'slide-controls' div
-            karSlider1Controls = karIframeContainer.siblings('div.karaoke-slider-1-slide-controls');
             
-            //remove the iframe
-            karIframeContainer.empty();
-            //hide the 'player-container' div
-            karIframeContainer.hide();
-            //make the 'slide-controls' div
-            //visible again
-            karSlider1Controls.show();
+            //helper vars
+            //get the visible iframe
+            var slideIframe = $('#karaoke-slider-1 iframe'),
+                //get the iframe's div container
+                iframeContainer = slideIframe.parents('div.iframe-container'),
+                //get the presently hidden slide image
+                hiddenSlideImg = iframeContainer.siblings('img'),
+                //get the presently hidden
+                //slide player button
+                hiddenPlayButton = iframeContainer.siblings('button'),
+                //get the presently hidden
+                //div.karaoke-splash-details-container elem
+                hiddenSplashDetails = iframeContainer.siblings('.karaoke-splash-details-container');
+            
+            //now, clear the div.iframe-container
+            //of any content
+            iframeContainer.empty();
+            
+            //assign 0 width and 0 height
+            //to the div.iframe-container elem
+            iframeContainer
+                .width(0)
+                .height(0)
+                //and hide the
+                //div.iframe-container elem
+                .hide();
+            
+            //show the previously hidden
+            //slide img
+            hiddenSlideImg.show();
+            
+            //show the previously hidden
+            //slide play button
+            hiddenPlayButton.show();
+            
+            //show the previously hidden
+            //div.karaoke-splash-details-container elem
+            hiddenSplashDetails.show();
+              
             
             //reference the helper var
             if (registered === 'black') {
@@ -359,12 +404,6 @@ $(document).ready(function () {
         //right after each rendering of the videos datatable
         while($('#karaoke-slider-1 li').length > 0){
             $('#karaoke-slider-1').empty();
-        }
-        
-        //function for making the video table
-        //go to its next page
-        function goToNextTablePage() {
-            videos_datatable.page(currentTablePage + 1).draw('page');    
         }
         
         $('#videos_datatable tbody tr').each(function () {
@@ -398,9 +437,13 @@ $(document).ready(function () {
             karaoke_slider_1.reloadSlider({
                 auto: true,
                 pager: false,
-                infiniteLoop: false,
+                infiniteLoop: true,
+                nextSelector: $('div.custom-bx-next'),
+                prevSelector: $('div.custom-bx-prev'),
+                nextText: '&rang;',
+                prevText: '&lang;',
                 hideControlOnEnd: true,
-                pause: 6000,
+                pause: 7000,
                 onSliderLoad: function (currentIndex) {
                     //by default, hide the
                     //div which will contain
@@ -412,36 +455,6 @@ $(document).ready(function () {
                     //for replacing offline videos
                     //with a notification
                     addOfflineNotifKarSlider1();
-
-                    //invoke functions on every
-                    //click of an img in the
-                    //videos table
-                    $('#videos_datatable tbody tr td img').click(function () {
-                        //get the video_index of the tr
-                        var thisVideoIndex = $(this).parents('tr').data('index_position');
-
-                        //if the parent tr of this image
-                        //does not have an 'active' class
-                        if ($(this).parents('tr').not('.active')) {
-                            //remove the class 'active'
-                            //from all videos table tr items
-                            $('#videos_datatable tbody').find('tr.active').removeClass('active');
-                            //then add an 'active' class to
-                            //this image's parent tr
-                            $(this).parents('tr').addClass('active');
-                        }
-
-                        //make the karaoke-slider-1 element
-                        //scroll to the video frame
-                        //corresponding to the videos_datatable img
-                        //clicked on
-                        karaoke_slider_1.goToSlide(thisVideoIndex);
-
-                        //animate the document
-                        //to scroll to the
-                        //karaoke-slider-1 element
-                        scrollToVidFrame();        
-                    });
 
                     //invoke the function
                     //for replacing a slider content
@@ -495,18 +508,6 @@ $(document).ready(function () {
                     //invoke function called by
                     //'Show Info' and 'Hide Info' buttons
                     showOrHideKarDescList();
-
-                    //if the element is the last
-                    if ($slideElement.data('index_position') === videos_table_items_length) {
-                        //first, clear the timeout with ID tablePageTurn
-                        window.clearTimeout(tablePageTurn);
-
-                        //set a the tablePageTurn var
-                        //into a setTimeout ID
-                        //that executes a table page turn
-                        //after 8 seconds
-                        tablePageTurn = window.setTimeout(goToNextTablePage, 8000);
-                    }
                 }
             });    
         }
@@ -531,6 +532,10 @@ $(document).ready(function () {
                 auto: false,
                 pager: false,
                 infiniteLoop: false,
+                nextSelector: $('div.custom-bx-next'),
+                prevSelector: $('div.custom-bx-prev'),
+                nextText: '&rang;',
+                prevText: '&lang;',
                 hideControlOnEnd: true,
                 onSliderLoad: function (currentIndex) {
                     //by default, hide the
@@ -644,12 +649,74 @@ $(document).ready(function () {
     
     /*
     * START
-    * function for showing
-    * or hiding
-    * the karaokedesclist ul li element
-    * depending on the karaoke-slider-1 element
-    * visible/active on the screen
+    * function invoked
+    * for karaoke-slider-1
+    * when the browser window
+    * is resized
     */
+    function karSlider1OnBrowserResize() {
+        //every time the browser window is resized...
+        $(window).resize(function () {
+            //invoke the function
+            //for finishing a window.SetTimeOut call
+            //before executing other functions
+            waitForFinalEvent(function () {
+                    //get any iframe containers that are visible
+                    //(by default, these containers are hidden)
+                var visibleIframeContainer = $('#karaoke-slider-1 div.iframe-container').filter(':visible'),
+                    //get the parent elem of the visible
+                    //iframe container
+                    //(which is a slide)
+                    visibleIframeContainerLiParent = visibleIframeContainer.parents('li.karaoke-slider-1-slide'),
+                    //get the next slide
+                    nextKar1LiSlide = visibleIframeContainerLiParent.next(),
+                    //get the image elem which is
+                    //the child of the next slide
+                    nextKar1LiSlideImg = nextKar1LiSlide.children('img'),
+                    //get the height of this img
+                    newIframeContainerHeight = nextKar1LiSlideImg.height();
+                
+                //if there is even one visible iframe
+                if (visibleIframeContainer.length > 0) {
+                    //get the height of the elem containing the iframe
+                    visibleIframeContainer.height(newIframeContainerHeight);
+                    //make the height of the 'karaoke-slider-1-container' element
+                    //equal to: (height of the iframe container) + (10)
+                    $('#karaoke-slider-1-container').height(newIframeContainerHeight + 10);
+                    //make the height of the 'bx-viewport' element
+                    //equal to: (height of the iframe container)
+                    $('#karaoke-slider-1-container div.bx-viewport').height(newIframeContainerHeight);
+                } else {
+                //if there are no visible iframes
+                    //make the height of the 'karaoke-slider-1-container' element
+                    //equal to: (height of the 'bx-viewport' element) + (10)
+                    $('#karaoke-slider-1-container').height($('#karaoke-slider-1-container div.bx-viewport').height() + 10);
+                }       
+            }, 250, 'karaoke-slider-1-resize');    
+        });    
+    }
+    /*
+    * function invoked
+    * for karaoke-slider-1
+    * when the browser window
+    * is resized
+    * END
+    */
+    
+/*
+* functions and vars
+* for karaoke-slider-1
+* END
+*/
+    
+/*
+* START
+* function for showing
+* or hiding
+* the karaokedesclist ul li element
+* depending on the karaoke-slider-1 element
+* visible/active on the screen
+*/
     function showOrHideDescListItems(index) {
         //hide all the karaoke description list items
         $('#karaokedesclist li').hide();
@@ -692,19 +759,12 @@ $(document).ready(function () {
             $('#karaokedesclist').hide();    
         });
     }
-    /*
-    * function for showing
-    * or hiding
-    * the karaokedesclist ul element
-    * END
-    */
 /*
-* functions and vars
-* for karaoke-slider-1
+* function for showing
+* or hiding
+* the karaokedesclist ul element
 * END
-*/
-    
-    
+*/    
     
 /*
 * START
@@ -801,11 +861,12 @@ $(document).ready(function () {
         //karaoke-slider-2 li items
         $('#karaoke-slider-2 li img').each(function () {
             //get the src of the img
-            var url = $(this).attr('src');
-            var thisImage = $(this);
+            var url = $(this).attr('src'),
+                thisImage = $(this),
+                thisImageParent = $(this).parent('li'),
             //assign an empty variable
             //to represent a yet to be determined size
-            var size;
+                size;
             //load an img into the browser memory
             //and get its size
             $('<img/>').attr('src', url).load(function () {
@@ -817,7 +878,7 @@ $(document).ready(function () {
                     //than the 'mqdefault' size
                     //of the thumbnail,
                     //replace with a notification
-                    thisImage.replaceWith('<div class="offline-notification">Sorry, video is unavailable</div>')
+                    thisImage.replaceWith('<div class="karaoke-slider-2-no-video-notif"><img src="images/no-video-black-with-text-320x180.jpg" width="80%" alt="No-video-available" title="No video available"></div>');
                 }
 
             });
@@ -954,9 +1015,11 @@ $(document).ready(function () {
                 //'karaoke_slider_2_vis_items'
                 karaoke_slider_2_vis_items.length = 0;
                 
-                //get slide count of karaoke-slider-1
-                var karaoke_slider_1_qty = karaoke_slider_1.getSlideCount();
-                //console.log('The karaoke-slider-1 slider has ' + karaoke_slider_1_qty + ' slides!');
+                var bx_viewport_height = $('#karaoke-slider-2-container .bx-viewport').height();
+                
+                $('#karaoke-slider-2 li').css({
+                    'height': bx_viewport_height + 'px' 
+                });
                 
                 addActiveClass('karaoke-slider-2');
                 
@@ -1132,12 +1195,7 @@ $(document).ready(function () {
         //the slider moves
             karaoke_slider_2_vis_items = [],
         //get the length of the videos table
-            videos_table_items_length = $('#videos_datatable tbody tr').length,
-        //create an empty var
-        //which will be assigned
-        //the value of a setTimeout ID
-        //later in the init karaoke-slider-1 func
-            tablePageTurn;
+            videos_table_items_length = $('#videos_datatable tbody tr').length;
         
         
         
@@ -1146,16 +1204,60 @@ $(document).ready(function () {
         //(there were results)
         if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
             //assemble the karaoke-slider-1 element
-            initKaraokeSlider1(registered, thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage, tablePageTurn);
+            initKaraokeSlider1(registered, thisRow, rowData, video_index, karaoke_slider_1_item, videos_table_items_length, currentTablePage);
             
             //assemble the karaoke-slider-2 element
             initKaraokeSlider2(thisRow, rowData, video_index, karaoke_slider_2_item, karaoke_slider_2_vis_items, videos_table_items_length);
+            
+            
             
             //invoke function for
             //showing or hiding the
             //'Prev Page' and 'Next Page' buttons
             //depending on the video table page
             showOrHideCustomPageBtns(currentTablePage, tablePageTotal);
+            
+            //invoke functions on every
+            //click of an img in the
+            //videos table
+            $('#videos_datatable tbody tr td img').click(function () {
+                //get the video_index of the tr
+                var thisVideoIndex = $(this).parents('tr').data('index_position');
+
+                //if the parent tr of this image
+                //does not have an 'active' class
+                if ($(this).parents('tr').not('.active')) {
+                    //remove the class 'active'
+                    //from all videos table tr items
+                    $('#videos_datatable tbody').find('tr.active').removeClass('active');
+                    //then add an 'active' class to
+                    //this image's parent tr
+                    $(this).parents('tr').addClass('active');
+                }
+
+                //make the karaoke-slider-1 element
+                //scroll to the video frame
+                //corresponding to the videos_datatable img
+                //clicked on
+                karaoke_slider_1.goToSlide(thisVideoIndex);
+                
+                //make the karaoke-slider-2 element
+                //scroll to the video frame
+                //corresponding to the videos_datatable img
+                //clicked on
+                karaoke_slider_2.goToSlide(thisVideoIndex);
+
+                //animate the document
+                //to scroll to the
+                //karaoke-slider-1 element
+                scrollToVidFrame();        
+            });
+            
+            //invoke function
+            //for restoring
+            //the karaoke-slider-1 dimensions
+            //on browser window resize
+            karSlider1OnBrowserResize();
         }
         //if a video table search returns a
         //"No Results Found" message
@@ -1170,6 +1272,9 @@ $(document).ready(function () {
             renderKaraoke2SliderErrorState(karaoke_slider_2_vis_items);
         }
     });
+    
+    
+     
 /*
 * behaviour of
 * sliders per every

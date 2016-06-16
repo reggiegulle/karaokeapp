@@ -35,22 +35,22 @@
 							'required'	=> true,
 							'min'		=> 2,
 							'max'		=> 50
-						]/*,
+						],
 						'group' => [
 							'required'	=> true
-						]*/
+						]
 					]);
 					
 					if($validation->passed()){
-						$user = new User();
+						$new_user = new User();
 						
-						$user_name_input = Input::get('name');
+						$new_user_name_input = Input::get('name');
 						
 						$salt = Hash::salt(32);
 						
 						try{
 						
-							$user->create([
+							$new_user->create([
 								'username'	=> Input::get('username'),
 								'password'	=> Hash::make(Input::get('password'), $salt),
 								'salt'		=> $salt,
@@ -59,16 +59,11 @@
 								'group'		=> Input::get('group')
 							]);
 							
-							Session::flash('register', $user_name_input . ' has been registered and can now log in!');
+							Session::flash('register', $new_user_name_input . ' has been registered and can now log in!');
 						} catch (Exception $e){
 							die($e->getMessage());
 						}
-					} /*else {
-						//echo errors
-						foreach($validation->errors() as $error){
-							echo '<p class="error">' . $error . '</p><br />';
-						}
-					}*/
+					}
 				}
 			}
 		}
@@ -98,10 +93,9 @@
 <!--datatables responsive plug-in css-->
 <link href="css/responsive.bootstrap.css" rel="stylesheet" type="text/css" media="screen">
 <!--Google Fonts-->
-<link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Anton|Roboto' rel='stylesheet' type='text/css'>
 <!--Custom css-->
 <link href="css/karaoke.main.css" rel="stylesheet" type="text/css" media="screen">
-
 <!--[if gte IE 9]>
   <style type="text/css">
     .gradient {
@@ -109,7 +103,9 @@
     }
   </style>
 <![endif]-->
-
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+<![endif]-->
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 <!--Bootstrap JS--> 
@@ -136,122 +132,124 @@
 	include_once "includes/user_section_header.php";
 ?>
 
-	<div id="wrapper">
+	<section class="min-height-box">
+        
+        <div class="container">
+            
+            <div class="row">
 
-		<article id="user_panel_normal">
-			<article>
-				<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
-				
-				<article id="logout"><a href="logout.php"><p>Logout</p></a></article>
-			</article>
+                <section id="user_panel_normal" class="user_panel col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <h1 class="col-xs-12">Manage Users Here:</h1>
 
-			<article>
-				<?php
-					if(Session::exists('register')){
-						echo '<p>' . Session::flash('register') . '</p>';
-					}
-				?>
-			</article>
+                    <article class="col-xs-12 feedback-notif">
+                        <?php
+                            if(Session::exists('register')){
+                                echo '<p>' . Session::flash('register') . '</p>';
+                            }
+                        ?>
+                    </article>
 
 
-			<h4>Register New User</h4>
+                    <h4 class="col-xs-12">Register New User</h4>
+                    <form action="" method="POST">
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('username')){
+                                        echo '<p>' . Session::flash('username') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="username" class="col-xs-12">Username</label>
+                            <input type="text" class="col-xs-8 col-sm-5" name="username" id="username" value="" autocomplete="off" />
+                        </div>
 
-			<form action="" method="POST">
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('username')){
-								echo '<p class="error">' . Session::flash('username') . '</p>';
-							}
-						?>
-					</article>
-					<label for="username">Username</label>
-					<input type="text" name="username" id="username" value="" autocomplete="off" />
-				</div>
-				
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('name')){
-								echo '<p class="error">' . Session::flash('name') . '</p>';
-							}
-						?>
-					</article>
-					<label for="name">User's Real Name</label>
-					<input type="text" name="name" id="name" value="" />
-				</div>
-				
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('group')){
-								echo '<p class="error">' . Session::flash('group') . '</p>';
-							}
-						?>
-					</article>
-					<label for="group">User Group</label>
-					<input type="radio" name="group" value="1" />Standard User
-					&nbsp;
-					<input type="radio" name="group" value="2" />Site Admin
-				</div>
-				
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('password')){
-								echo '<p class="error">' . Session::flash('password') . '</p>';
-							}
-						?>
-					</article>
-					<label for="password">Choose a password</label>
-					<input type="password" name="password" id="password" value="" />
-				</div>
-				
-				<div class="field">
-					<article>
-						<?php
-							if(Session::exists('password_again')){
-								echo '<p class="error">' . Session::flash('password_again') . '</p>';
-							}
-						?>
-					</article>
-					<label for="password_again">Enter password again</label>
-					<input type="password" name="password_again" id="password_again" value="" />
-				</div>
-				
-				<div class="field">
-					<input type="hidden" name="token" value="<?php echo Token::generate() ?>" >
-				</div>
-				
-				<input type="submit" value="Register" >
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('name')){
+                                        echo '<p>' . Session::flash('name') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="name" class="col-xs-12">User's Real Name</label>
+                            <input type="text" class="col-xs-8 col-sm-5" name="name" id="name" value="" />
+                        </div>
 
-				
-			</form>
-			<article>
-				<h5><a href="index.php">Cancel</a></h5>
-			</article>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('group')){
+                                        echo '<p>' . Session::flash('group') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="group" class="col-xs-12">User Group</label>
+                            <div class="col-xs-12">
+                                <input type="radio" name="group" value="1" />Standard User
+                                &nbsp;
+                                <input type="radio" name="group" value="2" />Site Admin
+                            </div>
+                        </div>
 
-			<article>
-				<?php
-					if(Session::exists('delete_user')){
-						echo '<p>' . Session::flash('delete_user') . '</p>';
-					}
-				?>
-			</article>
-		</article>
-	</div>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('password')){
+                                        echo '<p>' . Session::flash('password') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="password" class="col-xs-12">Choose a password</label>
+                            <input type="password" class="col-xs-8 col-sm-5" name="password" id="password" value="" />
+                        </div>
 
-	<table id="users_datatable" class="table table-bordered dataTable no-footer" cellspacing="0" width="100%">
-		<thead>
-			<tr>
-				<th>Index</th>
-				<th>Username</th>
-				<th>Name</th>
-				<th>Joined</th>
-				<th>Group</th>
-			</tr>
-		</thead>
-	</table>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('password_again')){
+                                        echo '<p>' . Session::flash('password_again') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="password_again" class="col-xs-12">Enter password again</label>
+                            <input type="password" class="col-xs-8 col-sm-5" name="password_again" id="password_again" value="" />
+                        </div>
+                        
+                        <div class="col-xs-12 field">
+                            <input type="submit" value="Register"  class="col-xs-4 col-sm-2" />
+                            <input type="hidden" name="token" value="<?php echo Token::generate() ?>" />
+                        </div>
+
+                    </form>
+
+                    <article class="col-xs-12 feedback-notif">
+                        <?php
+                            if(Session::exists('delete_user')){
+                                echo '<p>' . Session::flash('delete_user') . '</p>';
+                            }
+                        ?>
+                    </article>
+                </section>
+	
+
+                <table id="users_datatable" class="table table-bordered dataTable no-footer" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Joined</th>
+                            <th>Group</th>
+                        </tr>
+                    </thead>
+                </table>
+                
+            </div>
+        
+        </div>
+        
+    </section>
 
 <?php
 	include_once "includes/user_footer.php";

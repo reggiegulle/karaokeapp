@@ -8,12 +8,13 @@ $(document).ready(function () {
 */
     
     //helper vars
-    var vidOfflineNotif = '<div class="offline-notification">Sorry, video is unavailable</div>',
+    var vidOfflineNotif = '<div class="offline-notification"><img src="images/no-video-black-with-text-320x180.jpg" width="160px" height="90px" alt="No-video-available" title="Video is unavailable"></div>',
     /*
     * START
     * content of the 'custom_filter_section'
     */
         search_icon = '<img src="images/search_icon.png" width="32px" height="32px" alt="search icon" id="search-icon" />',
+        search_reset_button = '<button id="search_reset" class="filter-reset-button">X</button>',
     /*
     * END
     * content of the 'custom_filter_section'
@@ -52,7 +53,7 @@ $(document).ready(function () {
     custom_filter_section += '<span class="icon-bar"></span>';
     custom_filter_section += '<span class="icon-bar"></span>';
     custom_filter_section += '</button>';
-    custom_filter_section += '<a class="navbar-brand" href="#">Filters</a>';
+    custom_filter_section += '<div class="navbar-brand">Filters</div>';
     custom_filter_section += '</div>';
     custom_filter_section += '<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">';
     custom_filter_section += '<ul id="custom-filter" class="nav navbar-nav col-xs-12">';
@@ -199,7 +200,7 @@ $(document).ready(function () {
                 data.registered = registered;
 			}
 		},
-		"dom": "<\"col-xs-12\"f<\"#search_reset\">><\"col-xs-12 navbar navbar-default\" <\"custom-filter-container container-fluid\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><\"col-xs-12\"t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
+		"dom": "f<\"col-xs-12 navbar navbar-default\" <\"custom-filter-container\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs": [
             {"orderable": false, "targets": [3, 10]},
@@ -216,9 +217,6 @@ $(document).ready(function () {
 		"sPaginationType": "listbox",
         "drawCallback": prepareVideosTable
     }).fnFilterOnReturn();
-    
-    //assign a title-attribute to the #search-reset element
-    $('#search_reset').attr('title', 'Reset Search').html('X');
     
     //assign HTML content to the .custom-filter-container class
     $('div.custom-filter-container').html(custom_filter_section);
@@ -348,7 +346,7 @@ $(document).ready(function () {
             else if ($('#videos_datatable tbody tr td.dataTables_empty').length > 0) {
                 //form a new li element
                 //to appear as an error notification
-                var karaokedesclistitem = '<li>';
+                var karaokedesclistitem = '<li class="desclistempty">';
                     karaokedesclistitem += 'Sorry, No Info To Show';
                     karaokedesclistitem += '</li>';
                 
@@ -380,13 +378,13 @@ $(document).ready(function () {
         //"Search" text of the
         //input search field
         $('#videos_datatable_filter.dataTables_filter label')
-        .contents()
-        .filter(function () {
-            //find the only node item
-            //that is of type 'text'
-            return this.nodeType === 3; 
-        })
-        .remove();
+            .contents()
+            .filter(function () {
+                //find the only node item
+                //that is of type 'text'
+                return this.nodeType === 3; 
+            })
+            .remove();
         
         //add a custom PNG
         //search icon to
@@ -394,6 +392,14 @@ $(document).ready(function () {
         //the input search field
         if ($('#search-icon').length === 0) {
             $('#videos_datatable_filter.dataTables_filter label').prepend(search_icon);    
+        }
+        
+        //add a custom 
+        //'search reset' button
+        //right after
+        //the input search field
+        if ($('#search_reset').length === 0) {
+            $('#videos_datatable_filter.dataTables_filter label').append(search_reset_button);    
         }
         
         //grab the values/options
@@ -457,10 +463,15 @@ $(document).ready(function () {
                 thisRow.attr('data-index_position', video_index - 1);
                 var rowData = videos_datatable.row(thisRow).data();
                 addOfflineNotif('videos_datatable', rowData, thisRow);
-                
-                /*('<p>' + indexdata + '</p><a href="update_video.php?id=' + video_index + '"><p>Edit Video Details</p></a><a href="delete_video.php?video_id=' + videoiddata + '&song_title=' + songtitle_join + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>');*/
             });    
         } 
+        
+        //make the search reset button
+        //functional
+        $('#search_reset').on('click', function () {
+            $('.form-control.input-sm').val('');
+            videos_datatable.search('').draw();
+        });
     }
     /*
     * functions to be invoked
@@ -469,43 +480,63 @@ $(document).ready(function () {
     * END
     */
     
-    /*
+    /* 
     * START
-    * links to MySQL C-R-U-D pages
-    * to be added to the videos table
-    * if user has sufficient
-    * privileges
+    * behaviour
+    * on every videos table render
     */
-    if (registered === 'green') {
-        //on every videos table render
-        videos_datatable.on('draw.dt', function () {
-            $('#videos_datatable tbody tr').each(function () {
-                //assign helper vars
-                var thisRow = $(this),
-                    rowData = videos_datatable.row(thisRow).data(),
-                    song_db_id = rowData[1],
-                    songtitle = rowData[0],
-                    songtitlesplit = rowData[0].split(' '),
-                    songtitlejoin = songtitlesplit.join('+'),
-                    //get the datatable row Node object
-                    firstNode = videos_datatable.cell(this, 0).node();
-                
-                //assemble the links
-                //to be added to each table row
-                var crudLinks = '<p>' + songtitle + '</p>';
-                    crudLinks += '<a href="update_video.php?id=' + song_db_id + '">Edit Video Details</a>';
-                    crudLinks += '<a href="delete_video.php?video_id=' + song_db_id + '&song_title=' + songtitlejoin + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>';
-                
-                //add the links
-                $(firstNode).html(crudLinks);
-            });
+    videos_datatable.on('draw.dt', function () {
+        //links to MySQL C-R-U-D pages
+        //to be added to the videos table
+        //if user has sufficient
+        //privileges
+        if (registered === 'green') {
+            if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
+                $('#videos_datatable tbody tr').each(function () {
+                    //assign helper vars
+                    var thisRow = $(this),
+                        rowData = videos_datatable.row(thisRow).data(),
+                        song_db_id = rowData[1],
+                        songtitle = rowData[0],
+                        songtitlesplit = rowData[0].split(' '),
+                        songtitlejoin = songtitlesplit.join('+'),
+                        //get the datatable row Node object
+                        firstNode = videos_datatable.cell(this, 0).node();
+
+                    //assemble the links
+                    //to be added to each table row
+                    var crudLinks = '<p>' + songtitle + '</p>';
+                        crudLinks += '<a href="update_video.php?id=' + song_db_id + '">Edit Video Details</a>';
+                        crudLinks += '<a href="delete_video.php?video_id=' + song_db_id + '&song_title=' + songtitlejoin + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>';
+
+                    //add the links
+                    $(firstNode)
+                        .html(crudLinks)
+                        .css({
+                            'background-color': 'white',
+                            'box-shadow': 'none'
+                        });
+                });    
+            }
+        }
+        
+        //set the style
+        //of the filter toggle button
+        //contents
+        $('.navbar-toggle').mouseenter(function () {
+            $('.icon-bar').css({
+                'background-color': 'rgb(51, 255, 255)'        
+            });    
         });
-    }
-    /*
-    * links to MySQL C-R-U-D pages
-    * to be added to the videos table
-    * if user has sufficient
-    * privileges
+        $('.navbar-toggle').mouseleave(function () {
+            $('.icon-bar').css({
+                'background-color': 'white'        
+            });    
+        });
+    });
+    /* 
+    * behaviour
+    * on every videos table render
     * END
     */
     
@@ -537,20 +568,6 @@ $(document).ready(function () {
             $('#info-buttons ul li#showinfo').show();
         }
     });
-    
-    //make the search reset button
-    //functional
-    $('#search_reset').on('click', function () {
-        $('.form-control.input-sm').val('');
-        videos_datatable.search('').draw();
-    });
-	
-    //clicking the 'Reset' button
-    //beside the search input
-    //will reset the table
-	$('#search-reset').click(function () {
-		videos_datatable.search('').draw();
-	});
 	
 	//Custom filters
 	$('#decade-filter').change(function () {
