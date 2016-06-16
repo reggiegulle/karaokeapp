@@ -53,7 +53,7 @@ $(document).ready(function () {
     custom_filter_section += '<span class="icon-bar"></span>';
     custom_filter_section += '<span class="icon-bar"></span>';
     custom_filter_section += '</button>';
-    custom_filter_section += '<a class="navbar-brand" href="#">Filters</a>';
+    custom_filter_section += '<div class="navbar-brand">Filters</div>';
     custom_filter_section += '</div>';
     custom_filter_section += '<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">';
     custom_filter_section += '<ul id="custom-filter" class="nav navbar-nav col-xs-12">';
@@ -200,7 +200,7 @@ $(document).ready(function () {
                 data.registered = registered;
 			}
 		},
-		"dom": "f<\"col-xs-12 navbar navbar-default\" <\"custom-filter-container container-fluid\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
+		"dom": "f<\"col-xs-12 navbar navbar-default\" <\"custom-filter-container\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
 		"responsive" : true,
 		"columnDefs": [
             {"orderable": false, "targets": [3, 10]},
@@ -346,7 +346,7 @@ $(document).ready(function () {
             else if ($('#videos_datatable tbody tr td.dataTables_empty').length > 0) {
                 //form a new li element
                 //to appear as an error notification
-                var karaokedesclistitem = '<li>';
+                var karaokedesclistitem = '<li class="desclistempty">';
                     karaokedesclistitem += 'Sorry, No Info To Show';
                     karaokedesclistitem += '</li>';
                 
@@ -480,16 +480,17 @@ $(document).ready(function () {
     * END
     */
     
-    /*
+    /* 
     * START
-    * links to MySQL C-R-U-D pages
-    * to be added to the videos table
-    * if user has sufficient
-    * privileges
+    * behaviour
+    * on every videos table render
     */
-    if (registered === 'green') {
-        //on every videos table render
-        videos_datatable.on('draw.dt', function () {
+    videos_datatable.on('draw.dt', function () {
+        //links to MySQL C-R-U-D pages
+        //to be added to the videos table
+        //if user has sufficient
+        //privileges
+        if (registered === 'green') {
             if ($('#videos_datatable tbody tr td.dataTables_empty').length < 1) {
                 $('#videos_datatable tbody tr').each(function () {
                     //assign helper vars
@@ -509,16 +510,33 @@ $(document).ready(function () {
                         crudLinks += '<a href="delete_video.php?video_id=' + song_db_id + '&song_title=' + songtitlejoin + '" onclick="return confirm(\'Are You Sure?\')"><p>Delete Video</p></a>';
 
                     //add the links
-                    $(firstNode).html(crudLinks);
+                    $(firstNode)
+                        .html(crudLinks)
+                        .css({
+                            'background-color': 'white',
+                            'box-shadow': 'none'
+                        });
                 });    
             }
+        }
+        
+        //set the style
+        //of the filter toggle button
+        //contents
+        $('.navbar-toggle').mouseenter(function () {
+            $('.icon-bar').css({
+                'background-color': 'rgb(51, 255, 255)'        
+            });    
         });
-    }
-    /*
-    * links to MySQL C-R-U-D pages
-    * to be added to the videos table
-    * if user has sufficient
-    * privileges
+        $('.navbar-toggle').mouseleave(function () {
+            $('.icon-bar').css({
+                'background-color': 'white'        
+            });    
+        });
+    });
+    /* 
+    * behaviour
+    * on every videos table render
     * END
     */
     

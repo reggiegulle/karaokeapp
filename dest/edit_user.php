@@ -54,12 +54,7 @@ $user = new User();
 			} catch(Exception $e){
 				die($e->getMessage());
 			}
-		}/*else{
-			//echo errors
-			foreach($validation->errors() as $error){
-				echo '<p class="error">' . $error . '</p><br />';
-			}
-		}*/
+		}
 	}
 ?>
 
@@ -69,76 +64,86 @@ $user = new User();
 
 	include_once "includes/user_htmlHead.php";
 ?>
+
 <body>
+    
 <?php
 	include_once "includes/user_section_header.php";
 ?>
 
-<div id="wrapper">
+<section class="min-height-box">
+        
+        <div class="container">
+            
+            <div class="row">
 
-	<article id="user_panel_normal" class="user_panel">
+                <section id="user_panel_normal" class="user_panel col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+                    <h2 class="col-xs-12 col-sm-11 col-sm-offset-1">Edit User Profile Details:</h2>
 
-		<p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?>!</a></p>
+                    <p class="col-xs-12 col-sm-10 col-sm-offset-1">To modify the user's existing details, fill-in the user's new details in the fields below.  Then type the user's reset password in the field provided and click "Submit".</p>
 
-		<p>To modify the user's existing details, fill-in the user's new details in the fields below.  Then type the user's reset password in the field provided and click "Submit".</p>
-
-		<article>
-			<?php
-				if(Session::exists('edit_karaokeuser_success')){
-					echo '<p>' . Session::flash('edit_karaokeuser_success') . '</p>';
-				}
-			?>
-		</article>
+                    <article class="col-xs-12 col-sm-10 col-sm-offset-1 feedback-notif">
+                        <?php
+                            if(Session::exists('edit_karaokeuser_success')){
+                                echo '<p>' . Session::flash('edit_karaokeuser_success') . '</p>';
+                            }
+                        ?>
+                    </article>
 
 
-		<form action="" method="POST">
-			<div class="field">
-				<article>
-					<?php
-						if(Session::exists('username')){
-							echo '<p class="error">' . Session::flash('username') . '</p>';
-						}
-					?>
-				</article>
-				<label for="name">Username</label>
-				<input type="text" name="username" value="<?php echo escape($karaoke_user_data->username); ?>" />
-			</div>
-			
-			<div class="field">
-				<article>
-					<?php
-						if(Session::exists('name')){
-							echo '<p class="error">' . Session::flash('name') . '</p>';
-						}
-					?>
-				</article>
-				<label for="name">User's Real Name</label>
-				<input type="text" name="name" id="name" value="<?php echo escape($karaoke_user_data->name); ?>" />
-			</div>
+                    <form action="" method="POST"  class="col-xs-12 col-sm-11 col-sm-offset-1">
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">
+                                <?php
+                                    if(Session::exists('username')){
+                                        echo '<p>' . Session::flash('username') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="username" class="col-xs-12">Username</label>
+                            <br />
+                            <input type="text" class="col-xs-10 col-sm-8" name="username" value="<?php echo escape($karaoke_user_data->username); ?>" />
+                        </div>
 
-			<div class="field">
-				<article>
-					<?php
-						if(Session::exists('password')){
-							echo '<p class="error">' . Session::flash('password') . '</p>';
-						}
-					?>
-				</article>
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" autocomplete="off" value="" />
-			</div>	
-				
-			<div class="field">
-				<input type="submit" value="Submit" />
-				<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
-			</div>
-		</form>
-		
-		<p>Back To: <a href="manage_users.php">Users Table</a></p>
-	
-	</article>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif">  
+                                <?php
+                                    if(Session::exists('name')){
+                                        echo '<p>' . Session::flash('name') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="name" class="col-xs-12">User's Real Name</label>
+                            <br />
+                            <input type="text" name="name" id="name" value="<?php echo escape($karaoke_user_data->name); ?>" class="col-xs-10 col-sm-8" />
+                        </div>
 
-</div>
+                        <div class="field">
+                            <article class="col-xs-12 feedback-notif"> 
+                                <?php
+                                    if(Session::exists('password')){
+                                        echo '<p>' . Session::flash('password') . '</p>';
+                                    }
+                                ?>
+                            </article>
+                            <label for="password" class="col-xs-12">Password</label>
+                            <input type="password" name="password" id="password" autocomplete="off" value="" class="col-xs-8 col-sm-8"  />
+                        </div>	
+
+                        <div class="col-xs-12 field">
+                            <input type="submit" value="Submit" class="col-xs-4 col-sm-2" />
+                            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
+                            <a class="col-xs-3 col-sm-2 cancel-button" href="manage_users.php">Cancel</a>
+                        </div>
+                    </form>
+
+                </section>
+
+            </div>
+            
+        </div>
+    
+    </section>
 
 <?php
 	include_once "includes/user_footer.php";

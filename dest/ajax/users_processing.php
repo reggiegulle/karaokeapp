@@ -37,7 +37,10 @@ $columns = [
 
 // SQL server connection information
 $sql_details = [
-
+	'user' => 'xxxxxxxxx',
+	'pass' => 'xxxxxxxxx',
+	'db'   => 'xxxxxxxxx',
+	'host' => 'xxxxxxxxx'
 ];
 
 

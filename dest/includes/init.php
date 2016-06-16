@@ -3,7 +3,20 @@
 session_start();
 
 $GLOBALS['config'] = [
-
+	'mysql' => [
+		'host' => 'xxxxxxxxx',
+		'username' => 'xxxxxxxxx',
+		'password' => 'xxxxxxxxx',
+		'db' => 'xxxxxxxxx'
+	],
+	'remember' => [
+		'cookie_name' => 'xxxxxxxxx',
+		'cookie_expiry' => 'xxxxxxxxx'
+	],
+	'session' => [
+		'session_name' => 'xxxxxxxxx',
+		'token_name' => 'xxxxxxxxx'
+	]
 ];
 
 spl_autoload_register(function($class){
