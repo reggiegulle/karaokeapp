@@ -15,14 +15,18 @@
 <meta name="twitter:creator:id" content="Reggie Gulle">
 <meta name="twitter:title" content="Renegade Karaoke!">
 <meta name="twitter:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs!">
-<meta name="twitter:image:src" content="http://www.renegade-karaoke.com/images/rk-fb-og.png">
+<meta name="twitter:image:src" content="http://www.renegade-karaoke.com/images/king-and-queen-of-hearts-fb.jpg">
+<meta name="twitter:image:alt" content="King-and-Queen-of-Hearts-Karaoke-image">
 <!--FB OG-->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Renegade Karaoke!"/>
 <meta property="og:site_name" content="Renegade Karaoke"/>
 <meta property="og:url" content="http://www.renegade-karaoke.com/"/>
 <meta property="og:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
-<meta property="og:image" content="http://www.renegade-karaoke.com/images/rk-fb-og.png"/>
+<meta property="og:image" content="http://www.renegade-karaoke.com/images/king-and-queen-of-hearts-fb.jpg"/>
+<meta property="og:image:type" content="image/jpeg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
 <meta property="fb:app_id" content="412347942245523"/>
 <title>Renegade Karaoke</title>
 <!--Set the window's initial width -->

@@ -4,18 +4,18 @@ session_start();
 
 $GLOBALS['config'] = [
 	'mysql' => [
-		'host' => 'xxxxxxxxx',
-		'username' => 'xxxxxxxxx',
-		'password' => 'xxxxxxxxx',
-		'db' => 'xxxxxxxxx'
+		'host' => 'xxxxxxxx',
+		'username' => 'xxxxxxxx',
+		'password' => 'xxxxxxxx',
+		'db' => 'xxxxxxxx'
 	],
 	'remember' => [
-		'cookie_name' => 'xxxxxxxxx',
-		'cookie_expiry' => 'xxxxxxxxx'
+		'cookie_name' => 'hash',
+		'cookie_expiry' => '604800'
 	],
 	'session' => [
-		'session_name' => 'xxxxxxxxx',
-		'token_name' => 'xxxxxxxxx'
+		'session_name' => 'user',
+		'token_name' => 'token'
 	]
 ];
 
