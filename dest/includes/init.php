@@ -4,10 +4,17 @@ session_start();
 
 $GLOBALS['config'] = [
 	'mysql' => [
+<<<<<<< HEAD
 		'host' => 'xxxxxxxx',
 		'username' => 'xxxxxxxx',
 		'password' => 'xxxxxxxx',
 		'db' => 'xxxxxxxx'
+=======
+		'host' => 'xxxxxxxxxxx',
+		'username' => 'xxxxxxxxxxx',
+		'password' => 'xxxxxxxxxxxxx',
+		'db' => 'xxxxxxxxxxxx'
+>>>>>>> refs/remotes/origin/styling
 	],
 	'remember' => [
 		'cookie_name' => 'hash',

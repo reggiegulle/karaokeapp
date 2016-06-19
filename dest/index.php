@@ -140,16 +140,19 @@
                     </ul>
                     <div id="logout" class="col-xs-12 col-sm-4">
                         <a href="logout.php" class="strong">Logout</a>
-                    </div>                
+                    </div>
+                    
+                    <article class="col-xs-12 feedback-notif">
                 <?php
                     if(Session::exists('edit_user_success')){
-                        echo '<div class="col-xs-12">' . Session::flash('edit_user_success') . '</div>';
+                        echo '<p>' . Session::flash('edit_user_success') . '</p>';
                     }
 
                     if(Session::exists('edit_user_pwd_success')){
-                        echo '<div class="col-xs-12">' . Session::flash('edit_user_pwd_success') . '</div>';
+                        echo '<p>' . Session::flash('edit_user_pwd_success') . '</p>';
                     }
                 ?>
+                    </article>
                 </article>
                 <?php
                     }

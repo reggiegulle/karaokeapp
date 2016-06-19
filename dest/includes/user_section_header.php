@@ -26,7 +26,7 @@
         ?>
             </ul>
             <div id="logout" class="col-xs-12 col-sm-4">
-                <a href="logout.php">Logout</a>
+                <a href="logout.php" class="strong">Logout</a>
             </div>
             
             <article class="col-xs-12 feedback-notif">

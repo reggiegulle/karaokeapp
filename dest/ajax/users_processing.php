@@ -37,10 +37,17 @@ $columns = [
 
 // SQL server connection information
 $sql_details = [
+<<<<<<< HEAD
 	'user' => 'xxxxxxxx',
 	'pass' => 'xxxxxxxx',
 	'db'   => 'xxxxxxxx',
 	'host' => 'xxxxxxxx'
+=======
+	'user' => 'xxxxxxxxxx',
+	'pass' => 'xxxxxxxxxx',
+	'db'   => 'xxxxxxxxxx',
+	'host' => 'xxxxxxxxxx'
+>>>>>>> refs/remotes/origin/styling
 ];
 
 
