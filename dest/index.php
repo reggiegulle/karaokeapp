@@ -62,11 +62,11 @@
 <script type="text/javascript">
 <?php
     if ($user->isLoggedIn()) {
-        echo 'var registered = "green";';   
-    } else {
+        echo 'var registered = "green";';    
+    } else if (!$user->isLoggedIn()) {
         echo 'var registered = "black";';
     }
-?>    
+?>     
 </script>
 <!--Bootstrap JS--> 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
