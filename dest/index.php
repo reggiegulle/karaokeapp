@@ -160,13 +160,13 @@
             </section>
 
            <section class="row">
-                <section id="karaoke-slider-1-container" class="col-xs-12">
-                    <article id="karaoke-slider-1"></article>
-                    <div class="custom-bx-prev"></div>
-                    <div class="custom-bx-next"></div>
-                </section>
-
-                <section id="titlelist-container" class="col-xs-12">
+                <div class="col-xs-12">
+                    <section id="karaoke-slider-1-container">
+                        <article id="karaoke-slider-1"></article>
+                    </section>
+                </div>
+                
+                <section id="titlelist-container">
                     <ul id="karaoketitlelist">
                     </ul>
                 </section>
@@ -177,12 +177,13 @@
                         <li id="hideinfo">HIDE INFO</li>
                     </ul>
                 </article>
-
-                <section id="desclist-container" class="col-xs-12">
-                    <ul id="karaokedesclist">
-                    </ul>
-                </section>
-
+                
+                <div class="col-xs-12">
+                    <section id="desclist-container">
+                        <ul id="karaokedesclist">
+                        </ul>
+                    </section>
+                </div>
 
                 <section id="karaoke-slider-2-container" class="col-xs-12">
                     <ul id="karaoke-slider-2">	

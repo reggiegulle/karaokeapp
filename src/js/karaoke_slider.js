@@ -438,10 +438,6 @@ $(document).ready(function () {
                 auto: true,
                 pager: false,
                 infiniteLoop: true,
-                nextSelector: $('div.custom-bx-next'),
-                prevSelector: $('div.custom-bx-prev'),
-                nextText: '&rang;',
-                prevText: '&lang;',
                 hideControlOnEnd: true,
                 pause: 7000,
                 onSliderLoad: function (currentIndex) {

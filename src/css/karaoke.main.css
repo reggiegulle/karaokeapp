@@ -233,167 +233,19 @@ body {
     padding-bottom: 5px;
   }
 }
-#karaoke-slider-1-container .custom-bx-prev {
-  position: absolute;
-  top: 50%;
-  height: 64px;
-  margin-top: -32px;
+#karaoke-slider-1-container .bx-wrapper .bx-prev {
   left: 10px;
-  padding-left: 10px;
-  padding-bottom: 5px;
-  padding-right: 5px;
-  border-radius: 0px 5px 5px 0px;
+  background: url('../images/bx-controls-ver.02.png') no-repeat 0 -32px;
 }
-#karaoke-slider-1-container .custom-bx-prev:hover a {
-  color: white;
+#karaoke-slider-1-container .bx-wrapper .bx-prev:hover {
+  background-position: 0 0;
 }
-#karaoke-slider-1-container .custom-bx-prev a {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 45px;
-  text-decoration: none;
-  color: black;
-  line-height: 1.3;
-}
-#karaoke-slider-1-container .custom-bx-prev a:hover {
-  color: white;
-  outline: none;
-  text-decoration: none;
-}
-#karaoke-slider-1-container .custom-bx-prev a:focus {
-  outline: none;
-}
-@media only screen and (max-width: 600px) {
-  #karaoke-slider-1-container .custom-bx-prev {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+50&0+0,0.7+50 */
-    background: -moz-linear-gradient(left, rgba(247, 166, 86, 0) 0%, rgba(247, 166, 86, 0.7) 50%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(247, 166, 86, 0) 0%, rgba(247, 166, 86, 0.7) 50%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(247, 166, 86, 0) 0%, rgba(247, 166, 86, 0.7) 50%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00f7a656', endColorstr='#b3f7a656', GradientType=1);
-    /* IE6-9 */
-  }
-}
-@media only screen and (min-width: 601px) {
-  #karaoke-slider-1-container .custom-bx-prev {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+100&0+0,0.7+37 */
-    background: -moz-linear-gradient(left, rgba(247, 166, 86, 0) 0%, rgba(247, 166, 86, 0.7) 37%, rgba(247, 166, 86, 0.7) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(247, 166, 86, 0) 0%, rgba(247, 166, 86, 0.7) 37%, rgba(247, 166, 86, 0.7) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(247, 166, 86, 0) 0%, rgba(247, 166, 86, 0.7) 37%, rgba(247, 166, 86, 0.7) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00f7a656', endColorstr='#b3f7a656', GradientType=1);
-    /* IE6-9 */
-  }
-}
-@media only screen and (max-width: 600px) {
-  #karaoke-slider-1-container .custom-bx-prev:hover {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+50&0+0,1+50 */
-    background: -moz-linear-gradient(left, rgba(247, 166, 86, 0) 0%, #f7a656 50%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(247, 166, 86, 0) 0%, #f7a656 50%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(247, 166, 86, 0) 0%, #f7a656 50%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00f7a656', endColorstr='#f7a656', GradientType=1);
-    /* IE6-9 */
-  }
-}
-@media only screen and (min-width: 601px) {
-  #karaoke-slider-1-container .custom-bx-prev:hover {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+100&0+0,1+37 */
-    background: -moz-linear-gradient(left, rgba(247, 166, 86, 0) 0%, #f7a656 37%, #f7a656 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(247, 166, 86, 0) 0%, #f7a656 37%, #f7a656 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(247, 166, 86, 0) 0%, #f7a656 37%, #f7a656 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00f7a656', endColorstr='#f7a656', GradientType=1);
-    /* IE6-9 */
-  }
-}
-#karaoke-slider-1-container .custom-bx-next {
-  position: absolute;
-  top: 50%;
-  height: 64px;
-  margin-top: -32px;
+#karaoke-slider-1-container .bx-wrapper .bx-next {
   right: 10px;
-  padding-right: 10px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  border-radius: 5px 0px 0px 5px;
+  background: url('../images/bx-controls-ver.02.png') no-repeat -43px -32px;
 }
-#karaoke-slider-1-container .custom-bx-next:hover a {
-  color: white;
-}
-#karaoke-slider-1-container .custom-bx-next a {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 45px;
-  text-decoration: none;
-  color: black;
-  line-height: 1.3;
-}
-#karaoke-slider-1-container .custom-bx-next a:hover {
-  color: white;
-  outline: none;
-  text-decoration: none;
-}
-#karaoke-slider-1-container .custom-bx-next a:focus {
-  outline: none;
-}
-@media only screen and (max-width: 600px) {
-  #karaoke-slider-1-container .custom-bx-next {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+50&0.7+50,0+100 */
-    background: -moz-linear-gradient(left, rgba(247, 166, 86, 0.7) 0%, rgba(247, 166, 86, 0.7) 50%, rgba(247, 166, 86, 0) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(247, 166, 86, 0.7) 0%, rgba(247, 166, 86, 0.7) 50%, rgba(247, 166, 86, 0) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(247, 166, 86, 0.7) 0%, rgba(247, 166, 86, 0.7) 50%, rgba(247, 166, 86, 0) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b3f7a656', endColorstr='#00f7a656', GradientType=1);
-    /* IE6-9 */
-  }
-}
-@media only screen and (min-width: 601px) {
-  #karaoke-slider-1-container .custom-bx-next {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+100&0.7+63,0+100 */
-    background: -moz-linear-gradient(left, rgba(247, 166, 86, 0.7) 0%, rgba(247, 166, 86, 0.7) 63%, rgba(247, 166, 86, 0) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(247, 166, 86, 0.7) 0%, rgba(247, 166, 86, 0.7) 63%, rgba(247, 166, 86, 0) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(247, 166, 86, 0.7) 0%, rgba(247, 166, 86, 0.7) 63%, rgba(247, 166, 86, 0) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b3f7a656', endColorstr='#00f7a656', GradientType=1);
-    /* IE6-9 */
-  }
-}
-@media only screen and (max-width: 600px) {
-  #karaoke-slider-1-container .custom-bx-next:hover {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+50&1+50,0+100 */
-    background: -moz-linear-gradient(left, #f7a656 0%, #f7a656 50%, rgba(247, 166, 86, 0) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #f7a656 0%, #f7a656 50%, rgba(247, 166, 86, 0) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #f7a656 0%, #f7a656 50%, rgba(247, 166, 86, 0) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7a656', endColorstr='#00f7a656', GradientType=1);
-    /* IE6-9 */
-  }
-}
-@media only screen and (min-width: 601px) {
-  #karaoke-slider-1-container .custom-bx-next:hover {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7a656+0,f7a656+100&1+63,0+100 */
-    background: -moz-linear-gradient(left, #f7a656 0%, #f7a656 63%, rgba(247, 166, 86, 0) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #f7a656 0%, #f7a656 63%, rgba(247, 166, 86, 0) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #f7a656 0%, #f7a656 63%, rgba(247, 166, 86, 0) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7a656', endColorstr='#00f7a656', GradientType=1);
-    /* IE6-9 */
-  }
+#karaoke-slider-1-container .bx-wrapper .bx-next:hover {
+  background-position: -43px 0px;
 }
 /*
 * karaoke-slider-1 styles
@@ -696,85 +548,95 @@ END
 .filter-reset-button:focus {
   outline: none;
 }
-#videos_datatable_wrapper div.dataTables_length,
-#videos_datatable_wrapper div.dataTables_paginate {
+@media only screen and (max-width: 767px) {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_info {
+    white-space: normal;
+  }
+}
+@media only screen and (min-width: 768px) {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_info {
+    white-space: nowrap;
+  }
+}
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_length,
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_paginate {
   color: white;
 }
 @media only screen and (max-width: 600px) {
-  #videos_datatable_wrapper div.dataTables_length,
-  #videos_datatable_wrapper div.dataTables_paginate {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_length,
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_paginate {
     text-shadow: 1px 1px 2px #000, -1px 1px 2px #000, 1px -1px 2px #000, -1px -1px 2px #000;
   }
 }
 @media only screen and (min-width: 601px) {
-  #videos_datatable_wrapper div.dataTables_length,
-  #videos_datatable_wrapper div.dataTables_paginate {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_length,
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_paginate {
     text-shadow: 1px 1px 2px #000, -1px 1px 2px #000, 1px -1px 2px #000, -1px -1px 2px #000, 2px 2px 3px #000, -2px 2px 3px #000, 2px -2px 3px #000, -2px -2px 3px #000, 3px 3px 4px #000, -3px 3px 4px #000, 3px -3px 4px #000, -3px -3px 4px #000;
   }
 }
 @media only screen and (max-width: 767px) {
-  #videos_datatable_wrapper div.dataTables_length {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_length {
     margin-top: 10px;
   }
 }
 @media only screen and (min-width: 768px) {
-  #videos_datatable_wrapper div.dataTables_length {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_length {
     margin-top: 0px;
   }
 }
-#videos_datatable_wrapper div.col-sm-4 > #videos_datatable_paginate.dataTables_paginate.paging_listbox {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.col-sm-4 > #videos_datatable_paginate.dataTables_paginate.paging_listbox {
   margin-bottom: 12px;
 }
 @media only screen and (max-width: 767px) {
-  #videos_datatable_wrapper div.col-sm-4 > #videos_datatable_paginate.dataTables_paginate.paging_listbox {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.col-sm-4 > #videos_datatable_paginate.dataTables_paginate.paging_listbox {
     padding-top: 10px;
   }
 }
 @media only screen and (min-width: 768px) {
-  #videos_datatable_wrapper div.col-sm-4 > #videos_datatable_paginate.dataTables_paginate.paging_listbox {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.col-sm-4 > #videos_datatable_paginate.dataTables_paginate.paging_listbox {
     padding-top: 0px;
   }
 }
-#videos_datatable_wrapper div.dataTables_filter {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_filter {
   margin-bottom: 10px;
 }
-#videos_datatable_wrapper div.dataTables_filter input {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.dataTables_filter input {
   vertical-align: middle;
 }
-#videos_datatable_wrapper div.navbar.navbar-default {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default {
   background-image: none;
   background-color: #e3e3e3;
   box-shadow: inset 0px 0px 12px #787D7D;
 }
 @media only screen and (max-width: 767px) {
-  #videos_datatable_wrapper div.navbar.navbar-default {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default {
     min-height: 0px;
     margin-top: 0px;
   }
 }
 @media only screen and (min-width: 768px) {
-  #videos_datatable_wrapper div.navbar.navbar-default {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default {
     min-height: 50px;
     margin-top: 5px;
   }
 }
 @media only screen and (max-width: 767px) {
-  #videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container {
     margin-top: 0px;
   }
 }
 @media only screen and (min-width: 768px) {
-  #videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container {
+  #videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container {
     margin-top: 10px;
   }
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid {
   padding: 0px;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header {
   min-height: 0px;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle {
   border: 0px none;
   color: white;
   box-shadow: inset 0px 0px 2px rgba(255, 255, 255, 0.8);
@@ -798,7 +660,7 @@ END
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#606060', endColorstr='#1f1f1f', GradientType=0);
   /* IE6-8 */
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle:hover {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle:hover {
   color: #33ffff;
   outline: none;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f1f1f+35,606060+90 */
@@ -821,30 +683,30 @@ END
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1f1f1f', endColorstr='#606060', GradientType=0);
   /* IE6-8 */
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle:focus {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle:focus {
   outline: none;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle .icon-bar {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-toggle .icon-bar {
   background-color: white;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-brand,
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-brand:hover {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-brand,
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid .navbar-header .navbar-brand:hover {
   font-size: 17px;
   font-weight: bold;
   color: #333;
   height: auto;
   padding: 15px 15px 0px;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse {
   padding: 0px;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse #custom-filter.nav.navbar-nav {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse #custom-filter.nav.navbar-nav {
   padding: 0px;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse.in {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse.in {
   border-color: #BFBDBD;
 }
-#videos_datatable_wrapper div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse.in #custom-filter.nav.navbar-nav {
+#videos_datatable_wrapper.dataTables_wrapper.form-inline.dt-bootstrap div.navbar.navbar-default div.custom-filter-container #custom-filter-container.container-fluid #bs-navbar-collapse-1.collapse.navbar-collapse.in #custom-filter.nav.navbar-nav {
   margin-left: 0px;
   margin-right: 0px;
   margin-bottom: 9px;
