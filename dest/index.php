@@ -159,41 +159,41 @@
                 ?>	
             </section>
 
+           <section class="row">
+                <section id="karaoke-slider-1-container" class="col-xs-12">
+                    <article id="karaoke-slider-1"></article>
+                    <div class="custom-bx-prev"></div>
+                    <div class="custom-bx-next"></div>
+                </section>
+
+                <section id="titlelist-container" class="col-xs-12">
+                    <ul id="karaoketitlelist">
+                    </ul>
+                </section>
+
+                <article id="info-buttons" class="col-xs-12">
+                    <ul>
+                        <li id="showinfo">SHOW INFO</li>
+                        <li id="hideinfo">HIDE INFO</li>
+                    </ul>
+                </article>
+
+                <section id="desclist-container" class="col-xs-12">
+                    <ul id="karaokedesclist">
+                    </ul>
+                </section>
 
 
-        <section id="karaoke-slider-1-container">
-            <article id="karaoke-slider-1"></article>
-            <div class="custom-bx-prev"></div>
-            <div class="custom-bx-next"></div>
-        </section>
-
-        <section id="titlelist-container">
-            <ul id="karaoketitlelist">
-            </ul>
-        </section>
-
-        <article id="info-buttons">
-            <ul>
-                <li id="showinfo">SHOW INFO</li>
-                <li id="hideinfo">HIDE INFO</li>
-            </ul>
-        </article>
-
-        <section id="desclist-container">
-            <ul id="karaokedesclist">
-            </ul>
-        </section>
-
-
-        <section id="karaoke-slider-2-container">
-            <ul id="karaoke-slider-2">	
-            </ul>
-        </section>
-
-        <div class="bxslider-custom-page-turn-container row">
-            <button id="prev-slider-page" class="col-xs-4 col-sm-2 bxslider-custom-page-turn gradient">Prev Page</button>
-            <button id="next-slider-page" class="col-xs-4 col-xs-offset-8 col-sm-2 col-sm-offset-10 bxslider-custom-page-turn gradient">Next Page</button>
-        </div>
+                <section id="karaoke-slider-2-container" class="col-xs-12">
+                    <ul id="karaoke-slider-2">	
+                    </ul>
+                </section>   
+            </section>
+            
+            <div class="bxslider-custom-page-turn-container row">
+                <button id="prev-slider-page" class="col-xs-4 col-sm-2 bxslider-custom-page-turn gradient">Prev Page</button>
+                <button id="next-slider-page" class="col-xs-4 col-xs-offset-8 col-sm-2 col-sm-offset-10 bxslider-custom-page-turn gradient">Next Page</button>
+            </div>
 
         <?php
             if($user->isLoggedIn()){

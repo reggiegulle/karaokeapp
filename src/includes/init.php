@@ -4,10 +4,10 @@ session_start();
 
 $GLOBALS['config'] = [
 	'mysql' => [
-		'host' => 'xxxxxxxx',
-		'username' => 'xxxxxxxx',
-		'password' => 'xxxxxxxx',
-		'db' => 'xxxxxxxx'
+		'host' => 'xxxxxxx',
+		'username' => 'xxxxxxx',
+		'password' => 'xxxxxxx',
+		'db' => 'xxxxxxx'
 	],
 	'remember' => [
 		'cookie_name' => 'hash',
