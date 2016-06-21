@@ -63,7 +63,7 @@
 <?php
     if ($user->isLoggedIn()) {
         echo 'var registered = "green";';    
-    } else {
+    } else if (!$user->isLoggedIn()) {
         echo 'var registered = "black";';
     }
 ?>    

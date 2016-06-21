@@ -188,35 +188,68 @@ $(document).ready(function () {
     * initialize the dataTable
     * for the karaoke videos
     */
-	$("#videos_datatable").dataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": {
-			'url': 'ajax/table_processing.php',
-			'data': function (data) {
-				data.year_of_release = filter_yr_of_rlse;
-				data.genre = filter_genre;
-				data.country_of_origin = filter_country_origin;
-                data.registered = registered;
-			}
-		},
-		"dom": "f<\"col-xs-12 navbar navbar-default\" <\"custom-filter-container\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
-		"responsive" : true,
-		"columnDefs": [
-            {"orderable": false, "targets": [3, 10]},
-            {"className": "never", "targets": [1, 11]},
-            {"className": "none", "targets": [4, 9, 10]},
-            {"className": "all strong", "targets": [0]},
-            {"className": "all", "targets": [0]},
-            {"className": "all", "targets": [3], "createdCell": addRowImages},
-            {"className": "min-tablet", "targets": [5, 6]},
-            {"className": "min-desktop", "targets": [2, 7, 8]}
-        ],
-        "order": [ 1, 'desc' ],
-		"stateSave": false,
-		"sPaginationType": "listbox",
-        "drawCallback": prepareVideosTable
-    }).fnFilterOnReturn();
+    if (registered === 'black') {
+        $("#videos_datatable").dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                'url': 'ajax/table_processing.php',
+                'data': function (data) {
+                    data.year_of_release = filter_yr_of_rlse;
+                    data.genre = filter_genre;
+                    data.country_of_origin = filter_country_origin;
+                    data.registered = registered;
+                }
+            },
+            "dom": "f<\"col-xs-12 navbar navbar-default\" <\"custom-filter-container\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
+            "responsive" : true,
+            "columnDefs": [
+                {"orderable": false, "targets": [3, 10]},
+                {"className": "never", "targets": [1, 11]},
+                {"className": "none", "targets": [4, 9, 10]},
+                {"className": "all strong", "targets": [0]},
+                {"className": "all", "targets": [0]},
+                {"className": "all", "targets": [3], "createdCell": addRowImages},
+                {"className": "min-tablet", "targets": [5, 6]},
+                {"className": "min-desktop", "targets": [2, 7, 8]}
+            ],
+            "order": [ 1, 'desc' ],
+            "stateSave": false,
+            "sPaginationType": "listbox",
+            "drawCallback": prepareVideosTable
+        }).fnFilterOnReturn();    
+    } else if (registered === 'green') {
+        $("#videos_datatable").dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                'url': 'ajax/table_processing.php',
+                'data': function (data) {
+                    data.year_of_release = filter_yr_of_rlse;
+                    data.genre = filter_genre;
+                    data.country_of_origin = filter_country_origin;
+                    data.registered = registered;
+                }
+            },
+            "dom": "f<\"col-xs-12 navbar navbar-default\" <\"custom-filter-container\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
+            "responsive" : true,
+            "columnDefs": [
+                {"orderable": false, "targets": [3, 10]},
+                {"className": "never", "targets": [1, 11]},
+                {"className": "none", "targets": [4, 9, 10]},
+                {"className": "all strong", "targets": [0]},
+                {"className": "all", "targets": [0]},
+                {"className": "all", "targets": [3], "createdCell": addRowImages},
+                {"className": "min-tablet", "targets": [5, 6]},
+                {"className": "min-desktop", "targets": [2, 7, 8]}
+            ],
+            "order": [ 1, 'desc' ],
+            "stateSave": true,
+            "sPaginationType": "listbox",
+            "drawCallback": prepareVideosTable
+        }).fnFilterOnReturn();    
+    }
+	
     
     //assign HTML content to the .custom-filter-container class
     $('div.custom-filter-container').html(custom_filter_section);

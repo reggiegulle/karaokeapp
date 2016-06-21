@@ -314,7 +314,7 @@ $(document).ready(function () {
             //with the appropriate
             //YouTube iframe embedded player
             //witht the proper video
-            slideIframeContainer.html('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&rel=0&controls=2&rel=0 frameborder="0"&iv_load_policy=3/>');
+            slideIframeContainer.html('<iframe id="ytplayer" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/' + video_id + '?autoplay=1&controls=2&rel=0&iv_load_policy=3" frameborder="0" allowfullscreen/>');
         });    
     } 
     /*
