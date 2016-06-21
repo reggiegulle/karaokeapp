@@ -528,10 +528,6 @@ $(document).ready(function () {
                 auto: false,
                 pager: false,
                 infiniteLoop: false,
-                nextSelector: $('div.custom-bx-next'),
-                prevSelector: $('div.custom-bx-prev'),
-                nextText: '&rang;',
-                prevText: '&lang;',
                 hideControlOnEnd: true,
                 onSliderLoad: function (currentIndex) {
                     //by default, hide the
