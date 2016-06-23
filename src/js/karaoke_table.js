@@ -243,7 +243,8 @@ $(document).ready(function () {
                 {"className": "min-tablet", "targets": [5, 6]},
                 {"className": "min-desktop", "targets": [2, 7, 8]}
             ],
-            "order": [ 1, 'desc' ],
+            "order": [ 0, 'asc' ],
+            "lengthMenu": [ 100, 150 ],
             "stateSave": true,
             "sPaginationType": "listbox",
             "drawCallback": prepareVideosTable
