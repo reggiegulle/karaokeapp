@@ -147,9 +147,11 @@
                     if(Session::exists('edit_user_success')){
                         echo '<p>' . Session::flash('edit_user_success') . '</p>';
                     }
-
                     if(Session::exists('edit_user_pwd_success')){
                         echo '<p>' . Session::flash('edit_user_pwd_success') . '</p>';
+                    }
+                    if(Session::exists('delete')){
+                        echo '<p>' . Session::flash('delete') . '</p>';
                     }
                 ?>
                     </article>
@@ -200,11 +202,6 @@
                 if($user->isLoggedIn()){
             ?>
                     <article class="addnew">
-                        <?php
-                            if(Session::exists('delete')){
-                                echo '<p>' . Session::flash('delete') . '</p>';
-                            }
-                        ?>
                         <a href="add_video.php">Add New Video</a>
                     </article>
             <?php
