@@ -106,18 +106,9 @@ body {
   -webkit-box-shadow: 0 0 8px 2px #f7a656, 0 0 5px 12px #000;
   box-shadow: 0 0 8px 2px #f7a656, 0 0 5px 12px #000;
   border: 5px solid transparent;
+  background: black;
   margin-bottom: 5px;
   border-radius: 6px;
-}
-@media only screen and (max-width: 600px) {
-  #karaoke-slider-1-container .bx-wrapper {
-    background: rgba(247, 166, 86, 0.4);
-  }
-}
-@media only screen and (min-width: 601px) {
-  #karaoke-slider-1-container .bx-wrapper {
-    background: transparent;
-  }
 }
 #karaoke-slider-1-container .bx-wrapper li.no_results {
   max-width: 640px;
