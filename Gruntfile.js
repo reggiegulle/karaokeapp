@@ -83,8 +83,10 @@ module.exports = function(grunt) {
         },
         javascript_files: {
              files: [
+                /*html5shiv*/
+                {src:'bower_components/html5shiv/dist/html5shiv.js', dest: 'src/js/html5shiv.js'},
                 /*Bootstrap js file*/
-                {src:'bower_components/bootstrap/dist/js/bootstrap.js' , dest: 'src/js/bootstrap.js'},
+                {src:'bower_components/bootstrap/dist/js/bootstrap.js', dest: 'src/js/bootstrap.js'},
                 /*DataTables jQuery plug-in js files with bootstrap integration*/
                 {src:'bower_components/datatables.net/js/jquery.dataTables.js', dest: 'src/js/jquery.dataTables.js'},
                 {src:'bower_components/datatables.net-bs/js/dataTables.bootstrap.js' , dest: 'src/js/dataTables.bootstrap.js'},
@@ -140,19 +142,16 @@ module.exports = function(grunt) {
     },
     watch: {
       styles: {
-        files: 'src/css/*.css',
-        tasks: ['default'],
-        options: {
-          event: ['all']
-        }
-      },
+        files: ['src/css/*.less'],
+        tasks: ['less']
+      }/*,
       js_scripts: {
         files: ['src/js/*.js'],
         tasks: ['default'],
         options: {
           event: ['all']
         }
-      }
+      }*/
     }   
     });
   
@@ -161,7 +160,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-  
+    
     grunt.registerTask('default', ['less', 'cssmin', 'uglify']);
 
 };

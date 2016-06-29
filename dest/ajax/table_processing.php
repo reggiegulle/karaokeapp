@@ -48,7 +48,10 @@ $columns = [
 
 // SQL server connection information
 $sql_details = [
-
+	'user' => 'xxxxxxx',
+	'pass' => 'xxxxxxx',
+	'db'   => 'xxxxxxx',
+	'host' => 'xxxxxxx'
 ];
 
 //GET value of the 'logged in' user status

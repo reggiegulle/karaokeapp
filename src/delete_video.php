@@ -32,7 +32,7 @@
 			//echo "Hello World!";
 			try{
 				$video->delete([
-					'video_id', '=' , Input::get('video_id')
+					'id', '=' , Input::get('video_id')
 				]);
 				
 				Session::flash('delete', 'Video for song "' . $song_title . '" has been deleted from the database.');
