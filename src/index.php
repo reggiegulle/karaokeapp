@@ -58,16 +58,6 @@
 <![endif]-->    
 <!--JS files to be minified in deployment-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<!--helper vars-->
-<script type="text/javascript">
-<?php
-    if ($user->isLoggedIn()) {
-        echo 'var registered = "green";';    
-    } else if (!$user->isLoggedIn()) {
-        echo 'var registered = "black";';
-    }
-?>    
-</script>
 <!--Bootstrap JS--> 
 <script src="js/bootstrap.js" type="text/javascript"></script>
 <!--datatables core-->
@@ -84,10 +74,29 @@
 <script src="js/TweenLite.js" type="text/javascript"></script>
 <script src="js/TimelineLite.js" type="text/javascript"></script>
 <script src="js/EasePack.js" type="text/javascript"></script>
-<!--custom JS-->
-<script src="js/karaoke_table.js" type="text/javascript"></script>
-<!--custom slick slider JS-->
-<script src="js/karaoke_slider.js" type="text/javascript"></script>
+<?php
+    if ($user->isLoggedIn()) {
+?>
+        <script type="text/javascript">
+            var registered = 'green';
+        </script>
+        <!--custom JS-->
+        <script src="js/karaoke_table_registered_user.js" type="text/javascript"></script>
+        <!--custom bxslider and youtube JS-->
+        <script src="js/karaoke_bx_and_yT_registered_user.js" type="text/javascript"></script>
+<?php
+    } else if (!$user->isLoggedIn()) {
+?>
+        <script type="text/javascript">
+            var registered = 'black';
+        </script>
+        <!--custom datatable JS-->
+        <script src="js/karaoke_table_non_registered_user.js" type="text/javascript"></script>
+        <!--custom bxslider and youtube JS-->
+        <script src="js/karaoke_bx_and_yT_non_registered_user.js" type="text/javascript"></script>
+<?php
+    }
+?>
 <!--stylejs-->
 <script src="js/karaoke.style.js" type="text/javascript"></script>
 </head>
@@ -115,8 +124,11 @@
                     <li class="col-xs-6">
                         <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a>
                     </li>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    <script>
+                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+                    </script>
                 </ul>
+                
                 <?php
                     //$user = new User();
                     if($user->isLoggedIn()){
@@ -163,8 +175,17 @@
 
             <section class="row">
                 <div class="col-xs-12">
-                    <section id="karaoke-slider-1-container">
-                        <article id="karaoke-slider-1"></article>
+                    <section id="karaoke-player-container">
+                        <article id="prev-arrow" class="player-nav"></article>
+                        <article id="next-arrow" class="player-nav"></article>
+                        <article id="yt-player">
+                        </article>
+                        <article class="karaoke-splash-details-container">
+                            <div class="karaoke-splash-details">
+                                <h4></h4>
+                                <p></p>
+                            </div>
+                        </article>
                     </section>
                 </div>
                 
@@ -187,8 +208,8 @@
                     </section>
                 </div>
 
-                <section id="karaoke-slider-2-container" class="col-xs-12">
-                    <ul id="karaoke-slider-2">	
+                <section id="karaoke-slider-container" class="col-xs-12">
+                    <ul id="karaoke-slider">	
                     </ul>
                 </section>   
             </section>
