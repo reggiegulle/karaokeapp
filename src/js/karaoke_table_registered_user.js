@@ -229,13 +229,12 @@ $(document).ready(function() {
         "responsive" : true,
         "columnDefs": [
             {"orderable": false, "targets": [3, 10]},
-            {"className": "never", "targets": [1, 11]},
-            {"className": "none", "targets": [4, 9, 10]},
-            {"className": "all strong", "targets": [0]},
-            {"className": "all", "targets": [0]},
+            {"className": "never", "targets": [1, 11]}, //ID, Added By
+            {"className": "none", "targets": [4, 9, 10]}, //Composer, Running Time, Lyrics
+            {"className": "all strong", "targets": [0]}, //Song Title 
             {"className": "all", "targets": [3], "createdCell": addRowImages}, //addRowImages is a function for adding img thumbnails to each assigned image-containing table cell
-            {"className": "min-tablet", "targets": [5, 6]},
-            {"className": "min-desktop", "targets": [2, 7, 8]}
+            {"className": "min-tablet", "targets": [2, 6]}, //Performed By, Source Album
+            {"className": "min-desktop", "targets": [5, 7, 8]}// Genre, Year of Release, Country of Origin
         ],
         "order": [ 0, 'asc' ],
         "lengthMenu": [ 100, 150 ],
