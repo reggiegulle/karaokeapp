@@ -245,6 +245,12 @@ $(document).ready(function() {
     
     //assign HTML content to the .custom-sort-and-filter-container class
     $('div.custom-sort-and-filter-container').html(custom_sort_and_filter_section);
+    
+    //make sure that
+    //the value of the 'search' input
+    //for the videos_datatable
+    //is empty when the page is refreshed
+    $('#videos_datatable_filter input.form-control.input-sm').val('');
 	
     //assign a variable to
     //the videos dataTable API instance
