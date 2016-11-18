@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="title" CONTENT="FREE Karaoke Anytime Anywhere | Renegade Karaoke!" />
 <meta name="Description" CONTENT="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
 <link rel="canonical" href="http://www.renegade-karaoke.com" />
 <!--Twitter-->
@@ -19,16 +20,26 @@
 <meta name="twitter:image:alt" content="Feelin-So-Good-Karaoke-image">
 <!--FB OG-->
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Renegade Karaoke!"/>
+<meta property="og:title" content="FREE Karaoke Anytime Anywhere | Renegade Karaoke!"/>
 <meta property="og:site_name" content="Renegade Karaoke"/>
 <meta property="og:url" content="http://www.renegade-karaoke.com/"/>
 <meta property="og:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
-<meta property="og:image" content="http://www.renegade-karaoke.com/images/feelin-so-good.fb.jpg"/>
+<meta property="og:video:url" content="https://www.youtube.com/embed/NSLGVI8vbSM" />
+<meta property="og:video:secure_url" content="https://www.youtube.com/embed/NSLGVI8vbSM" />
+<meta property="og:video:type" content="text/html" />
+<meta property="og:video:width" content="1280" />
+<meta property="og:video:height" content="720" />
+<meta property="og:video:url" content="http://www.youtube.com/v/NSLGVI8vbSM?version=3&autohide=1" >
+<meta property="og:video:secure_url" content="https://www.youtube.com/v/NSLGVI8vbSM?version=3&autohide=1" />
+<meta property="og:video:type" content="application/x-shockwave-flash" />
+<meta property="og:video:width" content="1280" />
+<meta property="og:video:height" content="720" />
+<meta property="og:image" content="http://www.renegade-karaoke.com/images/renkaraoke-Welcom-card.1280x720.jpg"/>
 <meta property="og:image:type" content="image/jpeg"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
+<meta property="og:image:width" content="1280"/>
+<meta property="og:image:height" content="720"/>
 <meta property="fb:app_id" content="412347942245523"/>
-<title>Renegade Karaoke</title>
+<title>FREE Karaoke Anytime Anywhere | Renegade Karaoke!</title>
 <!--Set the window's initial width -->
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!--Separate css files to be minified in deployment-->
@@ -57,7 +68,7 @@
     <script src="js/html5shiv.min.js"></script>
 <![endif]-->
 <!--JS files to be minified in deployment-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!--Bootstrap JS--> 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <!--datatables core-->

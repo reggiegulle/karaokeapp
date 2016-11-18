@@ -107,7 +107,7 @@
     <script src="js/html5shiv.js"></script>
 <![endif]-->
 <!--JS files to be minified in deployment-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
 <!--Bootstrap JS--> 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <!--datatables core-->
