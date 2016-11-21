@@ -13,11 +13,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@reggiegulle">
 <meta name="twitter:creator" content="@reggiegulle">
-<meta name="twitter:creator:id" content="Reggie Gulle">
-<meta name="twitter:title" content="Renegade Karaoke!">
-<meta name="twitter:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs!">
-<meta name="twitter:image:src" content="http://www.renegade-karaoke.com/images/feelin-so-good.fb.jpg">
-<meta name="twitter:image:alt" content="Feelin-So-Good-Karaoke-image">
+<meta name="twitter:creator:id" content="29137205">
+<meta name="twitter:title" content="Visit renegade-karaoke.com, sing, have fun, for FREE!">
+<meta name="twitter:description" content="renegade-karaoke.com || Your ultimate destination for FREE and unlimited access to your favorite karaoke songs!">
+<meta name="twitter:image" content="http://www.renegade-karaoke.com/images/renkaraoke-Welcom-card.1280x720.jpg">
+<meta name="twitter:image:alt" content="A picture showing the webpage of renegade-karaoke.com">
 <!--FB OG-->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="FREE Karaoke Anytime Anywhere | Renegade Karaoke!"/>
@@ -130,13 +130,39 @@
                     <a id="masthead" href="index.php">Renegade Karaoke</a>
                 </h1>
                 <ul id="social-media-buttons" class="row gradient">
+                    
+                    <!--Facebook Like and Share buttons-->
                     <li class="fb-like col-xs-6" data-href="http://www.renegade-karaoke.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" data-width="225px">
                     </li>
+                    
+                    <!--Twitter button-->
                     <li class="col-xs-6">
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a>
+                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large">
+                            Tweet
+                        </a>
                     </li>
+                    
                     <script>
-                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+                        
+                        window.twttr = (function(d, s, id) {
+                            var js, 
+                                fjs = d.getElementsByTagName(s)[0],
+                                t = window.twttr || {};
+                            
+                            if (d.getElementById(id)) return t;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "https://platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+
+                            t._e = [];
+                            t.ready = function(f) {
+                                t._e.push(f);
+                            };
+
+                            return t;
+                        }(document, "script", "twitter-wjs"));
+                        
                     </script>
                 </ul>
                 
