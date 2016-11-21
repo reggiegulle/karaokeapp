@@ -10,7 +10,7 @@
 <meta name="Description" CONTENT="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
 <link rel="canonical" href="http://www.renegade-karaoke.com" />
 <!--Twitter-->
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="player">
 <meta name="twitter:site" content="@reggiegulle">
 <meta name="twitter:creator" content="@reggiegulle">
 <meta name="twitter:creator:id" content="29137205">
@@ -18,6 +18,9 @@
 <meta name="twitter:description" content="renegade-karaoke.com || Your ultimate destination for FREE and unlimited access to your favorite karaoke songs!">
 <meta name="twitter:image" content="http://www.renegade-karaoke.com/images/renkaraoke-Welcom-card.1280x720.jpg">
 <meta name="twitter:image:alt" content="A picture showing the webpage of renegade-karaoke.com">
+<meta name="twitter:player" content="https://www.youtube.com/embed/NSLGVI8vbSM" />
+<meta name="twitter:player:width" content="1280" />
+<meta name="twitter:player:height" content="720" />
 <!--FB OG-->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="FREE Karaoke Anytime Anywhere | Renegade Karaoke!"/>
