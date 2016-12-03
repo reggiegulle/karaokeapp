@@ -8,6 +8,18 @@
 */
 @active-color: rgb(51, 255, 255); //light blue
 
+/*
+* media queries
+* based on bootstrap's less
+* and grid system
+*/
+@screen-xs-max: 767px; //maximum width of a small device (phone)
+@screen-sm-min: 768px; //minimum width of a small screen (tablet)
+@screen-sm-max: 991px; //maximum width of a small screen (tablet)
+@screen-md-min: 992px; //minimum width of a medium screen (small desktop)
+@screen-md-max: 1199px;//maximum width of a medium screen (small desktop)
+@screen-lg-min: 1200px;//minimum width of a large screen (large desktop)
+
 .index-page-control-btns-mixin(){
     border: 0px none;
     color: white;
@@ -435,30 +447,125 @@ END
 #search_reset {
     cursor: pointer;
 	display: inline-block;
-	margin-left: 3px;
+	margin-left: 4px;
     margin-top: 0px;
 	padding: 2px 8px;
     vertical-align: middle;
     border-radius: 4px;
-    height: 32px;
-    width: 32px;
     .index-page-control-btns-mixin;
 }
 
-#custom-sort-and-filter > li {
-    select {
-        vertical-align: middle;
-        margin-top: 1px;
-        @media only screen and (max-width: 767px) {
-            margin-bottom: 5px;
+/*
+* .custom-sort-and-filter-container
+* and children styles
+*/
+.custom-sort-and-filter-container {
+    #custom-sort-and-filter.row {
+        list-style-type: none;
+        padding-left: 0px; //reset the user agent css
+        li {
+            *.panel{
+                background: none;    
+            }
+            &.sort {
+                @media only screen and (max-width: @screen-xs-max) {
+                    text-align: center;
+                    #sort-select-fields {
+                    select {
+                            text-align: center;
+                        }    
+                    }
+                           
+                }
+                @media only screen and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+                    text-align: right;
+
+                }
+                @media only screen and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+                    text-align: right;  
+                }
+                @media only screen and (min-width: @screen-lg-min) {
+                    text-align: right;  
+                }
+                #sort-fields-reveal-button {
+                    .index-page-control-btns-mixin;
+                    margin-bottom: 8px;
+                    &.folded {
+                        @media only screen and (max-width: @screen-xs-max) {
+                            margin-right: 0px;
+                        }
+                        @media only screen and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+                            margin-right: 13.3%;     
+                        }
+                        @media only screen and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+                            margin-right: 10.1%;
+                        }
+                        @media only screen and (min-width: @screen-lg-min) {
+                            margin-right: 8%;
+                        }
+                    }
+                    &.unfolded {
+                        margin-right: 0%;     
+                    }
+                }
+                #sort-fields-hide-and-reset-button {
+                    margin-top: -7px;
+                }
+            }
+            &.filter {
+                ul {
+                    padding-left: 0px;
+                    list-style-type: none;
+                    li {
+                        margin-bottom: 6px;
+                        select {
+                            text-align: right;
+                        }
+                    }
+                }
+                @media only screen and (max-width: @screen-xs-max) {
+                    text-align: center;
+                    select {
+                        text-align: center;
+                    }       
+                }
+                @media only screen and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+                    text-align: right;
+                }
+                @media only screen and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+                    text-align: right;   
+                }
+                @media only screen and (min-width: @screen-lg-min) {
+                    text-align: right;   
+                }
+                #filter-fields-reveal-button {
+                    .index-page-control-btns-mixin;
+                    margin-bottom: 8px;
+                    &.folded {
+                        @media only screen and (max-width: @screen-xs-max) {
+                            margin-right: 0px;
+                        }
+                        @media only screen and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+                            margin-right: 10.1%;     
+                        }
+                        @media only screen and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+                            margin-right: 8%;
+                        }
+                        @media only screen and (min-width: @screen-lg-min) {
+                            margin-right: 6.3%;
+                        }
+                    }
+                    &.unfolded {
+                        margin-right: 0%;     
+
+                    }
+                }
+                #filter-fields-hide-and-reset-button {
+                    margin-top: -7px;
+                }
+            }
         }
-        @media only screen and (min-width: 768px) {
-            margin-bottom: 0px;
-        }
-    }
-    select#fields-for-sorting-videos {
-        margin-bottom: 5px;    
-    }
+    }   
 }
 
 .filter-reset-button {
@@ -506,7 +613,7 @@ END
         margin-bottom: 12px;
     }
     div.dataTables_filter {
-        margin-bottom: 10px;
+        margin-bottom: 3px;
         input {
             vertical-align: middle;
         }    
