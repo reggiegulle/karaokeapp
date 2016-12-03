@@ -9,19 +9,22 @@ $(document).ready(function() {
     
     //helper vars
     var vidOfflineNotif = '<div class="offline-notification"><img src="images/no-video-black-with-text-320x180.jpg" width="160px" height="90px" alt="No-video-available" title="Video is unavailable"></div>',
-    /*
+   /*
     * START
     * content and vars of 
-    * the 'custom_sort_and_filter_section'
+    * the SORT menu of the
+    * 'custom_sort_and_filter_section'
     */
         search_icon = '<img src="images/search_icon.png" width="32px" height="32px" alt="search icon" id="search-icon" />',
         search_reset_button = '<button id="search_reset" class="filter-reset-button">X</button>',
         sort_video_field_val = 'reset',
         order_column = 1,
         order_type = 'desc',
-    /*
+        sort_dropdown_menu_visible = false,
+     /*
     * END
     * content and vars of 
+    * the SORT menu of the
     * the 'custom_sort_and_filter_section'
     */
     /*
@@ -37,7 +40,8 @@ $(document).ready(function() {
         filter_genre = 'reset',
         filter_country_origin = 'reset',
         genre_filter_value = 'reset',
-        country_filter_value = 'reset';
+        country_filter_value = 'reset',
+        filter_dropdown_menu_visible = false;
     /*
     * END
     * utility variables
@@ -52,19 +56,13 @@ $(document).ready(function() {
     * content of the 'custom_sort_and_filter_section'
     */
 	var custom_sort_and_filter_section = '';
-        custom_sort_and_filter_section += '<div class="navbar-header">';
-        custom_sort_and_filter_section += '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">';
-        custom_sort_and_filter_section += '<span class="icon-bar"></span>';
-        custom_sort_and_filter_section += '<span class="icon-bar"></span>';
-        custom_sort_and_filter_section += '<span class="icon-bar"></span>';
-        custom_sort_and_filter_section += '</button>';
-        custom_sort_and_filter_section += '<div class="navbar-brand">Sort Or Filter</div>';
-        custom_sort_and_filter_section += '</div>';
-        custom_sort_and_filter_section += '<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">';
-        custom_sort_and_filter_section += '<ul id="custom-sort-and-filter" class="nav navbar-nav col-xs-12">'
-        custom_sort_and_filter_section += '<li class="sort col-xs-12">';
+        custom_sort_and_filter_section += '<ul id="custom-sort-and-filter" class="row">';
+        custom_sort_and_filter_section += '<li class="sort col-xs-12 col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8 col-lg-4 col-lg-offset-8">';
+        custom_sort_and_filter_section += '<button id="sort-fields-reveal-button" class="btn btn-default folded">Sort</button>';
+        custom_sort_and_filter_section += '<button id="sort-fields-hide-and-reset-button" class="filter-reset-button">X</button>';
+        custom_sort_and_filter_section += '<div id="sort-select-fields" class="panel">';
         custom_sort_and_filter_section += '<select id="fields-for-sorting-videos">';
-        custom_sort_and_filter_section += '<option value="1" selected="selected">-- Sort Videos By --</option>';
+        custom_sort_and_filter_section += '<option value="1" selected="selected">Party Shuffle</option>';
         custom_sort_and_filter_section += '<option value="0">Title</option>';
         custom_sort_and_filter_section += '<option value="2">Performer</option>';
         custom_sort_and_filter_section += '<option value="6">Album</option>';
@@ -80,11 +78,15 @@ $(document).ready(function() {
         custom_sort_and_filter_section += '<option value="asc" selected="selected">Old - New</option>';
         custom_sort_and_filter_section += '<option value="desc">New - Old</option>';
         custom_sort_and_filter_section += '</select>';
-        custom_sort_and_filter_section += '<button id="reset-videos-sorting" class="filter-reset-button">X</button>';
+        custom_sort_and_filter_section += '</div>';
         custom_sort_and_filter_section += '</li>';
-        custom_sort_and_filter_section += '<li class="filter col-xs-12 col-sm-4 col-md-4">';
+        custom_sort_and_filter_section += '<li class="filter col-xs-12 col-sm-5 col-sm-offset-7 col-md-5 col-md-offset-7 col-lg-5 col-lg-offset-7">';
+        custom_sort_and_filter_section += '<button id="filter-fields-reveal-button" class="btn btn-default folded">Filter</button>';
+        custom_sort_and_filter_section += '<button id="filter-fields-hide-and-reset-button" class="filter-reset-button">X</button>';
+        custom_sort_and_filter_section += '<ul id="filter-select-fields" class="panel row">';
+        custom_sort_and_filter_section += '<li class="col-xs-12">';
         custom_sort_and_filter_section += '<select id="decade-filter">';
-        custom_sort_and_filter_section += '<option value="reset" selected="selected">-- Filter By Decade --</option>';
+        custom_sort_and_filter_section += '<option value="reset" selected="selected">Filter By Decade</option>';
         custom_sort_and_filter_section += '<option value="2010">2010s</option>';
         custom_sort_and_filter_section += '<option value="2000">2000s</option>';
         custom_sort_and_filter_section += '<option value="1990">1990s</option>';
@@ -96,18 +98,19 @@ $(document).ready(function() {
         custom_sort_and_filter_section += '</select>';
         custom_sort_and_filter_section += '<button id="reset-decade-filter" class="filter-reset-button">X</button>';
         custom_sort_and_filter_section += '</li>';
-        custom_sort_and_filter_section += '<li class="filter col-xs-12 col-sm-4 col-md-4">';
+        custom_sort_and_filter_section += '<li class="col-xs-12">';
         custom_sort_and_filter_section += '<select id="genre-filter">';
         custom_sort_and_filter_section += '</select>';
         custom_sort_and_filter_section += '<button id="reset-genre-filter" class="filter-reset-button">X</button>';
         custom_sort_and_filter_section += '</li>';
-        custom_sort_and_filter_section += '<li class="filter col-xs-12 col-sm-4 col-md-4">';
+        custom_sort_and_filter_section += '<li class="col-xs-12">';
         custom_sort_and_filter_section += '<select id="country-filter">';
         custom_sort_and_filter_section += '</select>';
         custom_sort_and_filter_section += '<button id="reset-country-filter" class="filter-reset-button">X</button>';
+        custom_sort_and_filter_section += '</li>';
+        custom_sort_and_filter_section += '</ul>';
         custom_sort_and_filter_section += '</li>';  
         custom_sort_and_filter_section += '</ul>';
-        custom_sort_and_filter_section += '</div>';
     /*
     * END
     * content of the 'custom_sort_and_filter_section'
@@ -225,7 +228,7 @@ $(document).ready(function() {
                 data.registered = registered;
             }
         },
-        "dom": "f<\"col-xs-12 navbar navbar-default container-fluid\" <\"custom-sort-and-filter-container row\">><\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p><t><\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>r",
+        "dom": "f<\"custom-sort-and-filter-container\"><\"row\"<\"col-xs-12\"i><\"col-sm-8 col-xs-12\"l><\"col-sm-4 col-xs-12\"p>><t><\"row\"<\"col-sm-4 col-xs-12\"i><\"col-sm-8 col-xs-12\"p><\"col-xs-12\"l>>r",
         "responsive" : true,
         "columnDefs": [
             {"orderable": false, "targets": [3, 10]},
@@ -410,6 +413,38 @@ $(document).ready(function() {
     
     /*
     * START
+    * function for
+    * re-setting the "Sort"
+    * select tags
+    * to default values
+    */
+    function resetSortSelectTags() {
+        //the selected option should be
+        //the "Party Shuffle" option
+        $('#fields-for-sorting-videos').val('1');
+        //the "A-Z" option must be selected
+        $('#order-for-text-sorting-videos').val('asc');
+        //the "Old-New" option must be selected
+        $('#order-for-num-sorting-videos').val('asc');
+        //hide the asc and desc dropdown menus
+        //if they are visible
+        if ($('#order-for-text-sorting-videos').is(':visible')) {
+            $('#order-for-text-sorting-videos').hide();    
+        }
+        if ($('#order-for-num-sorting-videos').is(':visible')) {
+            $('#order-for-num-sorting-videos').hide();    
+        }
+    }
+    /*
+    * function for
+    * re-setting the "Sort"
+    * select tags
+    * to default values
+    * END 
+    */
+    
+    /*
+    * START
     * callback function to be invoked
     * every time the videos dataTable
     * is 'drawn' or rendered
@@ -520,6 +555,61 @@ $(document).ready(function() {
             $('#videos_datatable_filter.dataTables_filter label').append(search_reset_button);    
         }
         
+        //conditional statement
+        //for hiding/revealing
+        //the SORT menu and capabilities
+        switch (sort_dropdown_menu_visible) {
+            case (false):
+                if ($('#sort-fields-hide-and-reset-button').is(':visible') && $('#sort-select-fields').is(':visible')) {
+                    $('#sort-fields-hide-and-reset-button').hide();
+                    $('#sort-select-fields').hide();
+                    resetSortSelectTags();
+                    $('#order-for-text-sorting-videos').hide();
+                    $('#order-for-num-sorting-videos').hide();  
+                    $('#sort-fields-reveal-button').click(function () {
+                        $('#sort-fields-hide-and-reset-button').show();
+                        $('#sort-select-fields').show();
+                        sort_dropdown_menu_visible = true;
+                    });
+                    $('#sort-fields-hide-and-reset-button').click(function () {
+                        resetSortSelectTags();
+                        if ($('#sort-fields-reveal-button').is('.unfolded')) {
+                            $('#sort-fields-reveal-button').removeClass('unfolded');
+                            $('#sort-fields-reveal-button').addClass('folded');    
+                        }
+                        order_column = 1;
+                        order_type = 'desc';
+                        $('#sort-select-fields').hide();
+                        $(this).hide();
+                        videos_datatable.order( [ order_column, order_type] ).draw();
+                        sort_dropdown_menu_visible = false;
+                    });
+                }
+                break;
+                
+            case (true):
+                break;
+                
+            default:
+                break;
+        }
+        
+        //function that sets
+        //the design of the 
+        //"sort-fields-reveal" button
+        $('#sort-fields-reveal-button').click(function () {
+            if ($(this).is('.folded')) {
+                $(this).removeClass('folded');
+                $(this).addClass('unfolded');
+            } else if ($(this).is('.unfolded')) {
+                return false;
+            }   
+        });
+        
+        if (order_column === 1) {
+            resetSortSelectTags();
+        } 
+        
         //behaviour of the
         //'custom-sort fields-for-sorting-videos' select tag
         $('#fields-for-sorting-videos').change(function () {
@@ -534,7 +624,7 @@ $(document).ready(function() {
             //as if the form is reset
             if (order_column === 1) {
                 order_type = 'desc';
-                $('#reset-videos-sorting').trigger('click');
+                videos_datatable.order( [ order_column, order_type ] ).draw();
             }
             //if the value selected is 'Year',
             //the sorting options
@@ -577,21 +667,6 @@ $(document).ready(function() {
             order_type = $(this).val();
             $('#order-for-text-sorting-videos').val('asc');
             videos_datatable.order( [ order_column, order_type ] ).draw();
-        });
-        
-        
-        //behaviour of the 'custom-sort' reset button
-        $('#reset-videos-sorting').click(function () {
-            $('#fields-for-sorting-videos').val('1');
-            $('#order-for-text-sorting-videos').val('asc');
-            $('#order-for-num-sorting-videos').val('asc');
-            if ($('#order-for-text-sorting-videos').is(':visible')) {
-                $('#order-for-text-sorting-videos').hide();    
-            }
-            if ($('#order-for-num-sorting-videos').is(':visible')) {
-                $('#order-for-num-sorting-videos').hide();    
-            }
-            videos_datatable.order( [ 1, 'desc'] ).draw();
         });
         
         //grab the values/options
@@ -688,6 +763,59 @@ $(document).ready(function() {
             country_filter_value = filter_country_origin;
             videos_datatable.draw();
         });
+        
+        //conditional statement
+        //for hiding/revealing
+        //the FILTER menu and capabilities
+        switch (filter_dropdown_menu_visible) {
+            case (false):
+                if ($('#filter-fields-hide-and-reset-button').is(':visible') && $('#filter-select-fields').is(':visible')) {
+                    $('#filter-fields-hide-and-reset-button').hide();
+                    $('#filter-select-fields').hide();
+                    filter_dropdown_menu_visible = false;    
+                }
+                $('#filter-fields-reveal-button').click(function () {
+                    if ($(this).is('.folded')) {
+                        $(this).removeClass('folded');
+                        $(this).addClass('unfolded');
+                    }
+                    $('#filter-fields-hide-and-reset-button').show();
+                    $('#filter-select-fields').show();
+                    $('#decade-filter').val('reset');
+                    filter_yr_of_rlse = 'reset';
+                    $('#genre-filter').val('reset');
+                    filter_genre = 'reset';
+                    genre_filter_value = filter_genre;
+                    $('#country-filter').val('reset');
+                    filter_country_origin = 'reset';
+                    country_filter_value = filter_country_origin;
+                    videos_datatable.draw();
+                    filter_dropdown_menu_visible = true;
+                });
+                break;
+            case (true):
+                $('#filter-fields-hide-and-reset-button').click(function () {
+                    if ($('#filter-fields-reveal-button').is('.unfolded')) {
+                        $('#filter-fields-reveal-button').removeClass('unfolded');
+                        $('#filter-fields-reveal-button').addClass('folded');
+                    }
+                    $('#decade-filter').val('reset');
+                    filter_yr_of_rlse = 'reset';
+                    $('#genre-filter').val('reset');
+                    filter_genre = 'reset';
+                    genre_filter_value = filter_genre;
+                    $('#country-filter').val('reset');
+                    filter_country_origin = 'reset';
+                    country_filter_value = filter_country_origin;
+                    $('#filter-fields-hide-and-reset-button').hide();
+                    $('#filter-select-fields').hide();
+                    videos_datatable.draw();
+                    filter_dropdown_menu_visible = false;
+                });
+                break;
+            default:
+                break;
+        }
         
         //set the style
         //of the filter toggle button

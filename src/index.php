@@ -269,7 +269,7 @@
                 }
             ?>
 
-            <section id="videos_datatable_container" class="row">
+            <section id="videos_datatable_container">
 
                 <article>
 
