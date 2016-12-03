@@ -6,29 +6,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="title" CONTENT="FREE Karaoke Anytime Anywhere | Renegade Karaoke!" />
 <meta name="Description" CONTENT="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
 <link rel="canonical" href="http://www.renegade-karaoke.com" />
 <!--Twitter-->
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="player">
 <meta name="twitter:site" content="@reggiegulle">
 <meta name="twitter:creator" content="@reggiegulle">
-<meta name="twitter:creator:id" content="Reggie Gulle">
-<meta name="twitter:title" content="Renegade Karaoke!">
-<meta name="twitter:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs!">
-<meta name="twitter:image:src" content="http://www.renegade-karaoke.com/images/king-and-queen-of-hearts-fb.jpg">
-<meta name="twitter:image:alt" content="King-and-Queen-of-Hearts-Karaoke-image">
+<meta name="twitter:creator:id" content="29137205">
+<meta name="twitter:title" content="Visit renegade-karaoke.com, sing, have fun, for FREE!">
+<meta name="twitter:description" content="renegade-karaoke.com || Your ultimate destination for FREE and unlimited access to your favorite karaoke songs!">
+<meta name="twitter:image" content="http://www.renegade-karaoke.com/images/renkaraoke-Welcom-card.1280x720.jpg">
+<meta name="twitter:image:alt" content="A picture showing the webpage of renegade-karaoke.com">
+<meta name="twitter:player" content="https://www.youtube.com/embed/NSLGVI8vbSM" />
+<meta name="twitter:player:width" content="1280" />
+<meta name="twitter:player:height" content="720" />
 <!--FB OG-->
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Renegade Karaoke!"/>
+<meta property="og:title" content="FREE Karaoke Anytime Anywhere | Renegade Karaoke!"/>
 <meta property="og:site_name" content="Renegade Karaoke"/>
 <meta property="og:url" content="http://www.renegade-karaoke.com/"/>
 <meta property="og:description" content="The ultimate online karaoke web app with FREE and unlimited access to your favorite songs. Now you can sing-along to karaoke anywhere, anytime, on any device absolutely free!  Bust your pipes, show them You've Got Talent and be your own Singing Idol!"/>
-<meta property="og:image" content="http://www.renegade-karaoke.com/images/king-and-queen-of-hearts-fb.jpg"/>
+<meta property="og:video:url" content="https://www.youtube.com/embed/NSLGVI8vbSM" />
+<meta property="og:video:secure_url" content="https://www.youtube.com/embed/NSLGVI8vbSM" />
+<meta property="og:video:type" content="text/html" />
+<meta property="og:video:width" content="1280" />
+<meta property="og:video:height" content="720" />
+<meta property="og:video:url" content="http://www.youtube.com/v/NSLGVI8vbSM?version=3&autohide=1" >
+<meta property="og:video:secure_url" content="https://www.youtube.com/v/NSLGVI8vbSM?version=3&autohide=1" />
+<meta property="og:video:type" content="application/x-shockwave-flash" />
+<meta property="og:video:width" content="1280" />
+<meta property="og:video:height" content="720" />
+<meta property="og:image" content="http://www.renegade-karaoke.com/images/renkaraoke-Welcom-card.1280x720.jpg"/>
 <meta property="og:image:type" content="image/jpeg"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
+<meta property="og:image:width" content="1280"/>
+<meta property="og:image:height" content="720"/>
 <meta property="fb:app_id" content="412347942245523"/>
-<title>Renegade Karaoke</title>
+<title>FREE Karaoke Anytime Anywhere | Renegade Karaoke!</title>
 <!--Set the window's initial width -->
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!--Separate css files to be minified in deployment-->
@@ -57,17 +71,7 @@
     <script src="js/html5shiv.min.js"></script>
 <![endif]-->
 <!--JS files to be minified in deployment-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<!--helper vars-->
-<script type="text/javascript">
-<?php
-    if ($user->isLoggedIn()) {
-        echo 'var registered = "green";';    
-    } else if (!$user->isLoggedIn()) {
-        echo 'var registered = "black";';
-    }
-?>     
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!--Bootstrap JS--> 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <!--datatables core-->
@@ -84,10 +88,29 @@
 <script src="js/TweenLite.min.js" type="text/javascript"></script>
 <script src="js/TimelineLite.min.js" type="text/javascript"></script>
 <script src="js/EasePack.min.js" type="text/javascript"></script>
-<!--custom JS-->
-<script src="js/karaoke_table.min.js" type="text/javascript"></script>
-<!--custom slick slider JS-->
-<script src="js/karaoke_slider.min.js" type="text/javascript"></script>
+<?php
+    if ($user->isLoggedIn()) {
+?>
+        <script type="text/javascript">
+            var registered = 'green';
+        </script>
+        <!--custom JS-->
+        <script src="js/karaoke_table_registered_user.min.js" type="text/javascript"></script>
+        <!--custom bxslider and youtube JS-->
+        <script src="js/karaoke_bx_and_yT_registered_user.min.js" type="text/javascript"></script>
+<?php
+    } else if (!$user->isLoggedIn()) {
+?>
+        <script type="text/javascript">
+            var registered = 'black';
+        </script>
+        <!--custom datatable JS-->
+        <script src="js/karaoke_table_non_registered_user.min.js" type="text/javascript"></script>
+        <!--custom bxslider and youtube JS-->
+        <script src="js/karaoke_bx_and_yT_non_registered_user.min.js" type="text/javascript"></script>
+<?php
+    }
+?>
 <!--stylejs-->
 <script src="js/karaoke.style.min.js" type="text/javascript"></script>
 </head>
@@ -110,13 +133,42 @@
                     <a id="masthead" href="index.php">Renegade Karaoke</a>
                 </h1>
                 <ul id="social-media-buttons" class="row gradient">
+                    
+                    <!--Facebook Like and Share buttons-->
                     <li class="fb-like col-xs-6" data-href="http://www.renegade-karaoke.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" data-width="225px">
                     </li>
+                    
+                    <!--Twitter button-->
                     <li class="col-xs-6">
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.renegade-karaoke.com/" data-text="Check out this site!" data-via="reggiegulle" data-size="large">Tweet</a>
+                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large">
+                            Tweet
+                        </a>
                     </li>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    
+                    <script>
+                        
+                        window.twttr = (function(d, s, id) {
+                            var js, 
+                                fjs = d.getElementsByTagName(s)[0],
+                                t = window.twttr || {};
+                            
+                            if (d.getElementById(id)) return t;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "https://platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+
+                            t._e = [];
+                            t.ready = function(f) {
+                                t._e.push(f);
+                            };
+
+                            return t;
+                        }(document, "script", "twitter-wjs"));
+                        
+                    </script>
                 </ul>
+                
                 <?php
                     //$user = new User();
                     if($user->isLoggedIn()){
@@ -163,8 +215,17 @@
 
            <section class="row">
                 <div class="col-xs-12">
-                    <section id="karaoke-slider-1-container">
-                        <article id="karaoke-slider-1"></article>
+                    <section id="karaoke-player-container">
+                        <article id="prev-arrow" class="player-nav"></article>
+                        <article id="next-arrow" class="player-nav"></article>
+                        <article id="yt-player">
+                        </article>
+                        <article class="karaoke-splash-details-container">
+                            <div class="karaoke-splash-details">
+                                <h4></h4>
+                                <p></p>
+                            </div>
+                        </article>
                     </section>
                 </div>
                 
@@ -187,8 +248,8 @@
                     </section>
                 </div>
 
-                <section id="karaoke-slider-2-container" class="col-xs-12">
-                    <ul id="karaoke-slider-2">	
+                <section id="karaoke-slider-container" class="col-xs-12">
+                    <ul id="karaoke-slider">	
                     </ul>
                 </section>   
             </section>
