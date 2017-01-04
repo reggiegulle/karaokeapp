@@ -19,6 +19,10 @@
 			$video->find($video_index);
 		
 			if(Input::exists('post')){
+                
+                foreach($_POST as $key => $value){
+                    ${$key} = $value;
+                }
 		
 				$validate = new Validate();
 				$validation = $validate->check($_POST, [
@@ -144,7 +148,7 @@
                             ?>
                         </article>
                         <label for="song_title" class="col-xs-12"><p>Song Title:</p></label>
-                        <input type="text" id="song_title" class="col-xs-8 col-sm-5" name="song_title" form="updatevideo" value="<?php echo escape($video->data()->song_title); ?>" />
+                        <input type="text" id="song_title" class="col-xs-8 col-sm-5" name="song_title" form="updatevideo" value="<?php echo '' . isset($song_title) ? html_entity_decode($song_title) : escape($video->data()->song_title) . ''; ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -155,7 +159,7 @@
                             ?>
                         </article>
                         <label for="composer" class="col-xs-12"><p>Composer:</p></label>
-                        <input type="text" id="composer" class="col-xs-8 col-sm-5" name="composer" form="updatevideo" value="<?php echo escape($video->data()->composer); ?>" />
+                        <input type="text" id="composer" class="col-xs-8 col-sm-5" name="composer" form="updatevideo" value="<?php echo '' . isset($composer) ? html_entity_decode($composer) : escape($video->data()->composer) . ''; ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -166,7 +170,7 @@
                             ?>
                         </article>
                         <label for="performed_by" class="col-xs-12"><p>Performed By:</p></label>
-                        <input type="text" id="performed_by" class="col-xs-8 col-sm-5" name="performed_by" form="updatevideo" value="<?php echo escape($video->data()->performed_by); ?>" />
+                        <input type="text" id="performed_by" class="col-xs-8 col-sm-5" name="performed_by" form="updatevideo" value="<?php echo '' . isset($performed_by) ? html_entity_decode($performed_by) : escape($video->data()->performed_by) . ''; ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -177,7 +181,7 @@
                             ?>
                         </article>
                         <label for="video_id" class="col-xs-12"><p>Video ID:</p></label>
-                        <input type="text" id="video_id" class="col-xs-8 col-sm-5" name="video_id" form="updatevideo" value="<?php echo escape($video->data()->video_id); ?>" />	
+                        <input type="text" id="video_id" class="col-xs-8 col-sm-5" name="video_id" form="updatevideo" value="<?php echo '' . isset($video_id) ? html_entity_decode($video_id) : escape($video->data()->video_id) . ''; ?>" />	
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -188,7 +192,7 @@
                             ?>
                         </article>
                         <label for="source_album" class="col-xs-12"><p>Source Album:</p></label>
-                        <input type="text" id="source_album" class="col-xs-8 col-sm-5" name="source_album" form="updatevideo" value="<?php echo escape($video->data()->source_album); ?>" />
+                        <input type="text" id="source_album" class="col-xs-8 col-sm-5" name="source_album" form="updatevideo" value="<?php echo '' . isset($source_album) ? html_entity_decode($source_album) : escape($video->data()->source_album) . ''; ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -199,7 +203,7 @@
                             ?>
                         </article>
                         <label for="year_of_release" class="col-xs-12"><p>Year of Release:</p></label>
-                        <input type="text" id="year_of_release" class="col-xs-3 col-sm-2" name="year_of_release" form="updatevideo" value="<?php echo escape($video->data()->year_of_release); ?>" />
+                        <input type="text" id="year_of_release" class="col-xs-3 col-sm-2" name="year_of_release" form="updatevideo" value="<?php echo '' . isset($year_of_release) ? html_entity_decode($year_of_release) : escape($video->data()->year_of_release) . ''; ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -210,7 +214,7 @@
                             ?>
                         </article>
                         <label for="genre" class="col-xs-12"><p>Genre:</p></label>
-                        <input type="text" id="genre" class="col-xs-8 col-sm-5" name="genre" form="updatevideo" value="<?php echo escape($video->data()->genre); ?>" />
+                        <input type="text" id="genre" class="col-xs-8 col-sm-5" name="genre" form="updatevideo" value="<?php echo '' . isset($genre) ? html_entity_decode($genre) : escape($video->data()->genre) . ''; ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -221,7 +225,7 @@
                             ?>
                         </article>
                         <label for="country_of_origin" class="col-xs-12"><p>Country of Origin:</p></label>
-                        <input type="text" id="country_of_origin" class="col-xs-8 col-sm-5" name="country_of_origin" form="updatevideo" value="<?php echo escape($video->data()->country_of_origin); ?>" />
+                        <input type="text" id="country_of_origin" class="col-xs-8 col-sm-5" name="country_of_origin" form="updatevideo" value="<?php echo '' . isset($country_of_origin) ? html_entity_decode($country_of_origin) : escape($video->data()->country_of_origin) . ''; ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -241,8 +245,8 @@
                         <div class="col-xs-12">
                             <label for="running_time"><p>Running Time:</p></label>
                             <br />
-                            <input type="text" id="running_time_min" name="running_time_min" form="updatevideo" value="<?php echo escape(substr(($video->data()->running_time), 3, 2)); ?>" /> <span class="time-input">min</span>
-                            <input type="text" id="running_time_sec" name="running_time_sec" form="updatevideo" value="<?php echo escape(substr(($video->data()->running_time), 6, 2)); ?>" /> <span class="time-input">sec</span>
+                            <input type="text" id="running_time_min" name="running_time_min" form="updatevideo" value="<?php echo '' . isset($running_time_min) ? html_entity_decode($running_time_min) : escape(substr(($video->data()->running_time), 3, 2)); ?>" /> <span class="time-input">min</span>
+                            <input type="text" id="running_time_sec" name="running_time_sec" form="updatevideo" value="<?php echo '' . isset($running_time_sec) ? html_entity_decode($running_time_sec) : escape(substr(($video->data()->running_time), 6, 2)); ?>" /> <span class="time-input">sec</span>
                         </div>
                     </div>
                     <div class="field">
@@ -254,7 +258,7 @@
                             ?>
                         </article>
                         <label for="lyrics" class="col-xs-12"><p>Song Lyrics:</p></label>
-                        <textarea id="lyrics" name="lyrics" class="col-xs-12"><?php echo escape(strip_tags($video->data()->lyrics)); ?></textarea>
+                        <textarea id="lyrics" name="lyrics" class="col-xs-12"><?php echo '' . isset($lyrics)? escape(strip_tags($lyrics)) : escape(strip_tags($video->data()->lyrics)); ?></textarea>
                     </div>
                     <div class="col-xs-12">
                         <input type="submit" value="Edit Entry" />
