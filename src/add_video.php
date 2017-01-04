@@ -8,8 +8,15 @@
 	} else {
 	
         $data = $user->data();
+        
+        
+        foreach($_POST as $key => $value){
+            ${$key} = $value;
+        }
 
         if(Input::exists()){
+            
+            
             
             $validate = new Validate();
             $validation = $validate->check($_POST, [
@@ -84,8 +91,14 @@
                         'added_by'			=> (Input::get('username'))
 
                     ]);
+                    
+                    foreach($_POST as $key => $value){
+                        ${$key} = '';
+                    }
 
                     Session::flash('add_video', 'You have added a new video entry!');
+                    
+                    
                 } catch (Exception $e){
                     die($e->getMessage());
                 }
@@ -113,11 +126,11 @@
 
                 <article class="col-xs-12 feedback-notif">
                     <?php
-                    if(Session::exists('add_video')){
-                        echo '<p>' . Session::flash('add_video') . '</p>';
-                    } else if(!Session::exists('add_video')){
-                        echo '<p>No Video Added Yet</p>';
-                    }
+                        if(Session::exists('add_video')){
+                            echo '<p>' . Session::flash('add_video') . '</p>';
+                        } else if(!Session::exists('add_video')){
+                            echo '<p>No Video Added Yet</p>';
+                        }
                     ?>
                 </article>
 
@@ -132,7 +145,8 @@
                             ?>
                         </article>
                         <label for="song_title" class="col-xs-12"><p>Song Title:</p></label>
-                        <input type="text" id="song_title" class="col-xs-8 col-sm-5" name="song_title" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('song_title')); }  ?>" />
+                        <input type="text" id="song_title" class="col-xs-8 col-sm-5" name="song_title" form="addnewvideo" value="<?php echo '' . isset($song_title) ? html_entity_decode($song_title) : '' . '';  ?>" />
+                        
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -143,7 +157,7 @@
                             ?>
                         </article>
                         <label for="composer" class="col-xs-12"><p>Composer:</p></label>
-                        <input type="text" id="composer" class="col-xs-8 col-sm-5" name="composer" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('composer')); }  ?>" />
+                        <input type="text" id="composer" class="col-xs-8 col-sm-5" name="composer" form="addnewvideo" value="<?php echo '' . isset($composer) ? html_entity_decode($composer) : '' . '';  ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -154,7 +168,7 @@
                             ?>
                         </article>
                         <label for="performed_by" class="col-xs-12"><p>Performed By:</p></label>
-                        <input type="text" id="performed_by" class="col-xs-8 col-sm-5" name="performed_by" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('performed_by')); }  ?>" />
+                        <input type="text" id="performed_by" class="col-xs-8 col-sm-5" name="performed_by" form="addnewvideo" value="<?php echo '' . isset($performed_by) ? html_entity_decode($performed_by) : '' . '';  ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -165,7 +179,7 @@
                             ?>
                         </article>
                         <label for="video_id" class="col-xs-12"><p>Video ID:</p></label>
-                        <input type="text" id="video_id" class="col-xs-8 col-sm-5" name="video_id" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('video_id')); }  ?>" />	
+                        <input type="text" id="video_id" class="col-xs-8 col-sm-5" name="video_id" form="addnewvideo" value="<?php echo '' . isset($video_id) ? html_entity_decode($video_id) : '' . '';  ?>" />	
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -176,7 +190,7 @@
                             ?>
                         </article>
                         <label for="source_album" class="col-xs-12"><p>Source Album:</p></label>
-                        <input type="text" id="source_album" class="col-xs-8 col-sm-5" name="source_album" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('source_album')); }  ?>" />
+                        <input type="text" id="source_album" class="col-xs-8 col-sm-5" name="source_album" form="addnewvideo" value="<?php echo '' . isset($source_album) ? html_entity_decode($source_album) : '' . '';  ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -187,7 +201,7 @@
                             ?>
                         </article>
                         <label for="year_of_release" class="col-xs-12"><p>Year of Release:</p></label>
-                        <input type="text" id="year_of_release" class="col-xs-3 col-sm-2" name="year_of_release" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo Input::get('year_of_release'); }  ?>" />
+                        <input type="text" id="year_of_release" class="col-xs-3 col-sm-2" name="year_of_release" form="addnewvideo" value="<?php echo '' . isset($year_of_release) ? html_entity_decode($year_of_release) : '' . '';  ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -198,7 +212,7 @@
                             ?>
                         </article>
                         <label for="genre" class="col-xs-12"><p>Genre:</p></label>
-                        <input type="text" id="genre" class="col-xs-8 col-sm-5" name="genre" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('genre')); }  ?>" />
+                        <input type="text" id="genre" class="col-xs-8 col-sm-5" name="genre" form="addnewvideo" value="<?php echo '' . isset($genre) ? html_entity_decode($genre) : '' . '';  ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -209,7 +223,7 @@
                             ?>
                         </article>
                         <label for="country_of_origin" class="col-xs-12"><p>Country of Origin:</p></label>
-                        <input type="text" id="country_of_origin" class="col-xs-8 col-sm-5" name="country_of_origin" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('country_of_origin')); }  ?>" />
+                        <input type="text" id="country_of_origin" class="col-xs-8 col-sm-5" name="country_of_origin" form="addnewvideo" value="<?php echo '' . isset($country_of_origin) ? html_entity_decode($country_of_origin) : '' . '';  ?>" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -229,8 +243,8 @@
                         <div class="col-xs-12">
                             <label for="running_time"><p>Running Time:</p></label>
                             <br />
-                            <input type="text" id="running_time_min" name="running_time_min" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo Input::get('running_time_min'); }  ?>" /> <span class="time-input">min</span>
-                            <input type="text" id="running_time_sec" name="running_time_sec" form="addnewvideo" value="<?php if(!Session::exists('add_video')){ echo Input::get('running_time_sec'); }  ?>" /> <span class="time-input">sec</span>
+                            <input type="text" id="running_time_min" name="running_time_min" form="addnewvideo" value="<?php echo '' . isset($running_time_min) ? html_entity_decode($running_time_min) : '' . '';  ?>" /> <span class="time-input">min</span>
+                            <input type="text" id="running_time_sec" name="running_time_sec" form="addnewvideo" value="<?php echo '' . isset($running_time_sec) ? html_entity_decode($running_time_sec) : '' . '';  ?>" /> <span class="time-input">sec</span>
                         </div>  
                     </div>
                     <div class="field">
@@ -242,7 +256,7 @@
                             ?>
                         </article>
                         <label for="lyrics" class="col-xs-12"><p>Song Lyrics:</p></label>
-                        <textarea id="lyrics" name="lyrics" class="col-xs-12"><?php if(!Session::exists('add_video')){ echo html_entity_decode(Input::get('lyrics')); } ?></textarea>
+                        <textarea id="lyrics" name="lyrics" class="col-xs-12"><?php echo '' . isset($lyrics) ? html_entity_decode($lyrics) : '' . '';  ?></textarea>
                     </div>
                     <br />
                     <input type="hidden" name="username" value="<?php echo escape($data->username); ?>" />
