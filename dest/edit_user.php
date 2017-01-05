@@ -15,7 +15,11 @@ $user = new User();
 	}
 	
 	$karaoke_user_to_be_edited = new User($_GET['id']);
-	$karaoke_user_data = $karaoke_user_to_be_edited->data();	
+	$karaoke_user_data = $karaoke_user_to_be_edited->data();
+
+    foreach($_POST as $key => $value){
+        ${$key} = $value;
+    }
 
 	if(Input::exists()){
 		//echo 'OK!';
@@ -102,7 +106,7 @@ $user = new User();
                             </article>
                             <label for="username" class="col-xs-12">Username</label>
                             <br />
-                            <input type="text" class="col-xs-10 col-sm-8" name="username" value="<?php echo escape($karaoke_user_data->username); ?>" />
+                            <input type="text" class="col-xs-10 col-sm-8" name="username" value="<?php echo '' . isset($username) ? html_entity_decode($username) : escape($karaoke_user_data->username); ?>" />
                         </div>
 
                         <div class="field">
@@ -115,7 +119,7 @@ $user = new User();
                             </article>
                             <label for="name" class="col-xs-12">User's Real Name</label>
                             <br />
-                            <input type="text" name="name" id="name" value="<?php echo escape($karaoke_user_data->name); ?>" class="col-xs-10 col-sm-8" />
+                            <input type="text" name="name" id="name" value="<?php echo '' . isset($name) ? html_entity_decode($name) : escape($karaoke_user_data->name); ?>" class="col-xs-10 col-sm-8" />
                         </div>
 
                         <div class="field">
