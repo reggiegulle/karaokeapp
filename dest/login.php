@@ -6,6 +6,11 @@
 	if ($user->isLoggedIn()){
 		Redirect::to('index.php');
 	} else {
+        
+        foreach($_POST as $key => $value){
+            ${$key} = $value;
+        }
+        
 		if(Input::exists()){
 			if(Token::check(Input::get('token'))){
 			
@@ -23,7 +28,12 @@
 					$login = $user->login(Input::get('username'), Input::get('password'), $remember);
 					
 					if($login){
-						Redirect::to('index.php');
+                        
+                        foreach($_POST as $key => $value){
+                            ${$key} = '';
+                        }
+						
+                        Redirect::to('index.php');
 					} else {
 						//echo '<p class="error">Sorry, logging in failed.</p>';
 						Session::put("login_fail", "Invalid username/password.  Please try again.");
@@ -75,7 +85,7 @@
                             ?>
                         </article>
                         <label for="username">Username</label>
-                        <input type="text" name="username" id="username" autocomplete="off" value="" />
+                        <input type="text" name="username" id="username" autocomplete="off" value="<?php echo '' . isset($username) ? html_entity_decode($username) : '' . '';  ?>" />
                     </div>
                     <div class="field">
                         <article class="feedback-notif">

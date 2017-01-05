@@ -11,6 +11,11 @@
 		if(!$user->hasPermission('admin') || !$user->exists()){
 			Redirect::to('index.php');
 		} else {
+            
+            foreach($_POST as $key => $value){
+                ${$key} = $value;
+            }
+            
 			if(Input::exists()){
 
 				if(Token::check(Input::get('token'))){
@@ -58,6 +63,10 @@
 								'joined'	=> date('Y-m-d H:i:s'),
 								'group'		=> Input::get('group')
 							]);
+                            
+                            foreach($_POST as $key => $value){
+                                ${$key} = '';
+                            }
 							
 							Session::flash('register', $new_user_name_input . ' has been registered and can now log in!');
 						} catch (Exception $e){
@@ -161,7 +170,7 @@
                                 ?>
                             </article>
                             <label for="username" class="col-xs-12">Username</label>
-                            <input type="text" class="col-xs-8 col-sm-5" name="username" id="username" value="" autocomplete="off" />
+                            <input type="text" class="col-xs-8 col-sm-5" name="username" id="username" value="<?php echo '' . isset($username) ? html_entity_decode($username) : '' . '';  ?>" autocomplete="off" />
                         </div>
 
                         <div class="field">
@@ -173,7 +182,7 @@
                                 ?>
                             </article>
                             <label for="name" class="col-xs-12">User's Real Name</label>
-                            <input type="text" class="col-xs-8 col-sm-5" name="name" id="name" value="" />
+                            <input type="text" class="col-xs-8 col-sm-5" name="name" id="name" value="<?php echo '' . isset($name) ? html_entity_decode($name) : '' . '';  ?>" />
                         </div>
 
                         <div class="field">

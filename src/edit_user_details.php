@@ -19,7 +19,11 @@
                 Redirect::to('index.php');    
             }
         }
-    } 
+    }
+
+    foreach($_POST as $key => $value){
+        ${$key} = $value;
+    }
 
     if(Input::exists()){
         if(Token::check(Input::get('token'))){
@@ -94,7 +98,7 @@
                             ?>
                         </article>
                         <label for="name" class="col-xs-12">Username</label>
-                        <input type="text" name="username" value="<?php echo escape($data->username); ?>" class="col-xs-8 col-sm-8" />
+                        <input type="text" name="username" value="<?php echo '' . isset($username) ? html_entity_decode($username) : escape($data->username); ?>" class="col-xs-8 col-sm-8" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">
@@ -105,7 +109,7 @@
                             ?>
                         </article>
                         <label for="name" class="col-xs-12">Full Name</label>
-                        <input type="text" name="name" value="<?php echo escape($data->name); ?>" class="col-xs-8 col-sm-8" />
+                        <input type="text" name="name" value="<?php echo '' . isset($name) ? html_entity_decode($name) : escape($data->name); ?>" class="col-xs-8 col-sm-8" />
                     </div>
                     <div class="field">
                         <article class="col-xs-12 feedback-notif">

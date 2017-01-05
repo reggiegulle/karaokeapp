@@ -57,8 +57,8 @@ class Validate{
 								Session::flash('' . $item . '', '' . $this->clean_item_output($item) . ' is already in use. Please put a different value.');
 							}
 						break;					
-						case 'numeric':
-							if(!is_numeric($value)){
+						case 'strictlydigits':
+							if(!is_numeric((int)$value)){
 								$this->addError($this->clean_item_output($item) . " must be a number.");
 								Session::flash('' . $item . '', '' . $this->clean_item_output($item) . ' must be a number.');
 							}
@@ -93,7 +93,7 @@ class Validate{
 			$output = '';
 			$output .= strtoupper(implode(' ', $item_raw));
 			return $output;
-		}
+		} 
 		return strtoupper($item);
 	}
 	
